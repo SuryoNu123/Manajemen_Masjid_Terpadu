@@ -36,9 +36,34 @@
         Kegiatan Ibadah
     </a>
 
-    <a href="#"
-       class="block px-4 py-2 rounded-lg hover:bg-slate-800">
-        Aset
+    <a href="{{ route('business-units.index') }}"
+    class="block px-4 py-2 rounded-lg hover:bg-slate-800">
+        <span>Unit Usaha</span>
+    </a>
+
+    <a href="{{ route('business-unit-sales.index') }}"
+    class="block px-4 py-2 rounded-lg hover:bg-slate-800">
+        <span>Pencatatan Omzet</span>
+    </a>
+
+    <a href="{{ route('business-unit-sales.report') }}"
+    class="block px-4 py-2 rounded-lg hover:bg-slate-800">
+        <span>Laporan Omzet</span>
+    </a>
+    
+    <a href="{{ route('library-books.index') }}"
+    class="block rounded-lg px-4 py-3 hover:bg-slate-800">
+        Katalog Perpustakaan
+    </a>
+
+    <a href="{{ route('book-loans.index') }}"
+    class="block rounded-lg px-4 py-3 hover:bg-slate-800">
+        Peminjaman Buku
+    </a>
+    
+    <a href="{{ route('book-loans.report') }}"
+    class="block rounded-lg px-4 py-3 hover:bg-slate-800">
+        Laporan Perpustakaan
     </a>
 
     <a href="#"
@@ -46,9 +71,9 @@
         Remaja Masjid
     </a>
 
-    <a href="#"
-       class="block px-4 py-2 rounded-lg hover:bg-slate-800">
-        TPQ / TPA
+    <a href="{{ route('santri-attendances.report') }}"
+    class="block px-4 py-2 rounded-lg hover:bg-slate-800">
+        <span>Laporan TPQ/TPA</span>
     </a>
 
     <a href="#"

@@ -33,5 +33,20 @@
        class="block px-4 py-2 rounded-lg hover:bg-slate-800">
         Petugas
     </a>
+        
+    <a href="{{ route('library-books.index') }}"
+    class="block px-4 py-2 rounded-lg hover:bg-slate-800">
+        <span>Katalog Perpustakaan</span>
+    </a>
+
+    <a href="{{ route('book-loans.index') }}"
+    class="block rounded-lg px-4 py-3 hover:bg-slate-800">
+        Peminjaman Buku
+    </a>
+
+    <a href="{{ route('santri-attendances.index') }}"
+   class="block rounded-lg px-4 py-3 hover:bg-slate-800">
+    <span>Absensi Santri</span>
+</a>
 
 </div>
