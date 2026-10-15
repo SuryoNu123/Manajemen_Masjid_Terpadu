@@ -76,7 +76,7 @@ class PrayerAttendanceController extends Controller
             $attendanceData
         ) {
             foreach ($attendanceData as $jamaahId => $status) {
-                if (!ctype_digit((string) $jamaahId)) {
+                if (! ctype_digit((string) $jamaahId)) {
                     continue;
                 }
 
@@ -96,6 +96,7 @@ class PrayerAttendanceController extends Controller
 
                 if ($status === null || $status === '') {
                     PrayerAttendance::where($criteria)->delete();
+
                     continue;
                 }
 

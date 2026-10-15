@@ -13,8 +13,6 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
         ]);
     }
-
-    
 }
 
 $this->call([
@@ -29,4 +27,3 @@ $this->call([
     FinancialCategorySeeder::class,
     PrayerScheduleSeeder::class,
 ]);
-

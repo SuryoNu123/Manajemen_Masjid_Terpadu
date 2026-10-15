@@ -48,7 +48,6 @@ class ZakatController extends Controller
                 $jumlahOrang * $nilaiPerOrang;
         }
 
-
         /*
         |--------------------------------------------------------------------------
         | ZAKAT MAAL

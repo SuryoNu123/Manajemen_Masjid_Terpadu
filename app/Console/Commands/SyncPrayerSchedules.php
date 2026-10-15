@@ -27,7 +27,7 @@ class SyncPrayerSchedules extends Command
 
             $this->info(
                 "Berhasil menyimpan {$count} jadwal sholat untuk "
-                . $date->format('Y-m-d')
+                .$date->format('Y-m-d')
             );
 
             return self::SUCCESS;
@@ -35,7 +35,7 @@ class SyncPrayerSchedules extends Command
         } catch (Throwable $e) {
 
             $this->error(
-                'Gagal melakukan sinkronisasi: ' . $e->getMessage()
+                'Gagal melakukan sinkronisasi: '.$e->getMessage()
             );
 
             return self::FAILURE;

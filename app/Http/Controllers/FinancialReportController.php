@@ -31,7 +31,6 @@ class FinancialReportController extends Controller
         );
     }
 
-
     /**
      * Form generate laporan.
      */
@@ -39,7 +38,6 @@ class FinancialReportController extends Controller
     {
         return view('financial-reports.create');
     }
-
 
     /**
      * Generate / membuat laporan otomatis.
@@ -56,7 +54,6 @@ class FinancialReportController extends Controller
             : null;
 
         $year = $data['year'];
-
 
         /*
         |--------------------------------------------------------------------------
@@ -77,16 +74,13 @@ class FinancialReportController extends Controller
             )
             ->first();
 
-
         if ($existing) {
             return back()
                 ->withInput()
                 ->withErrors([
-                    'period_type' =>
-                        'Laporan untuk periode tersebut sudah tersedia.'
+                    'period_type' => 'Laporan untuk periode tersebut sudah tersedia.',
                 ]);
         }
-
 
         /*
         |--------------------------------------------------------------------------
@@ -125,7 +119,6 @@ class FinancialReportController extends Controller
             )
             ->get();
 
-
         /*
         |--------------------------------------------------------------------------
         | Hitung total
@@ -141,7 +134,6 @@ class FinancialReportController extends Controller
             ->sum('amount');
 
         $balance = $totalIncome - $totalExpense;
-
 
         /*
         |--------------------------------------------------------------------------
@@ -163,7 +155,6 @@ class FinancialReportController extends Controller
             'submitted_by' => Auth::id(),
         ]);
 
-
         return redirect()
             ->route(
                 'laporan-keuangan.index'
@@ -173,7 +164,6 @@ class FinancialReportController extends Controller
                 'Laporan keuangan berhasil dibuat.'
             );
     }
-
 
     /**
      * Submit laporan ke Ketua.
@@ -200,7 +190,6 @@ class FinancialReportController extends Controller
             'Laporan berhasil dikirim kepada Ketua DKM.'
         );
     }
-
 
     /**
      * Ketua menyetujui laporan.
@@ -229,7 +218,6 @@ class FinancialReportController extends Controller
         );
     }
 
-
     /**
      * Ketua menolak laporan.
      */
@@ -256,7 +244,6 @@ class FinancialReportController extends Controller
             'Laporan keuangan ditolak.'
         );
     }
-
 
     /**
      * Publikasikan laporan.

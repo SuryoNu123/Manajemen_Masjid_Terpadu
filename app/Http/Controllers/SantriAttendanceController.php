@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\SantriAttendanceExport;
 use App\Models\Santri;
 use App\Models\SantriAttendance;
 use App\Models\TpqClass;
-use App\Exports\SantriAttendanceExport;
-use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SantriAttendanceController extends Controller
 {
@@ -125,7 +125,7 @@ class SantriAttendanceController extends Controller
             ])
             ->with('success', 'Absensi santri berhasil disimpan.');
     }
-   
+
     public function report(Request $request)
     {
         $validated = $request->validate([
@@ -143,9 +143,9 @@ class SantriAttendanceController extends Controller
         $endDate = $validated['end_date'] ?? today()->toDateString();
         $classId = $validated['class_id'] ?? null;
 
-        $classes = \App\Models\TpqClass::orderBy('name')->get();
+        $classes = TpqClass::orderBy('name')->get();
 
-        $attendanceQuery = \App\Models\SantriAttendance::query()
+        $attendanceQuery = SantriAttendance::query()
             ->whereBetween('attendance_date', [$startDate, $endDate])
             ->when($classId, function ($query) use ($classId) {
                 $query->whereHas('santri', function ($q) use ($classId) {
@@ -169,7 +169,7 @@ class SantriAttendanceController extends Controller
             ? round(($totalPresent / $totalRecords) * 100, 1)
             : 0;
 
-        $classReports = \App\Models\TpqClass::query()
+        $classReports = TpqClass::query()
             ->withCount([
                 'santris as active_santris_count' => function ($query) {
                     $query->where('status', 'active');
@@ -188,7 +188,7 @@ class SantriAttendanceController extends Controller
             ->map(function ($class) use ($startDate, $endDate) {
                 $ids = $class->santris->pluck('id');
 
-                $counts = \App\Models\SantriAttendance::query()
+                $counts = SantriAttendance::query()
                     ->whereIn('santri_id', $ids)
                     ->whereBetween('attendance_date', [$startDate, $endDate])
                     ->selectRaw("
@@ -235,7 +235,7 @@ class SantriAttendanceController extends Controller
             'recentAttendances'
         ));
     }
-    
+
     public function export(Request $request)
     {
         $validated = $request->validate([
@@ -253,15 +253,15 @@ class SantriAttendanceController extends Controller
             ],
         ]);
 
-        $classId = !empty($validated['class_id'])
+        $classId = ! empty($validated['class_id'])
             ? (int) $validated['class_id']
             : null;
 
         $filename = 'laporan-tpq-'
-            . $validated['start_date']
-            . '-sampai-'
-            . $validated['end_date']
-            . '.xlsx';
+            .$validated['start_date']
+            .'-sampai-'
+            .$validated['end_date']
+            .'.xlsx';
 
         return Excel::download(
             new SantriAttendanceExport(
@@ -272,5 +272,4 @@ class SantriAttendanceController extends Controller
             $filename
         );
     }
-
 }

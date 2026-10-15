@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\TpqClass;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 
 class TpqClassController extends Controller
 {

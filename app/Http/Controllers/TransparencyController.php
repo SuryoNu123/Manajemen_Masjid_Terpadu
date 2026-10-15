@@ -34,7 +34,6 @@ class TransparencyController extends Controller
             ->orderByDesc('id')
             ->first();
 
-
         /*
         |--------------------------------------------------------------------------
         | Riwayat laporan yang sudah dipublikasikan
@@ -47,7 +46,6 @@ class TransparencyController extends Controller
             ->orderByDesc('month')
             ->orderByDesc('id')
             ->paginate(12);
-
 
         /*
         |--------------------------------------------------------------------------
@@ -62,7 +60,6 @@ class TransparencyController extends Controller
         $summaryReport =
             $latestMonthlyReport
             ?? $latestYearlyReport;
-
 
         return view(
             'transparency.index',

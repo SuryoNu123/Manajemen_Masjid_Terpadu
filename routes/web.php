@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ActivityLogController;
+use App\Http\Controllers\BusinessUnitItemController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FinancialTransactionController;
 use App\Http\Controllers\ProfileController;
@@ -10,6 +12,8 @@ use App\Http\Controllers\FinancialReportController;
 use App\Http\Controllers\TransparencyController;
 use App\Http\Controllers\PrayerScheduleController;
 use App\Http\Controllers\PublicHomeController;
+use App\Http\Controllers\PublicProfileController;
+use App\Http\Controllers\DigitalSignageController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\OfficerController;
 use App\Http\Controllers\NotificationController;
@@ -25,6 +29,8 @@ use App\Http\Controllers\BookLoanController;
 use App\Http\Controllers\TpqClassController;
 use App\Http\Controllers\SantriController;
 use App\Http\Controllers\SantriAttendanceController;
+use App\Http\Controllers\YouthMemberController;
+use App\Http\Controllers\YouthProgramController;
 use App\Http\Controllers\DakwahContentController;
 use App\Http\Controllers\AnnouncementController;
 use Illuminate\Support\Facades\Route;
@@ -35,6 +41,13 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 
+Route::get('/', [PublicHomeController::class, 'index'])->name('home');
+Route::get('/profil', [PublicProfileController::class, 'index'])->name('profile.public');
+Route::get('/digital-signage', [DigitalSignageController::class, 'index'])->name('digital-signage.index');
+Route::get('/pengumuman', [AnnouncementController::class, 'publicIndex'])->name('announcements.public');
+Route::get('/pengumuman/{announcement}', [AnnouncementController::class, 'publicShow'])->name('announcements.show');
+Route::get('/artikel', [DakwahContentController::class, 'publicIndex'])->name('dakwah.public');
+Route::get('/artikel/{slug}', [DakwahContentController::class, 'publicShow'])->name('dakwah.show');
 
 /*
 |--------------------------------------------------------------------------
@@ -323,17 +336,6 @@ Route::get('/transparansi', [
     'index'
 ])->name('transparansi.index');
 
-/*
-|--------------------------------------------------------------------------
-| PUBLIC HOME
-|--------------------------------------------------------------------------
-*/
-
-Route::get('/', [
-    PublicHomeController::class,
-    'index'
-])->name('home');
-
 
 /*
 |--------------------------------------------------------------------------
@@ -380,11 +382,10 @@ Route::middleware([
         'destroy'
     ])->name('jadwal-sholat.destroy');
 
-});
-
-Route::middleware(['auth', 'role:ketua,sekretaris'])->group(function () {
-
-    Route::resource('activities', ActivityController::class);
+    Route::post('/jadwal-sholat/sync', [
+        PrayerScheduleController::class,
+        'sync'
+    ])->name('prayer-schedules.sync');
 
 });
 
@@ -392,13 +393,8 @@ Route::get('/kegiatan', [ActivityController::class, 'publicIndex'])
     ->name('activities.public');
 
 Route::middleware(['auth', 'role:ketua,sekretaris'])->group(function () {
-
-    Route::resource('activities', ActivityController::class)
-        ->except(['show']);
-
-    Route::resource('officers', OfficerController::class)
-        ->except(['show']);
-
+    Route::resource('activities', ActivityController::class);
+    Route::resource('officers', OfficerController::class)->except(['show']);
 });
 
 Route::middleware('auth')->group(function () {
@@ -411,23 +407,6 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/notifikasi/read-all', [NotificationController::class, 'readAll'])
         ->name('notifications.readAll');
-
-});
-
-Route::post(
-    '/jadwal-sholat/sync',
-    [PrayerScheduleController::class, 'sync']
-)->name('prayer-schedules.sync');
-
-Route::middleware(['auth', 'role:ketua,marbot'])->group(function () {
-
-    Route::resource('prayer-schedules', PrayerScheduleController::class)
-        ->except(['show']);
-
-    Route::post(
-        '/jadwal-sholat/sync',
-        [PrayerScheduleController::class, 'sync']
-    )->name('prayer-schedules.sync');
 
 });
 
@@ -502,6 +481,18 @@ Route::middleware(['auth', 'role:ketua,bendahara'])->group(function () {
         \App\Http\Controllers\BusinessUnitSaleController::class,
         'report',
     ])->name('business-unit-sales.report');
+
+    // Inventaris dan stok produk unit usaha
+    Route::resource('business-unit-items', BusinessUnitItemController::class)
+        ->parameters([
+            'business-unit-items' => 'businessUnitItem',
+        ])
+        ->except(['show']);
+
+    Route::post('/business-unit-items/{businessUnitItem}/adjust-stock', [
+        BusinessUnitItemController::class,
+        'adjustStock',
+    ])->name('business-unit-items.adjust-stock');
 });
 
 Route::middleware(['auth', 'role:ketua,sekretaris'])->group(function () {
@@ -512,50 +503,51 @@ Route::middleware(['auth', 'role:ketua,sekretaris'])->group(function () {
         ->except(['show', 'destroy']);
 });
 
-Route::middleware(['auth', 'role:ketua,sekretaris'])
-    ->group(function () {
+Route::middleware(['auth', 'role:ketua,sekretaris'])->group(function () {
+    Route::get('/book-loans', [
+        BookLoanController::class,
+        'index'
+    ])->name('book-loans.index');
 
-        Route::get('/book-loans', [
-            BookLoanController::class,
-            'index'
-        ])->name('book-loans.index');
+    Route::get('/book-loans/create', [
+        BookLoanController::class,
+        'create'
+    ])->name('book-loans.create');
 
-        Route::get('/book-loans/create', [
-            BookLoanController::class,
-            'create'
-        ])->name('book-loans.create');
+    Route::post('/book-loans', [
+        BookLoanController::class,
+        'store'
+    ])->name('book-loans.store');
 
-        Route::post('/book-loans', [
-            BookLoanController::class,
-            'store'
-        ])->name('book-loans.store');
-
-        Route::patch('/book-loans/{bookLoan}/return', [
-            BookLoanController::class,
-            'returnBook'
-        ])->name('book-loans.return');
-    });
+    Route::patch('/book-loans/{bookLoan}/return', [
+        BookLoanController::class,
+        'returnBook'
+    ])->name('book-loans.return');
 
     Route::patch('/book-loans/{bookLoan}/lost', [
-        \App\Http\Controllers\BookLoanController::class,
+        BookLoanController::class,
         'markLost',
     ])->name('book-loans.lost');
 
     Route::get('/book-loans/report', [
-        \App\Http\Controllers\BookLoanController::class,
+        BookLoanController::class,
         'report',
     ])->name('book-loans.report');
 
-    Route::middleware(['auth', 'role:ketua,sekretaris'])->group(function () {
-        Route::resource('tpq-classes', TpqClassController::class)
-            ->except(['show']);
-    });
+    Route::resource('tpq-classes', TpqClassController::class)
+        ->except(['show']);
 
-    Route::middleware(['auth', 'role:ketua,sekretaris'])->group(function () {
-        Route::resource('santris', SantriController::class);
-    });
+    Route::resource('santris', SantriController::class);
 
-    Route::middleware(['auth', 'role:ketua,sekretaris,marbot'])->group(function () {
+    // Remaja Masjid (IRMA / Risma)
+    Route::resource('youth-members', YouthMemberController::class)
+        ->except(['show']);
+
+    Route::resource('youth-programs', YouthProgramController::class)
+        ->except(['show']);
+});
+
+Route::middleware(['auth', 'role:ketua,sekretaris,marbot'])->group(function () {
     Route::get('/santri-attendances', [
         SantriAttendanceController::class,
         'index',
@@ -565,17 +557,17 @@ Route::middleware(['auth', 'role:ketua,sekretaris'])
         SantriAttendanceController::class,
         'store',
     ])->name('santri-attendances.store');
+
+    Route::get('/santri-attendances/report', [
+        SantriAttendanceController::class,
+        'report',
+    ])->name('santri-attendances.report');
+
+    Route::get('/santri-attendances/export', [
+        SantriAttendanceController::class,
+        'export',
+    ])->name('santri-attendances.export');
 });
-
-Route::get('/santri-attendances/report', [
-    SantriAttendanceController::class,
-    'report',
-])->name('santri-attendances.report');
-
-Route::get('/santri-attendances/export', [
-    SantriAttendanceController::class,
-    'export',
-])->name('santri-attendances.export');
 
 Route::middleware(['auth', 'role:ketua,sekretaris'])->group(function () {
     Route::resource('dakwah-contents', DakwahContentController::class)
@@ -583,6 +575,16 @@ Route::middleware(['auth', 'role:ketua,sekretaris'])->group(function () {
 
     Route::resource('announcements', AnnouncementController::class)
         ->except(['show']);
+
+    Route::get('/announcements/{announcement}/detail', [AnnouncementController::class, 'show'])
+        ->name('announcements.internal-show');
+});
+
+Route::middleware(['auth', 'role:ketua'])->group(function () {
+    Route::get('/activity-logs', [
+        \App\Http\Controllers\ActivityLogController::class,
+        'index'
+    ])->name('activity-logs.index');
 });
 
 require __DIR__ . '/auth.php';

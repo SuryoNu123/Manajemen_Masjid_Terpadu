@@ -4,7 +4,6 @@ namespace App\Notifications;
 
 use App\Models\Activity;
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
 class ActivityReminderNotification extends Notification
@@ -13,8 +12,7 @@ class ActivityReminderNotification extends Notification
 
     public function __construct(
         public Activity $activity
-    ) {
-    }
+    ) {}
 
     /**
      * Channel notifikasi.
@@ -37,7 +35,7 @@ class ActivityReminderNotification extends Notification
             'start_time' => $this->activity->start_time,
             'end_time' => $this->activity->end_time,
             'location' => $this->activity->location,
-            'message' => 'Pengingat kegiatan: ' . $this->activity->title,
+            'message' => 'Pengingat kegiatan: '.$this->activity->title,
         ];
     }
 }

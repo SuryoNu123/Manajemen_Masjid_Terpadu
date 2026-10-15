@@ -1,27 +1,66 @@
-<div class="pt-4">
+<div class="space-y-4 pt-2">
 
-    <p class="px-4 text-xs font-semibold text-slate-500 uppercase mb-2">
-        Jamaah
-    </p>
+    {{-- LAYANAN & INFORMASI --}}
+    <div>
+        <p class="px-4 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+            Layanan Jamaah
+        </p>
+        <div class="mt-1 space-y-0.5">
+            <a href="{{ route('home') }}"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800">
+                Jadwal Sholat & Beranda
+            </a>
+            <a href="{{ route('activities.public') }}"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800">
+                Jadwal Kajian & Kegiatan
+            </a>
+            <a href="{{ route('announcements.public') }}"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800">
+                Pengumuman Masjid
+            </a>
+            <a href="{{ route('dakwah.public') }}"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800">
+                Artikel Dakwah
+            </a>
+        </div>
+    </div>
 
-    <a href="#" class="block px-4 py-2 rounded-lg hover:bg-slate-800">
-        Jadwal Sholat
-    </a>
+    {{-- DONASI & ZAKAT --}}
+    <div>
+        <p class="px-4 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+            Donasi & Transparansi
+        </p>
+        <div class="mt-1 space-y-0.5">
+            <a href="{{ route('donasi.create') }}"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800">
+                Infaq & Donasi Digital
+            </a>
+            <a href="{{ route('zakat.index') }}"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800">
+                Kalkulator Zakat
+            </a>
+            <a href="{{ route('transparansi.index') }}"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800">
+                Transparansi Kas Masjid
+            </a>
+        </div>
+    </div>
 
-    <a href="#" class="block px-4 py-2 rounded-lg hover:bg-slate-800">
-        Kegiatan
-    </a>
-
-    <a href="#" class="block px-4 py-2 rounded-lg hover:bg-slate-800">
-        Donasi
-    </a>
-
-    <a href="#" class="block px-4 py-2 rounded-lg hover:bg-slate-800">
-        Zakat
-    </a>
-
-    <a href="#" class="block px-4 py-2 rounded-lg hover:bg-slate-800">
-        Profil
-    </a>
+    {{-- PROFIL --}}
+    <div>
+        <p class="px-4 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+            Akun & Profil
+        </p>
+        <div class="mt-1 space-y-0.5">
+            <a href="{{ route('profile.public') }}"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800">
+                Profil & DKM Masjid
+            </a>
+            <a href="{{ route('profile.edit') }}"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 {{ request()->routeIs('profile.edit') ? 'bg-slate-800 text-white font-medium' : '' }}">
+                Pengaturan Akun Saya
+            </a>
+        </div>
+    </div>
 
 </div>

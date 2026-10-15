@@ -4,6 +4,28 @@
 
 @section('content')
 
+@if(isset($emergencyAnnouncements) && $emergencyAnnouncements->isNotEmpty())
+    <div class="bg-red-600 text-white px-6 py-3.5">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-white text-red-600">
+                    DARURAT
+                </span>
+                <span class="text-sm font-semibold">
+                    {{ $emergencyAnnouncements->first()->title }}:
+                </span>
+                <span class="text-sm text-red-100 hidden sm:inline">
+                    {{ Str::limit($emergencyAnnouncements->first()->content, 120) }}
+                </span>
+            </div>
+            <a href="{{ route('announcements.show', $emergencyAnnouncements->first()) }}"
+               class="text-xs font-bold underline hover:text-red-200">
+                Lihat Selengkapnya →
+            </a>
+        </div>
+    </div>
+@endif
+
 {{-- ========================================================= --}}
 {{-- HERO --}}
 {{-- ========================================================= --}}
@@ -791,55 +813,40 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-4">
 
-
                 <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
-
                     <p class="text-slate-400 text-sm">
                         Total Pemasukan
                     </p>
-
-                    <p class="text-3xl font-bold mt-2">
-                        Rp 0
+                    <p class="text-3xl font-bold mt-2 text-emerald-400">
+                        Rp {{ number_format($totalIncome ?? 0, 0, ',', '.') }}
                     </p>
-
-                    <p class="text-xs text-slate-500 mt-2">
-                        Belum ada laporan publik
+                    <p class="text-xs text-slate-400 mt-2">
+                        {{ $reportPeriodLabel ?? 'Data Terverifikasi' }}
                     </p>
-
                 </div>
 
-
                 <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
-
                     <p class="text-slate-400 text-sm">
                         Total Pengeluaran
                     </p>
-
-                    <p class="text-3xl font-bold mt-2">
-                        Rp 0
+                    <p class="text-3xl font-bold mt-2 text-rose-400">
+                        Rp {{ number_format($totalExpense ?? 0, 0, ',', '.') }}
                     </p>
-
-                    <p class="text-xs text-slate-500 mt-2">
-                        Menunggu data publik
+                    <p class="text-xs text-slate-400 mt-2">
+                        Penyaluran & Operasional
                     </p>
-
                 </div>
 
-
-                <div class="bg-blue-600 rounded-2xl p-6">
-
-                    <p class="text-blue-100 text-sm">
-                        Saldo
+                <div class="bg-blue-600 rounded-2xl p-6 shadow-lg shadow-blue-500/20">
+                    <p class="text-blue-100 text-sm font-medium">
+                        Saldo Kas Masjid
                     </p>
-
-                    <p class="text-3xl font-bold mt-2">
-                        Rp 0
+                    <p class="text-3xl font-bold mt-2 text-white">
+                        Rp {{ number_format($balance ?? 0, 0, ',', '.') }}
                     </p>
-
                     <p class="text-xs text-blue-100 mt-2">
-                        Akan diperbarui otomatis
+                        Tersedia untuk program umat
                     </p>
-
                 </div>
 
             </div>
@@ -850,6 +857,148 @@
 
 </section>
 
+{{-- ========================================================= --}}
+{{-- PENGUMUMAN MASJID --}}
+{{-- ========================================================= --}}
+
+<section class="py-20 bg-slate-50 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-5 mb-10">
+            <div>
+                <span class="text-sm font-semibold text-blue-600 uppercase tracking-wider">
+                    Informasi
+                </span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-2 text-slate-900">
+                    Pengumuman Masjid
+                </h2>
+                <p class="text-slate-500 mt-2">
+                    Kabar dan pemberitahuan penting untuk jamaah Masjid Terpadu.
+                </p>
+            </div>
+
+            <a href="{{ route('announcements.public') }}" class="text-sm font-semibold text-blue-600 hover:underline">
+                Lihat Semua Pengumuman →
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            @forelse($latestAnnouncements ?? [] as $announcement)
+                <div class="bg-white rounded-2xl border border-slate-200 p-6 flex flex-col justify-between hover:shadow-lg transition">
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-3">
+                            @if($announcement->type === 'emergency')
+                                <span class="rounded-full bg-red-100 text-red-700 px-2.5 py-0.5 text-xs font-semibold">
+                                    Darurat
+                                </span>
+                            @else
+                                <span class="rounded-full bg-blue-100 text-blue-700 px-2.5 py-0.5 text-xs font-semibold">
+                                    Pengumuman
+                                </span>
+                            @endif
+
+                            <span class="text-xs text-slate-400">
+                                {{ $announcement->published_at?->format('d M Y') }}
+                            </span>
+                        </div>
+
+                        <h3 class="font-bold text-lg text-slate-900 hover:text-blue-600">
+                            <a href="{{ route('announcements.show', $announcement) }}">
+                                {{ $announcement->title }}
+                            </a>
+                        </h3>
+
+                        <p class="text-sm text-slate-600 mt-2 line-clamp-3 leading-relaxed">
+                            {{ Str::limit($announcement->content, 130) }}
+                        </p>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <span class="text-xs text-slate-400">
+                            {{ $announcement->published_at?->format('H:i') }} WIB
+                        </span>
+                        <a href="{{ route('announcements.show', $announcement) }}"
+                           class="text-xs font-semibold text-blue-600 hover:underline">
+                            Baca Selengkapnya →
+                        </a>
+                    </div>
+                </div>
+            @empty
+                <div class="col-span-3 text-center py-12 text-slate-400 bg-white rounded-2xl border border-slate-200">
+                    Belum ada pengumuman terbaru.
+                </div>
+            @endforelse
+        </div>
+    </div>
+</section>
+
+{{-- ========================================================= --}}
+{{-- ARTIKEL DAKWAH --}}
+{{-- ========================================================= --}}
+
+<section class="py-20 bg-white border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-5 mb-10">
+            <div>
+                <span class="text-sm font-semibold text-emerald-600 uppercase tracking-wider">
+                    Dakwah & Berita
+                </span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-2 text-slate-900">
+                    Artikel & Kajian Dakwah
+                </h2>
+                <p class="text-slate-500 mt-2">
+                    Tingkatkan wawasan keislaman melalui artikel dakwah dan risalah Jumat.
+                </p>
+            </div>
+
+            <a href="{{ route('dakwah.public') }}" class="text-sm font-semibold text-emerald-600 hover:underline">
+                Lihat Semua Artikel →
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            @forelse($latestArticles ?? [] as $article)
+                <div class="bg-slate-50 rounded-2xl border border-slate-200 overflow-hidden flex flex-col justify-between hover:shadow-lg transition">
+                    <div>
+                        @if($article->cover_image)
+                            <img src="{{ asset('storage/' . $article->cover_image) }}"
+                                 alt="{{ $article->title }}"
+                                 class="h-44 w-full object-cover">
+                        @else
+                            <div class="h-44 bg-slate-900 flex items-center justify-center text-4xl text-white">
+                                📚
+                            </div>
+                        @endif
+
+                        <div class="p-6">
+                            <span class="text-xs text-slate-400">
+                                {{ $article->published_at?->format('d M Y') }}
+                            </span>
+                            <h3 class="font-bold text-lg text-slate-900 mt-1 hover:text-emerald-600">
+                                <a href="{{ route('dakwah.show', $article->slug) }}">
+                                    {{ $article->title }}
+                                </a>
+                            </h3>
+                            <p class="text-sm text-slate-600 mt-2 line-clamp-2">
+                                {{ $article->excerpt ?: Str::limit(strip_tags($article->content), 100) }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="px-6 pb-6 pt-2">
+                        <a href="{{ route('dakwah.show', $article->slug) }}"
+                           class="text-xs font-semibold text-emerald-600 hover:underline">
+                            Baca Selengkapnya →
+                        </a>
+                    </div>
+                </div>
+            @empty
+                <div class="col-span-3 text-center py-12 text-slate-400 bg-slate-50 rounded-2xl border border-slate-200">
+                    Belum ada artikel dakwah.
+                </div>
+            @endforelse
+        </div>
+    </div>
+</section>
 
 {{-- ========================================================= --}}
 {{-- CTA DONASI --}}

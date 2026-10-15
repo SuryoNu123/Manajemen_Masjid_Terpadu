@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdatePrayerScheduleRequest extends FormRequest
+class UpdateMustahikRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -14,43 +14,64 @@ class UpdatePrayerScheduleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'schedule_date' => [
+            'name' => [
                 'required',
+                'string',
+                'max:255',
+            ],
+
+            'asnaf' => [
+                'required',
+                'in:fakir,miskin,amil,muallaf,riqab,gharim,fisabilillah,ibnu_sabil',
+            ],
+
+            'address' => [
+                'nullable',
+                'string',
+                'max:500',
+            ],
+
+            'phone' => [
+                'nullable',
+                'string',
+                'max:30',
+            ],
+
+            'amount' => [
+                'required',
+                'numeric',
+                'min:0',
+            ],
+
+            'status' => [
+                'required',
+                'in:pending,distributed',
+            ],
+
+            'distributed_at' => [
+                'nullable',
                 'date',
             ],
 
-            'prayer_name' => [
-                'required',
-                'in:subuh,dzuhur,ashar,maghrib,isya',
-            ],
-
-            'prayer_time' => [
-                'required',
-                'date_format:H:i',
-            ],
-
-            'latitude' => [
-                'nullable',
-                'numeric',
-                'between:-90,90',
-            ],
-
-            'longitude' => [
-                'nullable',
-                'numeric',
-                'between:-180,180',
-            ],
-
-            'source' => [
+            'notes' => [
                 'nullable',
                 'string',
-                'max:100',
+                'max:1000',
             ],
+        ];
+    }
 
-            'is_active' => [
-                'nullable',
-                'boolean',
-            ],
+    public function attributes(): array
+    {
+        return [
+            'name' => 'nama mustahik',
+            'asnaf' => 'kategori asnaf',
+            'address' => 'alamat',
+            'phone' => 'nomor HP',
+            'amount' => 'nominal',
+            'status' => 'status penyaluran',
+            'distributed_at' => 'tanggal penyaluran',
+            'notes' => 'catatan',
         ];
     }
 }

@@ -49,13 +49,11 @@ class BookLoanController extends Controller
     {
         $books = LibraryBook::where('is_active', true)
             ->withCount([
-                'loans as borrowed_copies' => fn ($query) =>
-                    $query->where('status', 'borrowed')
+                'loans as borrowed_copies' => fn ($query) => $query->where('status', 'borrowed'),
             ])
             ->orderBy('title')
             ->get()
-            ->filter(fn ($book) =>
-                $book->total_copies > $book->borrowed_copies
+            ->filter(fn ($book) => $book->total_copies > $book->borrowed_copies
             );
 
         $jamaahs = Jamaah::orderBy('id')->get();
@@ -86,17 +84,16 @@ class BookLoanController extends Controller
                 $book->id
             )->where('status', 'borrowed')->count();
 
-            if (!$book->is_active ||
+            if (! $book->is_active ||
                 $borrowed >= $book->total_copies) {
                 throw ValidationException::withMessages([
-                    'library_book_id' =>
-                        'Stok buku tidak tersedia.',
+                    'library_book_id' => 'Stok buku tidak tersedia.',
                 ]);
             }
 
             BookLoan::create([
                 ...$data,
-                'loan_code' => 'PJM-' . Str::upper(
+                'loan_code' => 'PJM-'.Str::upper(
                     Str::random(10)
                 ),
                 'status' => 'borrowed',
@@ -133,7 +130,7 @@ class BookLoanController extends Controller
             ->route('book-loans.index')
             ->with('success', 'Buku berhasil dikembalikan.');
     }
-    
+
     public function markLost(BookLoan $bookLoan)
     {
         if ($bookLoan->status !== 'borrowed') {
@@ -150,33 +147,33 @@ class BookLoanController extends Controller
             ->route('book-loans.index')
             ->with('success', 'Peminjaman berhasil ditandai sebagai buku hilang.');
     }
-    
+
     public function report()
     {
-        $totalBooks = \App\Models\LibraryBook::count();
+        $totalBooks = LibraryBook::count();
 
-        $totalCopies = \App\Models\LibraryBook::sum('total_copies');
+        $totalCopies = LibraryBook::sum('total_copies');
 
-        $activeLoans = \App\Models\BookLoan::where(
+        $activeLoans = BookLoan::where(
             'status',
             'borrowed'
         )->count();
 
-        $overdueLoans = \App\Models\BookLoan::where('status', 'borrowed')
+        $overdueLoans = BookLoan::where('status', 'borrowed')
             ->whereDate('due_date', '<', today())
             ->count();
 
-        $returnedLoans = \App\Models\BookLoan::where(
+        $returnedLoans = BookLoan::where(
             'status',
             'returned'
         )->count();
 
-        $lostLoans = \App\Models\BookLoan::where(
+        $lostLoans = BookLoan::where(
             'status',
             'lost'
         )->count();
 
-        $recentLoans = \App\Models\BookLoan::with([
+        $recentLoans = BookLoan::with([
             'book',
             'jamaah',
         ])
@@ -194,5 +191,4 @@ class BookLoanController extends Controller
             'recentLoans'
         ));
     }
-
 }

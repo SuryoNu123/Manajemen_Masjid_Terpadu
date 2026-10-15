@@ -2,28 +2,55 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdatePrayerScheduleRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            //
+            'schedule_date' => [
+                'required',
+                'date',
+            ],
+
+            'prayer_name' => [
+                'required',
+                'in:subuh,dzuhur,ashar,maghrib,isya',
+            ],
+
+            'prayer_time' => [
+                'required',
+                'date_format:H:i',
+            ],
+
+            'latitude' => [
+                'nullable',
+                'numeric',
+                'between:-90,90',
+            ],
+
+            'longitude' => [
+                'nullable',
+                'numeric',
+                'between:-180,180',
+            ],
+
+            'source' => [
+                'nullable',
+                'string',
+                'max:100',
+            ],
+
+            'is_active' => [
+                'nullable',
+                'boolean',
+            ],
         ];
     }
 }

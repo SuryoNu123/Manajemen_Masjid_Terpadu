@@ -149,7 +149,6 @@ class DonationController extends Controller
                 ->where('type', 'income')
                 ->firstOrFail();
 
-
             /*
             |--------------------------------------------------------------------------
             | Buat transaksi keuangan
@@ -160,8 +159,7 @@ class DonationController extends Controller
                 'category_id' => $category->id,
                 'user_id' => Auth::id(),
 
-                'transaction_code' =>
-                    'DON-' . $donasi->donation_code,
+                'transaction_code' => 'DON-'.$donasi->donation_code,
 
                 'type' => 'income',
 
@@ -169,14 +167,12 @@ class DonationController extends Controller
 
                 'transaction_date' => now()->toDateString(),
 
-                'source' =>
-                    $donasi->donor_name
+                'source' => $donasi->donor_name
                     ?: 'Donasi Online',
 
-                'description' =>
-                    'Donasi ' .
-                    ucfirst($donasi->type) .
-                    ' - ' .
+                'description' => 'Donasi '.
+                    ucfirst($donasi->type).
+                    ' - '.
                     $donasi->donation_code,
 
                 /*
@@ -217,9 +213,9 @@ class DonationController extends Controller
     {
         do {
             $code =
-                'DON-' .
-                now()->format('YmdHis') .
-                '-' .
+                'DON-'.
+                now()->format('YmdHis').
+                '-'.
                 random_int(100, 999);
 
         } while (

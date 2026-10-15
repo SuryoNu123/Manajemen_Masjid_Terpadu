@@ -40,7 +40,7 @@ class GenerateFinancialReportRequest extends FormRequest
 
             if (
                 $this->period_type === 'monthly'
-                && !$this->month
+                && ! $this->month
             ) {
                 $validator->errors()->add(
                     'month',

@@ -46,7 +46,7 @@ class FinancialTransaction extends Model
             'financial_transaction_id'
         );
     }
-  
+
     public function businessUnitSale(): HasOne
     {
         return $this->hasOne(

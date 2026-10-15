@@ -1,63 +1,62 @@
-<div class="pt-4">
+<div class="space-y-4 pt-2">
 
-    <p class="px-4 text-xs font-semibold text-slate-500 uppercase mb-2">
-        Operasional
-    </p>
+    {{-- OPERASIONAL IBADAH --}}
+    <div>
+        <p class="px-4 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+            Operasional Ibadah
+        </p>
+        <div class="mt-1 space-y-0.5">
+            <a href="{{ route('jadwal-sholat.index') }}"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 {{ request()->routeIs('jadwal-sholat.*') ? 'bg-slate-800 text-white font-medium' : '' }}">
+                Jadwal Sholat 5 Waktu
+            </a>
+            <a href="{{ route('prayer-attendances.index') }}"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 {{ request()->routeIs('prayer-attendances.*') ? 'bg-slate-800 text-white font-medium' : '' }}">
+                Presensi Jamaah Sholat
+            </a>
+            <a href="{{ route('prayer-attendance-reports.index') }}"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 {{ request()->routeIs('prayer-attendance-reports.*') ? 'bg-slate-800 text-white font-medium' : '' }}">
+                Laporan Rekap Presensi
+            </a>
+            <a href="{{ route('santri-attendances.index') }}"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 {{ request()->routeIs('santri-attendances.*') ? 'bg-slate-800 text-white font-medium' : '' }}">
+                Absensi Santri TPQ
+            </a>
+        </div>
+    </div>
 
-    <a
-        href="{{ route('jadwal-sholat.index') }}"
-        class="block px-4 py-2 rounded-lg hover:bg-slate-800"
-    >
-        Jadwal Sholat
-    </a>
-    
-    <a href="{{ route('prayer-attendances.index') }}"
-    class="block px-4 py-2 rounded-lg hover:bg-slate-800">
-        <span>Presensi Jamaah</span>
-    </a>
-    
-    <a href="{{ route('prayer-attendance-reports.index') }}"
-    class="block px-4 py-2 rounded-lg hover:bg-slate-800">
-        <span>Laporan Presensi</span>
-    </a>
+    {{-- PEMELIHARAAN ASET --}}
+    <div>
+        <p class="px-4 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+            Pemeliharaan Aset
+        </p>
+        <div class="mt-1 space-y-0.5">
+            <a href="{{ route('assets.index') }}"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 {{ request()->routeIs('assets.*') ? 'bg-slate-800 text-white font-medium' : '' }}">
+                Inventaris Aset Masjid
+            </a>
+            <a href="{{ route('asset-maintenances.index') }}"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 {{ request()->routeIs('asset-maintenances.*') ? 'bg-slate-800 text-white font-medium' : '' }}">
+                Jadwal & Catatan Perawatan
+            </a>
+        </div>
+    </div>
 
-    <a href="{{ route('santri-attendances.index') }}"
-    class="block px-4 py-2 rounded-lg hover:bg-slate-800">
-        <span>Absensi Santri</span>
-    </a>
-    
-    <a href="{{ route('assets.index') }}"
-     class="block px-4 py-2 rounded-lg hover:bg-slate-800">
-        <span>Data Aset</span>
-    </a>
-    
-    <a href="{{ route('asset-maintenances.index') }}"
-     class="block px-4 py-2 rounded-lg hover:bg-slate-800">
-        <span>Perawatan Aset</span>
-    </a>
-
-    <a href="{{ route('business-unit-sales.index') }}"
-    class="block px-4 py-2 rounded-lg hover:bg-slate-800">
-        <span>Pencatatan Omzet</span>
-        </a>
-
-    <a href="{{ route('business-unit-sales.report') }}"
-     class="block px-4 py-2 rounded-lg hover:bg-slate-800">
-        <span>Laporan Omzet</span>
-    </a>
-
-    <a
-        href="#"
-        class="block px-4 py-2 rounded-lg hover:bg-slate-800"
-    >
-        Imam & Petugas
-    </a>
-
-    <a
-        href="#"
-        class="block px-4 py-2 rounded-lg hover:bg-slate-800"
-    >
-        Digital Signage
-    </a>
+    {{-- MEDIA & INFORMASI --}}
+    <div>
+        <p class="px-4 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+            Media Masjid
+        </p>
+        <div class="mt-1 space-y-0.5">
+            <a href="{{ route('digital-signage.index') }}" target="_blank"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800">
+                📺 Buka Digital Signage TV ↗
+            </a>
+            <a href="{{ route('activities.public') }}" target="_blank"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800">
+                Jadwal Kegiatan Masjid ↗
+            </a>
+        </div>
+    </div>
 
 </div>

@@ -134,6 +134,46 @@
             </div>
         </div>
     </div>
+
+    <div>
+        <h2 class="mb-4 border-b border-slate-200 pb-2 font-semibold text-slate-800">
+            Progres Pembelajaran & Hafalan
+        </h2>
+
+        <div class="grid gap-4 sm:grid-cols-2 mb-4">
+            <div>
+                <label class="mb-2 block text-sm font-medium">Progres Hafalan Al-Qur'an</label>
+                <input type="text" name="progress_hafalan" maxlength="255"
+                       placeholder="Contoh: Juz 30 / Surat An-Naba ayat 1-20"
+                       value="{{ old('progress_hafalan', $santri->progress_hafalan ?? '') }}"
+                       class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm">
+                @error('progress_hafalan')
+                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div>
+                <label class="mb-2 block text-sm font-medium">Progres Bacaan / Kitab</label>
+                <input type="text" name="progress_bacaan" maxlength="255"
+                       placeholder="Contoh: Iqro Jilid 4 Hal 12 / Al-Qur'an Juz 2"
+                       value="{{ old('progress_bacaan', $santri->progress_bacaan ?? '') }}"
+                       class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm">
+                @error('progress_bacaan')
+                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                @enderror
+            </div>
+        </div>
+
+        <div>
+            <label class="mb-2 block text-sm font-medium">Catatan Pembelajaran / Ustadz</label>
+            <textarea name="learning_notes" rows="2"
+                      placeholder="Catatan tajwid, makhraj, atau akhlak santri..."
+                      class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm">{{ old('learning_notes', $santri->learning_notes ?? '') }}</textarea>
+            @error('learning_notes')
+                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+            @enderror
+        </div>
+    </div>
 </div>
 
 <div class="mt-6 flex justify-end gap-3 border-t border-slate-200 pt-5">

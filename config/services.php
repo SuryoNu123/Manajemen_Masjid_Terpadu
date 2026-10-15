@@ -35,7 +35,7 @@ return [
         ],
     ],
 
-        'prayer_api' => [
+    'prayer_api' => [
         'base_url' => 'https://api.aladhan.com/v1',
         'latitude' => env('MOSQUE_LATITUDE'),
         'longitude' => env('MOSQUE_LONGITUDE'),

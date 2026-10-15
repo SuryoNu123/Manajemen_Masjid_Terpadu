@@ -18,7 +18,6 @@ class ActivityController extends Controller
         return view('activities.index', compact('activities'));
     }
 
-
     public function create()
     {
         $officers = Officer::where('is_active', true)
@@ -27,7 +26,6 @@ class ActivityController extends Controller
 
         return view('activities.create', compact('officers'));
     }
-
 
     public function store(Request $request)
     {
@@ -59,15 +57,14 @@ class ActivityController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        if (!empty($selectedOfficerIds) && empty($validated['end_time'])) {
+        if (! empty($selectedOfficerIds) && empty($validated['end_time'])) {
 
             return back()
                 ->withErrors([
-                    'end_time' => 'Waktu selesai wajib diisi jika kegiatan memiliki petugas.'
+                    'end_time' => 'Waktu selesai wajib diisi jika kegiatan memiliki petugas.',
                 ])
                 ->withInput();
         }
-
 
         /*
         |--------------------------------------------------------------------------
@@ -75,7 +72,7 @@ class ActivityController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        if (!empty($selectedOfficerIds)) {
+        if (! empty($selectedOfficerIds)) {
 
             $activeOfficerCount = Officer::where('is_active', true)
                 ->whereIn('id', $selectedOfficerIds)
@@ -85,12 +82,11 @@ class ActivityController extends Controller
 
                 return back()
                     ->withErrors([
-                        'officers' => 'Petugas yang dipilih harus dalam status aktif.'
+                        'officers' => 'Petugas yang dipilih harus dalam status aktif.',
                     ])
                     ->withInput();
             }
         }
-
 
         /*
         |--------------------------------------------------------------------------
@@ -98,12 +94,12 @@ class ActivityController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        if (!empty($selectedOfficerIds)) {
+        if (! empty($selectedOfficerIds)) {
 
             $conflicts = Activity::whereDate(
-                    'activity_date',
-                    $validated['activity_date']
-                )
+                'activity_date',
+                $validated['activity_date']
+            )
                 ->where(function ($query) use ($validated) {
 
                     $query->whereTime(
@@ -111,16 +107,16 @@ class ActivityController extends Controller
                         '<',
                         $validated['end_time']
                     )
-                    ->where(function ($query) use ($validated) {
+                        ->where(function ($query) use ($validated) {
 
-                        $query->whereNull('end_time')
-                            ->orWhere(
-                                'end_time',
-                                '>',
-                                $validated['start_time']
-                            );
+                            $query->whereNull('end_time')
+                                ->orWhere(
+                                    'end_time',
+                                    '>',
+                                    $validated['start_time']
+                                );
 
-                    });
+                        });
 
                 })
                 ->whereHas('officers', function ($query) use ($selectedOfficerIds) {
@@ -134,7 +130,6 @@ class ActivityController extends Controller
                 ->with('officers')
                 ->get();
 
-
             if ($conflicts->isNotEmpty()) {
 
                 $names = $conflicts
@@ -146,12 +141,11 @@ class ActivityController extends Controller
 
                 return back()
                     ->withErrors([
-                        'officers' => "Jadwal petugas bentrok dengan kegiatan lain: {$names}"
+                        'officers' => "Jadwal petugas bentrok dengan kegiatan lain: {$names}",
                     ])
                     ->withInput();
             }
         }
-
 
         /*
         |--------------------------------------------------------------------------
@@ -165,7 +159,6 @@ class ActivityController extends Controller
             $validated['officers'],
             $validated['assignments']
         );
-
 
         DB::transaction(function () use (
             $validated,
@@ -191,7 +184,6 @@ class ActivityController extends Controller
             $activity->officers()->sync($pivotData);
         });
 
-
         return redirect()
             ->route('activities.index')
             ->with('success', 'Kegiatan berhasil ditambahkan.');
@@ -203,7 +195,6 @@ class ActivityController extends Controller
 
         return view('activities.show', compact('activity'));
     }
-
 
     public function edit(Activity $activity)
     {
@@ -225,7 +216,6 @@ class ActivityController extends Controller
         );
     }
 
-
     public function update(Request $request, Activity $activity)
     {
         $validated = $request->validate([
@@ -246,11 +236,9 @@ class ActivityController extends Controller
             'assignments' => 'nullable|array',
         ]);
 
-
         $selectedOfficerIds = array_unique(
             $request->input('officers', [])
         );
-
 
         /*
         |--------------------------------------------------------------------------
@@ -258,15 +246,14 @@ class ActivityController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        if (!empty($selectedOfficerIds) && empty($validated['end_time'])) {
+        if (! empty($selectedOfficerIds) && empty($validated['end_time'])) {
 
             return back()
                 ->withErrors([
-                    'end_time' => 'Waktu selesai wajib diisi jika kegiatan memiliki petugas.'
+                    'end_time' => 'Waktu selesai wajib diisi jika kegiatan memiliki petugas.',
                 ])
                 ->withInput();
         }
-
 
         /*
         |--------------------------------------------------------------------------
@@ -274,7 +261,7 @@ class ActivityController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        if (!empty($selectedOfficerIds)) {
+        if (! empty($selectedOfficerIds)) {
 
             $activeOfficerCount = Officer::where('is_active', true)
                 ->whereIn('id', $selectedOfficerIds)
@@ -284,12 +271,11 @@ class ActivityController extends Controller
 
                 return back()
                     ->withErrors([
-                        'officers' => 'Petugas yang dipilih harus dalam status aktif.'
+                        'officers' => 'Petugas yang dipilih harus dalam status aktif.',
                     ])
                     ->withInput();
             }
         }
-
 
         /*
         |--------------------------------------------------------------------------
@@ -297,7 +283,7 @@ class ActivityController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        if (!empty($selectedOfficerIds)) {
+        if (! empty($selectedOfficerIds)) {
 
             $conflicts = Activity::where('id', '!=', $activity->id)
                 ->whereDate(
@@ -311,16 +297,16 @@ class ActivityController extends Controller
                         '<',
                         $validated['end_time']
                     )
-                    ->where(function ($query) use ($validated) {
+                        ->where(function ($query) use ($validated) {
 
-                        $query->whereNull('end_time')
-                            ->orWhere(
-                                'end_time',
-                                '>',
-                                $validated['start_time']
-                            );
+                            $query->whereNull('end_time')
+                                ->orWhere(
+                                    'end_time',
+                                    '>',
+                                    $validated['start_time']
+                                );
 
-                    });
+                        });
 
                 })
                 ->whereHas('officers', function ($query) use ($selectedOfficerIds) {
@@ -334,7 +320,6 @@ class ActivityController extends Controller
                 ->with('officers')
                 ->get();
 
-
             if ($conflicts->isNotEmpty()) {
 
                 $names = $conflicts
@@ -346,12 +331,11 @@ class ActivityController extends Controller
 
                 return back()
                     ->withErrors([
-                        'officers' => "Jadwal petugas bentrok dengan kegiatan lain: {$names}"
+                        'officers' => "Jadwal petugas bentrok dengan kegiatan lain: {$names}",
                     ])
                     ->withInput();
             }
         }
-
 
         /*
         |--------------------------------------------------------------------------
@@ -365,7 +349,6 @@ class ActivityController extends Controller
             $validated['officers'],
             $validated['assignments']
         );
-
 
         DB::transaction(function () use (
             $activity,
@@ -392,12 +375,10 @@ class ActivityController extends Controller
             $activity->officers()->sync($pivotData);
         });
 
-
         return redirect()
             ->route('activities.index')
             ->with('success', 'Kegiatan berhasil diperbarui.');
     }
-
 
     public function destroy(Activity $activity)
     {
@@ -407,7 +388,6 @@ class ActivityController extends Controller
             ->route('activities.index')
             ->with('success', 'Kegiatan berhasil dihapus.');
     }
-
 
     public function publicIndex()
     {

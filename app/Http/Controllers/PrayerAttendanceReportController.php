@@ -91,8 +91,8 @@ class PrayerAttendanceReportController extends Controller
             $date = $record->attendance_date->toDateString();
 
             if (
-                !isset($summaryByPrayer[$prayer]) ||
-                !isset($totalByStatus[$status])
+                ! isset($summaryByPrayer[$prayer]) ||
+                ! isset($totalByStatus[$status])
             ) {
                 continue;
             }
@@ -101,7 +101,7 @@ class PrayerAttendanceReportController extends Controller
             $summaryByPrayer[$prayer]['total']++;
             $totalByStatus[$status]++;
 
-            if (!isset($dailySummary[$date][$prayer])) {
+            if (! isset($dailySummary[$date][$prayer])) {
                 $dailySummary[$date][$prayer] = [
                     'hadir' => 0,
                     'izin' => 0,

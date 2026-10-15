@@ -18,7 +18,7 @@ class PrayerScheduleService
         $method = config('services.prayer_api.method', 20);
         $timezone = config('services.prayer_api.timezone', 'Asia/Jakarta');
 
-        if (!$latitude || !$longitude) {
+        if (! $latitude || ! $longitude) {
             throw new RuntimeException(
                 'Koordinat masjid belum dikonfigurasi di file .env.'
             );
@@ -29,7 +29,7 @@ class PrayerScheduleService
         $url = rtrim(
             config('services.prayer_api.base_url'),
             '/'
-        ) . "/timings/{$formattedDate}";
+        )."/timings/{$formattedDate}";
 
         $response = Http::acceptJson()
             ->timeout(15)
@@ -43,9 +43,9 @@ class PrayerScheduleService
         if ($response->failed()) {
 
             throw new RuntimeException(
-                'API gagal. HTTP ' .
-                $response->status() .
-                ' - ' .
+                'API gagal. HTTP '.
+                $response->status().
+                ' - '.
                 $response->body()
             );
         }
@@ -53,9 +53,9 @@ class PrayerScheduleService
         $data = $response->json();
 
         if (
-            !isset($data['code']) ||
+            ! isset($data['code']) ||
             $data['code'] !== 200 ||
-            !isset($data['data']['timings'])
+            ! isset($data['data']['timings'])
         ) {
             throw new RuntimeException(
                 'Format data dari API jadwal sholat tidak valid.'
@@ -76,7 +76,7 @@ class PrayerScheduleService
 
         foreach ($prayers as $prayerName => $prayerTime) {
 
-            if (!$prayerTime) {
+            if (! $prayerTime) {
                 continue;
             }
 

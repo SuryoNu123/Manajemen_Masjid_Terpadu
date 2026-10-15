@@ -30,7 +30,7 @@ class SendActivityReminders extends Command
         $activities = Activity::where('is_public', true)
             ->where('status', 'scheduled')
             ->whereRaw(
-                "TIMESTAMP(activity_date, start_time) BETWEEN ? AND ?",
+                'TIMESTAMP(activity_date, start_time) BETWEEN ? AND ?',
                 [
                     $startWindow->format('Y-m-d H:i:s'),
                     $endWindow->format('Y-m-d H:i:s'),

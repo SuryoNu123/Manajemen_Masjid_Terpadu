@@ -18,6 +18,9 @@ class Santri extends Model
         'address',
         'tpq_class_id',
         'enrollment_date',
+        'progress_hafalan',
+        'progress_bacaan',
+        'learning_notes',
         'status',
     ];
 

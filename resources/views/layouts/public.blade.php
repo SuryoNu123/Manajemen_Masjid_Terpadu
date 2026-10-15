@@ -69,7 +69,7 @@
 
                 {{-- MENU PUBLIK --}}
 
-                <nav class="hidden md:flex items-center gap-7">
+                <nav class="hidden lg:flex items-center gap-6">
 
                     <a
                         href="{{ url('/') }}"
@@ -79,17 +79,31 @@
                     </a>
 
                     <a
-                        href="#"
+                        href="{{ route('profile.public') }}"
                         class="text-sm font-medium text-gray-700 hover:text-blue-600"
                     >
-                        Jadwal Sholat
+                        Profil
                     </a>
 
                     <a
-                        href="#"
+                        href="{{ route('activities.public') }}"
                         class="text-sm font-medium text-gray-700 hover:text-blue-600"
                     >
                         Kegiatan
+                    </a>
+
+                    <a
+                        href="{{ route('announcements.public') }}"
+                        class="text-sm font-medium text-gray-700 hover:text-blue-600"
+                    >
+                        Pengumuman
+                    </a>
+
+                    <a
+                        href="{{ route('dakwah.public') }}"
+                        class="text-sm font-medium text-gray-700 hover:text-blue-600"
+                    >
+                        Artikel
                     </a>
 
                     <a
@@ -209,10 +223,10 @@
                         </a>
 
                         <a
-                            href="#"
+                            href="{{ route('activities.public') }}"
                             class="block text-slate-400 hover:text-white"
                         >
-                            Jadwal Sholat
+                            Kegiatan Masjid
                         </a>
 
                         <a
@@ -220,6 +234,14 @@
                             class="block text-slate-400 hover:text-white"
                         >
                             Transparansi Keuangan
+                        </a>
+
+                        <a
+                            href="{{ route('digital-signage.index') }}"
+                            class="block text-slate-400 hover:text-white"
+                            target="_blank"
+                        >
+                            Digital Signage TV
                         </a>
 
                     </div>

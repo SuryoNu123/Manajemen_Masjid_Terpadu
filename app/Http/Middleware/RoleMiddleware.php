@@ -14,7 +14,7 @@ class RoleMiddleware
         Closure $next,
         ...$roles
     ): Response {
-        if (!Auth::check()) {
+        if (! Auth::check()) {
             return redirect()->route('login');
         }
 
@@ -22,7 +22,7 @@ class RoleMiddleware
 
         $userRole = $user?->role?->name;
 
-        if (!$userRole || !in_array($userRole, $roles, true)) {
+        if (! $userRole || ! in_array($userRole, $roles, true)) {
             abort(403, 'Anda tidak memiliki akses ke halaman ini.');
         }
 

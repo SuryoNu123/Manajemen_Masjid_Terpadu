@@ -14,7 +14,7 @@ class DakwahContentController extends Controller
     {
         $contents = DakwahContent::query()
             ->when($request->filled('search'), function ($query) use ($request) {
-                $query->where('title', 'like', '%' . $request->search . '%');
+                $query->where('title', 'like', '%'.$request->search.'%');
             })
             ->when($request->filled('status'), function ($query) use ($request) {
                 $query->where('status', $request->status);
@@ -46,7 +46,7 @@ class DakwahContentController extends Controller
         $number = 1;
 
         while (DakwahContent::where('slug', $slug)->exists()) {
-            $slug = $baseSlug . '-' . $number++;
+            $slug = $baseSlug.'-'.$number++;
         }
 
         $data['slug'] = $slug;
@@ -97,7 +97,7 @@ class DakwahContentController extends Controller
                     ->where('id', '!=', $dakwahContent->id)
                     ->exists()
             ) {
-                $slug = $baseSlug . '-' . $number++;
+                $slug = $baseSlug.'-'.$number++;
             }
 
             $data['slug'] = $slug;
@@ -136,5 +136,40 @@ class DakwahContentController extends Controller
         return redirect()
             ->route('dakwah-contents.index')
             ->with('success', 'Konten dakwah berhasil dihapus.');
+    }
+
+    /**
+     * Halaman index artikel dakwah publik.
+     */
+    public function publicIndex(Request $request)
+    {
+        $articles = DakwahContent::where('status', 'published')
+            ->when($request->filled('search'), function ($query) use ($request) {
+                $query->where('title', 'like', '%'.$request->search.'%')
+                    ->orWhere('content', 'like', '%'.$request->search.'%');
+            })
+            ->latest('published_at')
+            ->paginate(9)
+            ->withQueryString();
+
+        return view('public.articles.index', compact('articles'));
+    }
+
+    /**
+     * Halaman baca artikel dakwah publik.
+     */
+    public function publicShow(string $slug)
+    {
+        $article = DakwahContent::where('status', 'published')
+            ->where('slug', $slug)
+            ->firstOrFail();
+
+        $recentArticles = DakwahContent::where('status', 'published')
+            ->where('id', '!=', $article->id)
+            ->latest('published_at')
+            ->take(4)
+            ->get();
+
+        return view('public.articles.show', compact('article', 'recentArticles'));
     }
 }

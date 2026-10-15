@@ -15,7 +15,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 
 class BusinessUnitSaleController extends Controller
-{         
+{
     public function index(Request $request)
     {
         $filters = $request->validate([
@@ -123,29 +123,27 @@ class BusinessUnitSaleController extends Controller
                 ]
             );
 
-            if ($category->type !== 'income' || !$category->is_active) {
+            if ($category->type !== 'income' || ! $category->is_active) {
                 throw ValidationException::withMessages([
-                    'business_unit_id' =>
-                        'Kategori keuangan Unit Usaha harus aktif dan bertipe income.',
+                    'business_unit_id' => 'Kategori keuangan Unit Usaha harus aktif dan bertipe income.',
                 ]);
             }
 
             $transaction = FinancialTransaction::create([
                 'category_id' => $category->id,
                 'user_id' => Auth::id(),
-                'transaction_code' =>
-                    'USH-' . now()->format('YmdHis') . '-'
-                    . Str::upper(Str::random(6)),
+                'transaction_code' => 'USH-'.now()->format('YmdHis').'-'
+                    .Str::upper(Str::random(6)),
                 'type' => 'income',
                 'amount' => $validated['amount'],
                 'transaction_date' => $validated['sale_date'],
-                'source' => 'Unit Usaha: ' . $unit->name,
-                'description' => 'Omzet ' . $unit->name
-                    . (!empty($validated['reference_number'])
-                        ? ' | Referensi: ' . $validated['reference_number']
+                'source' => 'Unit Usaha: '.$unit->name,
+                'description' => 'Omzet '.$unit->name
+                    .(! empty($validated['reference_number'])
+                        ? ' | Referensi: '.$validated['reference_number']
                         : '')
-                    . (!empty($validated['description'])
-                        ? ' | ' . $validated['description']
+                    .(! empty($validated['description'])
+                        ? ' | '.$validated['description']
                         : ''),
                 'evidence_path' => null,
                 'status' => 'draft',
@@ -209,12 +207,12 @@ class BusinessUnitSaleController extends Controller
             )
             ->selectRaw('COUNT(bus.id) as transaction_count')
             ->selectRaw('COALESCE(SUM(bus.amount), 0) as total_sales')
-            ->selectRaw("
+            ->selectRaw('
                 COALESCE(SUM(
                     CASE WHEN bus.id IS NOT NULL AND ft.id IS NULL
                     THEN bus.amount ELSE 0 END
                 ), 0) as unlinked_amount
-            ")
+            ')
             ->selectRaw("
                 COALESCE(SUM(
                     CASE WHEN ft.type = 'income' AND ft.status = 'draft'

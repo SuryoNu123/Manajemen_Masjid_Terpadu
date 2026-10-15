@@ -61,11 +61,14 @@ class SantriController extends Controller
                 'exists:tpq_classes,id',
             ],
             'enrollment_date' => ['nullable', 'date', 'before_or_equal:today'],
+            'progress_hafalan' => ['nullable', 'string', 'max:255'],
+            'progress_bacaan' => ['nullable', 'string', 'max:255'],
+            'learning_notes' => ['nullable', 'string'],
             'status' => ['required', Rule::in(['active', 'inactive'])],
         ]);
 
         $validated['registration_number'] =
-            'SAN-' . now()->format('Ymd') . '-' . Str::upper(Str::random(6));
+            'SAN-'.now()->format('Ymd').'-'.Str::upper(Str::random(6));
 
         Santri::create($validated);
 
@@ -104,6 +107,9 @@ class SantriController extends Controller
                 'exists:tpq_classes,id',
             ],
             'enrollment_date' => ['nullable', 'date', 'before_or_equal:today'],
+            'progress_hafalan' => ['nullable', 'string', 'max:255'],
+            'progress_bacaan' => ['nullable', 'string', 'max:255'],
+            'learning_notes' => ['nullable', 'string'],
             'status' => ['required', Rule::in(['active', 'inactive'])],
         ]);
 

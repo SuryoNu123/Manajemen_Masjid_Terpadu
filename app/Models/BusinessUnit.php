@@ -34,4 +34,9 @@ class BusinessUnit extends Model
     {
         return $this->hasMany(BusinessUnitSale::class);
     }
+
+    public function items(): HasMany
+    {
+        return $this->hasMany(BusinessUnitItem::class);
+    }
 }

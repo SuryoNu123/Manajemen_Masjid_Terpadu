@@ -5,11 +5,11 @@ namespace App\Exports;
 use App\Models\SantriAttendance;
 use Illuminate\Database\Eloquent\Builder;
 use Maatwebsite\Excel\Concerns\FromQuery;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
-use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class SantriAttendanceExport implements FromQuery, WithHeadings, WithMapping, ShouldAutoSize
+class SantriAttendanceExport implements FromQuery, ShouldAutoSize, WithHeadings, WithMapping
 {
     public function __construct(
         private string $startDate,

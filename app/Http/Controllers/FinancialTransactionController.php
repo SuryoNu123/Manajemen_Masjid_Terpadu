@@ -8,8 +8,8 @@ use App\Models\FinancialCategory;
 use App\Models\FinancialTransaction;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class FinancialTransactionController extends Controller
@@ -51,7 +51,7 @@ class FinancialTransactionController extends Controller
             ->orderBy('name')
             ->get();
 
-       $totalIncome = (clone $query)
+        $totalIncome = (clone $query)
             ->where('type', 'income')
             ->where('status', '!=', 'rejected')
             ->sum('amount');
@@ -97,8 +97,7 @@ class FinancialTransactionController extends Controller
             return back()
                 ->withInput()
                 ->withErrors([
-                    'category_id' =>
-                        'Kategori tidak sesuai dengan jenis transaksi.'
+                    'category_id' => 'Kategori tidak sesuai dengan jenis transaksi.',
                 ]);
         }
 
@@ -161,8 +160,7 @@ class FinancialTransactionController extends Controller
             return back()
                 ->withInput()
                 ->withErrors([
-                    'category_id' =>
-                        'Kategori tidak sesuai dengan jenis transaksi.'
+                    'category_id' => 'Kategori tidak sesuai dengan jenis transaksi.',
                 ]);
         }
 
@@ -229,9 +227,9 @@ class FinancialTransactionController extends Controller
     {
         do {
             $code =
-                'TRX-' .
-                now()->format('YmdHis') .
-                '-' .
+                'TRX-'.
+                now()->format('YmdHis').
+                '-'.
                 random_int(100, 999);
 
         } while (

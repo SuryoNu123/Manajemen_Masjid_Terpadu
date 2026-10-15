@@ -82,6 +82,27 @@
         </dl>
     </div>
 
+    <div class="rounded-xl border border-emerald-200 bg-emerald-50/40 p-6 shadow-sm">
+        <h2 class="mb-5 border-b border-emerald-200 pb-3 font-semibold text-emerald-900">
+            Progres Hafalan & Bacaan Santri
+        </h2>
+
+        <dl class="grid gap-5 sm:grid-cols-2">
+            <div>
+                <dt class="text-sm text-emerald-700 font-medium">Hafalan Al-Qur'an Terakhir</dt>
+                <dd class="mt-1 font-bold text-slate-800 text-lg">{{ $santri->progress_hafalan ?: 'Belum dicatat' }}</dd>
+            </div>
+            <div>
+                <dt class="text-sm text-emerald-700 font-medium">Capaian Jilid / Kitab Bacaan</dt>
+                <dd class="mt-1 font-bold text-slate-800 text-lg">{{ $santri->progress_bacaan ?: 'Belum dicatat' }}</dd>
+            </div>
+            <div class="sm:col-span-2">
+                <dt class="text-sm text-emerald-700 font-medium">Catatan Pembimbing / Ustadz</dt>
+                <dd class="mt-1 text-slate-700 whitespace-pre-line">{{ $santri->learning_notes ?: '-' }}</dd>
+            </div>
+        </dl>
+    </div>
+
     <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
         <h2 class="mb-4 font-semibold text-slate-800">10 Riwayat Kehadiran Terakhir</h2>
 

@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePrayerScheduleRequest;
 use App\Http\Requests\UpdatePrayerScheduleRequest;
 use App\Models\PrayerSchedule;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use App\Services\PrayerScheduleService;
 use Carbon\Carbon;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class PrayerScheduleController extends Controller
@@ -34,14 +34,14 @@ class PrayerScheduleController extends Controller
         $schedules = PrayerSchedule::query()
             ->whereDate('schedule_date', $date)
             ->orderByRaw("
-                FIELD(
-                    prayer_name,
-                    'subuh',
-                    'dzuhur',
-                    'ashar',
-                    'maghrib',
-                    'isya'
-                )
+                CASE prayer_name
+                    WHEN 'subuh' THEN 1
+                    WHEN 'dzuhur' THEN 2
+                    WHEN 'ashar' THEN 3
+                    WHEN 'maghrib' THEN 4
+                    WHEN 'isya' THEN 5
+                    ELSE 6
+                END
             ")
             ->get();
 
@@ -158,7 +158,7 @@ class PrayerScheduleController extends Controller
             $count = $service->syncDate(Carbon::today());
 
             return redirect()
-                ->route('prayer-schedules.index')
+                ->route('jadwal-sholat.index')
                 ->with(
                     'success',
                     "Berhasil memperbarui {$count} jadwal sholat hari ini."
@@ -167,10 +167,10 @@ class PrayerScheduleController extends Controller
         } catch (\Throwable $e) {
 
             return redirect()
-                ->route('prayer-schedules.index')
+                ->route('jadwal-sholat.index')
                 ->with(
                     'error',
-                    'Gagal mengambil jadwal sholat: ' . $e->getMessage()
+                    'Gagal mengambil jadwal sholat: '.$e->getMessage()
                 );
         }
     }

@@ -1,311 +1,188 @@
 @extends('layouts.dashboard')
 
 @section('title', 'Dashboard Bendahara')
-@section('page-title', 'Dashboard Bendahara')
+@section('page-title', 'Dashboard Keuangan & Bendahara')
 
 @section('content')
 
-<div class="mb-8">
+<div class="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    <div>
+        <h1 class="text-2xl font-bold text-gray-900">
+            Dashboard Bendahara
+        </h1>
+        <p class="text-gray-500 mt-1">
+            Pantau arus kas, verifikasi donasi digital, zakat mustahik, dan laporan pertanggungjawaban keuangan masjid.
+        </p>
+    </div>
 
-    <h1 class="text-2xl font-bold text-gray-900">
-        Dashboard Bendahara
-    </h1>
-
-    <p class="text-gray-500 mt-1">
-        Pantau kondisi keuangan masjid.
-    </p>
-
+    <div class="flex items-center gap-2">
+        <a href="{{ route('transaksi.create', ['type' => 'income']) }}"
+           class="rounded-lg bg-green-600 px-3.5 py-2 text-xs font-semibold text-white hover:bg-green-700">
+            + Pemasukan
+        </a>
+        <a href="{{ route('transaksi.create', ['type' => 'expense']) }}"
+           class="rounded-lg bg-red-600 px-3.5 py-2 text-xs font-semibold text-white hover:bg-red-700">
+            - Pengeluaran
+        </a>
+        <a href="{{ route('laporan-keuangan.create') }}"
+           class="rounded-lg bg-slate-900 px-3.5 py-2 text-xs font-semibold text-white hover:bg-slate-800">
+            + Buat Laporan
+        </a>
+    </div>
 </div>
 
-
 {{-- STATISTIK UTAMA --}}
-
 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mb-8">
-
-    {{-- Pemasukan --}}
-
-    <div class="bg-white rounded-xl shadow-sm p-5">
-
-        <p class="text-sm text-gray-500">
-            Total Pemasukan
+    <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-5">
+        <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">
+            Saldo Kas Riil
         </p>
-
-        <p class="text-2xl font-bold text-green-600 mt-2">
-            Rp {{ number_format($totalIncome, 0, ',', '.') }}
-        </p>
-
-    </div>
-
-
-    {{-- Pengeluaran --}}
-
-    <div class="bg-white rounded-xl shadow-sm p-5">
-
-        <p class="text-sm text-gray-500">
-            Total Pengeluaran
-        </p>
-
-        <p class="text-2xl font-bold text-red-600 mt-2">
-            Rp {{ number_format($totalExpense, 0, ',', '.') }}
-        </p>
-
-    </div>
-
-
-    {{-- Saldo --}}
-
-    <div class="bg-white rounded-xl shadow-sm p-5">
-
-        <p class="text-sm text-gray-500">
-            Saldo Kas
-        </p>
-
-        <p class="text-2xl font-bold text-gray-900 mt-2">
+        <p class="text-2xl font-bold text-slate-900 mt-2">
             Rp {{ number_format($balance, 0, ',', '.') }}
         </p>
-
+        <p class="text-xs text-slate-400 mt-1">Total Pemasukan - Pengeluaran</p>
     </div>
 
-
-    {{-- Donasi --}}
-
-    <div class="bg-white rounded-xl shadow-sm p-5">
-
-        <p class="text-sm text-gray-500">
-            Donasi Terbayar
+    <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-5">
+        <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">
+            Pemasukan (Bulan Ini)
         </p>
+        <p class="text-2xl font-bold text-green-600 mt-2">
+            Rp {{ number_format($monthlyIncome, 0, ',', '.') }}
+        </p>
+        <p class="text-xs text-slate-400 mt-1">Kumulatif: Rp {{ number_format($totalIncome, 0, ',', '.') }}</p>
+    </div>
 
+    <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-5">
+        <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">
+            Pengeluaran (Bulan Ini)
+        </p>
+        <p class="text-2xl font-bold text-red-600 mt-2">
+            Rp {{ number_format($monthlyExpense, 0, ',', '.') }}
+        </p>
+        <p class="text-xs text-slate-400 mt-1">Kumulatif: Rp {{ number_format($totalExpense, 0, ',', '.') }}</p>
+    </div>
+
+    <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-5">
+        <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">
+            Donasi Terverifikasi
+        </p>
         <p class="text-2xl font-bold text-blue-600 mt-2">
             Rp {{ number_format($totalDonation, 0, ',', '.') }}
         </p>
-
+        <p class="text-xs text-slate-400 mt-1">{{ $pendingDonations }} donasi menunggu verifikasi</p>
     </div>
-
 </div>
 
-
-{{-- RINGKASAN BULAN INI --}}
-
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-
-    <div class="bg-white rounded-xl shadow-sm p-6">
-
-        <h2 class="font-semibold text-lg mb-5">
-            Ringkasan Bulan Ini
-        </h2>
-
-        <div class="space-y-4">
-
-            <div class="flex justify-between">
-
-                <span class="text-gray-500">
-                    Pemasukan
-                </span>
-
-                <span class="font-semibold text-green-600">
-                    Rp {{ number_format($monthlyIncome, 0, ',', '.') }}
-                </span>
-
-            </div>
-
-
-            <div class="flex justify-between">
-
-                <span class="text-gray-500">
-                    Pengeluaran
-                </span>
-
-                <span class="font-semibold text-red-600">
-                    Rp {{ number_format($monthlyExpense, 0, ',', '.') }}
-                </span>
-
-            </div>
-
-
-            <div class="border-t pt-4 flex justify-between">
-
-                <span class="font-semibold">
-                    Selisih
-                </span>
-
-                <span class="font-bold">
-                    Rp {{ number_format(
-                        $monthlyIncome - $monthlyExpense,
-                        0,
-                        ',',
-                        '.'
-                    ) }}
-                </span>
-
-            </div>
-
+{{-- MODUL DONASI, ZAKAT & UNIT USAHA --}}
+<div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+        <div class="flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Penyaluran Zakat</span>
+            <span class="text-lg">🤲</span>
         </div>
-
-    </div>
-
-
-    {{-- STATUS LAPORAN --}}
-
-    <div class="bg-white rounded-xl shadow-sm p-6">
-
-        <div class="flex justify-between items-center">
-
-            <h2 class="font-semibold text-lg">
-                Status Laporan
-            </h2>
-
-            <span class="text-2xl font-bold">
-                {{ $pendingReports }}
-            </span>
-
-        </div>
-
-        <p class="text-gray-500 mt-2">
-            Laporan yang belum selesai diproses.
+        <p class="mt-2 text-xl font-bold text-emerald-700">
+            Rp {{ number_format($totalZakatDisbursed, 0, ',', '.') }}
         </p>
-
-        <a
-            href="#"
-            class="inline-block mt-5 text-sm text-blue-600">
-            Kelola Laporan →
-        </a>
-
+        <div class="mt-2 flex items-center justify-between text-xs">
+            <span class="text-slate-500">{{ $totalMustahik }} Mustahik Terdaftar</span>
+            <a href="{{ route('mustahik.index') }}" class="font-semibold text-emerald-600 hover:underline">Kelola →</a>
+        </div>
     </div>
 
-</div>
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+        <div class="flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Omzet Unit Usaha (Bulan Ini)</span>
+            <span class="text-lg">🏪</span>
+        </div>
+        <p class="mt-2 text-xl font-bold text-slate-900">
+            Rp {{ number_format($totalBusinessSalesMonth, 0, ',', '.') }}
+        </p>
+        <div class="mt-2 flex items-center justify-between text-xs">
+            <span class="text-slate-500">Koperasi / Kantin</span>
+            <a href="{{ route('business-unit-sales.index') }}" class="font-semibold text-blue-600 hover:underline">Catat Omzet →</a>
+        </div>
+    </div>
 
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+        <div class="flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Status Laporan Keuangan</span>
+            <span class="text-lg">📋</span>
+        </div>
+        <p class="mt-2 text-xl font-bold {{ $pendingReports > 0 ? 'text-amber-600' : 'text-slate-900' }}">
+            {{ $pendingReports }} Periode Pending
+        </p>
+        <div class="mt-2 flex items-center justify-between text-xs">
+            <span class="text-slate-500">Draft / Menunggu Ketua</span>
+            <a href="{{ route('laporan-keuangan.index') }}" class="font-semibold text-slate-900 hover:underline">Lihat Laporan →</a>
+        </div>
+    </div>
+</div>
 
 {{-- TRANSAKSI TERBARU --}}
-
-<div class="bg-white rounded-xl shadow-sm overflow-hidden">
-
-    <div class="px-6 py-5 border-b flex items-center justify-between">
-
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+    <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
         <div>
-
-            <h2 class="font-semibold text-lg">
-                Transaksi Terbaru
+            <h2 class="font-bold text-base text-slate-800">
+                Transaksi Kas Terkini
             </h2>
-
-            <p class="text-sm text-gray-500 mt-1">
-                Lima transaksi terakhir
+            <p class="text-xs text-slate-500">
+                5 transaksi terbaru yang tercatat di pembukuan
             </p>
-
         </div>
-
-        <a
-            href="{{ route('transaksi.index') }}"
-            class="text-sm text-blue-600">
-            Lihat Semua →
+        <a href="{{ route('transaksi.index') }}" class="text-xs font-semibold text-blue-600 hover:underline">
+            Semua Transaksi →
         </a>
-
     </div>
-
 
     <div class="overflow-x-auto">
-
         <table class="w-full text-sm">
-
-            <thead class="bg-gray-50">
-
+            <thead class="bg-slate-50 text-slate-500 text-xs uppercase">
                 <tr>
-
-                    <th class="text-left px-6 py-3">
-                        Kode
-                    </th>
-
-                    <th class="text-left px-6 py-3">
-                        Tanggal
-                    </th>
-
-                    <th class="text-left px-6 py-3">
-                        Kategori
-                    </th>
-
-                    <th class="text-left px-6 py-3">
-                        Jenis
-                    </th>
-
-                    <th class="text-right px-6 py-3">
-                        Nominal
-                    </th>
-
+                    <th class="text-left px-6 py-3">Kode</th>
+                    <th class="text-left px-6 py-3">Tanggal</th>
+                    <th class="text-left px-6 py-3">Kategori</th>
+                    <th class="text-left px-6 py-3">Jenis</th>
+                    <th class="text-right px-6 py-3">Nominal</th>
                 </tr>
-
             </thead>
-
-
-            <tbody class="divide-y">
-
+            <tbody class="divide-y divide-slate-100">
                 @forelse($latestTransactions as $transaction)
-
-                    <tr class="hover:bg-gray-50">
-
-                        <td class="px-6 py-4 font-medium">
+                    <tr class="hover:bg-slate-50">
+                        <td class="px-6 py-3.5 font-medium text-xs text-slate-800">
                             {{ $transaction->transaction_code }}
                         </td>
-
-                        <td class="px-6 py-4">
-                            {{ $transaction->transaction_date->format('d/m/Y') }}
+                        <td class="px-6 py-3.5 text-xs text-slate-600">
+                            {{ \Carbon\Carbon::parse($transaction->transaction_date)->format('d/m/Y') }}
                         </td>
-
-                        <td class="px-6 py-4">
-                            {{ $transaction->category->name }}
+                        <td class="px-6 py-3.5 text-xs text-slate-800 font-medium">
+                            {{ $transaction->category?->name ?? 'Kas Umum' }}
                         </td>
-
-                        <td class="px-6 py-4">
-
+                        <td class="px-6 py-3.5">
                             @if($transaction->type === 'income')
-
-                                <span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-700">
+                                <span class="px-2 py-0.5 text-xs rounded font-semibold bg-green-100 text-green-700">
                                     Pemasukan
                                 </span>
-
                             @else
-
-                                <span class="px-2 py-1 text-xs rounded-full bg-red-100 text-red-700">
+                                <span class="px-2 py-0.5 text-xs rounded font-semibold bg-red-100 text-red-700">
                                     Pengeluaran
                                 </span>
-
                             @endif
-
                         </td>
-
-                        <td class="px-6 py-4 text-right font-semibold">
-
-                            Rp {{ number_format(
-                                $transaction->amount,
-                                0,
-                                ',',
-                                '.'
-                            ) }}
-
+                        <td class="px-6 py-3.5 text-right font-bold {{ $transaction->type === 'income' ? 'text-green-600' : 'text-red-600' }}">
+                            Rp {{ number_format($transaction->amount, 0, ',', '.') }}
                         </td>
-
                     </tr>
-
                 @empty
-
                     <tr>
-
-                        <td
-                            colspan="5"
-                            class="px-6 py-10 text-center text-gray-400">
-
-                            Belum ada transaksi.
-
+                        <td colspan="5" class="px-6 py-8 text-center text-slate-400">
+                            Belum ada transaksi kas tercatat.
                         </td>
-
                     </tr>
-
                 @endforelse
-
             </tbody>
-
         </table>
-
     </div>
-
 </div>
 
 @endsection
