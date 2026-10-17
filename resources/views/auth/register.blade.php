@@ -1,5 +1,7 @@
 <x-guest-layout>
 
+    <div class="mx-auto w-full max-w-md">
+
     {{-- Header --}}
     <div
         style="
@@ -29,7 +31,7 @@
                 line-height: 22px;
             "
         >
-            Daftarkan akun Anda ke sistem
+            Daftarkan akun Jamaah Anda ke sistem
         </p>
 
     </div>
@@ -295,6 +297,8 @@
             </a>
 
         </div>
+
+    </div>
 
     </div>
 

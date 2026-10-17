@@ -13,7 +13,7 @@ class LogSuccessfulLogin
     {
         /** @var User $user */
         $user = $event->user;
-        $roleName = $user->role?->display_name ?? 'Pengguna';
+        $roleName = $user->roleDisplayName() ?? 'Pengguna';
 
         ActivityLogger::log(
             'login',

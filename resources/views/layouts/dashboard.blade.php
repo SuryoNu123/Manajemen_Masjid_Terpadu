@@ -29,10 +29,25 @@
 
 <body class="bg-gray-100 text-gray-800">
 
-<div class="min-h-screen">
+<div class="min-h-screen" x-data="{ sidebarOpen: false }">
+
+    <div
+        x-cloak
+        x-show="sidebarOpen"
+        x-transition.opacity
+        class="fixed inset-0 z-30 bg-slate-950/50 lg:hidden"
+        @click="sidebarOpen = false"
+        @keydown.escape.window="sidebarOpen = false"
+        aria-hidden="true"
+    ></div>
 
     {{-- SIDEBAR --}}
-    <aside class="fixed inset-y-0 left-0 z-40 flex h-screen w-64 flex-col overflow-hidden bg-slate-900 text-white">
+    <aside
+        class="sidebar-menu fixed inset-y-0 left-0 z-40 flex h-screen w-72 max-w-[85vw] flex-col overflow-hidden bg-slate-900 text-white transition-transform duration-200 ease-out lg:w-64 lg:translate-x-0"
+        :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
+        id="dashboard-sidebar"
+        aria-label="Navigasi dashboard"
+    >
 
         {{-- HEADER SIDEBAR --}}
         <div class="shrink-0 border-b border-slate-700 px-6 py-5">
@@ -85,26 +100,38 @@
     </aside>
 
     {{-- KONTEN UTAMA --}}
-    <main class="ml-64 min-h-screen">
+    <main class="min-h-screen min-w-0 lg:ml-64">
 
         {{-- TOPBAR --}}
-        <header class="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-gray-200 bg-white px-8">
+        <header class="sticky top-0 z-20 flex h-16 items-center justify-between gap-3 border-b border-gray-200 bg-white px-4 sm:px-8">
 
-            <div>
+            <div class="flex min-w-0 items-center gap-3">
+                <button
+                    type="button"
+                    class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-gray-200 text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-emerald-600 lg:hidden"
+                    @click="sidebarOpen = !sidebarOpen"
+                    :aria-expanded="sidebarOpen.toString()"
+                    aria-controls="dashboard-sidebar"
+                    aria-label="Buka atau tutup menu navigasi"
+                >
+                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
                 <h2 class="font-semibold text-gray-800">
                     @yield('page-title', 'Dashboard')
                 </h2>
             </div>
 
-            <div class="flex items-center gap-4">
+            <div class="flex shrink-0 items-center gap-3 sm:gap-4">
 
-                <div class="text-right">
+                <div class="hidden text-right sm:block">
                     <p class="text-sm font-semibold">
                         {{ auth()->user()->name }}
                     </p>
 
                     <p class="text-xs capitalize text-gray-500">
-                        {{ auth()->user()->role?->display_name }}
+                        {{ auth()->user()->roleDisplayName() }}
                     </p>
                 </div>
 
@@ -123,7 +150,7 @@
         </header>
 
         {{-- KONTEN HALAMAN --}}
-        <section class="p-8">
+        <section class="min-w-0 p-4 sm:p-6 lg:p-8">
 
             @if(session('success'))
                 <div class="mb-6 rounded-lg bg-green-100 px-4 py-3 text-green-700">

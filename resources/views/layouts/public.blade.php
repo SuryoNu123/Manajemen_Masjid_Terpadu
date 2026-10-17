@@ -33,11 +33,11 @@
 
     {{-- ================= NAVBAR PUBLIK ================= --}}
 
-    <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+    <header class="sticky top-0 z-50 border-b border-gray-200 bg-white" x-data="{ mobileMenuOpen: false }">
 
-        <div class="max-w-7xl mx-auto px-6">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6">
 
-            <div class="h-20 flex items-center justify-between">
+            <div class="flex h-16 items-center justify-between gap-3 sm:h-20">
 
                 {{-- LOGO --}}
 
@@ -132,7 +132,20 @@
 
                 {{-- LOGIN / DASHBOARD --}}
 
-                <div>
+                <div class="flex shrink-0 items-center gap-2">
+
+                    <button
+                        type="button"
+                        class="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-gray-200 text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-emerald-600 lg:hidden"
+                        @click="mobileMenuOpen = !mobileMenuOpen"
+                        :aria-expanded="mobileMenuOpen.toString()"
+                        aria-controls="public-mobile-navigation"
+                        aria-label="Buka atau tutup menu"
+                    >
+                        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
 
                     @auth
 
@@ -157,6 +170,25 @@
                 </div>
 
             </div>
+
+            <nav
+                id="public-mobile-navigation"
+                x-cloak
+                x-show="mobileMenuOpen"
+                x-transition
+                @keydown.escape.window="mobileMenuOpen = false"
+                class="grid gap-1 border-t border-gray-100 py-3 lg:hidden"
+                aria-label="Navigasi utama"
+            >
+                <a href="{{ route('home') }}" class="rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Beranda</a>
+                <a href="{{ route('profile.public') }}" class="rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Profil</a>
+                <a href="{{ route('activities.public') }}" class="rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Kegiatan</a>
+                <a href="{{ route('announcements.public') }}" class="rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Pengumuman</a>
+                <a href="{{ route('dakwah.public') }}" class="rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Artikel</a>
+                <a href="{{ route('donasi.create') }}" class="rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Donasi</a>
+                <a href="{{ route('zakat.index') }}" class="rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Zakat</a>
+                <a href="{{ route('transparansi.index') }}" class="rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Transparansi</a>
+            </nav>
 
         </div>
 

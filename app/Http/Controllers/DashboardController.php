@@ -31,7 +31,7 @@ class DashboardController extends Controller
     {
         /** @var User $user */
         $user = Auth::user();
-        $role = $user->role?->name;
+        $role = $user->roleName();
 
         // Keuangan Agregat Dasar
         $totalIncome = FinancialTransaction::where('type', 'income')

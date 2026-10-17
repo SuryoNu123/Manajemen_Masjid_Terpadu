@@ -20,7 +20,7 @@ class RoleMiddleware
 
         $user = Auth::user();
 
-        $userRole = $user?->role?->name;
+        $userRole = $user?->roleName();
 
         if (! $userRole || ! in_array($userRole, $roles, true)) {
             abort(403, 'Anda tidak memiliki akses ke halaman ini.');

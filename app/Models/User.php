@@ -45,7 +45,17 @@ class User extends Authenticatable
      */
     public function hasRole(string $role): bool
     {
-        return $this->role?->name === $role;
+        return $this->roleName() === $role;
+    }
+
+    public function roleName(): ?string
+    {
+        return $this->role?->name ?? ($this->role_id === null ? 'jamaah' : null);
+    }
+
+    public function roleDisplayName(): ?string
+    {
+        return $this->role?->display_name ?? ($this->role_id === null ? 'Jamaah' : null);
     }
 
     /**

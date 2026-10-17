@@ -24,36 +24,36 @@
         }
     </style>
 </head>
-<body class="bg-slate-950 text-white min-h-screen flex flex-col justify-between overflow-hidden select-none">
+<body class="flex min-h-screen min-w-0 flex-col justify-between overflow-x-hidden bg-slate-950 text-white select-none lg:overflow-hidden">
 
     {{-- HEADER DIGITAL SIGNAGE --}}
-    <header class="bg-slate-900/90 border-b border-slate-800 px-8 py-5 flex items-center justify-between">
-        <div class="flex items-center gap-4">
-            <div class="w-14 h-14 rounded-2xl bg-blue-600 flex items-center justify-center text-3xl shadow-lg shadow-blue-500/30">
+    <header class="flex flex-col gap-4 border-b border-slate-800 bg-slate-900/90 px-4 py-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8 lg:py-5">
+        <div class="flex min-w-0 items-center gap-3 sm:gap-4">
+            <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-blue-600 text-2xl shadow-lg shadow-blue-500/30 sm:h-14 sm:w-14 sm:text-3xl">
                 🕌
             </div>
             <div>
-                <h1 class="text-3xl font-extrabold tracking-tight">MASJID TERPADU</h1>
-                <p class="text-sm text-slate-400">Sistem Informasi Operasional & Kemakmuran Jamaah</p>
+                <h1 class="text-xl font-extrabold tracking-tight sm:text-2xl lg:text-3xl">MASJID TERPADU</h1>
+                <p class="text-xs text-slate-400 sm:text-sm">Sistem Informasi Operasional & Kemakmuran Jamaah</p>
             </div>
         </div>
 
         {{-- JAM & TANGGAL BESAR --}}
-        <div class="text-right">
-            <div id="liveClock" class="text-4xl md:text-5xl font-mono font-bold tracking-wider text-white">
+        <div class="min-w-0 text-left lg:text-right">
+            <div id="liveClock" class="font-mono text-3xl font-bold tracking-wide text-white sm:text-4xl md:text-5xl">
                 --:--:--
             </div>
-            <div id="liveDate" class="text-sm md:text-base font-medium text-blue-400 mt-1">
+            <div id="liveDate" class="mt-1 break-words text-xs font-medium text-blue-400 sm:text-sm md:text-base">
                 {{ \Carbon\Carbon::now()->translatedFormat('l, d F Y') }}
             </div>
         </div>
     </header>
 
     {{-- MAIN CONTENT AREA (SLIDES / DUAL PANEL) --}}
-    <main class="flex-1 p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+    <main class="grid flex-1 min-w-0 grid-cols-1 items-stretch gap-4 p-4 sm:gap-8 sm:p-6 lg:grid-cols-12 lg:p-8">
 
         {{-- LEFT PANEL: JADWAL SHOLAT 5 WAKTU (5 COLS) --}}
-        <div class="lg:col-span-5 flex flex-col justify-between bg-slate-900/80 rounded-3xl border border-slate-800 p-6 shadow-2xl">
+        <div class="flex min-w-0 flex-col justify-between rounded-3xl border border-slate-800 bg-slate-900/80 p-4 shadow-2xl sm:p-6 lg:col-span-5">
             <div>
                 <div class="flex items-center justify-between pb-4 border-b border-slate-800 mb-4">
                     <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Waktu Sholat Hari Ini</span>
@@ -67,11 +67,11 @@
                 @if($nextSchedule)
                     <div class="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl p-5 mb-5 shadow-xl text-white">
                         <p class="text-xs font-semibold uppercase tracking-wider text-blue-100">Menuju Waktu Sholat</p>
-                        <div class="flex items-center justify-between mt-2">
-                            <span class="text-3xl font-extrabold">
+                        <div class="mt-2 flex flex-wrap items-center justify-between gap-2">
+                            <span class="text-2xl font-extrabold sm:text-3xl">
                                 {{ $prayerNames[$nextSchedule->prayer_name] ?? ucfirst($nextSchedule->prayer_name) }}
                             </span>
-                            <span class="text-3xl font-mono font-bold">
+                            <span class="whitespace-nowrap font-mono text-2xl font-bold sm:text-3xl">
                                 {{ \Carbon\Carbon::parse($nextSchedule->prayer_time)->format('H:i') }} WIB
                             </span>
                         </div>
@@ -112,7 +112,7 @@
         </div>
 
         {{-- RIGHT PANEL: ROTATING CAROUSEL (KEGIATAN & TRANSPARANSI KEUANGAN) (7 COLS) --}}
-        <div class="lg:col-span-7 flex flex-col justify-between bg-slate-900/80 rounded-3xl border border-slate-800 p-6 shadow-2xl relative">
+        <div class="relative flex min-w-0 flex-col justify-between rounded-3xl border border-slate-800 bg-slate-900/80 p-4 shadow-2xl sm:p-6 lg:col-span-7">
 
             {{-- SLIDE 1: AGENDA KAJIAN & KEGIATAN --}}
             <div id="slideKegiatan" class="transition-opacity duration-700">
