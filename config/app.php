@@ -29,6 +29,7 @@ return [
     'env' => env('APP_ENV', 'production'),
 
     'demo_data_seeding' => env('DEMO_DATA_SEEDING', false),
+    'demo_data_database' => env('DEMO_DATA_DATABASE'),
 
     /*
     |--------------------------------------------------------------------------

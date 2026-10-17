@@ -37,30 +37,32 @@ class DemoDataSeeder extends Seeder
     {
         $this->assertSafeDatabaseTarget();
 
-        $this->call([
-            RoleSeeder::class,
-            UserSeeder::class,
-            FinancialCategorySeeder::class,
-            PrayerScheduleSeeder::class,
-        ]);
+        DB::transaction(function (): void {
+            $this->call([
+                RoleSeeder::class,
+                UserSeeder::class,
+                FinancialCategorySeeder::class,
+                PrayerScheduleSeeder::class,
+            ]);
 
-        $users = User::query()->whereIn('email', [
-            'ketua@masjid.test',
-            'bendahara@masjid.test',
-            'sekretaris@masjid.test',
-            'marbot@masjid.test',
-        ])->get()->keyBy('email');
+            $users = User::query()->whereIn('email', [
+                'ketua@masjid.test',
+                'bendahara@masjid.test',
+                'sekretaris@masjid.test',
+                'marbot@masjid.test',
+            ])->get()->keyBy('email');
 
-        $this->seedJamaah($users['sekretaris@masjid.test']);
-        $this->seedPrayerSchedules();
-        $this->seedFinance($users['bendahara@masjid.test']);
-        $this->seedActivities();
-        $this->seedAssets();
-        $this->seedBusinessUnits($users['bendahara@masjid.test']);
-        $this->seedPublishedFinancialReport($users['ketua@masjid.test']);
-        $this->seedLibrary($users['marbot@masjid.test']);
-        $this->seedYouthAndEducation($users['sekretaris@masjid.test']);
-        $this->seedPublicContent($users['sekretaris@masjid.test']);
+            $this->seedJamaah($users['sekretaris@masjid.test']);
+            $this->seedPrayerSchedules();
+            $this->seedFinance($users['bendahara@masjid.test']);
+            $this->seedActivities();
+            $this->seedAssets();
+            $this->seedBusinessUnits($users['bendahara@masjid.test']);
+            $this->seedPublishedFinancialReport($users['ketua@masjid.test']);
+            $this->seedLibrary($users['marbot@masjid.test']);
+            $this->seedYouthAndEducation($users['sekretaris@masjid.test']);
+            $this->seedPublicContent($users['sekretaris@masjid.test']);
+        });
     }
 
     private function assertSafeDatabaseTarget(): void
@@ -75,10 +77,16 @@ class DemoDataSeeder extends Seeder
             && config('app.demo_data_seeding') === true
             && $driver === 'sqlite'
             && preg_match('/(?:demo|dev|test)/i', basename($database)) === 1;
+        $isExplicitLocalMySqlDatabase = app()->environment('local')
+            && config('app.demo_data_seeding') === true
+            && config('app.demo_data_database') === 'masjid_terpadu'
+            && $database === 'masjid_terpadu'
+            && in_array(strtolower((string) config('database.connections.mysql.host')), ['127.0.0.1', 'localhost', '::1'], true)
+            && $driver === 'mysql';
 
-        if (! $isIsolatedTestDatabase && ! $isExplicitDevelopmentDatabase) {
+        if (! $isIsolatedTestDatabase && ! $isExplicitDevelopmentDatabase && ! $isExplicitLocalMySqlDatabase) {
             throw new RuntimeException(
-                'DemoDataSeeder hanya dapat dijalankan pada SQLite testing terisolasi (:memory: atau nama berkas test/playwright/demo/dev) atau SQLite development bernama demo/dev/test dengan DEMO_DATA_SEEDING=true.'
+                'DemoDataSeeder hanya dapat dijalankan pada SQLite testing/development terisolasi, atau MySQL lokal masjid_terpadu dengan DEMO_DATA_SEEDING=true dan DEMO_DATA_DATABASE=masjid_terpadu.'
             );
         }
     }
@@ -305,6 +313,7 @@ class DemoDataSeeder extends Seeder
             $periodTransactions = FinancialTransaction::query()
                 ->whereYear('transaction_date', $year)
                 ->whereMonth('transaction_date', $month)
+                ->where('transaction_code', 'like', 'DEMO-%')
                 ->where('status', '!=', 'rejected');
             $income = (clone $periodTransactions)->where('type', 'income')->sum('amount');
             $expense = (clone $periodTransactions)->where('type', 'expense')->sum('amount');

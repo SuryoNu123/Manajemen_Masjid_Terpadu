@@ -20,8 +20,14 @@ class UserSeeder extends Seeder
             && config('app.demo_data_seeding') === true
             && DB::connection()->getDriverName() === 'sqlite'
             && preg_match('/(?:demo|dev|test)/i', basename($database)) === 1;
+        $isExplicitLocalMySqlDatabase = app()->environment('local')
+            && config('app.demo_data_seeding') === true
+            && config('app.demo_data_database') === 'masjid_terpadu'
+            && $database === 'masjid_terpadu'
+            && in_array(strtolower((string) config('database.connections.mysql.host')), ['127.0.0.1', 'localhost', '::1'], true)
+            && DB::connection()->getDriverName() === 'mysql';
 
-        if (! $isIsolatedTestDatabase && ! $isExplicitDevelopmentDatabase) {
+        if (! $isIsolatedTestDatabase && ! $isExplicitDevelopmentDatabase && ! $isExplicitLocalMySqlDatabase) {
             return;
         }
 

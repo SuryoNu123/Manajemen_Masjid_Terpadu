@@ -2,7 +2,7 @@
 
 ## Batas keamanan dan cara menjalankan
 
-`DemoDataSeeder` sengaja tidak dipanggil oleh `DatabaseSeeder`. Seeder hanya berjalan pada SQLite testing `:memory:` atau berkas yang namanya menandai `test`, `playwright`, `demo`, atau `dev`; atau SQLite development yang secara eksplisit diaktifkan dengan `DEMO_DATA_SEEDING=true` dan nama file mengandung `demo`, `dev`, atau `test`. Jadi `APP_ENV` saja tidak cukup untuk mengizinkan seeding. Target MySQL aplikasi tidak pernah dipakai untuk mengisi data demo.
+`DemoDataSeeder` sengaja tidak dipanggil oleh `DatabaseSeeder`. Seeder berjalan pada SQLite testing/development terisolasi. Untuk database aplikasi lokal, seeding hanya diizinkan jika environment adalah `local`, koneksi MySQL memakai host loopback, database aktif dan `DEMO_DATA_DATABASE` keduanya tepat `masjid_terpadu`, serta `DEMO_DATA_SEEDING=true`. Seeder bekerja dalam transaksi dan hanya menambah/mengenali baris bertanda demo; tidak menghapus atau memperbarui data yang sudah ada. Jangan gunakan opsi ini pada database produksi atau database bersama.
 
 Contoh PowerShell untuk membuat database demo terpisah di luar database aplikasi:
 
@@ -19,7 +19,19 @@ php artisan db:seed --class=DemoDataSeeder --force --no-interaction
 
 Untuk melihat UI dengan database tersebut, jalankan `php artisan serve` pada terminal yang tetap memakai variabel lingkungan yang sama. Untuk mengulang seeding, jalankan hanya perintah `db:seed` tersebut lagi. Seeder memakai penanda `Demo:`/`DEMO-` dan tidak memperbarui akun, transaksi, atau baris yang sudah ada. File SQLite contoh disimpan di `storage/app/private/`, yang dikecualikan Git.
 
-Sebelum menjalankan, pastikan `DB_CONNECTION=sqlite` dan `DB_DATABASE` menunjuk ke file demo khusus. Seeder menolak database selain SQLite testing atau file SQLite development yang memenuhi syarat tersebut. Jangan mengganti konfigurasi database dengan target produksi.
+Untuk mengisi database MySQL lokal aplikasi yang sudah dipastikan bernama `masjid_terpadu`, aktifkan perlindungan hanya pada terminal seeding:
+
+```powershell
+$env:DEMO_DATA_SEEDING = 'true'
+$env:DEMO_DATA_DATABASE = 'masjid_terpadu'
+php artisan db:seed --class=DemoDataSeeder --force --no-interaction
+Remove-Item Env:DEMO_DATA_SEEDING
+Remove-Item Env:DEMO_DATA_DATABASE
+```
+
+Setelah seeding berhasil, data tersimpan di MySQL lokal dan dapat ditampilkan dengan `php artisan serve` tanpa mengganti koneksi `.env`. Sebagian angka dashboard dan daftar transaksi akan mencakup baris simulasi yang ditandai `Demo:`/`DEMO-`. Laporan simulasi hanya menghitung transaksi demo agar laporan keuangan yang sudah ada tidak tercampur. Akun simulasi memakai email `@masjid.test`; kata sandi hanya berada di file lokal `storage/app/private/DEMO_CREDENTIALS.txt`.
+
+Sebelum menjalankan, verifikasi koneksi aktif dan nama database dengan `php artisan config:show database.default`, `php artisan config:show database.connections.mysql.database`, dan `php artisan db:show --counts`. Untuk SQLite, pastikan file target memang berkas demo khusus. Untuk MySQL, gunakan hanya database lokal `masjid_terpadu` dengan opt-in eksplisit di atas. Seeder akan menolak target lain.
 
 ## Seeder
 
@@ -65,4 +77,12 @@ Skema saat ini tidak memiliki tabel/model galeri foto/video maupun pengaturan pr
 - `npm.cmd run test:e2e`: 27 tes browser lulus pada desktop, tablet, dan ponsel. Setelah perbaikan tabel responsif, 18 tes halaman publik dan dashboard juga lulus, termasuk uji scroll kolom terakhir.
 - `npm.cmd run build`: Vite berhasil membangun CSS/JS setelah penambahan lebar minimum dan petunjuk scroll tabel.
 - Screenshot tersimpan di `artifacts/ui-audit/desktop/`, `artifacts/ui-audit/tablet/`, dan `artifacts/ui-audit/mobile/`. Screenshot dashboard, transparansi, halaman publik, dan tabel ponsel diperiksa secara visual.
-- Database `.env` aplikasi yang memakai MySQL tidak di-seed atau diubah; uji browser memakai SQLite sementara dan data demo lokal tersimpan pada file terisolasi `storage/app/private/masjid-demo.sqlite`.
+- Database demo SQLite terisolasi tetap tersedia pada `storage/app/private/masjid-demo.sqlite`; uji browser otomatis sebelumnya menggunakan SQLite sementara.
+
+## Pengisian database MySQL lokal untuk `php artisan serve`
+
+Atas permintaan pengguna, seeder dijalankan pada koneksi lokal `127.0.0.1`, database `masjid_terpadu` (environment `local`) dengan kedua opt-in eksplisit. `.env` tidak dialihkan ke SQLite. Seeding dilakukan di dalam transaksi dan dijalankan dua kali; jumlah baris tidak bertambah pada pengulangan kedua.
+
+Total baris sesudah pengisian (data lama tetap dipertahankan): 24 jamaah, 90 jadwal sholat, 144 presensi jamaah, 39 transaksi keuangan (27 bertanda demo), 20 donasi (15 demo), 11 mustahik (8 demo), 3 laporan keuangan (1 simulasi), 18 kegiatan, 7 petugas, 13 aset, 6 pemeliharaan, 2 unit usaha, 6 barang usaha, 8 penjualan, 13 buku, 5 peminjaman, 8 anggota remaja, 6 program remaja, 3 kelas TPQ, 15 santri, 60 presensi santri, 5 artikel, dan 5 pengumuman. Tabel role tetap 5 baris, kategori keuangan tetap 9, dan user tetap 4; seeder tidak mengganti akun yang telah ada.
+
+Halaman `/`, `/kegiatan`, `/pengumuman`, `/artikel`, dan `/transparansi` merespons HTTP 200 setelah seeding. `/dashboard` merespons redirect 302 untuk pengunjung anonim, sehingga autentikasi tetap aktif. Laporan simulasi hanya menghitung transaksi bertanda `DEMO-`; data transaksi/laporan lama tidak ditimpa. Dashboard atau daftar transaksi yang mengagregasi semua transaksi dapat ikut menampilkan nominal simulasi yang memang ditambahkan untuk pengujian.
