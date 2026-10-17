@@ -36,17 +36,20 @@ class PrayerScheduleSeeder extends Seeder
 
         foreach ($schedules as $schedule) {
 
-            PrayerSchedule::updateOrCreate(
-                [
+            $scheduleExists = PrayerSchedule::query()
+                ->whereDate('schedule_date', $date)
+                ->where('prayer_name', $schedule['prayer_name'])
+                ->exists();
+
+            if (! $scheduleExists) {
+                PrayerSchedule::create([
                     'schedule_date' => $date,
                     'prayer_name' => $schedule['prayer_name'],
-                ],
-                [
                     'prayer_time' => $schedule['prayer_time'],
                     'source' => 'manual',
                     'is_active' => true,
-                ]
-            );
+                ]);
+            }
         }
     }
 }

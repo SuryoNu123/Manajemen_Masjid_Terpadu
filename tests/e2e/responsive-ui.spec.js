@@ -144,6 +144,31 @@ for (const viewport of viewports) {
                 await capturePage(page, viewport.name, publicPage.name);
                 await checkLayout(page);
 
+                if (publicPage.path === '/transparansi' && viewport.width < 640) {
+                    const table = page.locator('.overflow-x-auto table').first();
+                    const scrollContainer = table.locator('xpath=..');
+                    const dimensions = await scrollContainer.evaluate((element) => ({
+                        clientWidth: element.clientWidth,
+                        scrollWidth: element.scrollWidth,
+                    }));
+
+                    expect(dimensions.scrollWidth).toBeGreaterThan(dimensions.clientWidth);
+                    await scrollContainer.evaluate((element) => {
+                        element.scrollLeft = element.scrollWidth;
+                    });
+                    const statusHeaderIsVisible = await scrollContainer.evaluate((element) => {
+                        const statusHeader = element.querySelector('table thead th:last-child');
+                        const containerBounds = element.getBoundingClientRect();
+                        const statusBounds = statusHeader?.getBoundingClientRect();
+
+                        return statusBounds !== undefined
+                            && statusBounds.left >= containerBounds.left - 1
+                            && statusBounds.right <= containerBounds.right + 1;
+                    });
+
+                    expect(statusHeaderIsVisible).toBe(true);
+                }
+
                 if (publicPage.path === '/') {
                     const menuButton = page.getByRole('button', { name: 'Buka atau tutup menu' });
                     if (viewport.width < 1024) {
@@ -182,6 +207,31 @@ for (const viewport of viewports) {
                 await expect(page.locator('#dashboard-sidebar')).toBeVisible();
                 if (viewport.width < 1024) {
                     await expect(page.locator('#dashboard-sidebar')).not.toBeInViewport();
+                }
+                if (user.role === 'ketua' && viewport.width < 640) {
+                    const transactionCard = page.getByRole('heading', { name: 'Transaksi Kas Terakhir' }).locator('xpath=../..');
+                    const scrollContainer = transactionCard.locator('.overflow-x-auto');
+                    const dimensions = await scrollContainer.evaluate((element) => ({
+                        clientWidth: element.clientWidth,
+                        scrollWidth: element.scrollWidth,
+                    }));
+
+                    expect(dimensions.scrollWidth).toBeGreaterThan(dimensions.clientWidth);
+                    const rightmostCellIsVisible = await scrollContainer.evaluate((element) => {
+                        element.scrollLeft = element.scrollWidth;
+                        const rightmostCell = element.querySelector('tbody tr:first-child td:last-child');
+                        const containerBounds = element.getBoundingClientRect();
+                        const cellBounds = rightmostCell?.getBoundingClientRect();
+
+                        return cellBounds !== undefined
+                            && cellBounds.left >= containerBounds.left - 1
+                            && cellBounds.right <= containerBounds.right + 1;
+                    });
+
+                    expect(rightmostCellIsVisible).toBe(true);
+                    await scrollContainer.evaluate((element) => {
+                        element.scrollLeft = 0;
+                    });
                 }
                 await capturePage(page, viewport.name, `${user.role}-dashboard`);
                 await checkLayout(page);

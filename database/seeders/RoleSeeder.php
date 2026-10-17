@@ -33,9 +33,9 @@ class RoleSeeder extends Seeder
         ];
 
         foreach ($roles as $role) {
-            Role::updateOrCreate(
+            Role::firstOrCreate(
                 ['name' => $role['name']],
-                $role
+                ['display_name' => $role['display_name']]
             );
         }
     }

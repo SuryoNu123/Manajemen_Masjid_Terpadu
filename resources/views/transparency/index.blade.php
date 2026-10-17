@@ -225,9 +225,13 @@
     <div class="bg-white rounded-2xl border
                 border-gray-200 overflow-hidden">
 
+        <p class="px-4 pt-3 text-xs text-gray-500 lg:hidden">
+            Geser tabel ke samping untuk melihat semua kolom.
+        </p>
+
         <div class="overflow-x-auto">
 
-            <table class="w-full text-sm">
+            <table class="w-full min-w-[720px] text-sm">
 
                 <thead class="bg-gray-50 border-b">
 

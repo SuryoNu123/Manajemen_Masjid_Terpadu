@@ -58,7 +58,10 @@ class FinancialCategorySeeder extends Seeder
         ];
 
         foreach ($categories as $category) {
-            FinancialCategory::create($category);
+            FinancialCategory::firstOrCreate(
+                ['name' => $category['name'], 'type' => $category['type']],
+                ['description' => $category['description'], 'is_active' => true]
+            );
         }
     }
 }

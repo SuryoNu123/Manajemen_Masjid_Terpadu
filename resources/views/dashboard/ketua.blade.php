@@ -152,8 +152,11 @@
             </a>
         </div>
 
+        <p class="px-5 pt-3 text-xs text-slate-500 lg:hidden">
+            Geser tabel ke samping untuk melihat semua kolom.
+        </p>
         <div class="overflow-x-auto">
-            <table class="w-full text-sm">
+            <table class="w-full min-w-[640px] text-sm">
                 <thead class="bg-slate-50 text-slate-500 text-xs uppercase">
                     <tr>
                         <th class="px-5 py-3 text-left">Tanggal</th>

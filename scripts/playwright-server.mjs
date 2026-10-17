@@ -104,6 +104,7 @@ let exitCode = 1;
 try {
     await run(php, ['artisan', 'migrate', '--force', '--no-interaction']);
     await run(php, ['artisan', 'db:seed', '--force', '--no-interaction']);
+    await run(php, ['artisan', 'db:seed', '--class=DemoDataSeeder', '--force', '--no-interaction']);
 
     const createJamaahUser = [
         'require "vendor/autoload.php";',
