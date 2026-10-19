@@ -16,6 +16,8 @@
             "
         >
 
+            <x-application-logo class="mx-auto mb-4 h-14 w-14" />
+
             <h1
                 style="
                     margin: 0;

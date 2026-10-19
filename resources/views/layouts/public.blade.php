@@ -15,6 +15,8 @@
         content="{{ csrf_token() }}"
     >
 
+    <link rel="icon" type="image/svg+xml" href="{{ asset('masjid-mark.svg') }}">
+
     <title>
         @yield('title', 'Masjid Terpadu')
     </title>
@@ -46,11 +48,7 @@
                     class="flex items-center gap-3"
                 >
 
-                    <div
-                        class="w-11 h-11 rounded-xl bg-slate-900 text-white flex items-center justify-center text-xl"
-                    >
-                        🕌
-                    </div>
+                    <x-application-logo class="h-11 w-11 shrink-0" />
 
                     <div>
 

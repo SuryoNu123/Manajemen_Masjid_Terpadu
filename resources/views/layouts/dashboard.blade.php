@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="{{ asset('masjid-mark.svg') }}">
 
     <title>
         @yield('title', 'Dashboard') - Sistem Manajemen Masjid
@@ -51,13 +52,17 @@
 
         {{-- HEADER SIDEBAR --}}
         <div class="shrink-0 border-b border-slate-700 px-6 py-5">
-            <h1 class="text-lg font-bold">
-                Masjid Terpadu
-            </h1>
-
-            <p class="mt-1 text-xs text-slate-400">
-                Sistem Manajemen Masjid
-            </p>
+            <div class="flex items-center gap-3">
+                <x-application-logo class="h-11 w-11 shrink-0" />
+                <div>
+                    <h1 class="text-base font-bold">
+                        Masjid Terpadu
+                    </h1>
+                    <p class="mt-1 text-xs text-slate-400">
+                        Sistem Manajemen Masjid
+                    </p>
+                </div>
+            </div>
         </div>
 
         {{-- MENU SIDEBAR --}}
