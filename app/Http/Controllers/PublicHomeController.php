@@ -8,8 +8,13 @@ use App\Models\DakwahContent;
 use App\Models\FinancialReport;
 use App\Models\FinancialTransaction;
 use App\Models\PrayerSchedule;
+use App\Services\PrayerScheduleService;
 use Carbon\Carbon;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
+use Throwable;
 
 class PublicHomeController extends Controller
 {
@@ -31,14 +36,6 @@ class PublicHomeController extends Controller
             ")
             ->get();
 
-        $now = Carbon::now()->format('H:i:s');
-
-        $nextSchedule = $schedules
-            ->filter(function ($schedule) use ($now) {
-                return $schedule->prayer_time >= $now;
-            })
-            ->first();
-
         $prayerNames = [
             'subuh' => 'Subuh',
             'dzuhur' => 'Dzuhur',
@@ -46,13 +43,6 @@ class PublicHomeController extends Controller
             'maghrib' => 'Maghrib',
             'isya' => 'Isya',
         ];
-
-        $nextPrayer = $nextSchedule
-            ? [
-                'name' => $prayerNames[$nextSchedule->prayer_name] ?? ucfirst($nextSchedule->prayer_name),
-                'time' => Carbon::parse($nextSchedule->prayer_time)->format('H:i'),
-            ]
-            : null;
 
         $activities = Activity::where('is_public', true)
             ->whereIn('status', ['scheduled', 'ongoing'])
@@ -105,7 +95,6 @@ class PublicHomeController extends Controller
 
         return view('welcome', compact(
             'schedules',
-            'nextPrayer',
             'prayerNames',
             'activities',
             'emergencyAnnouncements',
@@ -116,5 +105,40 @@ class PublicHomeController extends Controller
             'balance',
             'reportPeriodLabel'
         ));
+    }
+
+    public function schedules(Request $request, PrayerScheduleService $service): JsonResponse
+    {
+        $validated = $request->validate([
+            'date' => ['required', 'date_format:Y-m-d'],
+        ]);
+        $date = Carbon::createFromFormat('!Y-m-d', $validated['date'], config('services.prayer_api.timezone', 'Asia/Jakarta'));
+
+        $schedules = PrayerSchedule::whereDate('schedule_date', $date->toDateString())
+            ->where('is_active', true)
+            ->get();
+
+        if ($schedules->count() < 5) {
+            try {
+                $service->syncDate($date);
+                $schedules = PrayerSchedule::whereDate('schedule_date', $date->toDateString())
+                    ->where('is_active', true)
+                    ->get();
+            } catch (Throwable $exception) {
+                Log::warning('Prayer schedule refresh failed; returning stored schedules.', [
+                    'date' => $date->toDateString(),
+                    'message' => $exception->getMessage(),
+                ]);
+            }
+        }
+
+        return response()->json([
+            'date' => $date->toDateString(),
+            'available' => $schedules->isNotEmpty(),
+            'schedules' => $schedules->map(fn (PrayerSchedule $schedule): array => [
+                'name' => $schedule->prayer_name,
+                'time' => substr((string) $schedule->prayer_time, 0, 5),
+            ])->values(),
+        ]);
     }
 }

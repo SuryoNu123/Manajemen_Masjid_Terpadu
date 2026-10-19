@@ -43,6 +43,40 @@ test('guest can access public home page with dynamic finances and activities', f
     $response->assertSee('5.000.000');
 });
 
+test('public prayer schedule endpoint serves stored schedules for the requested local date', function () {
+    PrayerSchedule::create([
+        'schedule_date' => '2026-10-19',
+        'prayer_name' => 'dzuhur',
+        'prayer_time' => '12:04:00',
+        'source' => 'manual',
+        'is_active' => true,
+    ]);
+
+    $this->getJson(route('prayer-schedules.daily', ['date' => '2026-10-19']))
+        ->assertOk()
+        ->assertJsonPath('date', '2026-10-19')
+        ->assertJsonPath('available', true)
+        ->assertJsonPath('schedules.0.name', 'dzuhur')
+        ->assertJsonPath('schedules.0.time', '12:04');
+});
+
+test('public prayer schedule endpoint keeps stored schedules when refresh is unavailable', function () {
+    config(['services.prayer_api.latitude' => null, 'services.prayer_api.longitude' => null]);
+
+    PrayerSchedule::create([
+        'schedule_date' => '2026-10-19',
+        'prayer_name' => 'subuh',
+        'prayer_time' => '04:00:00',
+        'source' => 'manual',
+        'is_active' => true,
+    ]);
+
+    $this->getJson(route('prayer-schedules.daily', ['date' => '2026-10-19']))
+        ->assertOk()
+        ->assertJsonPath('available', true)
+        ->assertJsonPath('schedules.0.name', 'subuh');
+});
+
 test('emergency announcement displays prominently on home page', function () {
     Announcement::create([
         'title' => 'Peringatan Banjir Sekitar Masjid',

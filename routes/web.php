@@ -42,6 +42,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [PublicHomeController::class, 'index'])->name('home');
+Route::get('/jadwal-sholat-harian', [PublicHomeController::class, 'schedules'])->name('prayer-schedules.daily');
 Route::get('/profil', [PublicProfileController::class, 'index'])->name('profile.public');
 Route::get('/digital-signage', [DigitalSignageController::class, 'index'])->name('digital-signage.index');
 Route::get('/pengumuman', [AnnouncementController::class, 'publicIndex'])->name('announcements.public');

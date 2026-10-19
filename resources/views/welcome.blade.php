@@ -253,19 +253,22 @@
                                         Waktu Berikutnya
                                     </p>
 
-                                    <p class="text-3xl font-bold mt-2">
-                                        {{ $nextPrayer['name'] ?? 'Belum tersedia' }}
+                                    <p id="next-prayer-name" class="text-3xl font-bold mt-2">
+                                        Memuat jadwal…
                                     </p>
                                 </div>
 
                                 <div class="text-right">
 
-                                    <p class="text-4xl font-bold">
-                                        {{ $nextPrayer['time'] ?? '--:--' }}
+                                    <p id="next-prayer-time" class="text-4xl font-bold">
+                                        --:--
                                     </p>
 
-                                    <p class="text-xs text-slate-400 mt-1">
-                                        Jadwal sholat hari ini
+                                    <p id="next-prayer-date" class="text-xs text-slate-400 mt-1">
+                                        Jadwal sholat
+                                    </p>
+                                    <p class="text-xs text-slate-400">
+                                        <span id="device-clock">--:--:--</span>
                                     </p>
 
                                 </div>
@@ -277,11 +280,11 @@
 
                         {{-- Prayer List --}}
 
-                        <div class="space-y-3">
+                        <div id="prayer-schedule-list" class="space-y-3">
 
                             @foreach($schedules as $schedule)
 
-                                <div class="flex items-center justify-between px-4 py-3 rounded-xl bg-slate-50">
+                                <div data-prayer-row="{{ $schedule->prayer_name }}" class="flex items-center justify-between px-4 py-3 rounded-xl bg-slate-50">
 
                                     <span class="font-medium">
                                         {{ $prayerNames[$schedule->prayer_name] ?? ucfirst($schedule->prayer_name) }}
@@ -295,14 +298,17 @@
 
                             @endforeach
 
+                            <p id="prayer-schedule-empty" class="text-sm text-slate-500" @if($schedules->isNotEmpty()) hidden @endif>
+                                Jadwal sholat belum tersedia saat ini.
+                            </p>
+
                         </div>
 
 
                         <div class="mt-6 pt-5 border-t">
 
                             <p class="text-xs text-slate-500">
-                                Jadwal otomatis berdasarkan lokasi masjid
-                                akan terhubung pada modul Jadwal Sholat.
+                                Jadwal berdasarkan lokasi masjid. Jam mengikuti waktu lokal perangkat Anda.
                             </p>
 
                         </div>
@@ -580,15 +586,9 @@
         </div>
 
 
-        <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+        <div id="prayer-schedule-cards" class="grid grid-cols-2 md:grid-cols-5 gap-4">
 
-            @foreach([
-                ['name' => 'Subuh', 'time' => '04:30'],
-                ['name' => 'Dzuhur', 'time' => '12:00'],
-                ['name' => 'Ashar', 'time' => '15:15'],
-                ['name' => 'Maghrib', 'time' => '18:00'],
-                ['name' => 'Isya', 'time' => '19:15'],
-            ] as $prayer)
+            @foreach($schedules as $schedule)
 
                 <div class="bg-white border border-slate-200 rounded-2xl p-6 hover:shadow-lg transition">
 
@@ -619,11 +619,11 @@
                     </div>
 
                     <p class="text-sm text-slate-500">
-                        {{ $prayer['name'] }}
+                        {{ $prayerNames[$schedule->prayer_name] ?? ucfirst($schedule->prayer_name) }}
                     </p>
 
                     <p class="text-2xl font-bold mt-2">
-                        {{ $prayer['time'] }}
+                        {{ \Carbon\Carbon::parse($schedule->prayer_time)->format('H:i') }}
                     </p>
 
                 </div>
