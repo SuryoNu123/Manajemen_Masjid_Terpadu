@@ -69,7 +69,12 @@
         <nav class="sidebar-menu min-h-0 flex-1 space-y-1 overflow-y-auto overscroll-contain p-4">
 
             <a href="{{ route('dashboard') }}"
-               class="flex items-center gap-3 rounded-lg px-4 py-3 hover:bg-slate-800">
+               @class([
+                   'flex items-center gap-3 rounded-lg px-4 py-3 hover:bg-slate-800',
+                   'bg-slate-800 font-semibold text-white' => request()->routeIs('dashboard'),
+                   'text-slate-200' => ! request()->routeIs('dashboard'),
+               ])
+               @if(request()->routeIs('dashboard')) aria-current="page" @endif>
                 <span>Dashboard</span>
             </a>
 
@@ -123,7 +128,7 @@
                         <path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
                 </button>
-                <h2 class="font-semibold text-gray-800">
+                <h2 class="min-w-0 truncate text-sm font-semibold text-gray-800 sm:text-base" title="@yield('page-title', 'Dashboard')">
                     @yield('page-title', 'Dashboard')
                 </h2>
             </div>

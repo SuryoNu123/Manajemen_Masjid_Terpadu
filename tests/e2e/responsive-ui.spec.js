@@ -3,8 +3,10 @@ import { resolve } from 'node:path';
 
 const viewports = [
     { name: 'desktop', width: 1440, height: 900 },
+    { name: 'laptop', width: 1366, height: 768 },
     { name: 'tablet', width: 768, height: 1024 },
     { name: 'mobile', width: 390, height: 844 },
+    { name: 'small-mobile', width: 360, height: 800 },
 ];
 
 const publicPages = [
@@ -13,6 +15,7 @@ const publicPages = [
     { name: 'activities', path: '/kegiatan' },
     { name: 'announcements', path: '/pengumuman' },
     { name: 'articles', path: '/artikel' },
+    { name: 'library', path: '/perpustakaan' },
     { name: 'donations', path: '/donasi' },
     { name: 'zakat', path: '/zakat' },
     { name: 'transparency', path: '/transparansi' },
@@ -247,6 +250,41 @@ for (const viewport of viewports) {
                 expect(browserErrors).toEqual([]);
             });
         }
+
+        test('administration, notifications, and Jamaah account screens render responsively', async ({ page }) => {
+            await page.goto('/login');
+            await page.getByLabel('Email').fill('ketua@masjid.test');
+            await page.getByLabel('Password').fill('password123');
+            await page.getByRole('button', { name: 'Masuk' }).click();
+            await expect(page).toHaveURL(/\/dashboard$/);
+
+            for (const screen of [
+                { name: 'user-administration', path: '/admin/pengguna', heading: 'Akun pengguna' },
+                { name: 'notifications', path: '/notifikasi', heading: 'Notifikasi' },
+            ]) {
+                await page.goto(screen.path);
+                await expect(page.getByRole('heading', { name: screen.heading }).first()).toBeVisible();
+                await capturePage(page, viewport.name, screen.name);
+                await checkLayout(page);
+            }
+
+            await page.getByRole('button', { name: 'Logout' }).click();
+            await page.goto('/login');
+            await page.getByLabel('Email').fill('jamaah@masjid.test');
+            await page.getByLabel('Password').fill('password123');
+            await page.getByRole('button', { name: 'Masuk' }).click();
+            await expect(page).toHaveURL(/\/dashboard$/);
+
+            for (const screen of [
+                { name: 'jamaah-book-loans', path: '/akun/peminjaman', heading: 'Peminjaman Saya' },
+                { name: 'jamaah-notification-preferences', path: '/akun/pengaturan-notifikasi', heading: 'Preferensi Notifikasi' },
+            ]) {
+                await page.goto(screen.path);
+                await expect(page.getByRole('heading', { name: screen.heading }).first()).toBeVisible();
+                await capturePage(page, viewport.name, screen.name);
+                await checkLayout(page);
+            }
+        });
 
         test('profile form and account confirmation modal work without submitting deletion', async ({ page }) => {
             const browserErrors = [];

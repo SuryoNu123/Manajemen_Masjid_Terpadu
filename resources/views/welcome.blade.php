@@ -165,11 +165,11 @@
                     <div>
 
                         <p class="text-2xl font-bold">
-                            7
+                            Satu
                         </p>
 
                         <p class="text-sm text-slate-400 mt-1">
-                            Modul Sistem
+                            Platform Terpadu
                         </p>
 
                     </div>
@@ -178,11 +178,11 @@
                     <div>
 
                         <p class="text-2xl font-bold">
-                            24/7
+                            Publik
                         </p>
 
                         <p class="text-sm text-slate-400 mt-1">
-                            Akses Informasi
+                            Informasi Masjid
                         </p>
 
                     </div>
