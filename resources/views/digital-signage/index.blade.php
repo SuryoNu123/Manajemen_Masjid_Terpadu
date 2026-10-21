@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="refresh" content="300"> {{-- Refresh otomatis tiap 5 menit untuk update jadwal/pengumuman --}}
+    <link rel="icon" type="image/svg+xml" href="{{ asset('masjid-mark.svg') }}">
+    <link rel="alternate icon" type="image/png" href="{{ asset('favicon.png') }}">
     <title>Digital Signage TV - Masjid Terpadu</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
@@ -29,9 +31,7 @@
     {{-- HEADER DIGITAL SIGNAGE --}}
     <header class="flex flex-col gap-4 border-b border-slate-800 bg-slate-900/90 px-4 py-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8 lg:py-5">
         <div class="flex min-w-0 items-center gap-3 sm:gap-4">
-            <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-blue-600 text-2xl shadow-lg shadow-blue-500/30 sm:h-14 sm:w-14 sm:text-3xl">
-                🕌
-            </div>
+            <x-application-logo class="h-11 w-11 shrink-0 rounded-2xl shadow-lg shadow-blue-500/20 sm:h-14 sm:w-14" />
             <div>
                 <h1 class="text-xl font-extrabold tracking-tight sm:text-2xl lg:text-3xl">MASJID TERPADU</h1>
                 <p class="text-xs text-slate-400 sm:text-sm">Sistem Informasi Operasional & Kemakmuran Jamaah</p>
