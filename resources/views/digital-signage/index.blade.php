@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="refresh" content="300"> {{-- Refresh otomatis tiap 5 menit untuk update jadwal/pengumuman --}}
-    <link rel="icon" type="image/svg+xml" href="{{ asset('masjid-mark.svg') }}">
+        <link rel="icon" type="image/png" href="{{ asset('masjid-mark.png') }}">
     <link rel="alternate icon" type="image/png" href="{{ asset('favicon.png') }}">
     <title>Digital Signage TV - Masjid Terpadu</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])

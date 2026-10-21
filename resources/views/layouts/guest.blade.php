@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="icon" type="image/svg+xml" href="{{ asset('masjid-mark.svg') }}">
+    <link rel="icon" type="image/png" href="{{ asset('masjid-mark.png') }}">
 
     <title>{{ config('app.name', 'Sistem Manajemen Masjid') }}</title>
 
