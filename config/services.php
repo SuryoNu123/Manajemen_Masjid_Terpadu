@@ -43,4 +43,13 @@ return [
         'timezone' => env('PRAYER_TIMEZONE', 'Asia/Jakarta'),
     ],
 
+    'payment_gateway' => [
+        'adapter' => env('PAYMENT_GATEWAY_ADAPTER'),
+    ],
+
+    'whatsapp' => [
+        'adapter' => env('WHATSAPP_ADAPTER'),
+        'mode' => env('WHATSAPP_MODE', 'disabled'),
+    ],
+
 ];

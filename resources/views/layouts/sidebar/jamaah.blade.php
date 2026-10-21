@@ -22,6 +22,9 @@
                class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800">
                 Artikel Dakwah
             </a>
+            <a href="{{ route('library.public') }}" class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800">Katalog Perpustakaan</a>
+            <a href="{{ route('book-loan-requests.mine') }}" class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800">Peminjaman Saya</a>
+            <a href="{{ route('whatsapp-preferences.edit') }}" class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800">Preferensi Notifikasi</a>
         </div>
     </div>
 

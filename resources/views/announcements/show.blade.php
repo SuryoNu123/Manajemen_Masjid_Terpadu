@@ -69,6 +69,18 @@
             {{ $announcement->content }}
         </div>
     </div>
+
+    <section class="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+            <div><h2 class="font-bold text-gray-900">Status WhatsApp</h2><p class="mt-1 text-sm text-gray-500">Hanya Jamaah aktif yang memberikan persetujuan yang masuk daftar penerima.</p></div>
+            <span class="text-sm text-gray-600">{{ $announcement->whatsAppDeliveries->count() }} penerima tercatat</span>
+        </div>
+        @if ($announcement->whatsAppDeliveries->isNotEmpty())
+            <div class="mt-4 overflow-x-auto"><table class="min-w-full text-sm"><thead><tr class="border-b text-left text-xs uppercase text-gray-500"><th class="py-2 pr-4">Jamaah</th><th class="py-2 pr-4">Status</th><th class="py-2">Waktu kirim</th></tr></thead><tbody>@foreach ($announcement->whatsAppDeliveries as $delivery)<tr class="border-b last:border-0"><td class="py-3 pr-4">{{ $delivery->jamaah?->name ?? 'Data Jamaah dihapus' }}</td><td class="py-3 pr-4">{{ ['not_configured' => 'Belum dikonfigurasi', 'invalid_number' => 'Nomor tidak valid', 'pending' => 'Menunggu antrean', 'sending' => 'Mengirim', 'retrying' => 'Akan dicoba ulang', 'sent' => 'Terkirim', 'failed' => 'Gagal setelah percobaan ulang', 'simulated' => 'Simulasi — belum terkirim', 'cancelled_opt_out' => 'Dibatalkan: persetujuan dicabut'][$delivery->status] ?? $delivery->status }}</td><td class="py-3">{{ $delivery->sent_at?->format('d/m/Y H:i') ?? '—' }}</td></tr>@endforeach</tbody></table></div>
+        @else
+            <p class="mt-4 text-sm text-gray-500">Belum ada penerima dengan persetujuan WhatsApp yang tercatat.</p>
+        @endif
+    </section>
 </div>
 @endsection
 

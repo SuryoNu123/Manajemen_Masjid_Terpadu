@@ -105,6 +105,7 @@
                class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 {{ request()->routeIs('book-loans.index') ? 'bg-slate-800 text-white font-medium' : '' }}">
                 Peminjaman Buku
             </a>
+            <a href="{{ route('book-loan-requests.index') }}" class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 {{ request()->routeIs('book-loan-requests.index') ? 'bg-slate-800 text-white font-medium' : '' }}">Permintaan Pinjam Jamaah</a>
             <a href="{{ route('book-loans.report') }}"
                class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 {{ request()->routeIs('book-loans.report') ? 'bg-slate-800 text-white font-medium' : '' }}">
                 Laporan Perpustakaan
@@ -130,6 +131,7 @@
                class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 {{ request()->routeIs('activity-logs.*') ? 'bg-slate-800 text-white font-medium' : '' }}">
                 Log Aktivitas Sistem
             </a>
+            <a href="{{ route('user-administration.index') }}" class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 {{ request()->routeIs('user-administration.*') ? 'bg-slate-800 text-white font-medium' : '' }}">Administrasi Akun</a>
             <a href="{{ route('home') }}" target="_blank"
                class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800">
                 Website Publik ↗

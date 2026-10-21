@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Jamaah;
+use App\Services\ActivityLogger;
 use Illuminate\Http\Request;
 
 class JamaahController extends Controller
@@ -41,11 +42,17 @@ class JamaahController extends Controller
             'domicile' => ['required', 'string', 'max:255'],
             'birth_date' => ['nullable', 'date', 'before_or_equal:today'],
             'phone' => ['nullable', 'string', 'max:20'],
+            'whatsapp_opt_in' => ['sometimes', 'boolean'],
             'status' => ['required', 'in:aktif,nonaktif'],
             'notes' => ['nullable', 'string'],
         ]);
+        $validated['whatsapp_opt_in'] = $request->boolean('whatsapp_opt_in');
+        $validated['whatsapp_opt_in_at'] = $validated['whatsapp_opt_in'] ? now() : null;
 
-        Jamaah::create($validated);
+        $jamaah = Jamaah::create($validated);
+        if ($jamaah->whatsapp_opt_in) {
+            ActivityLogger::log('jamaah_whatsapp_opt_in', "Persetujuan WhatsApp dicatat untuk Jamaah {$jamaah->name}.", $jamaah);
+        }
 
         return redirect()
             ->route('jamaahs.index')
@@ -64,11 +71,24 @@ class JamaahController extends Controller
             'domicile' => ['required', 'string', 'max:255'],
             'birth_date' => ['nullable', 'date', 'before_or_equal:today'],
             'phone' => ['nullable', 'string', 'max:20'],
+            'whatsapp_opt_in' => ['sometimes', 'boolean'],
             'status' => ['required', 'in:aktif,nonaktif'],
             'notes' => ['nullable', 'string'],
         ]);
+        $validated['whatsapp_opt_in'] = $request->boolean('whatsapp_opt_in');
+        $wasOptedIn = $jamaah->whatsapp_opt_in;
+        $validated['whatsapp_opt_in_at'] = $validated['whatsapp_opt_in']
+            ? ($jamaah->whatsapp_opt_in_at ?? now())
+            : null;
 
         $jamaah->update($validated);
+        if ($wasOptedIn !== $jamaah->whatsapp_opt_in) {
+            ActivityLogger::log(
+                $jamaah->whatsapp_opt_in ? 'jamaah_whatsapp_opt_in' : 'jamaah_whatsapp_opt_out',
+                "Persetujuan WhatsApp Jamaah {$jamaah->name} diperbarui.",
+                $jamaah
+            );
+        }
 
         return redirect()
             ->route('jamaahs.index')

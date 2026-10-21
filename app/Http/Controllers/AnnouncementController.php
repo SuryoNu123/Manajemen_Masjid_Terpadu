@@ -6,6 +6,7 @@ use App\Models\Announcement;
 use App\Models\User;
 use App\Notifications\AnnouncementPublishedNotification;
 use App\Services\ActivityLogger;
+use App\Services\WhatsApp\WhatsAppProviderManager;
 use App\Services\WhatsAppNotificationService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -71,6 +72,8 @@ class AnnouncementController extends Controller
 
     public function show(Announcement $announcement): View
     {
+        $announcement->load(['whatsAppDeliveries.jamaah']);
+
         return view('announcements.show', compact('announcement'));
     }
 
@@ -153,6 +156,10 @@ class AnnouncementController extends Controller
      */
     public function publicShow(Announcement $announcement): View
     {
+        $announcement = Announcement::published()
+            ->whereKey($announcement->getKey())
+            ->firstOrFail();
+
         return view('public.announcements.show', compact('announcement'));
     }
 
@@ -163,16 +170,21 @@ class AnnouncementController extends Controller
     {
         try {
             // Notifikasi in-app untuk semua user pengurus/jamaah yang memiliki akun
-            $users = User::all();
+            $users = User::where('is_active', true)->get();
             if ($users->isNotEmpty()) {
                 Notification::send($users, new AnnouncementPublishedNotification($announcement));
             }
 
             // Integrasi WhatsApp notification
-            app(WhatsAppNotificationService::class)->sendAnnouncement($announcement);
-        } catch (\Throwable $e) {
-            // Log without breaking request
-            Log::error('Failed sending announcement notifications: '.$e->getMessage());
+            app(WhatsAppNotificationService::class)->sendAnnouncement(
+                $announcement,
+                app(WhatsAppProviderManager::class)
+            );
+        } catch (\Throwable $exception) {
+            Log::error('Failed dispatching announcement notifications.', [
+                'announcement_id' => $announcement->id,
+                'exception' => $exception::class,
+            ]);
         }
     }
 }

@@ -85,6 +85,7 @@
                class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 {{ request()->routeIs('library-books.*') ? 'bg-slate-800 text-white font-medium' : '' }}">
                 Katalog Buku
             </a>
+            <a href="{{ route('book-loan-requests.index') }}" class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800">Permintaan Pinjam Jamaah</a>
             <a href="{{ route('book-loans.index') }}"
                class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 {{ request()->routeIs('book-loans.index') ? 'bg-slate-800 text-white font-medium' : '' }}">
                 Peminjaman Buku

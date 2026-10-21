@@ -19,11 +19,16 @@ class Donation extends Model
         'gateway_reference',
         'paid_at',
         'financial_transaction_id',
+        'status_token',
+        'gateway_payment_url',
+        'gateway_qr_code_url',
+        'payment_expires_at',
     ];
 
     protected $casts = [
         'amount' => 'decimal:2',
         'paid_at' => 'datetime',
+        'payment_expires_at' => 'datetime',
     ];
 
     public function financialTransaction(): BelongsTo

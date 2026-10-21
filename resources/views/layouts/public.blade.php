@@ -104,6 +104,8 @@
                         Artikel
                     </a>
 
+                    <a href="{{ route('library.public') }}" class="text-sm font-medium text-gray-700 hover:text-blue-600">Perpustakaan</a>
+
                     <a
                         href="{{ route('donasi.create') }}"
                         class="text-sm font-medium text-gray-700 hover:text-blue-600"
@@ -183,6 +185,7 @@
                 <a href="{{ route('activities.public') }}" class="rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Kegiatan</a>
                 <a href="{{ route('announcements.public') }}" class="rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Pengumuman</a>
                 <a href="{{ route('dakwah.public') }}" class="rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Artikel</a>
+                <a href="{{ route('library.public') }}" class="rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Perpustakaan</a>
                 <a href="{{ route('donasi.create') }}" class="rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Donasi</a>
                 <a href="{{ route('zakat.index') }}" class="rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Zakat</a>
                 <a href="{{ route('transparansi.index') }}" class="rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Transparansi</a>
@@ -258,6 +261,8 @@
                         >
                             Kegiatan Masjid
                         </a>
+
+                        <a href="{{ route('library.public') }}" class="block text-slate-400 hover:text-white">Katalog Perpustakaan</a>
 
                         <a
                             href="{{ route('transparansi.index') }}"

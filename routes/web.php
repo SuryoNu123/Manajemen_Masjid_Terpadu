@@ -1,38 +1,44 @@
 <?php
 
-use App\Http\Controllers\ActivityLogController;
-use App\Http\Controllers\BusinessUnitItemController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\FinancialTransactionController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\DonationController;
-use App\Http\Controllers\MustahikController;
-use App\Http\Controllers\ZakatController;
-use App\Http\Controllers\FinancialReportController;
-use App\Http\Controllers\TransparencyController;
-use App\Http\Controllers\PrayerScheduleController;
-use App\Http\Controllers\PublicHomeController;
-use App\Http\Controllers\PublicProfileController;
-use App\Http\Controllers\DigitalSignageController;
 use App\Http\Controllers\ActivityController;
-use App\Http\Controllers\OfficerController;
-use App\Http\Controllers\NotificationController;
-use App\Http\Controllers\JamaahController;
-use App\Http\Controllers\PrayerAttendanceController;
-use App\Http\Controllers\PrayerAttendanceReportController;
+use App\Http\Controllers\ActivityLogController;
+use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\AssetController;
 use App\Http\Controllers\AssetMaintenanceController;
-use App\Http\Controllers\BusinessUnitController;
-use App\Http\Controllers\BusinessUnitSaleController;
-use App\Http\Controllers\LibraryBookController;
 use App\Http\Controllers\BookLoanController;
-use App\Http\Controllers\TpqClassController;
-use App\Http\Controllers\SantriController;
+use App\Http\Controllers\BookLoanRequestController;
+use App\Http\Controllers\BusinessUnitController;
+use App\Http\Controllers\BusinessUnitItemController;
+use App\Http\Controllers\BusinessUnitSaleController;
+use App\Http\Controllers\DakwahContentController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DigitalSignageController;
+use App\Http\Controllers\DonationController;
+use App\Http\Controllers\FinancialReportController;
+use App\Http\Controllers\FinancialTransactionController;
+use App\Http\Controllers\JamaahController;
+use App\Http\Controllers\LibraryBookController;
+use App\Http\Controllers\MustahikController;
+use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\OfficerController;
+use App\Http\Controllers\PaymentWebhookController;
+use App\Http\Controllers\PrayerAttendanceController;
+use App\Http\Controllers\PrayerAttendanceReportController;
+use App\Http\Controllers\PrayerScheduleController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PublicHomeController;
+use App\Http\Controllers\PublicLibraryController;
+use App\Http\Controllers\PublicProfileController;
 use App\Http\Controllers\SantriAttendanceController;
+use App\Http\Controllers\SantriController;
+use App\Http\Controllers\TpqClassController;
+use App\Http\Controllers\TransparencyController;
+use App\Http\Controllers\UserAdministrationController;
+use App\Http\Controllers\WhatsAppPreferenceController;
 use App\Http\Controllers\YouthMemberController;
 use App\Http\Controllers\YouthProgramController;
-use App\Http\Controllers\DakwahContentController;
-use App\Http\Controllers\AnnouncementController;
+use App\Http\Controllers\ZakatController;
+use App\Http\Middleware\EnsureActiveUser;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,6 +55,8 @@ Route::get('/pengumuman', [AnnouncementController::class, 'publicIndex'])->name(
 Route::get('/pengumuman/{announcement}', [AnnouncementController::class, 'publicShow'])->name('announcements.show');
 Route::get('/artikel', [DakwahContentController::class, 'publicIndex'])->name('dakwah.public');
 Route::get('/artikel/{slug}', [DakwahContentController::class, 'publicShow'])->name('dakwah.show');
+Route::get('/perpustakaan', [PublicLibraryController::class, 'index'])->name('library.public');
+Route::get('/perpustakaan/{book}', [PublicLibraryController::class, 'show'])->name('library.public.show');
 
 /*
 |--------------------------------------------------------------------------
@@ -66,9 +74,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', [
         DashboardController::class,
-        'index'
+        'index',
     ])->name('dashboard');
-
 
     /*
     |--------------------------------------------------------------------------
@@ -78,19 +85,18 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/profile', [
         ProfileController::class,
-        'edit'
+        'edit',
     ])->name('profile.edit');
 
     Route::patch('/profile', [
         ProfileController::class,
-        'update'
+        'update',
     ])->name('profile.update');
 
     Route::delete('/profile', [
         ProfileController::class,
-        'destroy'
+        'destroy',
     ])->name('profile.destroy');
-
 
     /*
     |--------------------------------------------------------------------------
@@ -105,11 +111,10 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/transaksi-keuangan', [
             FinancialTransactionController::class,
-            'index'
+            'index',
         ])->name('transaksi.index');
 
     });
-
 
     /*
     |--------------------------------------------------------------------------
@@ -125,27 +130,27 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/transaksi-keuangan/create', [
             FinancialTransactionController::class,
-            'create'
+            'create',
         ])->name('transaksi.create');
 
         Route::post('/transaksi-keuangan', [
             FinancialTransactionController::class,
-            'store'
+            'store',
         ])->name('transaksi.store');
 
         Route::get('/transaksi-keuangan/{transaksi}/edit', [
             FinancialTransactionController::class,
-            'edit'
+            'edit',
         ])->name('transaksi.edit');
 
         Route::put('/transaksi-keuangan/{transaksi}', [
             FinancialTransactionController::class,
-            'update'
+            'update',
         ])->name('transaksi.update');
 
         Route::delete('/transaksi-keuangan/{transaksi}', [
             FinancialTransactionController::class,
-            'destroy'
+            'destroy',
         ])->name('transaksi.destroy');
 
     });
@@ -156,36 +161,35 @@ Route::middleware(['auth', 'role:bendahara'])->group(function () {
 
     Route::get('/mustahik', [
         MustahikController::class,
-        'index'
+        'index',
     ])->name('mustahik.index');
 
     Route::get('/mustahik/create', [
         MustahikController::class,
-        'create'
+        'create',
     ])->name('mustahik.create');
 
     Route::post('/mustahik', [
         MustahikController::class,
-        'store'
+        'store',
     ])->name('mustahik.store');
 
     Route::get('/mustahik/{mustahik}/edit', [
         MustahikController::class,
-        'edit'
+        'edit',
     ])->name('mustahik.edit');
 
     Route::put('/mustahik/{mustahik}', [
         MustahikController::class,
-        'update'
+        'update',
     ])->name('mustahik.update');
 
     Route::delete('/mustahik/{mustahik}', [
         MustahikController::class,
-        'destroy'
+        'destroy',
     ])->name('mustahik.destroy');
 
 });
-
 
 /*
 |--------------------------------------------------------------------------
@@ -201,19 +205,22 @@ Route::middleware(['auth', 'role:bendahara'])->group(function () {
 
 Route::get('/donasi', [
     DonationController::class,
-    'create'
+    'create',
 ])->name('donasi.create');
 
 Route::post('/donasi', [
     DonationController::class,
-    'store'
+    'store',
 ])->name('donasi.store');
+
+Route::post('/webhooks/payments', PaymentWebhookController::class)
+    ->name('webhooks.payments')
+    ->withoutMiddleware(EnsureActiveUser::class);
 
 Route::get('/donasi/{donasi}/success', [
     DonationController::class,
-    'success'
+    'success',
 ])->name('donasi.success');
-
 
 /*
 |--------------------------------------------------------------------------
@@ -223,22 +230,22 @@ Route::get('/donasi/{donasi}/success', [
 
 Route::middleware([
     'auth',
-    'role:bendahara'
+    'role:bendahara',
 ])->group(function () {
 
     Route::get('/kelola-donasi', [
         DonationController::class,
-        'index'
+        'index',
     ])->name('donasi.index');
 
     Route::patch('/kelola-donasi/{donasi}/paid', [
         DonationController::class,
-        'markPaid'
+        'markPaid',
     ])->name('donasi.mark-paid');
 
     Route::patch('/kelola-donasi/{donasi}/failed', [
         DonationController::class,
-        'markFailed'
+        'markFailed',
     ])->name('donasi.mark-failed');
 
 });
@@ -254,12 +261,12 @@ Route::middleware([
 
 Route::get('/zakat', [
     ZakatController::class,
-    'index'
+    'index',
 ])->name('zakat.index');
 
 Route::post('/zakat/calculate', [
     ZakatController::class,
-    'calculate'
+    'calculate',
 ])->name('zakat.calculate');
 
 /*
@@ -270,58 +277,56 @@ Route::post('/zakat/calculate', [
 
 Route::middleware([
     'auth',
-    'role:ketua,bendahara'
+    'role:ketua,bendahara',
 ])->group(function () {
 
     Route::get('/laporan-keuangan', [
         FinancialReportController::class,
-        'index'
+        'index',
     ])->name('laporan-keuangan.index');
 
 });
 
-
 Route::middleware([
     'auth',
-    'role:bendahara'
+    'role:bendahara',
 ])->group(function () {
 
     Route::get('/laporan-keuangan/create', [
         FinancialReportController::class,
-        'create'
+        'create',
     ])->name('laporan-keuangan.create');
 
     Route::post('/laporan-keuangan/generate', [
         FinancialReportController::class,
-        'generate'
+        'generate',
     ])->name('laporan-keuangan.generate');
 
     Route::patch('/laporan-keuangan/{laporan}/submit', [
         FinancialReportController::class,
-        'submit'
+        'submit',
     ])->name('laporan-keuangan.submit');
 
 });
 
-
 Route::middleware([
     'auth',
-    'role:ketua'
+    'role:ketua',
 ])->group(function () {
 
     Route::patch('/laporan-keuangan/{laporan}/approve', [
         FinancialReportController::class,
-        'approve'
+        'approve',
     ])->name('laporan-keuangan.approve');
 
     Route::patch('/laporan-keuangan/{laporan}/reject', [
         FinancialReportController::class,
-        'reject'
+        'reject',
     ])->name('laporan-keuangan.reject');
 
     Route::patch('/laporan-keuangan/{laporan}/publish', [
         FinancialReportController::class,
-        'publish'
+        'publish',
     ])->name('laporan-keuangan.publish');
 
 });
@@ -334,9 +339,8 @@ Route::middleware([
 
 Route::get('/transparansi', [
     TransparencyController::class,
-    'index'
+    'index',
 ])->name('transparansi.index');
-
 
 /*
 |--------------------------------------------------------------------------
@@ -350,42 +354,42 @@ Route::get('/transparansi', [
 
 Route::middleware([
     'auth',
-    'role:ketua,marbot'
+    'role:ketua,marbot',
 ])->group(function () {
 
     Route::get('/jadwal-sholat', [
         PrayerScheduleController::class,
-        'index'
+        'index',
     ])->name('jadwal-sholat.index');
 
     Route::get('/jadwal-sholat/create', [
         PrayerScheduleController::class,
-        'create'
+        'create',
     ])->name('jadwal-sholat.create');
 
     Route::post('/jadwal-sholat', [
         PrayerScheduleController::class,
-        'store'
+        'store',
     ])->name('jadwal-sholat.store');
 
     Route::get('/jadwal-sholat/{jadwalSholat}/edit', [
         PrayerScheduleController::class,
-        'edit'
+        'edit',
     ])->name('jadwal-sholat.edit');
 
     Route::put('/jadwal-sholat/{jadwalSholat}', [
         PrayerScheduleController::class,
-        'update'
+        'update',
     ])->name('jadwal-sholat.update');
 
     Route::delete('/jadwal-sholat/{jadwalSholat}', [
         PrayerScheduleController::class,
-        'destroy'
+        'destroy',
     ])->name('jadwal-sholat.destroy');
 
     Route::post('/jadwal-sholat/sync', [
         PrayerScheduleController::class,
-        'sync'
+        'sync',
     ])->name('prayer-schedules.sync');
 
 });
@@ -411,12 +415,10 @@ Route::middleware('auth')->group(function () {
 
 });
 
-
 Route::middleware(['auth', 'role:ketua,sekretaris'])->group(function () {
     Route::resource('jamaahs', JamaahController::class)
         ->except(['show']);
 });
-
 
 Route::middleware(['auth', 'role:ketua,marbot'])->group(function () {
     Route::get('/presensi', [
@@ -461,25 +463,25 @@ Route::middleware(['auth', 'role:ketua'])->group(function () {
 Route::middleware(['auth', 'role:ketua,bendahara'])->group(function () {
     // Daftar penjualan dan rekap omzet
     Route::get('/business-unit-sales', [
-        \App\Http\Controllers\BusinessUnitSaleController::class,
+        BusinessUnitSaleController::class,
         'index',
     ])->name('business-unit-sales.index');
 
     // Form tambah penjualan
     Route::get('/business-unit-sales/create', [
-        \App\Http\Controllers\BusinessUnitSaleController::class,
+        BusinessUnitSaleController::class,
         'create',
     ])->name('business-unit-sales.create');
 
     // Simpan penjualan
     Route::post('/business-unit-sales', [
-        \App\Http\Controllers\BusinessUnitSaleController::class,
+        BusinessUnitSaleController::class,
         'store',
     ])->name('business-unit-sales.store');
 
     // Laporan omzet
     Route::get('/business-unit-sales/report', [
-        \App\Http\Controllers\BusinessUnitSaleController::class,
+        BusinessUnitSaleController::class,
         'report',
     ])->name('business-unit-sales.report');
 
@@ -507,22 +509,22 @@ Route::middleware(['auth', 'role:ketua,sekretaris'])->group(function () {
 Route::middleware(['auth', 'role:ketua,sekretaris'])->group(function () {
     Route::get('/book-loans', [
         BookLoanController::class,
-        'index'
+        'index',
     ])->name('book-loans.index');
 
     Route::get('/book-loans/create', [
         BookLoanController::class,
-        'create'
+        'create',
     ])->name('book-loans.create');
 
     Route::post('/book-loans', [
         BookLoanController::class,
-        'store'
+        'store',
     ])->name('book-loans.store');
 
     Route::patch('/book-loans/{bookLoan}/return', [
         BookLoanController::class,
-        'returnBook'
+        'returnBook',
     ])->name('book-loans.return');
 
     Route::patch('/book-loans/{bookLoan}/lost', [
@@ -582,10 +584,31 @@ Route::middleware(['auth', 'role:ketua,sekretaris'])->group(function () {
 });
 
 Route::middleware(['auth', 'role:ketua'])->group(function () {
+    Route::resource('/admin/pengguna', UserAdministrationController::class)
+        ->parameters(['pengguna' => 'user'])
+        ->names('user-administration')
+        ->except(['destroy']);
+
+    Route::post('/admin/pengguna/{user}/kirim-tautan-reset-password', [UserAdministrationController::class, 'sendPasswordReset'])
+        ->name('user-administration.password-reset');
+
     Route::get('/activity-logs', [
-        \App\Http\Controllers\ActivityLogController::class,
-        'index'
+        ActivityLogController::class,
+        'index',
     ])->name('activity-logs.index');
 });
 
-require __DIR__ . '/auth.php';
+Route::middleware(['auth', 'role:ketua,sekretaris'])->group(function () {
+    Route::get('/book-loan-requests', [BookLoanRequestController::class, 'index'])->name('book-loan-requests.index');
+    Route::patch('/book-loan-requests/{bookLoanRequest}/approve', [BookLoanRequestController::class, 'approve'])->name('book-loan-requests.approve');
+    Route::patch('/book-loan-requests/{bookLoanRequest}/reject', [BookLoanRequestController::class, 'reject'])->name('book-loan-requests.reject');
+});
+
+Route::middleware(['auth', 'role:jamaah'])->group(function () {
+    Route::get('/akun/peminjaman', [BookLoanRequestController::class, 'mine'])->name('book-loan-requests.mine');
+    Route::get('/akun/pengaturan-notifikasi', [WhatsAppPreferenceController::class, 'edit'])->name('whatsapp-preferences.edit');
+    Route::put('/akun/pengaturan-notifikasi', [WhatsAppPreferenceController::class, 'update'])->name('whatsapp-preferences.update');
+    Route::post('/perpustakaan/{book}/pinjam', [BookLoanRequestController::class, 'store'])->name('book-loan-requests.store');
+});
+
+require __DIR__.'/auth.php';

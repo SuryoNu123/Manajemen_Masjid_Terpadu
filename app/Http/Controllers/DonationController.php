@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreDonationRequest;
 use App\Models\Donation;
-use App\Models\FinancialCategory;
-use App\Models\FinancialTransaction;
+use App\Services\Payments\DonationPaymentService;
+use App\Services\Payments\PaymentGatewayManager;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class DonationController extends Controller
@@ -26,7 +27,8 @@ class DonationController extends Controller
      * Simpan donasi dari publik.
      */
     public function store(
-        StoreDonationRequest $request
+        StoreDonationRequest $request,
+        PaymentGatewayManager $gateways
     ): RedirectResponse {
         $validated = $request->validated();
 
@@ -42,10 +44,28 @@ class DonationController extends Controller
 
             'payment_method' => $validated['payment_method'],
             'payment_status' => 'pending',
+            'status_token' => (string) Str::uuid(),
         ]);
 
+        if ($donation->payment_method === 'qris' && $gateways->isConfigured()) {
+            try {
+                $intent = $gateways->driver()->createPayment($donation);
+                $donation->update([
+                    'gateway_reference' => $intent->reference,
+                    'gateway_payment_url' => $intent->paymentUrl,
+                    'gateway_qr_code_url' => $intent->qrCodeUrl,
+                    'payment_expires_at' => $intent->expiresAt,
+                ]);
+            } catch (\Throwable $exception) {
+                Log::warning('Payment gateway could not create a donation payment.', [
+                    'donation_code' => $donation->donation_code,
+                    'exception' => $exception::class,
+                ]);
+            }
+        }
+
         return redirect()
-            ->route('donasi.success', $donation)
+            ->route('donasi.success', ['donasi' => $donation, 'token' => $donation->status_token])
             ->with(
                 'success',
                 'Donasi berhasil dibuat dan menunggu pembayaran.'
@@ -56,12 +76,21 @@ class DonationController extends Controller
      * Halaman sukses / instruksi pembayaran.
      */
     public function success(
-        Donation $donasi
+        Donation $donasi,
+        Request $request
     ): View {
-        return view(
-            'donations.success',
-            compact('donasi')
+        abort_unless(
+            is_string($request->query('token'))
+                && is_string($donasi->status_token)
+                && hash_equals($donasi->status_token, $request->query('token')),
+            404
         );
+
+        return view('donations.success', [
+            'donasi' => $donasi,
+            'gatewayReady' => $donasi->gateway_reference !== null
+                && ($donasi->gateway_payment_url !== null || $donasi->gateway_qr_code_url !== null),
+        ]);
     }
 
     /**
@@ -113,76 +142,18 @@ class DonationController extends Controller
      * belum terhubung.
      */
     public function markPaid(
-        Donation $donasi
+        Donation $donasi,
+        DonationPaymentService $payments
     ): RedirectResponse {
-        if ($donasi->payment_status === 'paid') {
+        if ($donasi->payment_status !== 'pending') {
             return back()->with(
                 'error',
                 'Donasi sudah berstatus paid.'
             );
         }
 
-        DB::transaction(function () use ($donasi) {
-
-            $donasi->update([
-                'payment_status' => 'paid',
-                'paid_at' => now(),
-            ]);
-
-            /*
-            |--------------------------------------------------------------------------
-            | Cari kategori keuangan
-            |--------------------------------------------------------------------------
-            */
-
-            $categoryName = match ($donasi->type) {
-                'infaq' => 'Infaq',
-                'sedekah' => 'Sedekah',
-                'zakat' => 'Zakat',
-                'qurban' => 'Qurban',
-            };
-
-            $category = FinancialCategory::where(
-                'name',
-                $categoryName
-            )
-                ->where('type', 'income')
-                ->firstOrFail();
-
-            /*
-            |--------------------------------------------------------------------------
-            | Buat transaksi keuangan
-            |--------------------------------------------------------------------------
-            */
-
-            FinancialTransaction::create([
-                'category_id' => $category->id,
-                'user_id' => Auth::id(),
-
-                'transaction_code' => 'DON-'.$donasi->donation_code,
-
-                'type' => 'income',
-
-                'amount' => $donasi->amount,
-
-                'transaction_date' => now()->toDateString(),
-
-                'source' => $donasi->donor_name
-                    ?: 'Donasi Online',
-
-                'description' => 'Donasi '.
-                    ucfirst($donasi->type).
-                    ' - '.
-                    $donasi->donation_code,
-
-                /*
-                 * Tetap draft sampai workflow laporan
-                 * keuangan selesai.
-                 */
-                'status' => 'draft',
-            ]);
-
-        });
+        abort_if($donasi->payment_method === 'qris', 403, 'Pembayaran QRIS hanya dapat dikonfirmasi oleh gateway.');
+        $payments->recordOfflinePayment($donasi, Auth::id());
 
         return back()->with(
             'success',
@@ -196,6 +167,8 @@ class DonationController extends Controller
     public function markFailed(
         Donation $donasi
     ): RedirectResponse {
+        abort_if($donasi->payment_method === 'qris', 403, 'Status pembayaran QRIS hanya dapat diperbarui oleh gateway.');
+        abort_if($donasi->payment_status !== 'pending', 409, 'Status donasi ini sudah diproses.');
         $donasi->update([
             'payment_status' => 'failed',
         ]);

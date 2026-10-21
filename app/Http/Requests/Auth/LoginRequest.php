@@ -75,6 +75,7 @@ class LoginRequest extends FormRequest
                 $query->whereRaw('LOWER(email) = ?', [$email]);
             },
             'password' => $this->string('password')->toString(),
+            'is_active' => true,
         ], $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -12,11 +13,16 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    protected $attributes = [
+        'is_active' => true,
+    ];
+
     protected $fillable = [
         'name',
         'email',
         'password',
         'role_id',
+        'is_active',
     ];
 
     protected $hidden = [
@@ -29,6 +35,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_active' => 'boolean',
         ];
     }
 
@@ -64,6 +71,11 @@ class User extends Authenticatable
     public function financialTransactions(): HasMany
     {
         return $this->hasMany(FinancialTransaction::class);
+    }
+
+    public function jamaah(): HasOne
+    {
+        return $this->hasOne(Jamaah::class);
     }
 
     /**

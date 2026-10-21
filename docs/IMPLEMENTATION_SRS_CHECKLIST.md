@@ -9,9 +9,9 @@ Dokumen ini berisi pemetaan seluruh kebutuhan fungsional dan non-fungsional dari
 | Kode SRS | Kebutuhan Fungsi | Modul Terkait | File Implementasi | Status Implementasi | Hasil Pengujian | Catatan & Tindak Lanjut |
 |---|---|---|---|---|---|---|
 | **AUT-F-001** | Login Multi-Role | Autentikasi | `app/Http/Controllers/Auth/AuthenticatedSessionController.php`, `app/Http/Controllers/DashboardController.php`, `app/Http/Middleware/RoleMiddleware.php` | SUDAH SESUAI | Berhasil diuji (Pest) | Login mengarahkan masing-masing role (ketua, bendahara, sekretaris, marbot, jamaah) ke dashboard masing-masing. Jamaah & publik dapat akses publik tanpa login. |
-| **AUT-F-002** | Hak Akses Berjenjang (RBAC) | Autentikasi | `app/Http/Middleware/RoleMiddleware.php`, `bootstrap/app.php`, `routes/web.php` | SUDAH SESUAI | Berhasil diuji (Pest) | RBAC di server via middleware `role:x,y`. Proteksi URL langsung jika tidak punya hak akses menghasilkan HTTP 403. |
+| **AUT-F-002** | Hak Akses Berjenjang (RBAC) | Autentikasi | `app/Http/Middleware/RoleMiddleware.php`, `app/Http/Controllers/UserAdministrationController.php`, `routes/web.php` | SUDAH SESUAI | Diuji pada `UserAdministrationTest` | Ketua dapat mengelola akun/role; akun pengurus hanya dapat dibuat lewat alur Ketua; perubahan role sendiri dan penonaktifan Ketua aktif terakhir ditolak. |
 | **AUT-F-003** | Reset Password | Autentikasi | `app/Http/Controllers/Auth/PasswordResetLinkController.php`, `app/Http/Controllers/Auth/NewPasswordController.php` | SUDAH SESUAI | Berhasil diuji (Pest) | Fitur reset password Laravel Breeze via email/token. |
-| **AUT-F-004** | Log Aktivitas Pengurus | Autentikasi & Audit | `app/Models/ActivityLog.php`, `app/Services/ActivityLogger.php`, `app/Listeners/LogSuccessfulLogin.php`, `resources/views/activity-logs/index.blade.php` | SUDAH SESUAI | Berhasil diuji (Pest) | Pencatatan login, transaksi keuangan, perubahan data aset, donasi, pengumuman, dan tampilan log untuk Ketua DKM. |
+| **AUT-F-004** | Log Aktivitas Pengurus | Autentikasi & Audit | `app/Models/ActivityLog.php`, `app/Services/ActivityLogger.php`, `app/Listeners/LogSuccessfulLogin.php`, `resources/views/activity-logs/index.blade.php` | SUDAH SESUAI | Berhasil diuji (Pest) | Mencakup log yang sudah ada dan tindakan administratif akun sensitif. |
 
 ---
 
@@ -20,7 +20,7 @@ Dokumen ini berisi pemetaan seluruh kebutuhan fungsional dan non-fungsional dari
 | Kode SRS | Kebutuhan Fungsi | Modul Terkait | File Implementasi | Status Implementasi | Hasil Pengujian | Catatan & Tindak Lanjut |
 |---|---|---|---|---|---|---|
 | **KEU-F-001** | Kelola Kas Masuk/Keluar | Modul A | `app/Http/Controllers/FinancialTransactionController.php`, `app/Models/FinancialTransaction.php`, `app/Models/FinancialCategory.php` | SUDAH SESUAI | Berhasil diuji (Pest) | Transaksi per kategori (operasional, sosial, perawatan, infaq, dll). Hanya bendahara yang dapat mengubah/membuat. |
-| **KEU-F-002** | Donasi Digital (QRIS/PG) | Modul A | `app/Http/Controllers/DonationController.php`, `app/Models/Donation.php`, `resources/views/donations/` | SUDAH SESUAI | Berhasil diuji (Pest) | Mencegah double confirmation, mendukung status pending/paid/failed, otomatis membuat transaksi keuangan draft saat verified. QRIS mockup ready. |
+| **KEU-F-002** | Donasi Digital (QRIS/PG) | Modul A | `app/Http/Controllers/DonationController.php`, `app/Http/Controllers/PaymentWebhookController.php`, `app/Services/Payments/` | MENUNGGU KONFIGURASI EKSTERNAL | Kontrak, webhook palsu, idempotensi diuji di `PaymentIntegrationTest`; provider riil belum diuji | Alur pending, verifikasi webhook melalui adapter, pencatatan kas satu kali setelah pembayaran sah. Belum ada provider atau kredensial terpilih; QRIS belum dapat menerima pembayaran nyata. |
 | **KEU-F-003** | Perhitungan Zakat | Modul A | `app/Http/Controllers/ZakatController.php`, `app/Http/Requests/CalculateZakatRequest.php`, `resources/views/zakat/index.blade.php` | SUDAH SESUAI | Berhasil diuji (Pest) | Kalkulator zakat fitrah & zakat maal dengan konfigurasi nisab dan pengurang harta, dapat diakses publik tanpa login. |
 | **KEU-F-004** | Pencatatan Penyaluran Mustahik | Modul A | `app/Http/Controllers/MustahikController.php`, `app/Models/Mustahik.php`, `app/Http/Requests/UpdateMustahikRequest.php` | SUDAH SESUAI | Berhasil diuji (Pest) | Penyaluran 8 asnaf (fakir, miskin, amil, muallaf, riqab, gharim, fisabilillah, ibnu sabil) dengan nominal dan status distribusi. |
 | **KEU-F-005** | Laporan Keuangan Otomatis | Modul A | `app/Http/Controllers/FinancialReportController.php`, `app/Models/FinancialReport.php` | SUDAH SESUAI | Berhasil diuji (Pest) | Agregasi otomatis transaksi bulanan/tahunan (pemasukan, pengeluaran, saldo) tanpa duplikasi periode. |
@@ -59,8 +59,8 @@ Dokumen ini berisi pemetaan seluruh kebutuhan fungsional dan non-fungsional dari
 | **USH-F-001** | Kelola Unit Usaha | Modul D | `app/Http/Controllers/BusinessUnitController.php`, `app/Models/BusinessUnit.php` | SUDAH SESUAI | Berhasil diuji (Pest) | Pendaftaran unit usaha masjid (koperasi, kantin, dll) oleh Ketua DKM. |
 | **USH-F-002** | Pencatatan Omset Terhubung ke Keuangan | Modul D | `app/Http/Controllers/BusinessUnitSaleController.php`, `app/Models/BusinessUnitSale.php` | SUDAH SESUAI | Berhasil diuji (Pest) | Transaksi penjualan omset unit usaha otomatis tersambung ke `FinancialTransaction` kategori Unit Usaha dalam transaksi database aman. |
 | **USH-F-003** | Manajemen Stok Sederhana | Modul D | `app/Models/BusinessUnitItem.php`, `app/Http/Controllers/BusinessUnitItemController.php`, `database/migrations/` | SUDAH SESUAI | Berhasil diuji (Pest) | Pencatatan stok barang toko/koperasi unit usaha (nama barang, SKU, harga, stok). |
-| **PPS-F-001** | Katalog Buku Perpustakaan | Modul D | `app/Http/Controllers/LibraryBookController.php`, `app/Models/LibraryBook.php` | SUDAH SESUAI | Berhasil diuji (Pest) | Katalog buku/kitab: judul, penulis, penerbit, nomor ISBN/kode, kategori, jumlah eksemplar. |
-| **PPS-F-002** | Peminjaman & Pengembalian Buku | Modul D | `app/Http/Controllers/BookLoanController.php`, `app/Models/BookLoan.php` | SUDAH SESUAI | Berhasil diuji (Pest) | Peminjaman oleh jamaah terdaftar, validasi stok ketersediaan, status borrowed/returned/lost, denda/catatan. |
+| **PPS-F-001** | Katalog Buku Perpustakaan | Modul D | `app/Http/Controllers/PublicLibraryController.php`, `app/Models/LibraryBook.php` | SUDAH SESUAI | Diuji di `PublicBookLoanTest` | Katalog publik hanya menampilkan buku aktif, dengan pencarian, kategori, detail dan ketersediaan. |
+| **PPS-F-002** | Peminjaman & Pengembalian Buku | Modul D | `app/Http/Controllers/BookLoanRequestController.php`, `app/Http/Controllers/BookLoanController.php`, `app/Models/BookLoanRequest.php` | SUDAH SESUAI | Diuji di `PublicBookLoanTest` | Jamaah terhubung dapat mengajukan dan melihat pengajuan sendiri; pengurus menyetujui/menolak; stok dikunci saat persetujuan dan pengembalian tetap melalui alur pinjaman yang ada. Aturan jatuh tempo dimasukkan pengurus saat menyetujui. |
 
 ---
 
@@ -83,7 +83,7 @@ Dokumen ini berisi pemetaan seluruh kebutuhan fungsional dan non-fungsional dari
 | **KTN-F-001** | Publikasi Artikel Dakwah | Modul F | `app/Http/Controllers/DakwahContentController.php`, `resources/views/dakwah-contents/`, `resources/views/public/articles/` | SUDAH SESUAI | Berhasil diuji (Pest) | Publikasi artikel dakwah dan berita kegiatan masjid, slug otomatis, cover image, tampil di halaman publik. |
 | **KTN-F-002** | Pengumuman & Info Darurat | Modul F | `app/Http/Controllers/AnnouncementController.php`, `app/Models/Announcement.php`, `resources/views/announcements/` | SUDAH SESUAI | Berhasil diuji (Pest) | CRUD pengumuman, jenis normal/darurat, status draft/published, tanggal kedaluwarsa, banner darurat publik. |
 | **KTN-F-003** | Digital Signage (TV Masjid) | Modul F | `app/Http/Controllers/DigitalSignageController.php`, `resources/views/digital-signage/index.blade.php` | SUDAH SESUAI | Berhasil diuji (Pest) | Tampilan layar TV masjid: jam digital, countdown sholat, jadwal 5 waktu, running text pengumuman darurat/normal, ringkasan kas, dan info kajian bergantian otomatis. |
-| **KTN-F-004** | Notifikasi Pengumuman | Modul F | `app/Notifications/AnnouncementPublishedNotification.php`, `app/Services/WhatsAppNotificationService.php` | SUDAH SESUAI | Berhasil diuji (Pest) | Notifikasi in-app saat pengumuman dipublikasikan serta format integrasi pesan WhatsApp untuk jamaah/pengurus. |
+| **KTN-F-004** | Notifikasi Pengumuman | Modul F | `app/Notifications/AnnouncementPublishedNotification.php`, `app/Services/WhatsAppNotificationService.php`, `app/Jobs/SendWhatsAppDelivery.php` | MENUNGGU KONFIGURASI EKSTERNAL | Alur simulasi, opt-in, antrian dan status diuji di `WhatsAppDeliveryTest`; provider riil belum diuji | Hanya jamaah aktif dengan persetujuan WhatsApp yang menjadi penerima. Tanpa adapter berstatus belum dikonfigurasi; mode simulasi tidak dilaporkan terkirim. |
 
 ---
 
@@ -100,13 +100,9 @@ Dokumen ini berisi pemetaan seluruh kebutuhan fungsional dan non-fungsional dari
 
 ## 9. RINGKASAN HASIL AUDIT DAN PENGUJIAN AKHIR
 
-- **Cakupan Kebutuhan SRS**: 26 kode kebutuhan fungsional (AUT, KEU, JSK, JMH, AST, USH, PPS, RMJ, TPQ, KTN, WEB, DSH).
-- **Status Implementasi**: **100% SUDAH SESUAI** terhubung ke database tanpa data dummy/tombol palsu.
-- **Hasil Pengujian Otomatis (Pest)**:
-  - Total Pengujian: **51 tests**
-  - Total Asersi: **142 assertions**
-  - Status: **51 passed, 0 failed, 0 error (100% Pass Rate)**
-- **Kompilasi Frontend (Vite)**: Sukses dibundel (`public/build/assets/app-*.css`, `app-*.js`).
-- **Standar Kode (Laravel Pint)**: Sesuai standar PSR-12 / Laravel Code Style.
-- **Integritas Data**: Tidak ada migrasi destruktif (`migrate:fresh` / `db:wipe`). Seluruh database aman dan kompatibel.
+- **Cakupan checklist**: 38 kode kebutuhan fungsional pada dokumen ini.
+- **Hasil implementasi dalam cakupan perubahan**: administrasi akun dan alur katalog/peminjaman jamaah selesai; payment gateway serta WhatsApp menunggu pemilihan provider dan kredensial. Rincian bukti dan batas audit tercatat di `docs/TESTING_REPORT.md`.
+- **Hasil pengujian terbaru**: 103 tes lulus, 408 asersi; detail perintah dan batas verifikasi di `docs/TESTING_REPORT.md`.
+- **Integritas data**: migrasi tambahan non-destruktif diterapkan pada database lokal. Tidak dijalankan `migrate:fresh` atau `db:wipe`.
+- Checklist ini memetakan kebutuhan yang tercantum pada SRS, tetapi status modul lain tidak berarti telah dilakukan UAT ulang menyeluruh pada putaran ini.
 

@@ -90,6 +90,36 @@ test('draft announcements are not shown on public index', function () {
     $response->assertDontSee('Pengumuman Rahasia Draf');
 });
 
+test('guests cannot view unpublished announcements by direct URL', function () {
+    $announcement = Announcement::create([
+        'title' => 'Pengumuman Draf Rahasia',
+        'content' => 'Belum disetujui untuk publikasi.',
+        'type' => 'normal',
+        'status' => 'draft',
+    ]);
+
+    $response = $this->get(route('announcements.show', $announcement));
+
+    $response->assertNotFound();
+    $response->assertDontSee('Belum disetujui untuk publikasi.');
+});
+
+test('guests cannot view expired announcements by direct URL', function () {
+    $announcement = Announcement::create([
+        'title' => 'Pengumuman Kedaluwarsa',
+        'content' => 'Informasi yang sudah tidak berlaku.',
+        'type' => 'normal',
+        'status' => 'published',
+        'published_at' => now()->subDay(),
+        'expires_at' => now()->subMinute(),
+    ]);
+
+    $response = $this->get(route('announcements.show', $announcement));
+
+    $response->assertNotFound();
+    $response->assertDontSee('Informasi yang sudah tidak berlaku.');
+});
+
 test('jamaah cannot create announcements and receives forbidden 403', function () {
     $jamaah = createUserWithRole('jamaah');
 

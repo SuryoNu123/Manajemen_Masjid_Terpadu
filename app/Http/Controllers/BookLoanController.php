@@ -133,15 +133,14 @@ class BookLoanController extends Controller
 
     public function markLost(BookLoan $bookLoan)
     {
-        if ($bookLoan->status !== 'borrowed') {
-            return redirect()
-                ->route('book-loans.index')
-                ->with('error', 'Hanya buku yang sedang dipinjam yang dapat ditandai hilang.');
-        }
+        DB::transaction(function () use ($bookLoan): void {
+            $bookLoan = BookLoan::whereKey($bookLoan->id)->lockForUpdate()->firstOrFail();
+            if ($bookLoan->status !== 'borrowed') {
+                throw ValidationException::withMessages(['loan' => 'Hanya buku yang sedang dipinjam yang dapat ditandai hilang.']);
+            }
 
-        $bookLoan->update([
-            'status' => 'lost',
-        ]);
+            $bookLoan->update(['status' => 'lost']);
+        });
 
         return redirect()
             ->route('book-loans.index')

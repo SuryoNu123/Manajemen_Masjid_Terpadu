@@ -198,7 +198,7 @@
 
                         <td class="px-6 py-4">
 
-                            @if($donation->payment_status === 'pending')
+                            @if($donation->payment_status === 'pending' && $donation->payment_method !== 'qris')
 
                                 <div class="flex justify-end gap-2">
 
@@ -247,6 +247,8 @@
 
                                 </div>
 
+                            @elseif($donation->payment_status === 'pending')
+                                <span class="text-xs text-gray-500">Menunggu konfirmasi gateway</span>
                             @else
 
                                 <span class="text-gray-400 text-xs">
