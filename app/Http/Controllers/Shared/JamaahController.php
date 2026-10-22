@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Shared;
 
+use App\Http\Controllers\Controller;
 use App\Models\Jamaah;
 use App\Services\ActivityLogger;
 use Illuminate\Http\Request;

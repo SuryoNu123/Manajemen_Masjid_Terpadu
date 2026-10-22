@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Shared;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePrayerScheduleRequest;
 use App\Http\Requests\UpdatePrayerScheduleRequest;
 use App\Models\PrayerSchedule;

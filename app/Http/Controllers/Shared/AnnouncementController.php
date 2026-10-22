@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Shared;
 
+use App\Http\Controllers\Controller;
 use App\Models\Announcement;
 use App\Models\User;
 use App\Notifications\AnnouncementPublishedNotification;

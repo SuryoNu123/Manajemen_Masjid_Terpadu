@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Shared;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\GenerateFinancialReportRequest;
 use App\Models\FinancialReport;
 use App\Models\FinancialTransaction;

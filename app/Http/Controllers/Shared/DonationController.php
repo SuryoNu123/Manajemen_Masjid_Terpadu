@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Shared;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreDonationRequest;
 use App\Models\Donation;
 use App\Services\Payments\DonationPaymentService;

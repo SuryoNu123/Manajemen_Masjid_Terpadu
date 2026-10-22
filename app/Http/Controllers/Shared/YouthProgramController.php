@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Shared;
 
+use App\Http\Controllers\Controller;
 use App\Models\YouthMember;
 use App\Models\YouthProgram;
 use App\Services\ActivityLogger;

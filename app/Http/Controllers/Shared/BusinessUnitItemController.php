@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Shared;
 
+use App\Http\Controllers\Controller;
 use App\Models\BusinessUnit;
 use App\Models\BusinessUnitItem;
 use App\Services\ActivityLogger;
@@ -161,4 +162,3 @@ class BusinessUnitItemController extends Controller
             ->with('success', "Stok {$businessUnitItem->name} berhasil diperbarui (Stok saat ini: {$businessUnitItem->stock}).");
     }
 }
-

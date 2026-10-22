@@ -53,8 +53,9 @@ Controller yang dipindahkan:
 - `Bendahara/`: `MustahikController`.
 - `Jamaah/`: `WhatsAppPreferenceController`.
 - `Auth/` sudah menjadi kelompok sebelumnya.
+- `Shared/`: dashboard bersama dan controller modul yang melayani lebih dari satu role, seperti kegiatan/konten, aset, keuangan, perpustakaan/peminjaman, jamaah/TPQ, serta presensi.
 
-Controller kegiatan, transaksi dan laporan keuangan, donasi, jadwal/presensi, aset, perpustakaan, peminjaman, serta konten tetap di namespace bersama karena route dan operasinya dipakai lebih dari satu role. Belum ada controller yang hanya dipakai Sekretaris atau Marbot: route mereka berbagi modul dengan Ketua. Tidak dibuat controller duplikat atau folder role kosong.
+SRS menetapkan Sekretaris/Humas untuk data jamaah, kegiatan, perpustakaan, remaja/TPQ, dan konten; Marbot/Petugas untuk jadwal, presensi, aset, dan operasional signage. Implementasi memberi Ketua akses ke banyak modul itu sebagai pengawas, sehingga controller tersebut berada di `Shared/` dan middleware role yang sudah ada tetap membatasi akses. `DigitalSignageController` tetap berada di `Public/` karena route aktualnya hanya menyajikan layar informasi tanpa operasi admin terpisah. Belum ada controller yang rutenya khusus Sekretaris atau Marbot saja. Tidak dibuat controller duplikat atau folder role kosong.
 
 Views tetap dikelompokkan mengikuti modul yang digunakan saat ini, karena pemindahan view terpisah tidak diperlukan untuk perubahan namespace Controller ini.
 
@@ -69,7 +70,7 @@ Views tetap dikelompokkan mengikuti modul yang digunakan saat ini, karena pemind
 - `resources/views/mustahiks/index.blade.php`
 - `resources/views/financial-reports/index.blade.php`
 - Controller empat daftar tersebut
-- Controller role-spesifik di `app/Http/Controllers/{Public,Ketua,Bendahara,Jamaah}/`
+- Controller role-spesifik dan lintas role di `app/Http/Controllers/{Public,Ketua,Bendahara,Jamaah,Shared}/`
 - `routes/web.php` (import controller)
 - `tests/Feature/SearchAndFilteringTest.php`
 - `tests/e2e/responsive-ui.spec.js`
@@ -79,7 +80,6 @@ Views tetap dikelompokkan mengikuti modul yang digunakan saat ini, karena pemind
 ## Hasil verifikasi
 
 - `php artisan route:list --except-vendor`: berhasil, 186 route.
-- `php artisan test --compact`: berhasil, 108 test dan 436 assertion.
 - `php artisan test --compact`: berhasil setelah refactor namespace, 108 test dan 436 assertion.
 - `php artisan view:cache`: berhasil.
 - `npm.cmd run build`: berhasil dengan Vite 8.3.1 dan Tailwind CSS 4.3.3. (`npm` PowerShell shim awalnya diblokir execution policy; command yang sama berhasil lewat `npm.cmd`.)

@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Shared;
 
 use App\Exports\SantriAttendanceExport;
+use App\Http\Controllers\Controller;
 use App\Models\Santri;
 use App\Models\SantriAttendance;
 use App\Models\TpqClass;

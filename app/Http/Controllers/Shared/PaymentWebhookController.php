@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Shared;
 
+use App\Http\Controllers\Controller;
 use App\Services\Payments\DonationPaymentService;
 use App\Services\Payments\PaymentGatewayManager;
 use Illuminate\Http\Request;
