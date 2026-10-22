@@ -5,7 +5,7 @@
 @section('content')
 <section class="bg-slate-900 py-16 text-white">
     <div class="mx-auto max-w-7xl px-6">
-        <span class="text-sm font-semibold uppercase tracking-wider text-blue-400">Pusat Informasi</span>
+        <span class="text-sm font-semibold uppercase tracking-wider text-blue-200">Pusat Informasi</span>
         <h1 class="mt-2 text-3xl md:text-4xl font-bold">Pengumuman & Informasi Masjid</h1>
         <p class="mt-3 text-slate-300 max-w-2xl">
             Informasi terkini seputar kegiatan ibadah, layanan sosial, dan kabar penting untuk seluruh jamaah Masjid Terpadu.
@@ -83,7 +83,7 @@
                                     Darurat
                                 </span>
                             @else
-                                <span class="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700">
+                                <span class="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-800">
                                     Pengumuman
                                 </span>
                             @endif
@@ -110,7 +110,7 @@
                         </span>
 
                         <a href="{{ route('announcements.show', $announcement) }}"
-                           class="text-sm font-semibold text-blue-600 hover:text-blue-700">
+                           class="text-sm font-semibold text-blue-700 hover:text-blue-800">
                             Selengkapnya →
                         </a>
                     </div>

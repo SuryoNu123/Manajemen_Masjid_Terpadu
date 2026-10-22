@@ -23,9 +23,9 @@
                    name="search"
                    value="{{ request('search') }}"
                    placeholder="Cari deskripsi, IP, atau nama pengguna..."
-                   class="min-w-[240px] flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
+                   class="min-w-[240px] flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-600 focus:outline-none">
 
-            <select name="action" class="rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
+            <select name="action" class="rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-600 focus:outline-none">
                 <option value="">Semua Tindakan</option>
                 @foreach($actions as $act)
                     <option value="{{ $act }}" @selected(request('action') === $act)>

@@ -55,11 +55,11 @@
 <form method="GET" action="{{ route('laporan-keuangan.index') }}" class="mb-6 grid gap-3 rounded-xl border border-gray-200 bg-white p-4 sm:grid-cols-2 lg:grid-cols-4">
     <div>
         <label for="report-year" class="mb-1 block text-sm font-medium text-gray-700">Tahun</label>
-        <input id="report-year" name="year" type="number" min="1900" max="2200" value="{{ request('year') }}" placeholder="Semua tahun" class="w-full rounded-lg border-gray-300 text-sm focus:border-blue-500 focus:ring-blue-500">
+        <input id="report-year" name="year" type="number" min="1900" max="2200" value="{{ request('year') }}" placeholder="Semua tahun" class="w-full rounded-lg border-gray-300 text-sm focus:border-blue-600 focus:ring-blue-600">
     </div>
     <div>
         <label for="report-period-type" class="mb-1 block text-sm font-medium text-gray-700">Periode</label>
-        <select id="report-period-type" name="period_type" class="w-full rounded-lg border-gray-300 text-sm focus:border-blue-500 focus:ring-blue-500">
+        <select id="report-period-type" name="period_type" class="w-full rounded-lg border-gray-300 text-sm focus:border-blue-600 focus:ring-blue-600">
             <option value="">Semua periode</option>
             <option value="monthly" @selected(request('period_type') === 'monthly')>Bulanan</option>
             <option value="yearly" @selected(request('period_type') === 'yearly')>Tahunan</option>
@@ -67,7 +67,7 @@
     </div>
     <div>
         <label for="report-status" class="mb-1 block text-sm font-medium text-gray-700">Status</label>
-        <select id="report-status" name="status" class="w-full rounded-lg border-gray-300 text-sm focus:border-blue-500 focus:ring-blue-500">
+        <select id="report-status" name="status" class="w-full rounded-lg border-gray-300 text-sm focus:border-blue-600 focus:ring-blue-600">
             <option value="">Semua status</option>
             @foreach(['draft' => 'Draft', 'submitted' => 'Menunggu Review', 'approved' => 'Disetujui', 'rejected' => 'Ditolak', 'published' => 'Dipublikasikan'] as $value => $label)
                 <option value="{{ $value }}" @selected(request('status') === $value)>{{ $label }}</option>

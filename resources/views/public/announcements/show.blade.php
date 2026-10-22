@@ -5,7 +5,7 @@
 @section('content')
 <section class="bg-slate-900 py-12 text-white">
     <div class="mx-auto max-w-4xl px-6">
-        <a href="{{ route('announcements.public') }}" class="inline-flex items-center gap-2 text-sm text-blue-400 hover:text-blue-300 mb-4">
+        <a href="{{ route('announcements.public') }}" class="mb-4 inline-flex items-center gap-2 text-sm text-blue-200 hover:text-white">
             ← Kembali ke Semua Pengumuman
         </a>
 
@@ -15,7 +15,7 @@
                     ⚠️ Darurat
                 </span>
             @else
-                <span class="rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30 px-3 py-1 text-xs font-semibold">
+                <span class="rounded-full border border-blue-400/25 bg-blue-400/10 px-3 py-1 text-xs font-semibold text-blue-200">
                     Pengumuman Resmi
                 </span>
             @endif
@@ -49,7 +49,7 @@
                     Pengurus DKM Masjid Terpadu
                 </span>
 
-                <a href="{{ route('announcements.public') }}" class="text-sm font-semibold text-blue-600 hover:underline">
+                <a href="{{ route('announcements.public') }}" class="text-sm font-semibold text-blue-700 hover:underline">
                     Lihat Pengumuman Lainnya →
                 </a>
             </div>

@@ -2,10 +2,12 @@ import { expect, test } from '@playwright/test';
 import { resolve } from 'node:path';
 
 const viewports = [
+    { name: 'wide-desktop', width: 1920, height: 1080 },
     { name: 'desktop', width: 1440, height: 900 },
     { name: 'laptop', width: 1366, height: 768 },
     { name: 'tablet', width: 768, height: 1024 },
     { name: 'mobile', width: 390, height: 844 },
+    { name: 'mobile-375', width: 375, height: 812 },
     { name: 'small-mobile', width: 360, height: 800 },
 ];
 

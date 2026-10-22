@@ -13,18 +13,7 @@
 
 <body class="font-sans antialiased">
 
-    <main
-        style="
-            min-height: 100vh;
-            width: 100%;
-            background: #f1f5f9;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 20px;
-            box-sizing: border-box;
-        "
-    >
+    <main class="flex min-h-screen w-full items-center justify-center bg-slate-50 px-4 py-8 sm:px-6">
 
         {{ $slot }}
 

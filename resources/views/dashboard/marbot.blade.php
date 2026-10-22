@@ -15,14 +15,14 @@
         </p>
     </div>
 
-    <div class="flex items-center gap-2">
+    <div class="flex flex-wrap items-center gap-2">
         <a href="{{ route('prayer-attendances.index') }}"
            class="rounded-lg bg-blue-600 px-3.5 py-2 text-xs font-semibold text-white hover:bg-blue-700">
             + Presensi Sholat
         </a>
         <a href="{{ route('digital-signage.index') }}" target="_blank"
            class="rounded-lg bg-slate-900 px-3.5 py-2 text-xs font-semibold text-white hover:bg-slate-800">
-            📺 Buka TV Masjid ↗
+             Buka TV Masjid ↗
         </a>
     </div>
 </div>

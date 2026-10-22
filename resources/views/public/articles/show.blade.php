@@ -5,7 +5,7 @@
 @section('content')
 <section class="bg-slate-900 py-14 text-white">
     <div class="mx-auto max-w-4xl px-6">
-        <a href="{{ route('dakwah.public') }}" class="inline-flex items-center gap-2 text-sm text-blue-400 hover:text-blue-300 mb-4">
+        <a href="{{ route('dakwah.public') }}" class="mb-4 inline-flex items-center gap-2 text-sm text-blue-200 hover:text-white">
             ← Kembali ke Daftar Artikel
         </a>
 
@@ -41,7 +41,7 @@
                     <p class="text-xs text-gray-400">Bagikan artikel ini kepada kerabat dan keluarga jamaah.</p>
                 </div>
 
-                <a href="{{ route('dakwah.public') }}" class="text-sm font-semibold text-blue-600 hover:underline">
+                <a href="{{ route('dakwah.public') }}" class="text-sm font-semibold text-blue-700 hover:underline">
                     ← Artikel Lainnya
                 </a>
             </div>
@@ -54,7 +54,7 @@
                     @foreach($recentArticles as $other)
                         <div class="rounded-xl border border-gray-200 p-5 bg-white hover:shadow-md transition">
                             <span class="text-xs text-gray-400">{{ $other->published_at?->format('d M Y') }}</span>
-                            <h3 class="font-bold text-gray-900 mt-1 hover:text-blue-600">
+                            <h3 class="mt-1 font-semibold text-slate-900 hover:text-blue-600">
                                 <a href="{{ route('dakwah.show', $other->slug) }}">
                                     {{ $other->title }}
                                 </a>

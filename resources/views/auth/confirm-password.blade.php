@@ -3,7 +3,7 @@
 
         <div class="text-center mb-8">
             <div class="flex justify-center mb-4">
-                <div class="w-16 h-16 rounded-2xl bg-blue-600 flex items-center justify-center shadow-lg shadow-blue-200">
+                <div class="w-16 h-16 rounded-2xl bg-blue-600 flex items-center justify-center shadow-lg shadow-emerald-100">
                     <svg xmlns="http://www.w3.org/2000/svg"
                          class="w-9 h-9 text-white"
                          fill="none"
@@ -45,7 +45,7 @@
                         autocomplete="current-password"
                         autofocus
                         placeholder="Masukkan password Anda"
-                        class="block w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 focus:bg-white transition"
+                        class="block w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-100 focus:bg-white transition"
                     >
 
                     <x-input-error
@@ -56,7 +56,7 @@
 
                 <button
                     type="submit"
-                    class="w-full mt-6 rounded-xl bg-blue-600 px-5 py-3.5 text-sm font-semibold text-white shadow-lg shadow-blue-200 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition"
+                    class="w-full mt-6 rounded-xl bg-blue-600 px-5 py-3.5 text-sm font-semibold text-white shadow-lg shadow-emerald-100 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 transition"
                 >
                     Konfirmasi
                 </button>

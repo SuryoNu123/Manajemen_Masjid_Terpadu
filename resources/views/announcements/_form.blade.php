@@ -16,7 +16,7 @@
                value="{{ old('title', $announcement?->title) }}"
                required
                maxlength="255"
-               class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:outline-none">
+               class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-blue-600 focus:outline-none">
 
         @error('title')
             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -32,7 +32,7 @@
                   name="content"
                   rows="8"
                   required
-                  class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:outline-none">{{ old('content', $announcement?->content) }}</textarea>
+                  class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-blue-600 focus:outline-none">{{ old('content', $announcement?->content) }}</textarea>
 
         @error('content')
             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -100,7 +100,7 @@
                id="expires_at"
                name="expires_at"
                value="{{ old('expires_at', $announcement?->expires_at?->format('Y-m-d\TH:i')) }}"
-               class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:outline-none">
+               class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-blue-600 focus:outline-none">
 
         <p class="mt-1 text-xs text-gray-500">
             Kosongkan jika pengumuman tidak memiliki batas tayang otomatis.

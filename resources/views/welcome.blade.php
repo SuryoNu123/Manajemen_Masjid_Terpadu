@@ -30,39 +30,27 @@
 {{-- HERO --}}
 {{-- ========================================================= --}}
 
-<section class="relative overflow-hidden bg-slate-950 text-white">
+<section class="overflow-hidden bg-slate-900 text-white">
 
-    {{-- Decorative Background --}}
-    <div class="absolute inset-0">
+    <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-14">
 
-        <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-blue-600/20 blur-3xl"></div>
-
-        <div class="absolute top-1/2 -left-24 w-80 h-80 rounded-full bg-indigo-500/10 blur-3xl"></div>
-
-        <div class="absolute bottom-0 right-1/3 w-72 h-72 rounded-full bg-cyan-500/10 blur-3xl"></div>
-
-    </div>
-
-
-    <div class="relative max-w-7xl mx-auto px-6 py-20 lg:py-28">
-
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+        <div class="grid grid-cols-1 items-start gap-8 lg:grid-cols-[1.05fr_.95fr] lg:gap-12">
 
 
             {{-- HERO TEXT --}}
 
             <div>
 
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/10 text-sm text-slate-300 mb-6">
+                <div class="mb-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm text-slate-300">
 
-                    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                    <span class="w-2 h-2 rounded-full bg-blue-400"></span>
 
                     Sistem Manajemen Masjid Terpadu
 
                 </div>
 
 
-                <h1 class="text-4xl md:text-5xl xl:text-6xl font-bold leading-tight tracking-tight">
+                <h1 class="max-w-2xl text-3xl font-semibold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
 
                     Kelola Masjid
 
@@ -70,17 +58,16 @@
                         Lebih Mudah,
                     </span>
 
-                    <br>
-
-                    Layani Jamaah
+                    <span class="block">Layani Jamaah
                     <span class="text-blue-400">
                         Lebih Baik.
+                    </span>
                     </span>
 
                 </h1>
 
 
-                <p class="mt-6 text-lg md:text-xl text-slate-300 leading-relaxed max-w-xl">
+                <p class="mt-5 max-w-xl text-base leading-relaxed text-slate-300 sm:text-lg">
 
                     Satu platform untuk mengelola kegiatan,
                     keuangan, donasi, zakat, jamaah,
@@ -91,11 +78,11 @@
 
                 {{-- CTA --}}
 
-                <div class="flex flex-wrap gap-4 mt-8">
+                <div class="mt-7 flex flex-wrap gap-3">
 
                     <a
                         href="{{ route('donasi.create') }}"
-                        class="inline-flex items-center gap-2 px-6 py-3.5 bg-blue-600 hover:bg-blue-700 rounded-xl font-semibold transition"
+                        class="inline-flex min-h-11 items-center gap-2 rounded-lg bg-blue-600 px-5 py-3 font-semibold transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-slate-900"
                     >
 
                         Donasi Sekarang
@@ -120,7 +107,7 @@
 
                     <a
                         href="{{ route('zakat.index') }}"
-                        class="inline-flex items-center gap-2 px-6 py-3.5 bg-white text-slate-900 hover:bg-slate-100 rounded-xl font-semibold transition"
+                        class="inline-flex min-h-11 items-center gap-2 rounded-lg border border-white/25 bg-white/5 px-5 py-3 font-semibold text-white transition hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-blue-300"
                     >
 
                         Kalkulator Zakat
@@ -145,67 +132,23 @@
                 </div>
 
 
-                {{-- SMALL INFO --}}
-
-                <div class="flex flex-wrap gap-8 mt-10 pt-8 border-t border-white/10">
-
-                    <div>
-
-                        <p class="text-2xl font-bold">
-                            5
-                        </p>
-
-                        <p class="text-sm text-slate-400 mt-1">
-                            Waktu Sholat
-                        </p>
-
-                    </div>
-
-
-                    <div>
-
-                        <p class="text-2xl font-bold">
-                            Satu
-                        </p>
-
-                        <p class="text-sm text-slate-400 mt-1">
-                            Platform Terpadu
-                        </p>
-
-                    </div>
-
-
-                    <div>
-
-                        <p class="text-2xl font-bold">
-                            Publik
-                        </p>
-
-                        <p class="text-sm text-slate-400 mt-1">
-                            Informasi Masjid
-                        </p>
-
-                    </div>
-
-                </div>
-
             </div>
 
 
             {{-- HERO PRAYER CARD --}}
 
-            <div class="lg:pl-8">
+            <div class="min-w-0 lg:pl-4">
 
                 <div class="relative">
 
                     {{-- Main Card --}}
 
-                    <div class="bg-white rounded-3xl p-6 md:p-8 text-slate-900 shadow-2xl shadow-black/20">
+                    <div class="rounded-xl border border-slate-200 bg-white p-5 text-slate-900 shadow-lg shadow-black/10 sm:p-7">
 
 
                         {{-- Card Header --}}
 
-                        <div class="flex items-center justify-between mb-8">
+                        <div class="mb-5 flex items-center justify-between">
 
                             <div>
 
@@ -220,11 +163,11 @@
                             </div>
 
 
-                            <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center">
+                            <div class="flex h-11 w-11 items-center justify-center rounded-lg bg-blue-50 text-blue-600">
 
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
-                                    class="w-6 h-6 text-blue-600"
+                                    class="h-5 w-5"
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke="currentColor"
@@ -244,7 +187,7 @@
 
                         {{-- Next Prayer --}}
 
-                        <div class="bg-slate-950 text-white rounded-2xl p-4 sm:p-6 mb-6">
+                        <div class="mb-5 rounded-xl bg-slate-950 p-4 text-white sm:p-5">
 
                             <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 
@@ -253,14 +196,14 @@
                                         Waktu Berikutnya
                                     </p>
 
-                                    <p id="next-prayer-name" class="text-3xl font-bold mt-2">
+                                    <p id="next-prayer-name" class="mt-2 text-2xl font-bold sm:text-3xl">
                                         Memuat jadwal…
                                     </p>
                                 </div>
 
                                 <div class="text-right">
 
-                                    <p id="next-prayer-time" class="text-4xl font-bold">
+                                    <p id="next-prayer-time" class="text-3xl font-bold sm:text-4xl">
                                         --:--
                                     </p>
 
@@ -280,11 +223,11 @@
 
                         {{-- Prayer List --}}
 
-                        <div id="prayer-schedule-list" class="space-y-3">
+                        <div id="prayer-schedule-list" class="space-y-2">
 
                             @foreach($schedules as $schedule)
 
-                                <div data-prayer-row="{{ $schedule->prayer_name }}" class="flex items-center justify-between px-4 py-3 rounded-xl bg-slate-50">
+                                <div data-prayer-row="{{ $schedule->prayer_name }}" class="flex items-center justify-between rounded-lg bg-slate-50 px-4 py-2.5">
 
                                     <span class="font-medium">
                                         {{ $prayerNames[$schedule->prayer_name] ?? ucfirst($schedule->prayer_name) }}
@@ -305,7 +248,7 @@
                         </div>
 
 
-                        <div class="mt-6 pt-5 border-t">
+                        <div class="mt-5 border-t pt-4">
 
                             <p class="text-xs text-slate-500">
                                 Jadwal berdasarkan lokasi masjid. Jam mengikuti waktu lokal perangkat Anda.
@@ -322,11 +265,11 @@
 
                         <div class="flex items-center gap-3">
 
-                            <div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center">
+                            <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
 
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
-                                    class="w-5 h-5 text-emerald-600"
+                                    class="w-5 h-5 text-blue-600"
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke="currentColor"
@@ -381,7 +324,7 @@
 
         <div class="max-w-2xl mb-12">
 
-            <span class="text-sm font-semibold text-blue-600 uppercase tracking-wider">
+            <span class="text-sm font-semibold text-blue-700 uppercase tracking-wider">
                 Layanan Jamaah
             </span>
 
@@ -412,7 +355,7 @@
 
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        class="w-7 h-7 text-blue-600 group-hover:text-white"
+                        class="w-7 h-7 text-blue-700 group-hover:text-white"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -438,7 +381,7 @@
                 </p>
 
 
-                <div class="mt-6 text-sm font-semibold text-blue-600 group-hover:text-white">
+                <div class="mt-6 text-sm font-semibold text-blue-700 group-hover:text-white">
 
                     Mulai Donasi
                     →
@@ -452,14 +395,14 @@
 
             <a
                 href="{{ route('zakat.index') }}"
-                class="group bg-slate-50 rounded-2xl border border-slate-200 p-7 hover:bg-emerald-600 hover:border-emerald-600 transition duration-300"
+                class="group bg-slate-50 rounded-2xl border border-slate-200 p-7 hover:bg-blue-600 hover:border-blue-600 transition duration-300"
             >
 
-                <div class="w-14 h-14 rounded-2xl bg-emerald-100 group-hover:bg-white/15 flex items-center justify-center">
+                <div class="w-14 h-14 rounded-2xl bg-blue-100 group-hover:bg-white/15 flex items-center justify-center">
 
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        class="w-7 h-7 text-emerald-600 group-hover:text-white"
+                        class="w-7 h-7 text-blue-600 group-hover:text-white"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -479,13 +422,13 @@
                     Kalkulator Zakat
                 </h3>
 
-                <p class="text-slate-500 group-hover:text-emerald-100 mt-3 leading-relaxed">
+                <p class="text-slate-500 group-hover:text-blue-100 mt-3 leading-relaxed">
                     Hitung estimasi zakat fitrah
                     dan zakat maal dengan mudah.
                 </p>
 
 
-                <div class="mt-6 text-sm font-semibold text-emerald-600 group-hover:text-white">
+                <div class="mt-6 text-sm font-semibold text-blue-600 group-hover:text-white">
 
                     Hitung Zakat
                     →
@@ -561,7 +504,7 @@
 
             <div>
 
-                <span class="text-sm font-semibold text-blue-600 uppercase tracking-wider">
+                <span class="text-sm font-semibold text-blue-700 uppercase tracking-wider">
                     Waktu Ibadah
                 </span>
 
@@ -578,7 +521,7 @@
 
             <a
                 href="#prayer-schedule-cards"
-                class="text-sm font-semibold text-blue-600"
+                class="text-sm font-semibold text-blue-700"
             >
                 Lihat Jadwal Lengkap →
             </a>
@@ -596,7 +539,7 @@
 
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            class="w-5 h-5 text-blue-600"
+                            class="w-5 h-5 text-blue-700"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor"
@@ -649,7 +592,7 @@
 
             <div>
 
-                <span class="text-sm font-semibold text-blue-600 uppercase tracking-wider">
+                <span class="text-sm font-semibold text-blue-700 uppercase tracking-wider">
                     Agenda
                 </span>
 
@@ -664,7 +607,7 @@
             </div>
 
             <a href="{{ route('activities.public') }}"
-               class="text-sm font-semibold text-blue-600">
+               class="text-sm font-semibold text-blue-700">
                 Lihat Semua →
             </a>
 
@@ -766,7 +709,7 @@
 
             <div>
 
-                <span class="text-sm font-semibold text-blue-400 uppercase tracking-wider">
+                <span class="text-sm font-semibold text-blue-300 uppercase tracking-wider">
                     Transparansi
                 </span>
 
@@ -817,7 +760,7 @@
                     <p class="text-slate-400 text-sm">
                         Total Pemasukan
                     </p>
-                    <p class="text-3xl font-bold mt-2 text-emerald-400">
+                    <p class="text-3xl font-bold mt-2 text-blue-400">
                         Rp {{ number_format($totalIncome ?? 0, 0, ',', '.') }}
                     </p>
                     <p class="text-xs text-slate-400 mt-2">
@@ -865,7 +808,7 @@
     <div class="max-w-7xl mx-auto px-6">
         <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-5 mb-10">
             <div>
-                <span class="text-sm font-semibold text-blue-600 uppercase tracking-wider">
+                <span class="text-sm font-semibold text-blue-700 uppercase tracking-wider">
                     Informasi
                 </span>
                 <h2 class="text-3xl md:text-4xl font-bold mt-2 text-slate-900">
@@ -876,7 +819,7 @@
                 </p>
             </div>
 
-            <a href="{{ route('announcements.public') }}" class="text-sm font-semibold text-blue-600 hover:underline">
+            <a href="{{ route('announcements.public') }}" class="text-sm font-semibold text-blue-700 hover:underline">
                 Lihat Semua Pengumuman →
             </a>
         </div>
@@ -891,7 +834,7 @@
                                     Darurat
                                 </span>
                             @else
-                                <span class="rounded-full bg-blue-100 text-blue-700 px-2.5 py-0.5 text-xs font-semibold">
+                                <span class="rounded-full bg-blue-100 text-blue-800 px-2.5 py-0.5 text-xs font-semibold">
                                     Pengumuman
                                 </span>
                             @endif
@@ -901,7 +844,7 @@
                             </span>
                         </div>
 
-                        <h3 class="font-bold text-lg text-slate-900 hover:text-blue-600">
+                        <h3 class="font-bold text-lg text-slate-900 hover:text-blue-700">
                             <a href="{{ route('announcements.show', $announcement) }}">
                                 {{ $announcement->title }}
                             </a>
@@ -917,7 +860,7 @@
                             {{ $announcement->published_at?->format('H:i') }} WIB
                         </span>
                         <a href="{{ route('announcements.show', $announcement) }}"
-                           class="text-xs font-semibold text-blue-600 hover:underline">
+                           class="text-xs font-semibold text-blue-700 hover:underline">
                             Baca Selengkapnya →
                         </a>
                     </div>
@@ -939,7 +882,7 @@
     <div class="max-w-7xl mx-auto px-6">
         <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-5 mb-10">
             <div>
-                <span class="text-sm font-semibold text-emerald-600 uppercase tracking-wider">
+                <span class="text-sm font-semibold text-blue-600 uppercase tracking-wider">
                     Dakwah & Berita
                 </span>
                 <h2 class="text-3xl md:text-4xl font-bold mt-2 text-slate-900">
@@ -950,7 +893,7 @@
                 </p>
             </div>
 
-            <a href="{{ route('dakwah.public') }}" class="text-sm font-semibold text-emerald-600 hover:underline">
+            <a href="{{ route('dakwah.public') }}" class="text-sm font-semibold text-blue-600 hover:underline">
                 Lihat Semua Artikel →
             </a>
         </div>
@@ -973,7 +916,7 @@
                             <span class="text-xs text-slate-400">
                                 {{ $article->published_at?->format('d M Y') }}
                             </span>
-                            <h3 class="font-bold text-lg text-slate-900 mt-1 hover:text-emerald-600">
+                            <h3 class="font-bold text-lg text-slate-900 mt-1 hover:text-blue-600">
                                 <a href="{{ route('dakwah.show', $article->slug) }}">
                                     {{ $article->title }}
                                 </a>
@@ -986,7 +929,7 @@
 
                     <div class="px-6 pb-6 pt-2">
                         <a href="{{ route('dakwah.show', $article->slug) }}"
-                           class="text-xs font-semibold text-emerald-600 hover:underline">
+                           class="text-xs font-semibold text-blue-600 hover:underline">
                             Baca Selengkapnya →
                         </a>
                     </div>
@@ -1013,7 +956,7 @@
 
             <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="w-8 h-8 text-blue-600"
+                class="w-8 h-8 text-blue-700"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -1046,7 +989,7 @@
 
             <a
                 href="{{ route('donasi.create') }}"
-                class="px-7 py-3.5 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition"
+                class="px-7 py-3.5 bg-blue-700 text-white rounded-xl font-semibold hover:bg-blue-800 transition"
             >
                 Donasi Sekarang
             </a>

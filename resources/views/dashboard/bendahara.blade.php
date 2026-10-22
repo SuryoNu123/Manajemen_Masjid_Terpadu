@@ -15,7 +15,7 @@
         </p>
     </div>
 
-    <div class="flex items-center gap-2">
+    <div class="flex flex-wrap items-center gap-2">
         <a href="{{ route('transaksi.create', ['type' => 'income']) }}"
            class="rounded-lg bg-green-600 px-3.5 py-2 text-xs font-semibold text-white hover:bg-green-700">
             + Pemasukan
@@ -25,7 +25,7 @@
             - Pengeluaran
         </a>
         <a href="{{ route('laporan-keuangan.create') }}"
-           class="rounded-lg bg-slate-900 px-3.5 py-2 text-xs font-semibold text-white hover:bg-slate-800">
+           class="rounded-lg border border-slate-300 bg-white px-3.5 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50">
             + Buat Laporan
         </a>
     </div>
@@ -79,7 +79,7 @@
     <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
         <div class="flex items-center justify-between">
             <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Penyaluran Zakat</span>
-            <span class="text-lg">🤲</span>
+
         </div>
         <p class="mt-2 text-xl font-bold text-emerald-700">
             Rp {{ number_format($totalZakatDisbursed, 0, ',', '.') }}
@@ -93,7 +93,7 @@
     <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
         <div class="flex items-center justify-between">
             <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Omzet Unit Usaha (Bulan Ini)</span>
-            <span class="text-lg">🏪</span>
+
         </div>
         <p class="mt-2 text-xl font-bold text-slate-900">
             Rp {{ number_format($totalBusinessSalesMonth, 0, ',', '.') }}
@@ -107,7 +107,7 @@
     <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
         <div class="flex items-center justify-between">
             <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Status Laporan Keuangan</span>
-            <span class="text-lg">📋</span>
+
         </div>
         <p class="mt-2 text-xl font-bold {{ $pendingReports > 0 ? 'text-amber-600' : 'text-slate-900' }}">
             {{ $pendingReports }} Periode Pending

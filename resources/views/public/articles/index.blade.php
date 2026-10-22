@@ -5,7 +5,7 @@
 @section('content')
 <section class="bg-slate-900 py-16 text-white">
     <div class="mx-auto max-w-7xl px-6">
-        <span class="text-sm font-semibold uppercase tracking-wider text-blue-400">Pojok Literasi & Dakwah</span>
+        <span class="text-sm font-semibold uppercase tracking-wider text-blue-200">Pojok Literasi & Dakwah</span>
         <h1 class="mt-2 text-3xl md:text-4xl font-bold">Artikel Dakwah & Khazanah Islam</h1>
         <p class="mt-3 text-slate-300 max-w-2xl">
             Kumpulan artikel keagamaan, mutiara hikmah, dan berita seputar aktivitas kemakmuran Masjid Terpadu.
@@ -18,13 +18,13 @@
         <div class="mb-8 flex flex-wrap items-center justify-between gap-4">
             <h2 class="text-2xl font-bold text-gray-900">Semua Artikel</h2>
 
-            <form method="GET" action="{{ route('dakwah.public') }}" class="flex items-center gap-2">
+            <form method="GET" action="{{ route('dakwah.public') }}" class="flex w-full items-center gap-2 sm:w-auto">
                 <input type="text"
                        name="search"
                        value="{{ request('search') }}"
                        placeholder="Cari artikel dakwah..."
-                       class="rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
-                <button type="submit" class="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700">
+                       class="min-w-0 flex-1 rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-blue-600 sm:w-64 sm:flex-none">
+                <button type="submit" class="min-h-10 rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700">
                     Cari
                 </button>
             </form>
@@ -38,7 +38,7 @@
                              alt="{{ $article->title }}"
                              class="h-48 w-full object-cover">
                     @else
-                        <div class="h-48 w-full bg-gradient-to-r from-blue-900 to-indigo-900 flex items-center justify-center text-white text-3xl">
+                        <div class="flex h-48 w-full items-center justify-center bg-blue-700 text-sm font-medium text-white">
                             📖
                         </div>
                     @endif
@@ -51,7 +51,7 @@
                                 <span>{{ $article->author?->name ?? 'DKM Masjid' }}</span>
                             </div>
 
-                            <h3 class="text-xl font-bold text-gray-900 hover:text-blue-600">
+                            <h3 class="text-xl font-semibold text-slate-900 hover:text-blue-600">
                                 <a href="{{ route('dakwah.show', $article->slug) }}">
                                     {{ $article->title }}
                                 </a>
@@ -64,7 +64,7 @@
 
                         <div class="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between">
                             <a href="{{ route('dakwah.show', $article->slug) }}"
-                               class="text-sm font-semibold text-blue-600 hover:text-blue-700">
+                               class="text-sm font-semibold text-blue-700 hover:text-blue-800">
                                 Baca Selengkapnya →
                             </a>
                         </div>

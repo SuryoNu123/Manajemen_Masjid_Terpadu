@@ -15,13 +15,13 @@
         </p>
     </div>
 
-    <div class="flex items-center gap-2">
+    <div class="flex flex-wrap items-center gap-2">
         <a href="{{ route('donasi.create') }}"
-           class="rounded-lg bg-blue-600 px-4 py-2 text-xs font-semibold text-white hover:bg-blue-700 shadow-sm">
-            ❤️ Infaq & Donasi Online
+           class="rounded-lg bg-blue-600 px-4 py-2 text-xs font-semibold text-white hover:bg-blue-700">
+             Infaq & Donasi Online
         </a>
         <a href="{{ route('zakat.index') }}"
-           class="rounded-lg bg-emerald-600 px-4 py-2 text-xs font-semibold text-white hover:bg-emerald-700 shadow-sm">
+           class="rounded-lg bg-emerald-600 px-4 py-2 text-xs font-semibold text-white hover:bg-emerald-700">
             Kalkulator Zakat
         </a>
     </div>
@@ -29,7 +29,7 @@
 
 {{-- BANNER INFORMASI RINGKAS --}}
 <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
-    <div class="bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-xl shadow-sm p-5">
+    <div class="rounded-xl bg-slate-900 p-5 text-white">
         <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Transparansi Kas Masjid</span>
         <p class="mt-2 text-2xl font-bold text-white">Rp {{ number_format($balance, 0, ',', '.') }}</p>
         <div class="mt-3">
@@ -83,10 +83,10 @@
                     </span>
                     <h4 class="font-bold text-slate-900 text-sm mt-1">{{ $activity->title }}</h4>
                     <p class="text-xs text-slate-500 mt-1">
-                        📅 {{ \Carbon\Carbon::parse($activity->activity_date)->format('d F Y') }} • ⏰ {{ substr($activity->activity_time, 0, 5) }} WIB
+                         {{ \Carbon\Carbon::parse($activity->activity_date)->format('d F Y') }} • ⏰ {{ substr($activity->activity_time, 0, 5) }} WIB
                     </p>
                     @if($activity->speaker)
-                        <p class="text-xs text-slate-600 mt-0.5">🎙️ Penceramah: {{ $activity->speaker }}</p>
+                        <p class="text-xs text-slate-600 mt-0.5"> Penceramah: {{ $activity->speaker }}</p>
                     @endif
                 </div>
             @empty
@@ -99,7 +99,7 @@
     <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
         <div class="flex items-center justify-between mb-4">
             <h2 class="font-bold text-base text-slate-800">Pengumuman & Warta Masjid</h2>
-            <a href="{{ route('announcements.public') }}" class="text-xs font-semibold text-blue-600 hover:underline">
+            <a href="{{ route('announcements.public') }}" class="text-xs font-semibold text-blue-700 hover:underline">
                 Semua Pengumuman →
             </a>
         </div>

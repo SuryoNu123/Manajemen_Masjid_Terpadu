@@ -1,4 +1,4 @@
-<div class="space-y-4 pt-2">
+<div class="space-y-3 pt-1">
 
     {{-- LAYANAN & INFORMASI --}}
     <div>
@@ -7,24 +7,24 @@
         </p>
         <div class="mt-1 space-y-0.5">
             <a href="{{ route('home') }}"
-               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800">
+               class="block rounded-md px-3 py-1.5 text-sm text-slate-200 hover:bg-slate-800">
                 Jadwal Sholat & Beranda
             </a>
             <a href="{{ route('activities.public') }}"
-               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800">
+               class="block rounded-md px-3 py-1.5 text-sm text-slate-200 hover:bg-slate-800">
                 Jadwal Kajian & Kegiatan
             </a>
             <a href="{{ route('announcements.public') }}"
-               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800">
+               class="block rounded-md px-3 py-1.5 text-sm text-slate-200 hover:bg-slate-800">
                 Pengumuman Masjid
             </a>
             <a href="{{ route('dakwah.public') }}"
-               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800">
+               class="block rounded-md px-3 py-1.5 text-sm text-slate-200 hover:bg-slate-800">
                 Artikel Dakwah
             </a>
-            <a href="{{ route('library.public') }}" class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800">Katalog Perpustakaan</a>
-            <a href="{{ route('book-loan-requests.mine') }}" class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800">Peminjaman Saya</a>
-            <a href="{{ route('whatsapp-preferences.edit') }}" class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800">Preferensi Notifikasi</a>
+            <a href="{{ route('library.public') }}" class="block rounded-md px-3 py-1.5 text-sm text-slate-200 hover:bg-slate-800">Katalog Perpustakaan</a>
+            <a href="{{ route('book-loan-requests.mine') }}" class="block rounded-md px-3 py-1.5 text-sm text-slate-200 hover:bg-slate-800">Peminjaman Saya</a>
+            <a href="{{ route('whatsapp-preferences.edit') }}" class="block rounded-md px-3 py-1.5 text-sm text-slate-200 hover:bg-slate-800">Preferensi Notifikasi</a>
         </div>
     </div>
 
@@ -35,15 +35,15 @@
         </p>
         <div class="mt-1 space-y-0.5">
             <a href="{{ route('donasi.create') }}"
-               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800">
+               class="block rounded-md px-3 py-1.5 text-sm text-slate-200 hover:bg-slate-800">
                 Infaq & Donasi Digital
             </a>
             <a href="{{ route('zakat.index') }}"
-               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800">
+               class="block rounded-md px-3 py-1.5 text-sm text-slate-200 hover:bg-slate-800">
                 Kalkulator Zakat
             </a>
             <a href="{{ route('transparansi.index') }}"
-               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800">
+               class="block rounded-md px-3 py-1.5 text-sm text-slate-200 hover:bg-slate-800">
                 Transparansi Kas Masjid
             </a>
         </div>
@@ -56,11 +56,11 @@
         </p>
         <div class="mt-1 space-y-0.5">
             <a href="{{ route('profile.public') }}"
-               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800">
+               class="block rounded-md px-3 py-1.5 text-sm text-slate-200 hover:bg-slate-800">
                 Profil & DKM Masjid
             </a>
             <a href="{{ route('profile.edit') }}"
-               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 {{ request()->routeIs('profile.edit') ? 'bg-slate-800 text-white font-medium' : '' }}">
+               class="block rounded-md px-3 py-1.5 text-sm text-slate-200 hover:bg-slate-800 {{ request()->routeIs('profile.edit') ? 'bg-slate-800 text-white font-medium' : '' }}">
                 Pengaturan Akun Saya
             </a>
         </div>

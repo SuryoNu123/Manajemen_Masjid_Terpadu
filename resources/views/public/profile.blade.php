@@ -4,10 +4,9 @@
 
 @section('content')
 {{-- HERO --}}
-<section class="bg-slate-950 py-20 text-white relative overflow-hidden">
-    <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:16px_16px]"></div>
+<section class="relative overflow-hidden bg-slate-900 py-16 text-white sm:py-20">
     <div class="relative mx-auto max-w-7xl px-6 text-center">
-        <span class="inline-block px-4 py-1.5 rounded-full bg-blue-600/20 text-blue-400 text-xs font-semibold mb-4 border border-blue-500/20">
+        <span class="mb-4 inline-block rounded-full border border-blue-300/20 bg-blue-700/20 px-4 py-1.5 text-xs font-semibold text-blue-200">
             Profil & Kelembagaan
         </span>
         <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">
@@ -24,7 +23,7 @@
     <div class="mx-auto max-w-7xl px-6">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
-                <span class="text-sm font-semibold uppercase tracking-wider text-blue-600">Tentang Kami</span>
+                <span class="text-sm font-semibold uppercase tracking-wider text-blue-700">Tentang Kami</span>
                 <h2 class="text-3xl font-bold text-gray-900 mt-2">
                     Mewujudkan Masjid yang Makmur dan Memakmurkan
                 </h2>
@@ -34,7 +33,7 @@
 
                 <div class="mt-8 space-y-4">
                     <div class="flex items-start gap-4">
-                        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-100 text-blue-600 font-bold">
+                        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-blue-100 font-bold text-blue-600">
                             ✓
                         </div>
                         <div>
@@ -46,7 +45,7 @@
                     </div>
 
                     <div class="flex items-start gap-4">
-                        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-100 text-emerald-600 font-bold">
+                        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-100 text-blue-600 font-bold">
                             ✓
                         </div>
                         <div>
@@ -59,7 +58,7 @@
                 </div>
             </div>
 
-            <div class="rounded-3xl bg-slate-900 p-8 text-white shadow-xl">
+            <div class="rounded-xl border border-blue-700 bg-slate-900 p-6 text-white shadow-sm sm:p-8">
                 <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
                     <span>📍</span> Informasi & Alamat
                 </h3>
@@ -89,7 +88,7 @@
 <section class="py-16 bg-slate-50">
     <div class="mx-auto max-w-7xl px-6">
         <div class="text-center max-w-2xl mx-auto mb-12">
-            <span class="text-sm font-semibold uppercase tracking-wider text-blue-600">Amanah & Tata Kelola</span>
+            <span class="text-sm font-semibold uppercase tracking-wider text-blue-700">Amanah & Tata Kelola</span>
             <h2 class="text-3xl font-bold text-gray-900 mt-2">Struktur Pengurus DKM</h2>
             <p class="text-gray-500 mt-2 text-sm">
                 Dewan Kemakmuran Masjid yang bertugas mengelola peribadatan, administrasi, dan keuangan masjid.
@@ -103,7 +102,7 @@
                         {{ strtoupper(substr($member->name, 0, 1)) }}
                     </div>
                     <h3 class="font-bold text-gray-900 text-lg">{{ $member->name }}</h3>
-                    <p class="text-xs font-semibold text-blue-600 uppercase tracking-wide mt-1">
+                    <p class="text-xs font-semibold text-blue-700 uppercase tracking-wide mt-1">
                         {{ $member->role?->display_name ?? 'Pengurus' }}
                     </p>
                     <p class="text-xs text-gray-400 mt-2">{{ $member->email }}</p>
@@ -121,7 +120,7 @@
 <section class="py-16 bg-white">
     <div class="mx-auto max-w-7xl px-6">
         <div class="text-center max-w-2xl mx-auto mb-12">
-            <span class="text-sm font-semibold uppercase tracking-wider text-blue-600">Dokumentasi</span>
+            <span class="text-sm font-semibold uppercase tracking-wider text-blue-700">Dokumentasi</span>
             <h2 class="text-3xl font-bold text-gray-900 mt-2">Galeri Masjid & Kegiatan</h2>
             <p class="text-gray-500 mt-2 text-sm">
                 Suasana peribadatan dan sarana prasarana Masjid Terpadu.
@@ -129,22 +128,22 @@
         </div>
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div class="h-56 rounded-2xl bg-gradient-to-tr from-slate-900 to-blue-900 flex flex-col justify-end p-5 text-white shadow-sm">
+            <div class="flex h-56 flex-col justify-end rounded-xl border border-blue-600 bg-blue-700 p-5 text-white">
                 <span class="text-2xl mb-1">🕌</span>
                 <p class="font-bold text-sm">Ruang Utama Sholat</p>
                 <p class="text-xs text-slate-300">Kapasitas 1.000 Jamaah</p>
             </div>
-            <div class="h-56 rounded-2xl bg-gradient-to-tr from-emerald-950 to-teal-800 flex flex-col justify-end p-5 text-white shadow-sm">
+            <div class="flex h-56 flex-col justify-end rounded-xl border border-blue-600 bg-blue-600 p-5 text-white">
                 <span class="text-2xl mb-1">📚</span>
                 <p class="font-bold text-sm">Perpustakaan Masjid</p>
                 <p class="text-xs text-slate-300">Koleksi Kitab & Buku</p>
             </div>
-            <div class="h-56 rounded-2xl bg-gradient-to-tr from-indigo-950 to-purple-900 flex flex-col justify-end p-5 text-white shadow-sm">
+            <div class="flex h-56 flex-col justify-end rounded-xl border border-blue-600 bg-blue-600 p-5 text-white">
                 <span class="text-2xl mb-1">📖</span>
                 <p class="font-bold text-sm">Kelas Santri TPQ</p>
                 <p class="text-xs text-slate-300">Pendidikan Al-Qur'an</p>
             </div>
-            <div class="h-56 rounded-2xl bg-gradient-to-tr from-amber-950 to-orange-900 flex flex-col justify-end p-5 text-white shadow-sm">
+            <div class="flex h-56 flex-col justify-end rounded-xl border border-blue-600 bg-blue-600 p-5 text-white">
                 <span class="text-2xl mb-1">🏪</span>
                 <p class="font-bold text-sm">Unit Usaha Masjid</p>
                 <p class="text-xs text-slate-300">Koperasi Jamaah</p>

@@ -25,7 +25,7 @@
             + Tambah Kegiatan
         </a>
         <a href="{{ route('jamaahs.create') }}"
-           class="rounded-lg bg-slate-900 px-3.5 py-2 text-xs font-semibold text-white hover:bg-slate-800">
+           class="rounded-lg border border-slate-300 bg-white px-3.5 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50">
             + Tambah Jamaah
         </a>
     </div>
@@ -36,10 +36,10 @@
     <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
         <div class="flex items-center justify-between">
             <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Database Jamaah</span>
-            <span class="text-xl">👥</span>
+
         </div>
         <p class="mt-2 text-3xl font-extrabold text-slate-900">{{ number_format($totalJamaah) }}</p>
-        <a href="{{ route('jamaahs.index') }}" class="mt-2 inline-block text-xs font-semibold text-blue-600 hover:underline">
+        <a href="{{ route('jamaahs.index') }}" class="mt-2 inline-block text-xs font-semibold text-blue-700 hover:underline">
             Kelola Data Jamaah →
         </a>
     </div>
@@ -47,7 +47,7 @@
     <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
         <div class="flex items-center justify-between">
             <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Santri TPQ/TPA</span>
-            <span class="text-xl">📖</span>
+
         </div>
         <p class="mt-2 text-3xl font-extrabold text-emerald-700">{{ number_format($totalSantri) }}</p>
         <a href="{{ route('santris.index') }}" class="mt-2 inline-block text-xs font-semibold text-emerald-600 hover:underline">
@@ -58,7 +58,7 @@
     <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
         <div class="flex items-center justify-between">
             <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Remaja Masjid</span>
-            <span class="text-xl">🤝</span>
+
         </div>
         <p class="mt-2 text-3xl font-extrabold text-purple-700">{{ number_format($totalYouth) }}</p>
         <a href="{{ route('youth-members.index') }}" class="mt-2 inline-block text-xs font-semibold text-purple-600 hover:underline">
@@ -69,7 +69,7 @@
     <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
         <div class="flex items-center justify-between">
             <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Perpustakaan</span>
-            <span class="text-xl">📚</span>
+
         </div>
         <p class="mt-2 text-3xl font-extrabold text-slate-900">{{ number_format($totalBooks) }}</p>
         <p class="mt-1 text-xs text-slate-500">
@@ -84,7 +84,7 @@
     <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
         <div class="flex items-center justify-between mb-4">
             <h2 class="font-bold text-base text-slate-800">Kegiatan & Kajian Terdekat</h2>
-            <a href="{{ route('activities.index') }}" class="text-xs font-semibold text-blue-600 hover:underline">
+            <a href="{{ route('activities.index') }}" class="text-xs font-semibold text-blue-700 hover:underline">
                 Kelola Semua →
             </a>
         </div>
@@ -93,13 +93,13 @@
             @forelse($upcomingActivities as $activity)
                 <div class="flex items-start justify-between gap-3 rounded-lg border border-slate-100 p-3 hover:bg-slate-50">
                     <div>
-                        <span class="text-xs font-bold uppercase text-blue-600">{{ $activity->category }}</span>
+                        <span class="text-xs font-bold uppercase text-blue-700">{{ $activity->category }}</span>
                         <h4 class="font-semibold text-slate-900 text-sm mt-0.5">{{ $activity->title }}</h4>
                         <p class="text-xs text-slate-500 mt-1">
-                            📅 {{ \Carbon\Carbon::parse($activity->activity_date)->format('d M Y') }} • ⏰ {{ substr($activity->activity_time, 0, 5) }} WIB
+                             {{ \Carbon\Carbon::parse($activity->activity_date)->format('d M Y') }} • ⏰ {{ substr($activity->activity_time, 0, 5) }} WIB
                         </p>
                     </div>
-                    <a href="{{ route('activities.edit', $activity) }}" class="text-xs text-slate-500 hover:text-blue-600 font-medium">
+                    <a href="{{ route('activities.edit', $activity) }}" class="text-xs text-slate-500 hover:text-blue-700 font-medium">
                         Edit
                     </a>
                 </div>
@@ -113,7 +113,7 @@
     <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
         <div class="flex items-center justify-between mb-4">
             <h2 class="font-bold text-base text-slate-800">Pengumuman Masjid</h2>
-            <a href="{{ route('announcements.index') }}" class="text-xs font-semibold text-blue-600 hover:underline">
+            <a href="{{ route('announcements.index') }}" class="text-xs font-semibold text-blue-700 hover:underline">
                 Kelola Semua →
             </a>
         </div>
@@ -135,7 +135,7 @@
                         </div>
                         <h4 class="font-semibold text-slate-900 text-sm mt-1">{{ $announcement->title }}</h4>
                     </div>
-                    <a href="{{ route('announcements.edit', $announcement) }}" class="text-xs text-blue-600 hover:underline font-semibold">
+                    <a href="{{ route('announcements.edit', $announcement) }}" class="text-xs text-blue-700 hover:underline font-semibold">
                         Edit
                     </a>
                 </div>

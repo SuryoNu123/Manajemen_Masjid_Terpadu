@@ -1,5 +1,42 @@
 @import "tailwindcss";
 
+@layer base {
+    body {
+        font-family: ui-sans-serif, system-ui, sans-serif;
+        color: #1f2937;
+        font-feature-settings: "tnum";
+    }
+
+    :where(button, a, input, select, textarea, summary):focus-visible {
+        outline: 2px solid #6366f1;
+        outline-offset: 2px;
+    }
+
+    input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+    select,
+    textarea {
+        min-height: 2.5rem;
+        border: 1px solid #cbd5e1;
+        border-radius: 0.5rem;
+        background-color: #fff;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+    }
+
+    textarea {
+        min-height: 7rem;
+    }
+
+    input:disabled,
+    select:disabled,
+    textarea:disabled {
+        cursor: not-allowed;
+        background-color: #f8fafc;
+        color: #64748b;
+    }
+}
+
 [x-cloak] {
     display: none !important;
 }

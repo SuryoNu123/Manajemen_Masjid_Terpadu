@@ -28,11 +28,11 @@
 <form method="GET" action="{{ route('mustahik.index') }}" class="mb-6 grid gap-3 rounded-xl border border-gray-200 bg-white p-4 sm:grid-cols-2 lg:grid-cols-4">
     <div class="sm:col-span-2">
         <label for="mustahik-search" class="mb-1 block text-sm font-medium text-gray-700">Cari nama mustahik</label>
-        <input id="mustahik-search" name="search" type="search" value="{{ request('search') }}" maxlength="100" placeholder="Nama penerima" class="w-full rounded-lg border-gray-300 text-sm focus:border-blue-500 focus:ring-blue-500">
+        <input id="mustahik-search" name="search" type="search" value="{{ request('search') }}" maxlength="100" placeholder="Nama penerima" class="w-full rounded-lg border-gray-300 text-sm focus:border-blue-600 focus:ring-blue-600">
     </div>
     <div>
         <label for="mustahik-asnaf" class="mb-1 block text-sm font-medium text-gray-700">Asnaf</label>
-        <select id="mustahik-asnaf" name="asnaf" class="w-full rounded-lg border-gray-300 text-sm focus:border-blue-500 focus:ring-blue-500">
+        <select id="mustahik-asnaf" name="asnaf" class="w-full rounded-lg border-gray-300 text-sm focus:border-blue-600 focus:ring-blue-600">
             <option value="">Semua asnaf</option>
             @foreach(['fakir', 'miskin', 'amil', 'muallaf', 'riqab', 'gharim', 'fisabilillah', 'ibnu_sabil'] as $asnaf)
                 <option value="{{ $asnaf }}" @selected(request('asnaf') === $asnaf)>{{ ucfirst(str_replace('_', ' ', $asnaf)) }}</option>
@@ -41,7 +41,7 @@
     </div>
     <div>
         <label for="mustahik-status" class="mb-1 block text-sm font-medium text-gray-700">Status penyaluran</label>
-        <select id="mustahik-status" name="status" class="w-full rounded-lg border-gray-300 text-sm focus:border-blue-500 focus:ring-blue-500">
+        <select id="mustahik-status" name="status" class="w-full rounded-lg border-gray-300 text-sm focus:border-blue-600 focus:ring-blue-600">
             <option value="">Semua status</option>
             <option value="pending" @selected(request('status') === 'pending')>Menunggu</option>
             <option value="distributed" @selected(request('status') === 'distributed')>Disalurkan</option>

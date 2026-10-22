@@ -113,7 +113,7 @@
                         <img src="{{ $donasi->gateway_qr_code_url }}" alt="Kode QRIS pembayaran" class="mx-auto mt-4 max-h-72 rounded-lg">
                     @endif
                     @if ($donasi->gateway_payment_url)
-                        <a href="{{ $donasi->gateway_payment_url }}" class="mt-4 inline-flex rounded-lg bg-blue-700 px-4 py-2 text-white" rel="noopener noreferrer">Lanjutkan pembayaran</a>
+                        <a href="{{ $donasi->gateway_payment_url }}" class="mt-4 inline-flex rounded-lg bg-blue-600 px-4 py-2 text-white" rel="noopener noreferrer">Lanjutkan pembayaran</a>
                     @endif
                     @if ($donasi->payment_expires_at)
                         <p class="mt-3 text-xs text-blue-700">Batas pembayaran: {{ $donasi->payment_expires_at->format('d/m/Y H:i') }}</p>

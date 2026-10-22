@@ -31,28 +31,28 @@
 </head>
 
 
-<body class="bg-gray-50 text-gray-900 antialiased">
+<body class="bg-slate-50 text-slate-900 antialiased">
 
     {{-- ================= NAVBAR PUBLIK ================= --}}
 
-    <header class="sticky top-0 z-50 border-b border-gray-200 bg-white" x-data="{ mobileMenuOpen: false }">
+    <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur" x-data="{ mobileMenuOpen: false }">
 
         <div class="mx-auto max-w-7xl px-4 sm:px-6">
 
-            <div class="flex h-16 items-center justify-between gap-3 sm:h-20">
+            <div class="flex h-16 items-center justify-between gap-3">
 
                 {{-- LOGO --}}
 
                 <a
                     href="{{ url('/') }}"
-                    class="flex items-center gap-3"
+                    class="flex min-w-0 items-center gap-2.5"
                 >
 
-                    <x-application-logo class="h-11 w-11 shrink-0" />
+                    <x-application-logo class="h-10 w-10 shrink-0" />
 
                     <div>
 
-                        <h1 class="font-bold text-lg leading-tight">
+                        <h1 class="text-base font-semibold leading-tight tracking-tight">
                             Masjid Terpadu
                         </h1>
 
@@ -67,7 +67,7 @@
 
                 {{-- MENU PUBLIK --}}
 
-                <nav class="hidden lg:flex items-center gap-6">
+                <nav class="hidden items-center gap-3 xl:flex 2xl:gap-4">
 
                     <a
                         href="{{ url('/') }}"
@@ -113,7 +113,7 @@
 
                     <a
                         href="{{ route('donasi.create') }}"
-                        class="text-sm font-medium hover:text-blue-600 {{ request()->routeIs('donasi.*') ? 'text-blue-700' : 'text-gray-700' }}"
+                        class="text-sm font-medium hover:text-blue-700 {{ request()->routeIs('donasi.*') ? 'text-blue-800' : 'text-gray-700' }}"
                         @if(request()->routeIs('donasi.*')) aria-current="page" @endif
                     >
                         Donasi
@@ -121,7 +121,7 @@
 
                     <a
                         href="{{ route('zakat.index') }}"
-                        class="text-sm font-medium hover:text-blue-600 {{ request()->routeIs('zakat.*') ? 'text-blue-700' : 'text-gray-700' }}"
+                        class="text-sm font-medium hover:text-blue-700 {{ request()->routeIs('zakat.*') ? 'text-blue-800' : 'text-gray-700' }}"
                         @if(request()->routeIs('zakat.*')) aria-current="page" @endif
                     >
                         Zakat
@@ -129,7 +129,7 @@
 
                     <a
                         href="{{ route('transparansi.index') }}"
-                        class="text-sm font-medium hover:text-blue-600 {{ request()->routeIs('transparansi.*') ? 'text-blue-700' : 'text-gray-700' }}"
+                        class="text-sm font-medium hover:text-blue-700 {{ request()->routeIs('transparansi.*') ? 'text-blue-800' : 'text-gray-700' }}"
                         @if(request()->routeIs('transparansi.*')) aria-current="page" @endif
                     >
                         Transparansi
@@ -144,7 +144,7 @@
 
                     <button
                         type="button"
-                        class="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-gray-200 text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-emerald-600 lg:hidden"
+                        class="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-gray-200 text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-600 xl:hidden"
                         @click="mobileMenuOpen = !mobileMenuOpen"
                         :aria-expanded="mobileMenuOpen.toString()"
                         aria-controls="public-mobile-navigation"
@@ -159,7 +159,7 @@
 
                         <a
                             href="{{ route('dashboard') }}"
-                            class="px-4 py-2.5 bg-slate-900 text-white rounded-lg text-sm font-semibold hover:bg-slate-800"
+                            class="inline-flex min-h-10 items-center rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
                         >
                             Dashboard
                         </a>
@@ -168,7 +168,7 @@
 
                         <a
                             href="{{ route('login') }}"
-                            class="px-4 py-2.5 border border-gray-300 rounded-lg text-sm font-semibold hover:bg-gray-50"
+                            class="inline-flex min-h-10 items-center rounded-md border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
                         >
                             Login
                         </a>
@@ -185,18 +185,18 @@
                 x-show="mobileMenuOpen"
                 x-transition
                 @keydown.escape.window="mobileMenuOpen = false"
-                class="grid gap-1 border-t border-gray-100 py-3 lg:hidden"
+                class="grid max-h-[calc(100dvh-4rem)] gap-1 overflow-y-auto border-t border-slate-100 py-3 xl:hidden"
                 aria-label="Navigasi utama"
             >
-                <a href="{{ route('home') }}" class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-50 {{ request()->routeIs('home') ? 'text-blue-700' : 'text-gray-700' }}" @if(request()->routeIs('home')) aria-current="page" @endif>Beranda</a>
-                <a href="{{ route('profile.public') }}" class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-50 {{ request()->routeIs('profile.public') ? 'text-blue-700' : 'text-gray-700' }}" @if(request()->routeIs('profile.public')) aria-current="page" @endif>Profil</a>
-                <a href="{{ route('activities.public') }}" class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-50 {{ request()->routeIs('activities.public') ? 'text-blue-700' : 'text-gray-700' }}" @if(request()->routeIs('activities.public')) aria-current="page" @endif>Kegiatan</a>
-                <a href="{{ route('announcements.public') }}" class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-50 {{ request()->routeIs('announcements.public', 'announcements.show') ? 'text-blue-700' : 'text-gray-700' }}" @if(request()->routeIs('announcements.public', 'announcements.show')) aria-current="page" @endif>Pengumuman</a>
-                <a href="{{ route('dakwah.public') }}" class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-50 {{ request()->routeIs('dakwah.public', 'dakwah.show') ? 'text-blue-700' : 'text-gray-700' }}" @if(request()->routeIs('dakwah.public', 'dakwah.show')) aria-current="page" @endif>Artikel</a>
-                <a href="{{ route('library.public') }}" class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-50 {{ request()->routeIs('library.public*') ? 'text-blue-700' : 'text-gray-700' }}" @if(request()->routeIs('library.public*')) aria-current="page" @endif>Perpustakaan</a>
-                <a href="{{ route('donasi.create') }}" class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-50 {{ request()->routeIs('donasi.*') ? 'text-blue-700' : 'text-gray-700' }}" @if(request()->routeIs('donasi.*')) aria-current="page" @endif>Donasi</a>
-                <a href="{{ route('zakat.index') }}" class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-50 {{ request()->routeIs('zakat.*') ? 'text-blue-700' : 'text-gray-700' }}" @if(request()->routeIs('zakat.*')) aria-current="page" @endif>Zakat</a>
-                <a href="{{ route('transparansi.index') }}" class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-50 {{ request()->routeIs('transparansi.*') ? 'text-blue-700' : 'text-gray-700' }}" @if(request()->routeIs('transparansi.*')) aria-current="page" @endif>Transparansi</a>
+                <a href="{{ route('home') }}" class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-50 {{ request()->routeIs('home') ? 'text-blue-800' : 'text-gray-700' }}" @if(request()->routeIs('home')) aria-current="page" @endif>Beranda</a>
+                <a href="{{ route('profile.public') }}" class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-50 {{ request()->routeIs('profile.public') ? 'text-blue-800' : 'text-gray-700' }}" @if(request()->routeIs('profile.public')) aria-current="page" @endif>Profil</a>
+                <a href="{{ route('activities.public') }}" class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-50 {{ request()->routeIs('activities.public') ? 'text-blue-800' : 'text-gray-700' }}" @if(request()->routeIs('activities.public')) aria-current="page" @endif>Kegiatan</a>
+                <a href="{{ route('announcements.public') }}" class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-50 {{ request()->routeIs('announcements.public', 'announcements.show') ? 'text-blue-800' : 'text-gray-700' }}" @if(request()->routeIs('announcements.public', 'announcements.show')) aria-current="page" @endif>Pengumuman</a>
+                <a href="{{ route('dakwah.public') }}" class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-50 {{ request()->routeIs('dakwah.public', 'dakwah.show') ? 'text-blue-800' : 'text-gray-700' }}" @if(request()->routeIs('dakwah.public', 'dakwah.show')) aria-current="page" @endif>Artikel</a>
+                <a href="{{ route('library.public') }}" class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-50 {{ request()->routeIs('library.public*') ? 'text-blue-800' : 'text-gray-700' }}" @if(request()->routeIs('library.public*')) aria-current="page" @endif>Perpustakaan</a>
+                <a href="{{ route('donasi.create') }}" class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-50 {{ request()->routeIs('donasi.*') ? 'text-blue-800' : 'text-gray-700' }}" @if(request()->routeIs('donasi.*')) aria-current="page" @endif>Donasi</a>
+                <a href="{{ route('zakat.index') }}" class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-50 {{ request()->routeIs('zakat.*') ? 'text-blue-800' : 'text-gray-700' }}" @if(request()->routeIs('zakat.*')) aria-current="page" @endif>Zakat</a>
+                <a href="{{ route('transparansi.index') }}" class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-50 {{ request()->routeIs('transparansi.*') ? 'text-blue-800' : 'text-gray-700' }}" @if(request()->routeIs('transparansi.*')) aria-current="page" @endif>Transparansi</a>
             </nav>
 
         </div>
@@ -206,7 +206,7 @@
 
     {{-- ================= CONTENT ================= --}}
 
-    <main class="min-h-screen">
+    <main class="min-h-[calc(100dvh-4rem)]">
 
         @yield('content')
 
@@ -215,9 +215,9 @@
 
     {{-- ================= FOOTER ================= --}}
 
-    <footer class="bg-slate-900 text-white mt-16">
+    <footer class="mt-16 bg-slate-900 text-white">
 
-        <div class="max-w-7xl mx-auto px-6 py-12">
+        <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
 

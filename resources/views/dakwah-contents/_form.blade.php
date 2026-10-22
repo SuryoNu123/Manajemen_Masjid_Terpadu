@@ -19,7 +19,7 @@
                value="{{ old('title', $content?->title) }}"
                required
                maxlength="255"
-               class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:outline-none">
+               class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-blue-600 focus:outline-none">
         @error('title')
             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
         @enderror
@@ -33,7 +33,7 @@
                   name="excerpt"
                   rows="3"
                   maxlength="1000"
-                  class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:outline-none">{{ old('excerpt', $content?->excerpt) }}</textarea>
+                  class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-blue-600 focus:outline-none">{{ old('excerpt', $content?->excerpt) }}</textarea>
         @error('excerpt')
             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
         @enderror
@@ -47,7 +47,7 @@
                   name="content"
                   rows="10"
                   required
-                  class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:outline-none">{{ old('content', $content?->content) }}</textarea>
+                  class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-blue-600 focus:outline-none">{{ old('content', $content?->content) }}</textarea>
         @error('content')
             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
         @enderror

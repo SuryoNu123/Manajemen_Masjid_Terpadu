@@ -36,11 +36,11 @@
     <form method="GET" action="{{ route('activities.index') }}" class="grid gap-3 rounded-xl border border-slate-200 bg-white p-4 sm:grid-cols-2 lg:grid-cols-4">
         <div class="sm:col-span-2">
             <label for="activity-search" class="mb-1 block text-sm font-medium text-slate-700">Cari kegiatan</label>
-            <input id="activity-search" name="search" type="search" value="{{ request('search') }}" maxlength="100" placeholder="Judul, penceramah, atau lokasi" class="w-full rounded-lg border-slate-300 text-sm focus:border-blue-500 focus:ring-blue-500">
+            <input id="activity-search" name="search" type="search" value="{{ request('search') }}" maxlength="100" placeholder="Judul, penceramah, atau lokasi" class="w-full rounded-lg border-slate-300 text-sm focus:border-blue-600 focus:ring-blue-600">
         </div>
         <div>
             <label for="activity-type" class="mb-1 block text-sm font-medium text-slate-700">Jenis</label>
-            <select id="activity-type" name="type" class="w-full rounded-lg border-slate-300 text-sm focus:border-blue-500 focus:ring-blue-500">
+            <select id="activity-type" name="type" class="w-full rounded-lg border-slate-300 text-sm focus:border-blue-600 focus:ring-blue-600">
                 <option value="">Semua jenis</option>
                 @foreach($activityTypes as $activityType)
                     <option value="{{ $activityType }}" @selected(request('type') === $activityType)>{{ ucfirst(str_replace('_', ' ', $activityType)) }}</option>
@@ -49,7 +49,7 @@
         </div>
         <div>
             <label for="activity-status" class="mb-1 block text-sm font-medium text-slate-700">Status</label>
-            <select id="activity-status" name="status" class="w-full rounded-lg border-slate-300 text-sm focus:border-blue-500 focus:ring-blue-500">
+            <select id="activity-status" name="status" class="w-full rounded-lg border-slate-300 text-sm focus:border-blue-600 focus:ring-blue-600">
                 <option value="">Semua status</option>
                 @foreach(['scheduled' => 'Terjadwal', 'ongoing' => 'Berlangsung', 'completed' => 'Selesai', 'cancelled' => 'Dibatalkan'] as $value => $label)
                     <option value="{{ $value }}" @selected(request('status') === $value)>{{ $label }}</option>

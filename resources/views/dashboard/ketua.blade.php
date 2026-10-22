@@ -45,12 +45,12 @@
         </p>
         <p class="text-xs text-slate-400 mt-1">Total: Rp {{ number_format($totalExpense, 0, ',', '.') }}</p>
     </div>
-
+ 
     <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-5">
         <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">
             Donasi Terverifikasi
         </p>
-        <p class="text-2xl font-bold text-blue-600 mt-2">
+        <p class="text-2xl font-bold text-blue-700 mt-2">
             Rp {{ number_format($totalDonation, 0, ',', '.') }}
         </p>
         <p class="text-xs text-slate-400 mt-1">Infaq digital & QRIS</p>
@@ -63,21 +63,21 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {{-- JAMAAH --}}
         <a href="{{ route('jamaahs.index') }}"
-           class="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm hover:border-blue-400 hover:shadow-md transition">
+           class="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm hover:border-blue-300 hover:shadow-md transition">
             <div class="flex items-center justify-between">
                 <span class="text-sm font-semibold text-slate-600">Jamaah Terdaftar</span>
-                <span class="text-2xl group-hover:scale-110 transition">👥</span>
+
             </div>
             <p class="mt-3 text-3xl font-extrabold text-slate-900">{{ number_format($totalJamaah) }}</p>
-            <p class="mt-1 text-xs text-blue-600 font-medium">Buka Database Jamaah →</p>
+            <p class="mt-1 text-xs text-blue-700 font-medium">Buka Database Jamaah →</p>
         </a>
 
         {{-- SANTRI TPQ --}}
         <a href="{{ route('santris.index') }}"
-           class="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm hover:border-emerald-400 hover:shadow-md transition">
+           class="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm hover:border-blue-400 hover:shadow-md transition">
             <div class="flex items-center justify-between">
                 <span class="text-sm font-semibold text-slate-600">Santri TPQ/TPA</span>
-                <span class="text-2xl group-hover:scale-110 transition">📖</span>
+
             </div>
             <p class="mt-3 text-3xl font-extrabold text-emerald-700">{{ number_format($totalSantri) }}</p>
             <p class="mt-1 text-xs text-emerald-600 font-medium">Data & Capaian Santri →</p>
@@ -85,10 +85,10 @@
 
         {{-- REMAJA MASJID --}}
         <a href="{{ route('youth-members.index') }}"
-           class="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm hover:border-purple-400 hover:shadow-md transition">
+           class="group rounded-xl border border-slate-200 bg-white p-5 transition hover:border-purple-400 hover:shadow-sm">
             <div class="flex items-center justify-between">
                 <span class="text-sm font-semibold text-slate-600">Remaja Masjid</span>
-                <span class="text-2xl group-hover:scale-110 transition">🤝</span>
+
             </div>
             <p class="mt-3 text-3xl font-extrabold text-purple-700">{{ number_format($totalYouthMembers) }}</p>
             <p class="mt-1 text-xs text-purple-600 font-medium">{{ $totalYouthPrograms }} Program Kerja Aktif →</p>
@@ -99,7 +99,7 @@
            class="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm hover:border-amber-400 hover:shadow-md transition">
             <div class="flex items-center justify-between">
                 <span class="text-sm font-semibold text-slate-600">Inventaris Aset</span>
-                <span class="text-2xl group-hover:scale-110 transition">📦</span>
+
             </div>
             <p class="mt-3 text-3xl font-extrabold text-slate-900">{{ number_format($totalAssets) }}</p>
             <p class="mt-1 text-xs {{ $needsRepairAssets > 0 ? 'text-amber-600 font-bold' : 'text-slate-400' }}">
@@ -147,7 +147,7 @@
     <div class="lg:col-span-2 bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
         <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
             <h3 class="font-bold text-base text-slate-800">Transaksi Kas Terakhir</h3>
-            <a href="{{ route('transaksi.index') }}" class="text-xs font-semibold text-blue-600 hover:underline">
+            <a href="{{ route('transaksi.index') }}" class="text-xs font-semibold text-blue-700 hover:underline">
                 Semua Transaksi →
             </a>
         </div>
@@ -203,7 +203,7 @@
             <h3 class="font-bold text-base text-slate-800">Audit Trail / Log Aktivitas Terkini</h3>
             <p class="text-xs text-slate-500">Pencatatan tindakan pengurus dan operasional sistem</p>
         </div>
-        <a href="{{ route('activity-logs.index') }}" class="text-xs font-semibold text-blue-600 hover:underline">
+        <a href="{{ route('activity-logs.index') }}" class="text-xs font-semibold text-blue-700 hover:underline">
             Buka Riwayat Lengkap →
         </a>
     </div>
@@ -212,7 +212,7 @@
         @forelse($recentLogs as $log)
             <div class="py-2.5 flex items-center justify-between gap-4">
                 <div class="flex items-center gap-3">
-                    <span class="flex h-2 w-2 rounded-full bg-blue-500"></span>
+                    <span class="flex h-2 w-2 rounded-full bg-blue-600"></span>
                     <div>
                         <span class="font-semibold text-slate-800">{{ $log->user?->name ?? 'System' }}</span>
                         <span class="text-slate-600 text-xs ml-1">{{ $log->description }}</span>

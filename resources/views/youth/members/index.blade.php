@@ -35,7 +35,7 @@
                    name="search"
                    value="{{ request('search') }}"
                    placeholder="Cari nama, jabatan, atau telepon..."
-                   class="min-w-[220px] flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
+                   class="min-w-[220px] flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-600 focus:outline-none">
 
             <select name="division" class="rounded-lg border border-gray-300 px-3 py-2 text-sm">
                 <option value="">Semua Divisi</option>
