@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="http://127.0.0.1:4173/masjid-mark.png">
+
+    <title>
+        Peminjaman Saya - Sistem Manajemen Masjid
+    </title>
+
+    <link rel="preload" as="style" href="http://127.0.0.1:4173/build/assets/app-DjPiks-K.css" /><link rel="modulepreload" as="script" href="http://127.0.0.1:4173/build/assets/app-B-YYcDzE.js" /><link rel="stylesheet" href="http://127.0.0.1:4173/build/assets/app-DjPiks-K.css" /><script type="module" src="http://127.0.0.1:4173/build/assets/app-B-YYcDzE.js"></script>
+    </head>
+
+<body class="bg-gray-100 text-gray-800">
+
+<div class="min-h-screen" x-data="{ sidebarOpen: false }">
+
+    <div
+        x-cloak
+        x-show="sidebarOpen"
+        x-transition.opacity
+        class="fixed inset-0 z-30 bg-slate-950/50 lg:hidden"
+        @click="sidebarOpen = false"
+        @keydown.escape.window="sidebarOpen = false"
+        aria-hidden="true"
+    ></div>
+
+    
+    <aside
+        class="sidebar-menu fixed inset-y-0 left-0 z-40 flex h-screen w-72 max-w-[85vw] flex-col overflow-hidden bg-slate-900 text-white transition-transform duration-200 ease-out lg:w-64 lg:translate-x-0"
+        :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
+        id="dashboard-sidebar"
+        aria-label="Navigasi dashboard"
+    >
+
+        
+        <div class="shrink-0 border-b border-slate-700 px-6 py-5">
+            <div class="flex items-center gap-3">
+                <img src="http://127.0.0.1:4173/masjid-mark.png" alt="Logo Masjid Terpadu" class="rounded-2xl object-contain h-11 w-11 shrink-0">
+                <div>
+                    <h1 class="text-base font-bold">
+                        Masjid Terpadu
+                    </h1>
+                    <p class="mt-1 text-xs text-slate-400">
+                        Sistem Manajemen Masjid
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        
+        <nav class="sidebar-menu min-h-0 flex-1 space-y-1 overflow-y-auto overscroll-contain p-4">
+
+            <a href="http://127.0.0.1:4173/dashboard"
+               class="flex items-center gap-3 rounded-lg px-4 py-3 hover:bg-slate-800 text-slate-200"
+               >
+                <span>Dashboard</span>
+            </a>
+
+            
+                            <div class="space-y-4 pt-2">
+
+    
+    <div>
+        <p class="px-4 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+            Layanan Jamaah
+        </p>
+        <div class="mt-1 space-y-0.5">
+            <a href="http://127.0.0.1:4173"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800">
+                Jadwal Sholat & Beranda
+            </a>
+            <a href="http://127.0.0.1:4173/kegiatan"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800">
+                Jadwal Kajian & Kegiatan
+            </a>
+            <a href="http://127.0.0.1:4173/pengumuman"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800">
+                Pengumuman Masjid
+            </a>
+            <a href="http://127.0.0.1:4173/artikel"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800">
+                Artikel Dakwah
+            </a>
+            <a href="http://127.0.0.1:4173/perpustakaan" class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800">Katalog Perpustakaan</a>
+            <a href="http://127.0.0.1:4173/akun/peminjaman" class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800">Peminjaman Saya</a>
+            <a href="http://127.0.0.1:4173/akun/pengaturan-notifikasi" class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800">Preferensi Notifikasi</a>
+        </div>
+    </div>
+
+    
+    <div>
+        <p class="px-4 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+            Donasi & Transparansi
+        </p>
+        <div class="mt-1 space-y-0.5">
+            <a href="http://127.0.0.1:4173/donasi"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800">
+                Infaq & Donasi Digital
+            </a>
+            <a href="http://127.0.0.1:4173/zakat"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800">
+                Kalkulator Zakat
+            </a>
+            <a href="http://127.0.0.1:4173/transparansi"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800">
+                Transparansi Kas Masjid
+            </a>
+        </div>
+    </div>
+
+    
+    <div>
+        <p class="px-4 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+            Akun & Profil
+        </p>
+        <div class="mt-1 space-y-0.5">
+            <a href="http://127.0.0.1:4173/profil"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800">
+                Profil & DKM Masjid
+            </a>
+            <a href="http://127.0.0.1:4173/profile"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Pengaturan Akun Saya
+            </a>
+        </div>
+    </div>
+
+</div>
+            
+            
+            <a href="http://127.0.0.1:4173/notifikasi"
+               class="flex items-center justify-between gap-3 rounded-lg px-4 py-3 hover:bg-slate-800">
+
+                <span>Notifikasi</span>
+
+                
+            </a>
+
+        </nav>
+
+    </aside>
+
+    
+    <main class="min-h-screen min-w-0 lg:ml-64">
+
+        
+        <header class="sticky top-0 z-20 flex h-16 items-center justify-between gap-3 border-b border-gray-200 bg-white px-4 sm:px-8">
+
+            <div class="flex min-w-0 items-center gap-3">
+                <button
+                    type="button"
+                    class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-gray-200 text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-emerald-600 lg:hidden"
+                    @click="sidebarOpen = !sidebarOpen"
+                    :aria-expanded="sidebarOpen.toString()"
+                    aria-controls="dashboard-sidebar"
+                    aria-label="Buka atau tutup menu navigasi"
+                >
+                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+                <h2 class="min-w-0 truncate text-sm font-semibold text-gray-800 sm:text-base" title="Peminjaman Saya">
+                    Peminjaman Saya                </h2>
+            </div>
+
+            <div class="flex shrink-0 items-center gap-3 sm:gap-4">
+
+                <div class="hidden text-right sm:block">
+                    <p class="text-sm font-semibold">
+                        Jamaah Pengujian
+                    </p>
+
+                    <p class="text-xs capitalize text-gray-500">
+                        Jamaah
+                    </p>
+                </div>
+
+                <form method="POST" action="http://127.0.0.1:4173/logout">
+                    <input type="hidden" name="_token" value="DQXiSt6DeKrD1C5hv4Y2t3FqMILgxPsjRLklss0m" autocomplete="off">
+                    <button
+                        type="submit"
+                        class="text-sm text-red-600 hover:text-red-800">
+                        Logout
+                    </button>
+                </form>
+
+            </div>
+
+        </header>
+
+        
+        <section class="min-w-0 p-4 sm:p-6 lg:p-8">
+
+            
+            
+            <div class="space-y-5">
+        <p class="rounded-lg bg-amber-50 p-4 text-sm text-amber-800">Akun ini belum ditautkan ke data Jamaah. Hubungi pengurus masjid agar profil Anda ditautkan sebelum mengajukan pinjaman.</p>    <h2 class="text-xl font-bold">Permintaan dan riwayat pinjam</h2>
+    <div class="overflow-x-auto rounded-xl border border-slate-200 bg-white">
+        <table class="min-w-full divide-y divide-slate-200 text-sm">
+            <thead class="bg-slate-50"><tr><th class="px-4 py-3 text-left">Buku</th><th class="px-4 py-3 text-left">Diajukan</th><th class="px-4 py-3 text-left">Status</th><th class="px-4 py-3 text-left">Jatuh tempo</th></tr></thead>
+            <tbody class="divide-y divide-slate-100">
+                                    <tr><td colspan="4" class="p-8 text-center text-slate-500">Belum ada permintaan pinjam.</td></tr>
+                            </tbody>
+        </table>
+        <div class="border-t p-4"></div>
+    </div>
+    <a href="http://127.0.0.1:4173/perpustakaan" class="font-semibold text-emerald-800">Jelajahi katalog</a>
+</div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+</body>
+</html>

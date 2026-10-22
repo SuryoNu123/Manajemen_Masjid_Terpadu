@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Donasi - Masjid Terpadu</title>
+
+    <link rel="preload" as="style" href="http://127.0.0.1:4173/build/assets/app-DjPiks-K.css" /><link rel="modulepreload" as="script" href="http://127.0.0.1:4173/build/assets/app-B-YYcDzE.js" /><link rel="stylesheet" href="http://127.0.0.1:4173/build/assets/app-DjPiks-K.css" /><script type="module" src="http://127.0.0.1:4173/build/assets/app-B-YYcDzE.js"></script>
+</head>
+
+
+<body class="bg-gray-100 min-h-screen">
+
+<div class="max-w-3xl mx-auto py-12 px-5">
+
+    <div class="bg-white rounded-2xl shadow-sm overflow-hidden">
+
+        
+
+        <div class="bg-slate-900 text-white p-8">
+
+            <h1 class="text-3xl font-bold">
+                Donasi Masjid
+            </h1>
+
+            <p class="text-slate-300 mt-2">
+                Salurkan donasi untuk mendukung kegiatan masjid.
+            </p>
+
+        </div>
+
+
+        
+
+        <form
+            method="POST"
+            action="http://127.0.0.1:4173/donasi"
+            class="p-8 space-y-6"
+        >
+
+            <input type="hidden" name="_token" value="xLfEGifUBSj3bYj0nLvgsGrKNnQboLNbQzusmVoB" autocomplete="off">
+
+            
+
+            
+
+            <div>
+
+                <label class="block font-semibold mb-2">
+                    Jenis Donasi
+                </label>
+
+                <select
+                    name="type"
+                    required
+                    class="w-full rounded-lg border-gray-300"
+                >
+
+                    <option value="">
+                        Pilih jenis donasi
+                    </option>
+
+                    <option value="infaq"
+                        >
+                        Infaq
+                    </option>
+
+                    <option value="sedekah"
+                        >
+                        Sedekah
+                    </option>
+
+                    <option value="zakat"
+                        >
+                        Zakat
+                    </option>
+
+                    <option value="qurban"
+                        >
+                        Qurban
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            
+
+            <div>
+
+                <label class="block font-semibold mb-2">
+                    Nama Donatur
+                </label>
+
+                <input
+                    type="text"
+                    name="donor_name"
+                    value=""
+                    placeholder="Nama Anda"
+                    class="w-full rounded-lg border-gray-300"
+                >
+
+            </div>
+
+
+            
+
+            <div>
+
+                <label class="block font-semibold mb-2">
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    name="donor_email"
+                    value=""
+                    placeholder="email@example.com"
+                    class="w-full rounded-lg border-gray-300"
+                >
+
+            </div>
+
+
+            
+
+            <div>
+
+                <label class="block font-semibold mb-2">
+                    Nomor HP
+                </label>
+
+                <input
+                    type="text"
+                    name="donor_phone"
+                    value=""
+                    placeholder="08xxxxxxxxxx"
+                    class="w-full rounded-lg border-gray-300"
+                >
+
+            </div>
+
+
+            
+
+            <div>
+
+                <label class="block font-semibold mb-2">
+                    Nominal Donasi
+                </label>
+
+                <div class="relative">
+
+                    <span class="absolute left-4 top-1/2 -translate-y-1/2">
+                        Rp
+                    </span>
+
+                    <input
+                        type="number"
+                        name="amount"
+                        value=""
+                        min="1000"
+                        required
+                        placeholder="50000"
+                        class="w-full rounded-lg border-gray-300 pl-12"
+                    >
+
+                </div>
+
+            </div>
+
+
+            
+
+            <div>
+
+                <label class="block font-semibold mb-2">
+                    Metode Pembayaran
+                </label>
+
+                <select
+                    name="payment_method"
+                    required
+                    class="w-full rounded-lg border-gray-300"
+                >
+
+                    <option value="">
+                        Pilih metode pembayaran
+                    </option>
+
+                    <option value="qris">
+                        QRIS
+                    </option>
+
+                    <option value="transfer">
+                        Transfer Bank
+                    </option>
+
+                    <option value="cash">
+                        Tunai
+                    </option>
+
+                    <option value="other">
+                        Lainnya
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            
+
+            <button
+                type="submit"
+                class="w-full py-3 rounded-lg bg-slate-900 text-white font-semibold hover:bg-slate-800"
+            >
+                Lanjutkan Donasi
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <div class="text-center mt-5">
+
+        <a
+            href="http://127.0.0.1:4173"
+            class="text-sm text-gray-500 hover:text-gray-800"
+        >
+            ← Kembali ke halaman utama
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

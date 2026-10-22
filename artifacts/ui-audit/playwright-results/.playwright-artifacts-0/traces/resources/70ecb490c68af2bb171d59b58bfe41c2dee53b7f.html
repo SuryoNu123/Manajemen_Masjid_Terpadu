@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="4gHHoT58FwKtIJvysFtQXtmFtpUiJdX2cI56U1Qo">
+    <link rel="icon" type="image/png" href="http://127.0.0.1:4173/masjid-mark.png">
+
+    <title>Sistem Masjid Terpadu</title>
+
+    <link rel="preload" as="style" href="http://127.0.0.1:4173/build/assets/app-DjPiks-K.css" /><link rel="modulepreload" as="script" href="http://127.0.0.1:4173/build/assets/app-B-YYcDzE.js" /><link rel="stylesheet" href="http://127.0.0.1:4173/build/assets/app-DjPiks-K.css" /><script type="module" src="http://127.0.0.1:4173/build/assets/app-B-YYcDzE.js"></script></head>
+
+<body class="font-sans antialiased">
+
+    <main
+        style="
+            min-height: 100vh;
+            width: 100%;
+            background: #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            box-sizing: border-box;
+        "
+    >
+
+        <div
+        style="
+            width: 100%;
+            max-width: 440px;
+            margin: 0 auto;
+        "
+    >
+
+        
+        <div
+            style="
+                text-align: center;
+                margin-bottom: 24px;
+            "
+        >
+
+            <img src="http://127.0.0.1:4173/masjid-mark.png" alt="Logo Masjid Terpadu" class="rounded-2xl object-contain mx-auto mb-4 h-14 w-14">
+
+            <h1
+                style="
+                    margin: 0;
+                    color: #0f172b;
+                    font-size: 28px;
+                    line-height: 36px;
+                    font-weight: 700;
+                "
+            >
+                Sistem Manajemen Masjid
+            </h1>
+
+            <p
+                style="
+                    margin: 8px 0 0;
+                    color: #64748b;
+                    font-size: 15px;
+                    line-height: 22px;
+                "
+            >
+                Masuk ke akun Anda untuk melanjutkan
+            </p>
+
+        </div>
+
+
+        
+        <div
+            style="
+                width: 100%;
+                background: #ffffff;
+                border: 1px solid #e2e8f0;
+                border-radius: 16px;
+                padding: 28px;
+                box-sizing: border-box;
+                box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+            "
+        >
+
+            
+            
+
+            <form
+                method="POST"
+                action="http://127.0.0.1:4173/login"
+            >
+                <input type="hidden" name="_token" value="4gHHoT58FwKtIJvysFtQXtmFtpUiJdX2cI56U1Qo" autocomplete="off">
+
+                
+                <div>
+
+                    <label
+                        for="email"
+                        style="
+                            display: block;
+                            margin-bottom: 8px;
+                            color: #1e293b;
+                            font-size: 14px;
+                            font-weight: 600;
+                        "
+                    >
+                        Email
+                    </label>
+
+                    <input
+                        id="email"
+                        type="email"
+                        name="email"
+                        value=""
+                        required
+                        autofocus
+                        autocomplete="username"
+                        placeholder="Masukkan email Anda"
+                        style="
+                            display: block;
+                            width: 100%;
+                            height: 46px;
+                            padding: 0 14px;
+                            box-sizing: border-box;
+                            border: 1px solid #cbd5e1;
+                            border-radius: 8px;
+                            background: #ffffff;
+                            color: #0f172a;
+                            font-size: 14px;
+                            outline: none;
+                        "
+                    >
+
+                    
+                </div>
+
+
+                
+                <div style="margin-top: 18px;">
+
+                    <div
+                        style="
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                            margin-bottom: 8px;
+                        "
+                    >
+
+                        <label
+                            for="password"
+                            style="
+                                color: #1e293b;
+                                font-size: 14px;
+                                font-weight: 600;
+                            "
+                        >
+                            Password
+                        </label>
+
+                        
+                            <a
+                                href="http://127.0.0.1:4173/forgot-password"
+                                style="
+                                    color: #0f172b;
+                                    font-size: 13px;
+                                    font-weight: 600;
+                                    text-decoration: none;
+                                "
+                            >
+                                Lupa password?
+                            </a>
+
+                        
+                    </div>
+
+
+                    <input
+                        id="password"
+                        type="password"
+                        name="password"
+                        required
+                        autocomplete="current-password"
+                        placeholder="Masukkan password Anda"
+                        style="
+                            display: block;
+                            width: 100%;
+                            height: 46px;
+                            padding: 0 14px;
+                            box-sizing: border-box;
+                            border: 1px solid #cbd5e1;
+                            border-radius: 8px;
+                            background: #ffffff;
+                            color: #0f172a;
+                            font-size: 14px;
+                            outline: none;
+                        "
+                    >
+
+                    
+                </div>
+
+
+                
+                <div style="margin-top: 18px;">
+
+                    <label
+                        for="remember_me"
+                        style="
+                            display: flex;
+                            align-items: center;
+                            cursor: pointer;
+                        "
+                    >
+
+                        <input
+                            id="remember_me"
+                            type="checkbox"
+                            name="remember"
+                            style="
+                                width: 16px;
+                                height: 16px;
+                                margin: 0;
+                                accent-color: #0f172b;
+                            "
+                        >
+
+                        <span
+                            style="
+                                margin-left: 8px;
+                                color: #475569;
+                                font-size: 14px;
+                            "
+                        >
+                            Ingat saya
+                        </span>
+
+                    </label>
+
+                </div>
+
+
+                
+                <button
+                    type="submit"
+                    style="
+                        display: block;
+                        width: 100%;
+                        height: 46px;
+                        margin-top: 22px;
+                        border: none;
+                        border-radius: 8px;
+                        background: #0f172b;
+                        color: #ffffff;
+                        font-size: 14px;
+                        font-weight: 600;
+                        cursor: pointer;
+                    "
+                >
+                    Masuk
+                </button>
+
+            </form>
+
+
+            
+            
+                <div
+                    style="
+                        margin-top: 22px;
+                        padding-top: 20px;
+                        border-top: 1px solid #e2e8f0;
+                        text-align: center;
+                    "
+                >
+
+                    <span
+                        style="
+                            color: #64748b;
+                            font-size: 14px;
+                        "
+                    >
+                        Belum memiliki akun?
+                    </span>
+
+                    <a
+                        href="http://127.0.0.1:4173/register"
+                        style="
+                            color: #0f172b;
+                            font-size: 14px;
+                            font-weight: 600;
+                            text-decoration: none;
+                            margin-left: 4px;
+                        "
+                    >
+                        Daftar sekarang
+                    </a>
+
+                </div>
+
+            
+        </div>
+
+
+        
+        <p
+            style="
+                margin: 18px 0 0;
+                text-align: center;
+                color: #94a3b8;
+                font-size: 12px;
+            "
+        >
+            © 2026 Sistem Manajemen Masjid Terpadu
+        </p>
+
+    </div>
+
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <meta
+        name="csrf-token"
+        content="WDDUYPPRHYQmilQ7WEI9aesc5Q5QZdW9L2uEvhKd"
+    >
+
+    <link rel="icon" type="image/png" href="http://127.0.0.1:4173/masjid-mark.png">
+
+    <title>
+        Profil Masjid - Masjid Terpadu    </title>
+
+    <link rel="preload" as="style" href="http://127.0.0.1:4173/build/assets/app-DjPiks-K.css" /><link rel="modulepreload" as="script" href="http://127.0.0.1:4173/build/assets/app-B-YYcDzE.js" /><link rel="stylesheet" href="http://127.0.0.1:4173/build/assets/app-DjPiks-K.css" /><script type="module" src="http://127.0.0.1:4173/build/assets/app-B-YYcDzE.js"></script>
+    
+</head>
+
+
+<body class="bg-gray-50 text-gray-900 antialiased">
+
+    
+
+    <header class="sticky top-0 z-50 border-b border-gray-200 bg-white" x-data="{ mobileMenuOpen: false }">
+
+        <div class="mx-auto max-w-7xl px-4 sm:px-6">
+
+            <div class="flex h-16 items-center justify-between gap-3 sm:h-20">
+
+                
+
+                <a
+                    href="http://127.0.0.1:4173"
+                    class="flex items-center gap-3"
+                >
+
+                    <img src="http://127.0.0.1:4173/masjid-mark.png" alt="Logo Masjid Terpadu" class="rounded-2xl object-contain h-11 w-11 shrink-0">
+
+                    <div>
+
+                        <h1 class="font-bold text-lg leading-tight">
+                            Masjid Terpadu
+                        </h1>
+
+                        <p class="text-xs text-gray-500">
+                            Sistem Manajemen Masjid
+                        </p>
+
+                    </div>
+
+                </a>
+
+
+                
+
+                <nav class="hidden lg:flex items-center gap-6">
+
+                    <a
+                        href="http://127.0.0.1:4173"
+                    class="text-sm font-medium hover:text-blue-600 text-gray-700"
+                                        >
+                        Beranda
+                    </a>
+
+                    <a
+                        href="http://127.0.0.1:4173/profil"
+                        class="text-sm font-medium hover:text-blue-600 text-blue-700"
+                         aria-current="page"                     >
+                        Profil
+                    </a>
+
+                    <a
+                        href="http://127.0.0.1:4173/kegiatan"
+                        class="text-sm font-medium hover:text-blue-600 text-gray-700"
+                                            >
+                        Kegiatan
+                    </a>
+
+                    <a
+                        href="http://127.0.0.1:4173/pengumuman"
+                        class="text-sm font-medium hover:text-blue-600 text-gray-700"
+                                            >
+                        Pengumuman
+                    </a>
+
+                    <a
+                        href="http://127.0.0.1:4173/artikel"
+                        class="text-sm font-medium hover:text-blue-600 text-gray-700"
+                                            >
+                        Artikel
+                    </a>
+
+                    <a href="http://127.0.0.1:4173/perpustakaan" class="text-sm font-medium hover:text-blue-600 text-gray-700" >Perpustakaan</a>
+
+                    <a
+                        href="http://127.0.0.1:4173/donasi"
+                        class="text-sm font-medium hover:text-blue-600 text-gray-700"
+                                            >
+                        Donasi
+                    </a>
+
+                    <a
+                        href="http://127.0.0.1:4173/zakat"
+                        class="text-sm font-medium hover:text-blue-600 text-gray-700"
+                                            >
+                        Zakat
+                    </a>
+
+                    <a
+                        href="http://127.0.0.1:4173/transparansi"
+                        class="text-sm font-medium hover:text-blue-600 text-gray-700"
+                                            >
+                        Transparansi
+                    </a>
+
+                </nav>
+
+
+                
+
+                <div class="flex shrink-0 items-center gap-2">
+
+                    <button
+                        type="button"
+                        class="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-gray-200 text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-emerald-600 lg:hidden"
+                        @click="mobileMenuOpen = !mobileMenuOpen"
+                        :aria-expanded="mobileMenuOpen.toString()"
+                        aria-controls="public-mobile-navigation"
+                        aria-label="Buka atau tutup menu"
+                    >
+                        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+
+                    
+                        <a
+                            href="http://127.0.0.1:4173/login"
+                            class="px-4 py-2.5 border border-gray-300 rounded-lg text-sm font-semibold hover:bg-gray-50"
+                        >
+                            Login
+                        </a>
+
+                    
+                </div>
+
+            </div>
+
+            <nav
+                id="public-mobile-navigation"
+                x-cloak
+                x-show="mobileMenuOpen"
+                x-transition
+                @keydown.escape.window="mobileMenuOpen = false"
+                class="grid gap-1 border-t border-gray-100 py-3 lg:hidden"
+                aria-label="Navigasi utama"
+            >
+                <a href="http://127.0.0.1:4173" class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-50 text-gray-700" >Beranda</a>
+                <a href="http://127.0.0.1:4173/profil" class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-50 text-blue-700"  aria-current="page" >Profil</a>
+                <a href="http://127.0.0.1:4173/kegiatan" class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-50 text-gray-700" >Kegiatan</a>
+                <a href="http://127.0.0.1:4173/pengumuman" class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-50 text-gray-700" >Pengumuman</a>
+                <a href="http://127.0.0.1:4173/artikel" class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-50 text-gray-700" >Artikel</a>
+                <a href="http://127.0.0.1:4173/perpustakaan" class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-50 text-gray-700" >Perpustakaan</a>
+                <a href="http://127.0.0.1:4173/donasi" class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-50 text-gray-700" >Donasi</a>
+                <a href="http://127.0.0.1:4173/zakat" class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-50 text-gray-700" >Zakat</a>
+                <a href="http://127.0.0.1:4173/transparansi" class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-50 text-gray-700" >Transparansi</a>
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    
+
+    <main class="min-h-screen">
+
+        
+<section class="bg-slate-950 py-20 text-white relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:16px_16px]"></div>
+    <div class="relative mx-auto max-w-7xl px-6 text-center">
+        <span class="inline-block px-4 py-1.5 rounded-full bg-blue-600/20 text-blue-400 text-xs font-semibold mb-4 border border-blue-500/20">
+            Profil & Kelembagaan
+        </span>
+        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">
+            Masjid Terpadu
+        </h1>
+        <p class="mt-4 text-lg md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
+            Pusat Ibadah, Pembinaan Umat, dan Pemberdayaan Sosial-Ekonomi Masyarakat yang Berlandaskan Al-Qur'an dan Sunnah.
+        </p>
+    </div>
+</section>
+
+
+<section class="py-16 bg-white">
+    <div class="mx-auto max-w-7xl px-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div>
+                <span class="text-sm font-semibold uppercase tracking-wider text-blue-600">Tentang Kami</span>
+                <h2 class="text-3xl font-bold text-gray-900 mt-2">
+                    Mewujudkan Masjid yang Makmur dan Memakmurkan
+                </h2>
+                <p class="mt-4 text-gray-600 leading-relaxed">
+                    Masjid Terpadu didirikan sebagai episentrum kegiatan keagamaan, pendidikan anak melalui TPQ/TPA, wadah kreasi pemuda remaja masjid, serta transparansi pengelolaan donasi dan zakat untuk kemaslahatan umat.
+                </p>
+
+                <div class="mt-8 space-y-4">
+                    <div class="flex items-start gap-4">
+                        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-100 text-blue-600 font-bold">
+                            ✓
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-900">Visi Utama</h3>
+                            <p class="text-sm text-gray-600 mt-0.5">
+                                Menjadi masjid percontohan yang modern, akuntabel, dan berdaya guna tinggi bagi kesejahteraan jamaah lahir dan batin.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4">
+                        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-100 text-emerald-600 font-bold">
+                            ✓
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-900">Misi Utama</h3>
+                            <p class="text-sm text-gray-600 mt-0.5">
+                                Melayani peribadatan sholat 5 waktu, memfasilitasi kajian ilmiah Islam, mengasuh generasi Qur'ani, dan mengelola amanah dana umat secara transparan 100%.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="rounded-3xl bg-slate-900 p-8 text-white shadow-xl">
+                <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                    <span>📍</span> Informasi & Alamat
+                </h3>
+                <div class="space-y-4 text-sm text-slate-300">
+                    <div>
+                        <p class="text-xs text-slate-400">Lokasi Koordinat GPS</p>
+                        <p class="font-semibold text-white mt-1">-7.000000, 110.000000</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-slate-400">Fasilitas Masjid</p>
+                        <div class="flex flex-wrap gap-2 mt-2">
+                            <span class="rounded-lg bg-white/10 px-3 py-1 text-xs">Ruang Sholat Utama AC</span>
+                            <span class="rounded-lg bg-white/10 px-3 py-1 text-xs">Perpustakaan Kitab</span>
+                            <span class="rounded-lg bg-white/10 px-3 py-1 text-xs">Ruang Belajar TPQ</span>
+                            <span class="rounded-lg bg-white/10 px-3 py-1 text-xs">Unit Usaha Mandiri</span>
+                            <span class="rounded-lg bg-white/10 px-3 py-1 text-xs">Digital Signage TV</span>
+                            <span class="rounded-lg bg-white/10 px-3 py-1 text-xs">Area Parkir Luas</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="py-16 bg-slate-50">
+    <div class="mx-auto max-w-7xl px-6">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <span class="text-sm font-semibold uppercase tracking-wider text-blue-600">Amanah & Tata Kelola</span>
+            <h2 class="text-3xl font-bold text-gray-900 mt-2">Struktur Pengurus DKM</h2>
+            <p class="text-gray-500 mt-2 text-sm">
+                Dewan Kemakmuran Masjid yang bertugas mengelola peribadatan, administrasi, dan keuangan masjid.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                            <div class="bg-white rounded-2xl border border-gray-200 p-6 text-center shadow-sm hover:shadow-md transition">
+                    <div class="w-20 h-20 mx-auto rounded-full bg-slate-900 text-white flex items-center justify-center text-2xl font-bold mb-4">
+                        K
+                    </div>
+                    <h3 class="font-bold text-gray-900 text-lg">Ketua DKM</h3>
+                    <p class="text-xs font-semibold text-blue-600 uppercase tracking-wide mt-1">
+                        Ketua DKM
+                    </p>
+                    <p class="text-xs text-gray-400 mt-2">ketua@masjid.test</p>
+                </div>
+                            <div class="bg-white rounded-2xl border border-gray-200 p-6 text-center shadow-sm hover:shadow-md transition">
+                    <div class="w-20 h-20 mx-auto rounded-full bg-slate-900 text-white flex items-center justify-center text-2xl font-bold mb-4">
+                        B
+                    </div>
+                    <h3 class="font-bold text-gray-900 text-lg">Bendahara</h3>
+                    <p class="text-xs font-semibold text-blue-600 uppercase tracking-wide mt-1">
+                        Bendahara
+                    </p>
+                    <p class="text-xs text-gray-400 mt-2">bendahara@masjid.test</p>
+                </div>
+                            <div class="bg-white rounded-2xl border border-gray-200 p-6 text-center shadow-sm hover:shadow-md transition">
+                    <div class="w-20 h-20 mx-auto rounded-full bg-slate-900 text-white flex items-center justify-center text-2xl font-bold mb-4">
+                        S
+                    </div>
+                    <h3 class="font-bold text-gray-900 text-lg">Sekretaris</h3>
+                    <p class="text-xs font-semibold text-blue-600 uppercase tracking-wide mt-1">
+                        Sekretaris / Humas
+                    </p>
+                    <p class="text-xs text-gray-400 mt-2">sekretaris@masjid.test</p>
+                </div>
+                            <div class="bg-white rounded-2xl border border-gray-200 p-6 text-center shadow-sm hover:shadow-md transition">
+                    <div class="w-20 h-20 mx-auto rounded-full bg-slate-900 text-white flex items-center justify-center text-2xl font-bold mb-4">
+                        M
+                    </div>
+                    <h3 class="font-bold text-gray-900 text-lg">Marbot</h3>
+                    <p class="text-xs font-semibold text-blue-600 uppercase tracking-wide mt-1">
+                        Marbot / Petugas
+                    </p>
+                    <p class="text-xs text-gray-400 mt-2">marbot@masjid.test</p>
+                </div>
+                    </div>
+    </div>
+</section>
+
+
+<section class="py-16 bg-white">
+    <div class="mx-auto max-w-7xl px-6">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <span class="text-sm font-semibold uppercase tracking-wider text-blue-600">Dokumentasi</span>
+            <h2 class="text-3xl font-bold text-gray-900 mt-2">Galeri Masjid & Kegiatan</h2>
+            <p class="text-gray-500 mt-2 text-sm">
+                Suasana peribadatan dan sarana prasarana Masjid Terpadu.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="h-56 rounded-2xl bg-gradient-to-tr from-slate-900 to-blue-900 flex flex-col justify-end p-5 text-white shadow-sm">
+                <span class="text-2xl mb-1">🕌</span>
+                <p class="font-bold text-sm">Ruang Utama Sholat</p>
+                <p class="text-xs text-slate-300">Kapasitas 1.000 Jamaah</p>
+            </div>
+            <div class="h-56 rounded-2xl bg-gradient-to-tr from-emerald-950 to-teal-800 flex flex-col justify-end p-5 text-white shadow-sm">
+                <span class="text-2xl mb-1">📚</span>
+                <p class="font-bold text-sm">Perpustakaan Masjid</p>
+                <p class="text-xs text-slate-300">Koleksi Kitab & Buku</p>
+            </div>
+            <div class="h-56 rounded-2xl bg-gradient-to-tr from-indigo-950 to-purple-900 flex flex-col justify-end p-5 text-white shadow-sm">
+                <span class="text-2xl mb-1">📖</span>
+                <p class="font-bold text-sm">Kelas Santri TPQ</p>
+                <p class="text-xs text-slate-300">Pendidikan Al-Qur'an</p>
+            </div>
+            <div class="h-56 rounded-2xl bg-gradient-to-tr from-amber-950 to-orange-900 flex flex-col justify-end p-5 text-white shadow-sm">
+                <span class="text-2xl mb-1">🏪</span>
+                <p class="font-bold text-sm">Unit Usaha Masjid</p>
+                <p class="text-xs text-slate-300">Koperasi Jamaah</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+    </main>
+
+
+    
+
+    <footer class="bg-slate-900 text-white mt-16">
+
+        <div class="max-w-7xl mx-auto px-6 py-12">
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+
+
+                
+
+                <div>
+
+                    <h2 class="text-xl font-bold">
+                        Masjid Terpadu
+                    </h2>
+
+                    <p class="text-slate-400 text-sm mt-3 leading-relaxed">
+                        Sistem Manajemen Masjid Terpadu untuk
+                        mendukung pengelolaan masjid dan pelayanan
+                        kepada jamaah.
+                    </p>
+
+                </div>
+
+
+                
+
+                <div>
+
+                    <h3 class="font-semibold mb-4">
+                        Layanan
+                    </h3>
+
+                    <div class="space-y-2 text-sm">
+
+                        <a
+                            href="http://127.0.0.1:4173/donasi"
+                            class="block text-slate-400 hover:text-white"
+                        >
+                            Donasi
+                        </a>
+
+                        <a
+                            href="http://127.0.0.1:4173/zakat"
+                            class="block text-slate-400 hover:text-white"
+                        >
+                            Kalkulator Zakat
+                        </a>
+
+                        <a
+                            href="http://127.0.0.1:4173/kegiatan"
+                            class="block text-slate-400 hover:text-white"
+                        >
+                            Kegiatan Masjid
+                        </a>
+
+                        <a href="http://127.0.0.1:4173/perpustakaan" class="block text-slate-400 hover:text-white">Katalog Perpustakaan</a>
+
+                        <a
+                            href="http://127.0.0.1:4173/transparansi"
+                            class="block text-slate-400 hover:text-white"
+                        >
+                            Transparansi Keuangan
+                        </a>
+
+                        <a
+                            href="http://127.0.0.1:4173/digital-signage"
+                            class="block text-slate-400 hover:text-white"
+                            target="_blank"
+                        >
+                            Digital Signage TV
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                
+
+                <div>
+
+                    <h3 class="font-semibold mb-4">
+                        Informasi Masjid
+                    </h3>
+
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Sistem Manajemen Masjid Terpadu menyediakan
+                        informasi kegiatan, layanan jamaah,
+                        dan informasi publik masjid.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="border-t border-slate-700 mt-10 pt-6">
+
+                <p class="text-center text-sm text-slate-500">
+                    © 2026 Masjid Terpadu.
+                    Semua hak dilindungi.
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    
+</body>
+
+</html>

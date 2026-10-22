@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="http://127.0.0.1:4173/masjid-mark.png">
+
+    <title>
+        Dashboard Ketua DKM - Sistem Manajemen Masjid
+    </title>
+
+    <link rel="preload" as="style" href="http://127.0.0.1:4173/build/assets/app-DjPiks-K.css" /><link rel="modulepreload" as="script" href="http://127.0.0.1:4173/build/assets/app-B-YYcDzE.js" /><link rel="stylesheet" href="http://127.0.0.1:4173/build/assets/app-DjPiks-K.css" /><script type="module" src="http://127.0.0.1:4173/build/assets/app-B-YYcDzE.js"></script>
+    </head>
+
+<body class="bg-gray-100 text-gray-800">
+
+<div class="min-h-screen" x-data="{ sidebarOpen: false }">
+
+    <div
+        x-cloak
+        x-show="sidebarOpen"
+        x-transition.opacity
+        class="fixed inset-0 z-30 bg-slate-950/50 lg:hidden"
+        @click="sidebarOpen = false"
+        @keydown.escape.window="sidebarOpen = false"
+        aria-hidden="true"
+    ></div>
+
+    
+    <aside
+        class="sidebar-menu fixed inset-y-0 left-0 z-40 flex h-screen w-72 max-w-[85vw] flex-col overflow-hidden bg-slate-900 text-white transition-transform duration-200 ease-out lg:w-64 lg:translate-x-0"
+        :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
+        id="dashboard-sidebar"
+        aria-label="Navigasi dashboard"
+    >
+
+        
+        <div class="shrink-0 border-b border-slate-700 px-6 py-5">
+            <div class="flex items-center gap-3">
+                <img src="http://127.0.0.1:4173/masjid-mark.png" alt="Logo Masjid Terpadu" class="rounded-2xl object-contain h-11 w-11 shrink-0">
+                <div>
+                    <h1 class="text-base font-bold">
+                        Masjid Terpadu
+                    </h1>
+                    <p class="mt-1 text-xs text-slate-400">
+                        Sistem Manajemen Masjid
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        
+        <nav class="sidebar-menu min-h-0 flex-1 space-y-1 overflow-y-auto overscroll-contain p-4">
+
+            <a href="http://127.0.0.1:4173/dashboard"
+               class="flex items-center gap-3 rounded-lg px-4 py-3 hover:bg-slate-800 bg-slate-800 font-semibold text-white"
+                aria-current="page" >
+                <span>Dashboard</span>
+            </a>
+
+            
+                            <div class="space-y-4 pt-2">
+
+    
+    <div>
+        <p class="px-4 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+            Keuangan & Bisnis
+        </p>
+        <div class="mt-1 space-y-0.5">
+            <a href="http://127.0.0.1:4173/transaksi-keuangan"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Transaksi Keuangan
+            </a>
+            <a href="http://127.0.0.1:4173/laporan-keuangan"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Laporan Keuangan
+            </a>
+            <a href="http://127.0.0.1:4173/business-units"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Unit Usaha Masjid
+            </a>
+            <a href="http://127.0.0.1:4173/business-unit-items"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Stok Produk Toko
+            </a>
+            <a href="http://127.0.0.1:4173/business-unit-sales"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Pencatatan Omzet
+            </a>
+            <a href="http://127.0.0.1:4173/business-unit-sales/report"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Laporan Omzet
+            </a>
+        </div>
+    </div>
+
+    
+    <div>
+        <p class="px-4 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+            Ibadah & Jamaah
+        </p>
+        <div class="mt-1 space-y-0.5">
+            <a href="http://127.0.0.1:4173/jamaahs"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Database Jamaah
+            </a>
+            <a href="http://127.0.0.1:4173/jadwal-sholat"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Jadwal Sholat
+            </a>
+            <a href="http://127.0.0.1:4173/activities"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Kegiatan Ibadah & Kajian
+            </a>
+            <a href="http://127.0.0.1:4173/officers"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Petugas & Imam Sholat
+            </a>
+        </div>
+    </div>
+
+    
+    <div>
+        <p class="px-4 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+            Pendidikan & Remaja
+        </p>
+        <div class="mt-1 space-y-0.5">
+            <a href="http://127.0.0.1:4173/youth-members"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Anggota Remaja Masjid
+            </a>
+            <a href="http://127.0.0.1:4173/youth-programs"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Program Kerja Remaja
+            </a>
+            <a href="http://127.0.0.1:4173/santris"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Santri TPQ/TPA
+            </a>
+            <a href="http://127.0.0.1:4173/santri-attendances/report"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Laporan Absensi TPQ
+            </a>
+        </div>
+    </div>
+
+    
+    <div>
+        <p class="px-4 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+            Aset & Perpustakaan
+        </p>
+        <div class="mt-1 space-y-0.5">
+            <a href="http://127.0.0.1:4173/assets"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Inventaris Aset
+            </a>
+            <a href="http://127.0.0.1:4173/asset-maintenances"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Perawatan Aset
+            </a>
+            <a href="http://127.0.0.1:4173/library-books"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Katalog Buku
+            </a>
+            <a href="http://127.0.0.1:4173/book-loans"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Peminjaman Buku
+            </a>
+            <a href="http://127.0.0.1:4173/book-loan-requests" class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">Permintaan Pinjam Jamaah</a>
+            <a href="http://127.0.0.1:4173/book-loans/report"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Laporan Perpustakaan
+            </a>
+        </div>
+    </div>
+
+    
+    <div>
+        <p class="px-4 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+            Publikasi & Sistem
+        </p>
+        <div class="mt-1 space-y-0.5">
+            <a href="http://127.0.0.1:4173/announcements"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Pengumuman Masjid
+            </a>
+            <a href="http://127.0.0.1:4173/dakwah-contents"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Konten & Artikel Dakwah
+            </a>
+            <a href="http://127.0.0.1:4173/activity-logs"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Log Aktivitas Sistem
+            </a>
+            <a href="http://127.0.0.1:4173/admin/pengguna" class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">Administrasi Akun</a>
+            <a href="http://127.0.0.1:4173" target="_blank"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800">
+                Website Publik ↗
+            </a>
+            <a href="http://127.0.0.1:4173/digital-signage" target="_blank"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800">
+                Digital Signage TV ↗
+            </a>
+        </div>
+    </div>
+
+</div>
+            
+            
+            <a href="http://127.0.0.1:4173/notifikasi"
+               class="flex items-center justify-between gap-3 rounded-lg px-4 py-3 hover:bg-slate-800">
+
+                <span>Notifikasi</span>
+
+                
+            </a>
+
+        </nav>
+
+    </aside>
+
+    
+    <main class="min-h-screen min-w-0 lg:ml-64">
+
+        
+        <header class="sticky top-0 z-20 flex h-16 items-center justify-between gap-3 border-b border-gray-200 bg-white px-4 sm:px-8">
+
+            <div class="flex min-w-0 items-center gap-3">
+                <button
+                    type="button"
+                    class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-gray-200 text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-emerald-600 lg:hidden"
+                    @click="sidebarOpen = !sidebarOpen"
+                    :aria-expanded="sidebarOpen.toString()"
+                    aria-controls="dashboard-sidebar"
+                    aria-label="Buka atau tutup menu navigasi"
+                >
+                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+                <h2 class="min-w-0 truncate text-sm font-semibold text-gray-800 sm:text-base" title="Dashboard Ketua DKM (Super Admin)">
+                    Dashboard Ketua DKM (Super Admin)                </h2>
+            </div>
+
+            <div class="flex shrink-0 items-center gap-3 sm:gap-4">
+
+                <div class="hidden text-right sm:block">
+                    <p class="text-sm font-semibold">
+                        Ketua DKM
+                    </p>
+
+                    <p class="text-xs capitalize text-gray-500">
+                        Ketua DKM
+                    </p>
+                </div>
+
+                <form method="POST" action="http://127.0.0.1:4173/logout">
+                    <input type="hidden" name="_token" value="dxdyaYD7GzuLXexv8nvidAPR6usINQZ7SidczUCZ" autocomplete="off">
+                    <button
+                        type="submit"
+                        class="text-sm text-red-600 hover:text-red-800">
+                        Logout
+                    </button>
+                </form>
+
+            </div>
+
+        </header>
+
+        
+        <section class="min-w-0 p-4 sm:p-6 lg:p-8">
+
+            
+            
+            
+<div class="mb-8">
+    <h1 class="text-2xl font-bold text-gray-900">
+        Selamat Datang, Ketua DKM
+    </h1>
+    <p class="text-gray-500 mt-1">
+        Ringkasan lintas modul operasional, keuangan, dan dakwah Masjid Terpadu.
+    </p>
+</div>
+
+
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mb-8">
+    <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-5">
+        <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">
+            Total Saldo Kas
+        </p>
+        <p class="text-2xl font-bold text-slate-900 mt-2">
+            Rp -948.000
+        </p>
+        <p class="text-xs text-slate-400 mt-1">Saldo riil operasional masjid</p>
+    </div>
+
+    <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-5">
+        <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">
+            Pemasukan (Bulan Ini)
+        </p>
+        <p class="text-2xl font-bold text-green-600 mt-2">
+            Rp 1.907.000
+        </p>
+        <p class="text-xs text-slate-400 mt-1">Total: Rp 6.677.000</p>
+    </div>
+
+    <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-5">
+        <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">
+            Pengeluaran (Bulan Ini)
+        </p>
+        <p class="text-2xl font-bold text-red-600 mt-2">
+            Rp 2.525.000
+        </p>
+        <p class="text-xs text-slate-400 mt-1">Total: Rp 7.625.000</p>
+    </div>
+
+    <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-5">
+        <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">
+            Donasi Terverifikasi
+        </p>
+        <p class="text-2xl font-bold text-blue-600 mt-2">
+            Rp 5.775.000
+        </p>
+        <p class="text-xs text-slate-400 mt-1">Infaq digital & QRIS</p>
+    </div>
+</div>
+
+
+<div class="mb-8">
+    <h2 class="text-lg font-bold text-slate-800 mb-4">Ringkasan Lintas Modul Masjid</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <a href="http://127.0.0.1:4173/jamaahs"
+           class="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm hover:border-blue-400 hover:shadow-md transition">
+            <div class="flex items-center justify-between">
+                <span class="text-sm font-semibold text-slate-600">Jamaah Terdaftar</span>
+                <span class="text-2xl group-hover:scale-110 transition">👥</span>
+            </div>
+            <p class="mt-3 text-3xl font-extrabold text-slate-900">24</p>
+            <p class="mt-1 text-xs text-blue-600 font-medium">Buka Database Jamaah →</p>
+        </a>
+
+        
+        <a href="http://127.0.0.1:4173/santris"
+           class="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm hover:border-emerald-400 hover:shadow-md transition">
+            <div class="flex items-center justify-between">
+                <span class="text-sm font-semibold text-slate-600">Santri TPQ/TPA</span>
+                <span class="text-2xl group-hover:scale-110 transition">📖</span>
+            </div>
+            <p class="mt-3 text-3xl font-extrabold text-emerald-700">14</p>
+            <p class="mt-1 text-xs text-emerald-600 font-medium">Data & Capaian Santri →</p>
+        </a>
+
+        
+        <a href="http://127.0.0.1:4173/youth-members"
+           class="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm hover:border-purple-400 hover:shadow-md transition">
+            <div class="flex items-center justify-between">
+                <span class="text-sm font-semibold text-slate-600">Remaja Masjid</span>
+                <span class="text-2xl group-hover:scale-110 transition">🤝</span>
+            </div>
+            <p class="mt-3 text-3xl font-extrabold text-purple-700">7</p>
+            <p class="mt-1 text-xs text-purple-600 font-medium">6 Program Kerja Aktif →</p>
+        </a>
+
+        
+        <a href="http://127.0.0.1:4173/assets"
+           class="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm hover:border-amber-400 hover:shadow-md transition">
+            <div class="flex items-center justify-between">
+                <span class="text-sm font-semibold text-slate-600">Inventaris Aset</span>
+                <span class="text-2xl group-hover:scale-110 transition">📦</span>
+            </div>
+            <p class="mt-3 text-3xl font-extrabold text-slate-900">12</p>
+            <p class="mt-1 text-xs text-amber-600 font-bold">
+                3 butuh perbaikan →
+            </p>
+        </a>
+    </div>
+</div>
+
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+
+    
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 flex flex-col justify-between">
+        <div>
+            <div class="flex justify-between items-center mb-3">
+                <h3 class="font-bold text-base text-slate-800">
+                    Approval Laporan
+                </h3>
+                                    <span class="px-2.5 py-1 rounded-full bg-green-100 text-green-800 text-xs font-bold">
+                        Up to date
+                    </span>
+                            </div>
+
+            <p class="text-sm text-slate-500 leading-relaxed">
+                Laporan keuangan bulanan diajukan oleh Bendahara dan membutuhkan tinjauan serta persetujuan resmi Ketua DKM sebelum dipublikasikan ke publik.
+            </p>
+        </div>
+
+        <div class="mt-6 pt-4 border-t border-slate-100">
+            <a href="http://127.0.0.1:4173/laporan-keuangan"
+               class="inline-flex items-center justify-center w-full rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800">
+                Tinjau Laporan Keuangan →
+            </a>
+        </div>
+    </div>
+
+    
+    <div class="lg:col-span-2 bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+        <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
+            <h3 class="font-bold text-base text-slate-800">Transaksi Kas Terakhir</h3>
+            <a href="http://127.0.0.1:4173/transaksi-keuangan" class="text-xs font-semibold text-blue-600 hover:underline">
+                Semua Transaksi →
+            </a>
+        </div>
+
+        <p class="px-5 pt-3 text-xs text-slate-500 lg:hidden">
+            Geser tabel ke samping untuk melihat semua kolom.
+        </p>
+        <div class="overflow-x-auto">
+            <table class="w-full min-w-[640px] text-sm">
+                <thead class="bg-slate-50 text-slate-500 text-xs uppercase">
+                    <tr>
+                        <th class="px-5 py-3 text-left">Tanggal</th>
+                        <th class="px-5 py-3 text-left">Kategori</th>
+                        <th class="px-5 py-3 text-left">Jenis</th>
+                        <th class="px-5 py-3 text-right">Nominal</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                                            <tr>
+                            <td class="px-5 py-3 text-slate-600 text-xs whitespace-nowrap">
+                                22/10/2026
+                            </td>
+                            <td class="px-5 py-3 text-slate-800 font-medium">
+                                Unit Usaha
+                            </td>
+                            <td class="px-5 py-3">
+                                                                    <span class="rounded bg-green-100 px-2 py-0.5 text-xs font-semibold text-green-700">Masuk</span>
+                                                            </td>
+                            <td class="px-5 py-3 text-right font-bold text-green-600">
+                                Rp 85.000
+                            </td>
+                        </tr>
+                                            <tr>
+                            <td class="px-5 py-3 text-slate-600 text-xs whitespace-nowrap">
+                                22/10/2026
+                            </td>
+                            <td class="px-5 py-3 text-slate-800 font-medium">
+                                Infaq
+                            </td>
+                            <td class="px-5 py-3">
+                                                                    <span class="rounded bg-green-100 px-2 py-0.5 text-xs font-semibold text-green-700">Masuk</span>
+                                                            </td>
+                            <td class="px-5 py-3 text-right font-bold text-green-600">
+                                Rp 150.000
+                            </td>
+                        </tr>
+                                            <tr>
+                            <td class="px-5 py-3 text-slate-600 text-xs whitespace-nowrap">
+                                20/10/2026
+                            </td>
+                            <td class="px-5 py-3 text-slate-800 font-medium">
+                                Operasional
+                            </td>
+                            <td class="px-5 py-3">
+                                                                    <span class="rounded bg-red-100 px-2 py-0.5 text-xs font-semibold text-red-700">Keluar</span>
+                                                            </td>
+                            <td class="px-5 py-3 text-right font-bold text-red-600">
+                                Rp 1.850.000
+                            </td>
+                        </tr>
+                                            <tr>
+                            <td class="px-5 py-3 text-slate-600 text-xs whitespace-nowrap">
+                                19/10/2026
+                            </td>
+                            <td class="px-5 py-3 text-slate-800 font-medium">
+                                Pemeliharaan
+                            </td>
+                            <td class="px-5 py-3">
+                                                                    <span class="rounded bg-red-100 px-2 py-0.5 text-xs font-semibold text-red-700">Keluar</span>
+                                                            </td>
+                            <td class="px-5 py-3 text-right font-bold text-red-600">
+                                Rp 675.000
+                            </td>
+                        </tr>
+                                            <tr>
+                            <td class="px-5 py-3 text-slate-600 text-xs whitespace-nowrap">
+                                19/10/2026
+                            </td>
+                            <td class="px-5 py-3 text-slate-800 font-medium">
+                                Sedekah
+                            </td>
+                            <td class="px-5 py-3">
+                                                                    <span class="rounded bg-green-100 px-2 py-0.5 text-xs font-semibold text-green-700">Masuk</span>
+                                                            </td>
+                            <td class="px-5 py-3 text-right font-bold text-green-600">
+                                Rp 250.000
+                            </td>
+                        </tr>
+                                    </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+    <div class="flex items-center justify-between mb-4">
+        <div>
+            <h3 class="font-bold text-base text-slate-800">Audit Trail / Log Aktivitas Terkini</h3>
+            <p class="text-xs text-slate-500">Pencatatan tindakan pengurus dan operasional sistem</p>
+        </div>
+        <a href="http://127.0.0.1:4173/activity-logs" class="text-xs font-semibold text-blue-600 hover:underline">
+            Buka Riwayat Lengkap →
+        </a>
+    </div>
+
+    <div class="divide-y divide-slate-100 text-sm">
+                    <div class="py-2.5 flex items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <span class="flex h-2 w-2 rounded-full bg-blue-500"></span>
+                    <div>
+                        <span class="font-semibold text-slate-800">Ketua DKM</span>
+                        <span class="text-slate-600 text-xs ml-1">Pengguna Ketua DKM (Ketua DKM) berhasil masuk ke sistem.</span>
+                    </div>
+                </div>
+                <span class="text-xs text-slate-400 whitespace-nowrap">
+                    1 second ago
+                </span>
+            </div>
+                    <div class="py-2.5 flex items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <span class="flex h-2 w-2 rounded-full bg-blue-500"></span>
+                    <div>
+                        <span class="font-semibold text-slate-800">Ketua DKM</span>
+                        <span class="text-slate-600 text-xs ml-1">Pengguna Ketua DKM (Ketua DKM) berhasil masuk ke sistem.</span>
+                    </div>
+                </div>
+                <span class="text-xs text-slate-400 whitespace-nowrap">
+                    1 second ago
+                </span>
+            </div>
+                    <div class="py-2.5 flex items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <span class="flex h-2 w-2 rounded-full bg-blue-500"></span>
+                    <div>
+                        <span class="font-semibold text-slate-800">Jamaah Pengujian</span>
+                        <span class="text-slate-600 text-xs ml-1">Pengguna Jamaah Pengujian (Jamaah) berhasil masuk ke sistem.</span>
+                    </div>
+                </div>
+                <span class="text-xs text-slate-400 whitespace-nowrap">
+                    4 seconds ago
+                </span>
+            </div>
+                    <div class="py-2.5 flex items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <span class="flex h-2 w-2 rounded-full bg-blue-500"></span>
+                    <div>
+                        <span class="font-semibold text-slate-800">Jamaah Pengujian</span>
+                        <span class="text-slate-600 text-xs ml-1">Pengguna Jamaah Pengujian (Jamaah) berhasil masuk ke sistem.</span>
+                    </div>
+                </div>
+                <span class="text-xs text-slate-400 whitespace-nowrap">
+                    4 seconds ago
+                </span>
+            </div>
+                    <div class="py-2.5 flex items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <span class="flex h-2 w-2 rounded-full bg-blue-500"></span>
+                    <div>
+                        <span class="font-semibold text-slate-800">Marbot</span>
+                        <span class="text-slate-600 text-xs ml-1">Pengguna Marbot (Marbot / Petugas) berhasil masuk ke sistem.</span>
+                    </div>
+                </div>
+                <span class="text-xs text-slate-400 whitespace-nowrap">
+                    7 seconds ago
+                </span>
+            </div>
+                    <div class="py-2.5 flex items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <span class="flex h-2 w-2 rounded-full bg-blue-500"></span>
+                    <div>
+                        <span class="font-semibold text-slate-800">Marbot</span>
+                        <span class="text-slate-600 text-xs ml-1">Pengguna Marbot (Marbot / Petugas) berhasil masuk ke sistem.</span>
+                    </div>
+                </div>
+                <span class="text-xs text-slate-400 whitespace-nowrap">
+                    7 seconds ago
+                </span>
+            </div>
+            </div>
+</div>
+
+
+        </section>
+
+    </main>
+
+</div>
+
+
+</body>
+</html>

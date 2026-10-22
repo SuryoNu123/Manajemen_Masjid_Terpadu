@@ -244,9 +244,9 @@
 
                         {{-- Next Prayer --}}
 
-                        <div class="bg-slate-950 text-white rounded-2xl p-6 mb-6">
+                        <div class="bg-slate-950 text-white rounded-2xl p-4 sm:p-6 mb-6">
 
-                            <div class="flex items-center justify-between">
+                            <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 
                                 <div>
                                     <p class="text-sm text-slate-400">
@@ -577,7 +577,7 @@
 
 
             <a
-                href="#"
+                href="#prayer-schedule-cards"
                 class="text-sm font-semibold text-blue-600"
             >
                 Lihat Jadwal Lengkap →

@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <meta
+        name="csrf-token"
+        content="WDDUYPPRHYQmilQ7WEI9aesc5Q5QZdW9L2uEvhKd"
+    >
+
+    <link rel="icon" type="image/png" href="http://127.0.0.1:4173/masjid-mark.png">
+
+    <title>
+        Artikel Dakwah - Masjid Terpadu    </title>
+
+    <link rel="preload" as="style" href="http://127.0.0.1:4173/build/assets/app-DjPiks-K.css" /><link rel="modulepreload" as="script" href="http://127.0.0.1:4173/build/assets/app-B-YYcDzE.js" /><link rel="stylesheet" href="http://127.0.0.1:4173/build/assets/app-DjPiks-K.css" /><script type="module" src="http://127.0.0.1:4173/build/assets/app-B-YYcDzE.js"></script>
+    
+</head>
+
+
+<body class="bg-gray-50 text-gray-900 antialiased">
+
+    
+
+    <header class="sticky top-0 z-50 border-b border-gray-200 bg-white" x-data="{ mobileMenuOpen: false }">
+
+        <div class="mx-auto max-w-7xl px-4 sm:px-6">
+
+            <div class="flex h-16 items-center justify-between gap-3 sm:h-20">
+
+                
+
+                <a
+                    href="http://127.0.0.1:4173"
+                    class="flex items-center gap-3"
+                >
+
+                    <img src="http://127.0.0.1:4173/masjid-mark.png" alt="Logo Masjid Terpadu" class="rounded-2xl object-contain h-11 w-11 shrink-0">
+
+                    <div>
+
+                        <h1 class="font-bold text-lg leading-tight">
+                            Masjid Terpadu
+                        </h1>
+
+                        <p class="text-xs text-gray-500">
+                            Sistem Manajemen Masjid
+                        </p>
+
+                    </div>
+
+                </a>
+
+
+                
+
+                <nav class="hidden lg:flex items-center gap-6">
+
+                    <a
+                        href="http://127.0.0.1:4173"
+                    class="text-sm font-medium hover:text-blue-600 text-gray-700"
+                                        >
+                        Beranda
+                    </a>
+
+                    <a
+                        href="http://127.0.0.1:4173/profil"
+                        class="text-sm font-medium hover:text-blue-600 text-gray-700"
+                                            >
+                        Profil
+                    </a>
+
+                    <a
+                        href="http://127.0.0.1:4173/kegiatan"
+                        class="text-sm font-medium hover:text-blue-600 text-gray-700"
+                                            >
+                        Kegiatan
+                    </a>
+
+                    <a
+                        href="http://127.0.0.1:4173/pengumuman"
+                        class="text-sm font-medium hover:text-blue-600 text-gray-700"
+                                            >
+                        Pengumuman
+                    </a>
+
+                    <a
+                        href="http://127.0.0.1:4173/artikel"
+                        class="text-sm font-medium hover:text-blue-600 text-blue-700"
+                         aria-current="page"                     >
+                        Artikel
+                    </a>
+
+                    <a href="http://127.0.0.1:4173/perpustakaan" class="text-sm font-medium hover:text-blue-600 text-gray-700" >Perpustakaan</a>
+
+                    <a
+                        href="http://127.0.0.1:4173/donasi"
+                        class="text-sm font-medium hover:text-blue-600 text-gray-700"
+                                            >
+                        Donasi
+                    </a>
+
+                    <a
+                        href="http://127.0.0.1:4173/zakat"
+                        class="text-sm font-medium hover:text-blue-600 text-gray-700"
+                                            >
+                        Zakat
+                    </a>
+
+                    <a
+                        href="http://127.0.0.1:4173/transparansi"
+                        class="text-sm font-medium hover:text-blue-600 text-gray-700"
+                                            >
+                        Transparansi
+                    </a>
+
+                </nav>
+
+
+                
+
+                <div class="flex shrink-0 items-center gap-2">
+
+                    <button
+                        type="button"
+                        class="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-gray-200 text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-emerald-600 lg:hidden"
+                        @click="mobileMenuOpen = !mobileMenuOpen"
+                        :aria-expanded="mobileMenuOpen.toString()"
+                        aria-controls="public-mobile-navigation"
+                        aria-label="Buka atau tutup menu"
+                    >
+                        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+
+                    
+                        <a
+                            href="http://127.0.0.1:4173/login"
+                            class="px-4 py-2.5 border border-gray-300 rounded-lg text-sm font-semibold hover:bg-gray-50"
+                        >
+                            Login
+                        </a>
+
+                    
+                </div>
+
+            </div>
+
+            <nav
+                id="public-mobile-navigation"
+                x-cloak
+                x-show="mobileMenuOpen"
+                x-transition
+                @keydown.escape.window="mobileMenuOpen = false"
+                class="grid gap-1 border-t border-gray-100 py-3 lg:hidden"
+                aria-label="Navigasi utama"
+            >
+                <a href="http://127.0.0.1:4173" class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-50 text-gray-700" >Beranda</a>
+                <a href="http://127.0.0.1:4173/profil" class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-50 text-gray-700" >Profil</a>
+                <a href="http://127.0.0.1:4173/kegiatan" class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-50 text-gray-700" >Kegiatan</a>
+                <a href="http://127.0.0.1:4173/pengumuman" class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-50 text-gray-700" >Pengumuman</a>
+                <a href="http://127.0.0.1:4173/artikel" class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-50 text-blue-700"  aria-current="page" >Artikel</a>
+                <a href="http://127.0.0.1:4173/perpustakaan" class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-50 text-gray-700" >Perpustakaan</a>
+                <a href="http://127.0.0.1:4173/donasi" class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-50 text-gray-700" >Donasi</a>
+                <a href="http://127.0.0.1:4173/zakat" class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-50 text-gray-700" >Zakat</a>
+                <a href="http://127.0.0.1:4173/transparansi" class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-50 text-gray-700" >Transparansi</a>
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    
+
+    <main class="min-h-screen">
+
+        <section class="bg-slate-900 py-16 text-white">
+    <div class="mx-auto max-w-7xl px-6">
+        <span class="text-sm font-semibold uppercase tracking-wider text-blue-400">Pojok Literasi & Dakwah</span>
+        <h1 class="mt-2 text-3xl md:text-4xl font-bold">Artikel Dakwah & Khazanah Islam</h1>
+        <p class="mt-3 text-slate-300 max-w-2xl">
+            Kumpulan artikel keagamaan, mutiara hikmah, dan berita seputar aktivitas kemakmuran Masjid Terpadu.
+        </p>
+    </div>
+</section>
+
+<section class="py-12 bg-white">
+    <div class="mx-auto max-w-7xl px-6">
+        <div class="mb-8 flex flex-wrap items-center justify-between gap-4">
+            <h2 class="text-2xl font-bold text-gray-900">Semua Artikel</h2>
+
+            <form method="GET" action="http://127.0.0.1:4173/artikel" class="flex items-center gap-2">
+                <input type="text"
+                       name="search"
+                       value=""
+                       placeholder="Cari artikel dakwah..."
+                       class="rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
+                <button type="submit" class="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700">
+                    Cari
+                </button>
+            </form>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            <article class="flex flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm hover:shadow-lg transition duration-200">
+                                            <div class="h-48 w-full bg-gradient-to-r from-blue-900 to-indigo-900 flex items-center justify-center text-white text-3xl">
+                            📖
+                        </div>
+                    
+                    <div class="flex flex-1 flex-col justify-between p-6">
+                        <div>
+                            <div class="flex items-center gap-2 text-xs text-gray-400 mb-3">
+                                <span>21 Oct 2026</span>
+                                <span>•</span>
+                                <span>Sekretaris</span>
+                            </div>
+
+                            <h3 class="text-xl font-bold text-gray-900 hover:text-blue-600">
+                                <a href="http://127.0.0.1:4173/artikel/demo-renungan-masjid-01">
+                                    Demo: Renungan Masjid 01
+                                </a>
+                            </h3>
+
+                            <p class="mt-3 text-sm text-gray-600 leading-relaxed line-clamp-3">
+                                Artikel contoh untuk pengujian konten dakwah publik.
+                            </p>
+                        </div>
+
+                        <div class="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between">
+                            <a href="http://127.0.0.1:4173/artikel/demo-renungan-masjid-01"
+                               class="text-sm font-semibold text-blue-600 hover:text-blue-700">
+                                Baca Selengkapnya →
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                            <article class="flex flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm hover:shadow-lg transition duration-200">
+                                            <div class="h-48 w-full bg-gradient-to-r from-blue-900 to-indigo-900 flex items-center justify-center text-white text-3xl">
+                            📖
+                        </div>
+                    
+                    <div class="flex flex-1 flex-col justify-between p-6">
+                        <div>
+                            <div class="flex items-center gap-2 text-xs text-gray-400 mb-3">
+                                <span>20 Oct 2026</span>
+                                <span>•</span>
+                                <span>Sekretaris</span>
+                            </div>
+
+                            <h3 class="text-xl font-bold text-gray-900 hover:text-blue-600">
+                                <a href="http://127.0.0.1:4173/artikel/demo-renungan-masjid-02">
+                                    Demo: Renungan Masjid 02
+                                </a>
+                            </h3>
+
+                            <p class="mt-3 text-sm text-gray-600 leading-relaxed line-clamp-3">
+                                Artikel contoh untuk pengujian konten dakwah publik.
+                            </p>
+                        </div>
+
+                        <div class="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between">
+                            <a href="http://127.0.0.1:4173/artikel/demo-renungan-masjid-02"
+                               class="text-sm font-semibold text-blue-600 hover:text-blue-700">
+                                Baca Selengkapnya →
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                            <article class="flex flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm hover:shadow-lg transition duration-200">
+                                            <div class="h-48 w-full bg-gradient-to-r from-blue-900 to-indigo-900 flex items-center justify-center text-white text-3xl">
+                            📖
+                        </div>
+                    
+                    <div class="flex flex-1 flex-col justify-between p-6">
+                        <div>
+                            <div class="flex items-center gap-2 text-xs text-gray-400 mb-3">
+                                <span>19 Oct 2026</span>
+                                <span>•</span>
+                                <span>Sekretaris</span>
+                            </div>
+
+                            <h3 class="text-xl font-bold text-gray-900 hover:text-blue-600">
+                                <a href="http://127.0.0.1:4173/artikel/demo-renungan-masjid-03">
+                                    Demo: Renungan Masjid 03
+                                </a>
+                            </h3>
+
+                            <p class="mt-3 text-sm text-gray-600 leading-relaxed line-clamp-3">
+                                Artikel contoh untuk pengujian konten dakwah publik.
+                            </p>
+                        </div>
+
+                        <div class="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between">
+                            <a href="http://127.0.0.1:4173/artikel/demo-renungan-masjid-03"
+                               class="text-sm font-semibold text-blue-600 hover:text-blue-700">
+                                Baca Selengkapnya →
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                            <article class="flex flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm hover:shadow-lg transition duration-200">
+                                            <div class="h-48 w-full bg-gradient-to-r from-blue-900 to-indigo-900 flex items-center justify-center text-white text-3xl">
+                            📖
+                        </div>
+                    
+                    <div class="flex flex-1 flex-col justify-between p-6">
+                        <div>
+                            <div class="flex items-center gap-2 text-xs text-gray-400 mb-3">
+                                <span>18 Oct 2026</span>
+                                <span>•</span>
+                                <span>Sekretaris</span>
+                            </div>
+
+                            <h3 class="text-xl font-bold text-gray-900 hover:text-blue-600">
+                                <a href="http://127.0.0.1:4173/artikel/demo-renungan-masjid-04">
+                                    Demo: Renungan Masjid 04
+                                </a>
+                            </h3>
+
+                            <p class="mt-3 text-sm text-gray-600 leading-relaxed line-clamp-3">
+                                Artikel contoh untuk pengujian konten dakwah publik.
+                            </p>
+                        </div>
+
+                        <div class="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between">
+                            <a href="http://127.0.0.1:4173/artikel/demo-renungan-masjid-04"
+                               class="text-sm font-semibold text-blue-600 hover:text-blue-700">
+                                Baca Selengkapnya →
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                    </div>
+
+        <div class="mt-8">
+            
+        </div>
+    </div>
+</section>
+
+    </main>
+
+
+    
+
+    <footer class="bg-slate-900 text-white mt-16">
+
+        <div class="max-w-7xl mx-auto px-6 py-12">
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+
+
+                
+
+                <div>
+
+                    <h2 class="text-xl font-bold">
+                        Masjid Terpadu
+                    </h2>
+
+                    <p class="text-slate-400 text-sm mt-3 leading-relaxed">
+                        Sistem Manajemen Masjid Terpadu untuk
+                        mendukung pengelolaan masjid dan pelayanan
+                        kepada jamaah.
+                    </p>
+
+                </div>
+
+
+                
+
+                <div>
+
+                    <h3 class="font-semibold mb-4">
+                        Layanan
+                    </h3>
+
+                    <div class="space-y-2 text-sm">
+
+                        <a
+                            href="http://127.0.0.1:4173/donasi"
+                            class="block text-slate-400 hover:text-white"
+                        >
+                            Donasi
+                        </a>
+
+                        <a
+                            href="http://127.0.0.1:4173/zakat"
+                            class="block text-slate-400 hover:text-white"
+                        >
+                            Kalkulator Zakat
+                        </a>
+
+                        <a
+                            href="http://127.0.0.1:4173/kegiatan"
+                            class="block text-slate-400 hover:text-white"
+                        >
+                            Kegiatan Masjid
+                        </a>
+
+                        <a href="http://127.0.0.1:4173/perpustakaan" class="block text-slate-400 hover:text-white">Katalog Perpustakaan</a>
+
+                        <a
+                            href="http://127.0.0.1:4173/transparansi"
+                            class="block text-slate-400 hover:text-white"
+                        >
+                            Transparansi Keuangan
+                        </a>
+
+                        <a
+                            href="http://127.0.0.1:4173/digital-signage"
+                            class="block text-slate-400 hover:text-white"
+                            target="_blank"
+                        >
+                            Digital Signage TV
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                
+
+                <div>
+
+                    <h3 class="font-semibold mb-4">
+                        Informasi Masjid
+                    </h3>
+
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Sistem Manajemen Masjid Terpadu menyediakan
+                        informasi kegiatan, layanan jamaah,
+                        dan informasi publik masjid.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="border-t border-slate-700 mt-10 pt-6">
+
+                <p class="text-center text-sm text-slate-500">
+                    © 2026 Masjid Terpadu.
+                    Semua hak dilindungi.
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    
+</body>
+
+</html>

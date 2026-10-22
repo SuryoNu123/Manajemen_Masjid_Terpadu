@@ -11,20 +11,6 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    <style>
-        /* Menyembunyikan scrollbar sidebar tanpa mematikan scroll */
-        .sidebar-menu {
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-        }
-
-        .sidebar-menu::-webkit-scrollbar {
-            display: none;
-            width: 0;
-            height: 0;
-        }
-    </style>
-
     @stack('styles')
 </head>
 

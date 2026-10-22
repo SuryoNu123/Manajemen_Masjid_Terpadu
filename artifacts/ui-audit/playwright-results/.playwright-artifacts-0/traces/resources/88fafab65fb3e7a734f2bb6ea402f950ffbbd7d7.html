@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="http://127.0.0.1:4173/masjid-mark.png">
+
+    <title>
+        Administrasi Akun - Sistem Manajemen Masjid
+    </title>
+
+    <link rel="preload" as="style" href="http://127.0.0.1:4173/build/assets/app-DjPiks-K.css" /><link rel="modulepreload" as="script" href="http://127.0.0.1:4173/build/assets/app-B-YYcDzE.js" /><link rel="stylesheet" href="http://127.0.0.1:4173/build/assets/app-DjPiks-K.css" /><script type="module" src="http://127.0.0.1:4173/build/assets/app-B-YYcDzE.js"></script>
+    </head>
+
+<body class="bg-gray-100 text-gray-800">
+
+<div class="min-h-screen" x-data="{ sidebarOpen: false }">
+
+    <div
+        x-cloak
+        x-show="sidebarOpen"
+        x-transition.opacity
+        class="fixed inset-0 z-30 bg-slate-950/50 lg:hidden"
+        @click="sidebarOpen = false"
+        @keydown.escape.window="sidebarOpen = false"
+        aria-hidden="true"
+    ></div>
+
+    
+    <aside
+        class="sidebar-menu fixed inset-y-0 left-0 z-40 flex h-screen w-72 max-w-[85vw] flex-col overflow-hidden bg-slate-900 text-white transition-transform duration-200 ease-out lg:w-64 lg:translate-x-0"
+        :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
+        id="dashboard-sidebar"
+        aria-label="Navigasi dashboard"
+    >
+
+        
+        <div class="shrink-0 border-b border-slate-700 px-6 py-5">
+            <div class="flex items-center gap-3">
+                <img src="http://127.0.0.1:4173/masjid-mark.png" alt="Logo Masjid Terpadu" class="rounded-2xl object-contain h-11 w-11 shrink-0">
+                <div>
+                    <h1 class="text-base font-bold">
+                        Masjid Terpadu
+                    </h1>
+                    <p class="mt-1 text-xs text-slate-400">
+                        Sistem Manajemen Masjid
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        
+        <nav class="sidebar-menu min-h-0 flex-1 space-y-1 overflow-y-auto overscroll-contain p-4">
+
+            <a href="http://127.0.0.1:4173/dashboard"
+               class="flex items-center gap-3 rounded-lg px-4 py-3 hover:bg-slate-800 text-slate-200"
+               >
+                <span>Dashboard</span>
+            </a>
+
+            
+                            <div class="space-y-4 pt-2">
+
+    
+    <div>
+        <p class="px-4 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+            Keuangan & Bisnis
+        </p>
+        <div class="mt-1 space-y-0.5">
+            <a href="http://127.0.0.1:4173/transaksi-keuangan"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Transaksi Keuangan
+            </a>
+            <a href="http://127.0.0.1:4173/laporan-keuangan"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Laporan Keuangan
+            </a>
+            <a href="http://127.0.0.1:4173/business-units"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Unit Usaha Masjid
+            </a>
+            <a href="http://127.0.0.1:4173/business-unit-items"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Stok Produk Toko
+            </a>
+            <a href="http://127.0.0.1:4173/business-unit-sales"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Pencatatan Omzet
+            </a>
+            <a href="http://127.0.0.1:4173/business-unit-sales/report"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Laporan Omzet
+            </a>
+        </div>
+    </div>
+
+    
+    <div>
+        <p class="px-4 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+            Ibadah & Jamaah
+        </p>
+        <div class="mt-1 space-y-0.5">
+            <a href="http://127.0.0.1:4173/jamaahs"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Database Jamaah
+            </a>
+            <a href="http://127.0.0.1:4173/jadwal-sholat"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Jadwal Sholat
+            </a>
+            <a href="http://127.0.0.1:4173/activities"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Kegiatan Ibadah & Kajian
+            </a>
+            <a href="http://127.0.0.1:4173/officers"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Petugas & Imam Sholat
+            </a>
+        </div>
+    </div>
+
+    
+    <div>
+        <p class="px-4 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+            Pendidikan & Remaja
+        </p>
+        <div class="mt-1 space-y-0.5">
+            <a href="http://127.0.0.1:4173/youth-members"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Anggota Remaja Masjid
+            </a>
+            <a href="http://127.0.0.1:4173/youth-programs"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Program Kerja Remaja
+            </a>
+            <a href="http://127.0.0.1:4173/santris"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Santri TPQ/TPA
+            </a>
+            <a href="http://127.0.0.1:4173/santri-attendances/report"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Laporan Absensi TPQ
+            </a>
+        </div>
+    </div>
+
+    
+    <div>
+        <p class="px-4 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+            Aset & Perpustakaan
+        </p>
+        <div class="mt-1 space-y-0.5">
+            <a href="http://127.0.0.1:4173/assets"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Inventaris Aset
+            </a>
+            <a href="http://127.0.0.1:4173/asset-maintenances"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Perawatan Aset
+            </a>
+            <a href="http://127.0.0.1:4173/library-books"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Katalog Buku
+            </a>
+            <a href="http://127.0.0.1:4173/book-loans"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Peminjaman Buku
+            </a>
+            <a href="http://127.0.0.1:4173/book-loan-requests" class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">Permintaan Pinjam Jamaah</a>
+            <a href="http://127.0.0.1:4173/book-loans/report"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Laporan Perpustakaan
+            </a>
+        </div>
+    </div>
+
+    
+    <div>
+        <p class="px-4 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+            Publikasi & Sistem
+        </p>
+        <div class="mt-1 space-y-0.5">
+            <a href="http://127.0.0.1:4173/announcements"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Pengumuman Masjid
+            </a>
+            <a href="http://127.0.0.1:4173/dakwah-contents"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Konten & Artikel Dakwah
+            </a>
+            <a href="http://127.0.0.1:4173/activity-logs"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 ">
+                Log Aktivitas Sistem
+            </a>
+            <a href="http://127.0.0.1:4173/admin/pengguna" class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 bg-slate-800 text-white font-medium">Administrasi Akun</a>
+            <a href="http://127.0.0.1:4173" target="_blank"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800">
+                Website Publik ↗
+            </a>
+            <a href="http://127.0.0.1:4173/digital-signage" target="_blank"
+               class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800">
+                Digital Signage TV ↗
+            </a>
+        </div>
+    </div>
+
+</div>
+            
+            
+            <a href="http://127.0.0.1:4173/notifikasi"
+               class="flex items-center justify-between gap-3 rounded-lg px-4 py-3 hover:bg-slate-800">
+
+                <span>Notifikasi</span>
+
+                
+            </a>
+
+        </nav>
+
+    </aside>
+
+    
+    <main class="min-h-screen min-w-0 lg:ml-64">
+
+        
+        <header class="sticky top-0 z-20 flex h-16 items-center justify-between gap-3 border-b border-gray-200 bg-white px-4 sm:px-8">
+
+            <div class="flex min-w-0 items-center gap-3">
+                <button
+                    type="button"
+                    class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-gray-200 text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-emerald-600 lg:hidden"
+                    @click="sidebarOpen = !sidebarOpen"
+                    :aria-expanded="sidebarOpen.toString()"
+                    aria-controls="dashboard-sidebar"
+                    aria-label="Buka atau tutup menu navigasi"
+                >
+                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+                <h2 class="min-w-0 truncate text-sm font-semibold text-gray-800 sm:text-base" title="Administrasi Akun">
+                    Administrasi Akun                </h2>
+            </div>
+
+            <div class="flex shrink-0 items-center gap-3 sm:gap-4">
+
+                <div class="hidden text-right sm:block">
+                    <p class="text-sm font-semibold">
+                        Ketua DKM
+                    </p>
+
+                    <p class="text-xs capitalize text-gray-500">
+                        Ketua DKM
+                    </p>
+                </div>
+
+                <form method="POST" action="http://127.0.0.1:4173/logout">
+                    <input type="hidden" name="_token" value="dxdyaYD7GzuLXexv8nvidAPR6usINQZ7SidczUCZ" autocomplete="off">
+                    <button
+                        type="submit"
+                        class="text-sm text-red-600 hover:text-red-800">
+                        Logout
+                    </button>
+                </form>
+
+            </div>
+
+        </header>
+
+        
+        <section class="min-w-0 p-4 sm:p-6 lg:p-8">
+
+            
+            
+            <div class="space-y-6">
+    <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+        <div><h2 class="text-xl font-bold text-slate-800">Akun pengguna</h2><p class="mt-1 text-sm text-slate-500">Kelola akun, role, status, dan tautan data Jamaah.</p></div>
+        <a href="http://127.0.0.1:4173/admin/pengguna/create" class="rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white">Tambah akun</a>
+    </div>
+            <form method="GET" class="grid gap-3 rounded-xl border border-slate-200 bg-white p-4 sm:grid-cols-4">
+        <input name="search" value="" placeholder="Cari nama atau email" class="rounded-lg border-slate-300 text-sm">
+        <select name="role_id" class="rounded-lg border-slate-300 text-sm"><option value="">Semua role</option><option value="2" >Bendahara</option><option value="5" >Jamaah</option><option value="1" >Ketua DKM</option><option value="4" >Marbot / Petugas</option><option value="3" >Sekretaris / Humas</option></select>
+        <select name="status" class="rounded-lg border-slate-300 text-sm"><option value="">Semua status</option><option value="active" >Aktif</option><option value="inactive" >Nonaktif</option></select>
+        <button class="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white">Terapkan filter</button>
+    </form>
+    <div class="overflow-x-auto rounded-xl border border-slate-200 bg-white">
+        <table class="min-w-full divide-y divide-slate-200 text-sm"><thead class="bg-slate-50"><tr><th class="px-4 py-3 text-left">Nama</th><th class="px-4 py-3 text-left">Email</th><th class="px-4 py-3 text-left">Role</th><th class="px-4 py-3 text-left">Status</th><th class="px-4 py-3 text-left">Profil Jamaah</th><th class="px-4 py-3"></th></tr></thead><tbody class="divide-y divide-slate-100">
+        <tr><td class="px-4 py-3 font-medium">Bendahara</td><td class="px-4 py-3">bendahara@masjid.test</td><td class="px-4 py-3">Bendahara</td><td class="px-4 py-3">Aktif</td><td class="px-4 py-3">—</td><td class="px-4 py-3 text-right"><a class="font-semibold text-blue-700" href="http://127.0.0.1:4173/admin/pengguna/2">Detail</a></td></tr>
+        <tr><td class="px-4 py-3 font-medium">Jamaah Browser</td><td class="px-4 py-3">registration-desktop@masjid.test</td><td class="px-4 py-3">Jamaah</td><td class="px-4 py-3">Aktif</td><td class="px-4 py-3">—</td><td class="px-4 py-3 text-right"><a class="font-semibold text-blue-700" href="http://127.0.0.1:4173/admin/pengguna/6">Detail</a></td></tr>
+        <tr><td class="px-4 py-3 font-medium">Jamaah Pengujian</td><td class="px-4 py-3">jamaah@masjid.test</td><td class="px-4 py-3">Jamaah</td><td class="px-4 py-3">Aktif</td><td class="px-4 py-3">—</td><td class="px-4 py-3 text-right"><a class="font-semibold text-blue-700" href="http://127.0.0.1:4173/admin/pengguna/5">Detail</a></td></tr>
+        <tr><td class="px-4 py-3 font-medium">Ketua DKM</td><td class="px-4 py-3">ketua@masjid.test</td><td class="px-4 py-3">Ketua DKM</td><td class="px-4 py-3">Aktif</td><td class="px-4 py-3">—</td><td class="px-4 py-3 text-right"><a class="font-semibold text-blue-700" href="http://127.0.0.1:4173/admin/pengguna/1">Detail</a></td></tr>
+        <tr><td class="px-4 py-3 font-medium">Marbot</td><td class="px-4 py-3">marbot@masjid.test</td><td class="px-4 py-3">Marbot / Petugas</td><td class="px-4 py-3">Aktif</td><td class="px-4 py-3">—</td><td class="px-4 py-3 text-right"><a class="font-semibold text-blue-700" href="http://127.0.0.1:4173/admin/pengguna/4">Detail</a></td></tr>
+        <tr><td class="px-4 py-3 font-medium">Sekretaris</td><td class="px-4 py-3">sekretaris@masjid.test</td><td class="px-4 py-3">Sekretaris / Humas</td><td class="px-4 py-3">Aktif</td><td class="px-4 py-3">—</td><td class="px-4 py-3 text-right"><a class="font-semibold text-blue-700" href="http://127.0.0.1:4173/admin/pengguna/3">Detail</a></td></tr>
+                </tbody></table>
+        <div class="border-t p-4"></div>
+    </div>
+</div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+</body>
+</html>
