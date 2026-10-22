@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\GenerateFinancialReportRequest;
 use App\Models\FinancialReport;
 use App\Models\FinancialTransaction;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
@@ -14,16 +16,24 @@ class FinancialReportController extends Controller
     /**
      * Daftar laporan keuangan.
      */
-    public function index(): View
+    public function index(Request $request): View
     {
-        $reports = FinancialReport::with([
-            'submittedBy',
-            'reviewedBy',
-        ])
+        $filters = $request->validate([
+            'year' => ['nullable', 'integer', 'between:1900,2200'],
+            'period_type' => ['nullable', 'in:monthly,yearly'],
+            'status' => ['nullable', 'in:draft,submitted,approved,rejected,published'],
+        ]);
+
+        $reports = FinancialReport::query()
+            ->with(['submittedBy', 'reviewedBy'])
+            ->when($filters['year'] ?? null, fn (Builder $query, int $year): Builder => $query->where('year', $year))
+            ->when($filters['period_type'] ?? null, fn (Builder $query, string $periodType): Builder => $query->where('period_type', $periodType))
+            ->when($filters['status'] ?? null, fn (Builder $query, string $status): Builder => $query->where('status', $status))
             ->latest('year')
             ->latest('month')
             ->latest('id')
-            ->paginate(10);
+            ->paginate(10)
+            ->withQueryString();
 
         return view(
             'financial-reports.index',

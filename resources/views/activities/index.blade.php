@@ -33,6 +33,35 @@
 
     @endif
 
+    <form method="GET" action="{{ route('activities.index') }}" class="grid gap-3 rounded-xl border border-slate-200 bg-white p-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="sm:col-span-2">
+            <label for="activity-search" class="mb-1 block text-sm font-medium text-slate-700">Cari kegiatan</label>
+            <input id="activity-search" name="search" type="search" value="{{ request('search') }}" maxlength="100" placeholder="Judul, penceramah, atau lokasi" class="w-full rounded-lg border-slate-300 text-sm focus:border-blue-500 focus:ring-blue-500">
+        </div>
+        <div>
+            <label for="activity-type" class="mb-1 block text-sm font-medium text-slate-700">Jenis</label>
+            <select id="activity-type" name="type" class="w-full rounded-lg border-slate-300 text-sm focus:border-blue-500 focus:ring-blue-500">
+                <option value="">Semua jenis</option>
+                @foreach($activityTypes as $activityType)
+                    <option value="{{ $activityType }}" @selected(request('type') === $activityType)>{{ ucfirst(str_replace('_', ' ', $activityType)) }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div>
+            <label for="activity-status" class="mb-1 block text-sm font-medium text-slate-700">Status</label>
+            <select id="activity-status" name="status" class="w-full rounded-lg border-slate-300 text-sm focus:border-blue-500 focus:ring-blue-500">
+                <option value="">Semua status</option>
+                @foreach(['scheduled' => 'Terjadwal', 'ongoing' => 'Berlangsung', 'completed' => 'Selesai', 'cancelled' => 'Dibatalkan'] as $value => $label)
+                    <option value="{{ $value }}" @selected(request('status') === $value)>{{ $label }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="flex flex-wrap items-center gap-2 sm:col-span-2 lg:col-span-4">
+            <button type="submit" class="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800">Terapkan filter</button>
+            <a href="{{ route('activities.index') }}" class="rounded-lg border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">Reset</a>
+        </div>
+    </form>
+
     <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden">
 
         <div class="overflow-x-auto">

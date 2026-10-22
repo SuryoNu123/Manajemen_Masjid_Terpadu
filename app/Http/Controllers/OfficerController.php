@@ -3,13 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Models\Officer;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class OfficerController extends Controller
 {
-    public function index()
+    public function index(Request $request): View
     {
-        $officers = Officer::latest()->paginate(10);
+        $filters = $request->validate([
+            'search' => ['nullable', 'string', 'max:100'],
+            'position' => ['nullable', 'in:imam,khatib,muadzin,petugas,lainnya'],
+            'status' => ['nullable', 'in:active,inactive'],
+        ]);
+
+        $officers = Officer::query()
+            ->when($filters['search'] ?? null, function (Builder $query, string $search): void {
+                $query->where('name', 'like', "%{$search}%");
+            })
+            ->when($filters['position'] ?? null, fn (Builder $query, string $position): Builder => $query->where('position', $position))
+            ->when($filters['status'] ?? null, fn (Builder $query, string $status): Builder => $query->where('is_active', $status === 'active'))
+            ->latest()
+            ->paginate(10)
+            ->withQueryString();
 
         return view('officers.index', compact('officers'));
     }

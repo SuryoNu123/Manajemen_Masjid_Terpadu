@@ -189,6 +189,57 @@ for (const viewport of viewports) {
             expect(browserErrors).toEqual([]);
         });
 
+        test('administrative search and filter forms work without overflowing', async ({ page }) => {
+            await page.goto('/login');
+            await page.getByLabel('Email').fill('ketua@masjid.test');
+            await page.getByLabel('Password').fill('password123');
+            await page.getByRole('button', { name: 'Masuk' }).click();
+            await expect(page).toHaveURL(/\/dashboard$/);
+
+            const leadershipFilters = [
+                { path: '/activities', search: 'Kajian', filter: 'status', value: 'scheduled' },
+                { path: '/officers', search: 'Imam', filter: 'position', value: 'imam' },
+                { path: '/laporan-keuangan', search: null, filter: 'year', value: '2026' },
+            ];
+
+            for (const screen of leadershipFilters) {
+                await page.goto(screen.path);
+                const filterForm = page.locator('form[method="GET"]').first();
+                await expect(filterForm).toBeVisible();
+                if (screen.search) {
+                    await filterForm.locator('input[name="search"]').fill(screen.search);
+                }
+                if (screen.filter === 'year') {
+                    await filterForm.locator(`[name="${screen.filter}"]`).fill(screen.value);
+                } else {
+                    await filterForm.locator(`[name="${screen.filter}"]`).selectOption(screen.value);
+                }
+                await filterForm.getByRole('button', { name: /Terapkan/ }).click();
+                await expect(page).toHaveURL(new RegExp(`${screen.filter}=${screen.value}`));
+                await checkLayout(page);
+                await page.getByRole('link', { name: 'Reset' }).click();
+                await expect(page).toHaveURL(new RegExp(`${screen.path}$`));
+            }
+
+            await page.getByRole('button', { name: 'Logout' }).click();
+            await page.goto('/login');
+            await page.getByLabel('Email').fill('bendahara@masjid.test');
+            await page.getByLabel('Password').fill('password123');
+            await page.getByRole('button', { name: 'Masuk' }).click();
+            await expect(page).toHaveURL(/\/dashboard$/);
+
+            await page.goto('/mustahik');
+            const mustahikFilters = page.locator('form[method="GET"]').first();
+            await mustahikFilters.locator('input[name="search"]').fill('Ahmad');
+            await mustahikFilters.locator('[name="asnaf"]').selectOption('fakir');
+            await mustahikFilters.locator('[name="status"]').selectOption('pending');
+            await mustahikFilters.getByRole('button', { name: 'Terapkan filter' }).click();
+            await expect(page).toHaveURL(/search=Ahmad.*asnaf=fakir.*status=pending/);
+            await checkLayout(page);
+            await page.getByRole('link', { name: 'Reset' }).click();
+            await expect(page).toHaveURL(/\/mustahik$/);
+        });
+
         for (const user of dashboardUsers) {
             test(`${user.role} dashboard renders through normal login`, async ({ page }) => {
                 const browserErrors = [];
@@ -245,6 +296,20 @@ for (const viewport of viewports) {
                     await expect(page.locator('#dashboard-sidebar')).toBeInViewport();
                     await checkLayout(page);
                     await capturePage(page, viewport.name, `${user.role}-dashboard-sidebar-open`);
+                }
+
+                if (user.role === 'ketua') {
+                    const financialGroup = page.locator('#dashboard-sidebar details').filter({ hasText: 'Keuangan & Bisnis' });
+
+                    await expect(financialGroup.locator('summary')).toBeVisible();
+                    await expect(financialGroup.locator('a').first()).toBeHidden();
+                    await financialGroup.locator('summary').click();
+                    await expect(financialGroup.getByRole('link', { name: 'Transaksi Keuangan' })).toBeVisible();
+
+                    await page.goto('/transaksi-keuangan');
+                    await expect(page.locator('#dashboard-sidebar details[open]').filter({ hasText: 'Keuangan & Bisnis' }))
+                        .toHaveAttribute('open', '');
+                    await checkLayout(page);
                 }
 
                 expect(browserErrors).toEqual([]);

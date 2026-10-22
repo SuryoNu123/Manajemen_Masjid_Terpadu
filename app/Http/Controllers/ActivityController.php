@@ -4,18 +4,44 @@ namespace App\Http\Controllers;
 
 use App\Models\Activity;
 use App\Models\Officer;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
 
 class ActivityController extends Controller
 {
-    public function index()
+    public function index(Request $request): View
     {
-        $activities = Activity::latest('activity_date')
-            ->latest('start_time')
-            ->paginate(10);
+        $filters = $request->validate([
+            'search' => ['nullable', 'string', 'max:100'],
+            'type' => ['nullable', 'string', 'max:100'],
+            'status' => ['nullable', 'in:scheduled,ongoing,completed,cancelled'],
+        ]);
 
-        return view('activities.index', compact('activities'));
+        $query = Activity::query()
+            ->when($filters['search'] ?? null, function (Builder $query, string $search): void {
+                $query->where(function (Builder $query) use ($search): void {
+                    $query->where('title', 'like', "%{$search}%")
+                        ->orWhere('speaker', 'like', "%{$search}%")
+                        ->orWhere('location', 'like', "%{$search}%");
+                });
+            })
+            ->when($filters['type'] ?? null, fn (Builder $query, string $type): Builder => $query->where('type', $type))
+            ->when($filters['status'] ?? null, fn (Builder $query, string $status): Builder => $query->where('status', $status));
+
+        $activities = $query->latest('activity_date')
+            ->latest('start_time')
+            ->paginate(10)
+            ->withQueryString();
+
+        $activityTypes = Activity::query()
+            ->select('type')
+            ->distinct()
+            ->orderBy('type')
+            ->pluck('type');
+
+        return view('activities.index', compact('activities', 'activityTypes'));
     }
 
     public function create()

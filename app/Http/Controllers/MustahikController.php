@@ -5,15 +5,30 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreMustahikRequest;
 use App\Http\Requests\UpdateMustahikRequest;
 use App\Models\Mustahik;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class MustahikController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
-        $mustahiks = Mustahik::latest()
-            ->paginate(10);
+        $filters = $request->validate([
+            'search' => ['nullable', 'string', 'max:100'],
+            'asnaf' => ['nullable', 'in:fakir,miskin,amil,muallaf,riqab,gharim,fisabilillah,ibnu_sabil'],
+            'status' => ['nullable', 'in:pending,distributed'],
+        ]);
+
+        $mustahiks = Mustahik::query()
+            ->when($filters['search'] ?? null, function (Builder $query, string $search): void {
+                $query->where('name', 'like', "%{$search}%");
+            })
+            ->when($filters['asnaf'] ?? null, fn (Builder $query, string $asnaf): Builder => $query->where('asnaf', $asnaf))
+            ->when($filters['status'] ?? null, fn (Builder $query, string $status): Builder => $query->where('status', $status))
+            ->latest()
+            ->paginate(10)
+            ->withQueryString();
 
         $totalRecipients = Mustahik::count();
 

@@ -1,10 +1,11 @@
 <div class="space-y-4 pt-2">
 
     {{-- ADMINISTRASI & JAMAAH --}}
-    <div>
-        <p class="px-4 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+    <details class="group" @if(request()->routeIs('jamaahs.*', 'officers.*', 'activities.*')) open @endif>
+        <summary class="flex cursor-pointer list-none items-center justify-between rounded-lg px-4 py-2 text-[11px] font-bold uppercase tracking-wider text-slate-400 hover:bg-slate-800 hover:text-slate-200">
             Administrasi & Jamaah
-        </p>
+            <svg aria-hidden="true" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" class="h-4 w-4 transition-transform group-open:rotate-180"><path stroke-linecap="round" stroke-linejoin="round" d="m5 7.5 5 5 5-5" /></svg>
+        </summary>
         <div class="mt-1 space-y-0.5">
             <a href="{{ route('jamaahs.index') }}"
                class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 {{ request()->routeIs('jamaahs.*') ? 'bg-slate-800 text-white font-medium' : '' }}">
@@ -19,13 +20,14 @@
                 Kegiatan & Kajian
             </a>
         </div>
-    </div>
+    </details>
 
     {{-- KONTEN & PUBLIKASI --}}
-    <div>
-        <p class="px-4 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+    <details class="group" @if(request()->routeIs('announcements.*', 'dakwah-contents.*', 'home')) open @endif>
+        <summary class="flex cursor-pointer list-none items-center justify-between rounded-lg px-4 py-2 text-[11px] font-bold uppercase tracking-wider text-slate-400 hover:bg-slate-800 hover:text-slate-200">
             Konten & Informasi
-        </p>
+            <svg aria-hidden="true" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" class="h-4 w-4 transition-transform group-open:rotate-180"><path stroke-linecap="round" stroke-linejoin="round" d="m5 7.5 5 5 5-5" /></svg>
+        </summary>
         <div class="mt-1 space-y-0.5">
             <a href="{{ route('announcements.index') }}"
                class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 {{ request()->routeIs('announcements.*') ? 'bg-slate-800 text-white font-medium' : '' }}">
@@ -40,13 +42,14 @@
                 Website Publik ↗
             </a>
         </div>
-    </div>
+    </details>
 
     {{-- REMAJA & TPQ/TPA --}}
-    <div>
-        <p class="px-4 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+    <details class="group" @if(request()->routeIs('youth-members.*', 'youth-programs.*', 'santris.*', 'tpq-classes.*', 'santri-attendances.*')) open @endif>
+        <summary class="flex cursor-pointer list-none items-center justify-between rounded-lg px-4 py-2 text-[11px] font-bold uppercase tracking-wider text-slate-400 hover:bg-slate-800 hover:text-slate-200">
             Remaja Masjid & TPQ
-        </p>
+            <svg aria-hidden="true" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" class="h-4 w-4 transition-transform group-open:rotate-180"><path stroke-linecap="round" stroke-linejoin="round" d="m5 7.5 5 5 5-5" /></svg>
+        </summary>
         <div class="mt-1 space-y-0.5">
             <a href="{{ route('youth-members.index') }}"
                class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 {{ request()->routeIs('youth-members.*') ? 'bg-slate-800 text-white font-medium' : '' }}">
@@ -73,13 +76,14 @@
                 Laporan Absensi TPQ
             </a>
         </div>
-    </div>
+    </details>
 
     {{-- PERPUSTAKAAN --}}
-    <div>
-        <p class="px-4 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+    <details class="group" @if(request()->routeIs('library-books.*', 'book-loans.*', 'book-loan-requests.*')) open @endif>
+        <summary class="flex cursor-pointer list-none items-center justify-between rounded-lg px-4 py-2 text-[11px] font-bold uppercase tracking-wider text-slate-400 hover:bg-slate-800 hover:text-slate-200">
             Perpustakaan Masjid
-        </p>
+            <svg aria-hidden="true" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" class="h-4 w-4 transition-transform group-open:rotate-180"><path stroke-linecap="round" stroke-linejoin="round" d="m5 7.5 5 5 5-5" /></svg>
+        </summary>
         <div class="mt-1 space-y-0.5">
             <a href="{{ route('library-books.index') }}"
                class="block rounded-lg px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 {{ request()->routeIs('library-books.*') ? 'bg-slate-800 text-white font-medium' : '' }}">
@@ -95,6 +99,6 @@
                 Laporan Perpustakaan
             </a>
         </div>
-    </div>
+    </details>
 
 </div>

@@ -52,6 +52,35 @@
 @endif
 
 
+<form method="GET" action="{{ route('laporan-keuangan.index') }}" class="mb-6 grid gap-3 rounded-xl border border-gray-200 bg-white p-4 sm:grid-cols-2 lg:grid-cols-4">
+    <div>
+        <label for="report-year" class="mb-1 block text-sm font-medium text-gray-700">Tahun</label>
+        <input id="report-year" name="year" type="number" min="1900" max="2200" value="{{ request('year') }}" placeholder="Semua tahun" class="w-full rounded-lg border-gray-300 text-sm focus:border-blue-500 focus:ring-blue-500">
+    </div>
+    <div>
+        <label for="report-period-type" class="mb-1 block text-sm font-medium text-gray-700">Periode</label>
+        <select id="report-period-type" name="period_type" class="w-full rounded-lg border-gray-300 text-sm focus:border-blue-500 focus:ring-blue-500">
+            <option value="">Semua periode</option>
+            <option value="monthly" @selected(request('period_type') === 'monthly')>Bulanan</option>
+            <option value="yearly" @selected(request('period_type') === 'yearly')>Tahunan</option>
+        </select>
+    </div>
+    <div>
+        <label for="report-status" class="mb-1 block text-sm font-medium text-gray-700">Status</label>
+        <select id="report-status" name="status" class="w-full rounded-lg border-gray-300 text-sm focus:border-blue-500 focus:ring-blue-500">
+            <option value="">Semua status</option>
+            @foreach(['draft' => 'Draft', 'submitted' => 'Menunggu Review', 'approved' => 'Disetujui', 'rejected' => 'Ditolak', 'published' => 'Dipublikasikan'] as $value => $label)
+                <option value="{{ $value }}" @selected(request('status') === $value)>{{ $label }}</option>
+            @endforeach
+        </select>
+    </div>
+    <div class="flex flex-wrap items-end gap-2 sm:col-span-2 lg:col-span-1">
+        <button type="submit" class="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800">Terapkan</button>
+        <a href="{{ route('laporan-keuangan.index') }}" class="rounded-lg border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50">Reset</a>
+    </div>
+</form>
+
+
 <div class="bg-white rounded-xl shadow-sm overflow-hidden">
 
     <div class="overflow-x-auto">

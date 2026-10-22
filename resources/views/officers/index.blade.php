@@ -33,6 +33,34 @@
 
     @endif
 
+    <form method="GET" action="{{ route('officers.index') }}" class="grid gap-3 rounded-xl border border-slate-200 bg-white p-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="sm:col-span-2">
+            <label for="officer-search" class="mb-1 block text-sm font-medium text-slate-700">Cari nama petugas</label>
+            <input id="officer-search" name="search" type="search" value="{{ request('search') }}" maxlength="100" placeholder="Nama petugas" class="w-full rounded-lg border-slate-300 text-sm focus:border-blue-500 focus:ring-blue-500">
+        </div>
+        <div>
+            <label for="officer-position" class="mb-1 block text-sm font-medium text-slate-700">Posisi</label>
+            <select id="officer-position" name="position" class="w-full rounded-lg border-slate-300 text-sm focus:border-blue-500 focus:ring-blue-500">
+                <option value="">Semua posisi</option>
+                @foreach(['imam' => 'Imam', 'khatib' => 'Khatib', 'muadzin' => 'Muadzin', 'petugas' => 'Petugas', 'lainnya' => 'Lainnya'] as $value => $label)
+                    <option value="{{ $value }}" @selected(request('position') === $value)>{{ $label }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div>
+            <label for="officer-status" class="mb-1 block text-sm font-medium text-slate-700">Status</label>
+            <select id="officer-status" name="status" class="w-full rounded-lg border-slate-300 text-sm focus:border-blue-500 focus:ring-blue-500">
+                <option value="">Semua status</option>
+                <option value="active" @selected(request('status') === 'active')>Aktif</option>
+                <option value="inactive" @selected(request('status') === 'inactive')>Tidak aktif</option>
+            </select>
+        </div>
+        <div class="flex flex-wrap items-center gap-2 sm:col-span-2 lg:col-span-4">
+            <button type="submit" class="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800">Terapkan filter</button>
+            <a href="{{ route('officers.index') }}" class="rounded-lg border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">Reset</a>
+        </div>
+    </form>
+
     <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden">
 
         <div class="overflow-x-auto">
