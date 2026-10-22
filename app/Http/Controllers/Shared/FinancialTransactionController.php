@@ -17,33 +17,28 @@ class FinancialTransactionController extends Controller
 {
     public function index(Request $request): View
     {
+        $filters = $request->validate([
+            'search' => ['nullable', 'string', 'max:100'],
+            'type' => ['nullable', 'in:income,expense'],
+            'category_id' => ['nullable', 'integer', 'exists:financial_categories,id'],
+            'start_date' => ['nullable', 'date'],
+            'end_date' => ['nullable', 'date', 'after_or_equal:start_date'],
+        ]);
+
         $query = FinancialTransaction::with('category')
             ->latest('transaction_date')
-            ->latest('id');
-
-        if ($request->filled('type')) {
-            $query->where('type', $request->type);
-        }
-
-        if ($request->filled('category_id')) {
-            $query->where('category_id', $request->category_id);
-        }
-
-        if ($request->filled('start_date')) {
-            $query->whereDate(
-                'transaction_date',
-                '>=',
-                $request->start_date
-            );
-        }
-
-        if ($request->filled('end_date')) {
-            $query->whereDate(
-                'transaction_date',
-                '<=',
-                $request->end_date
-            );
-        }
+            ->latest('id')
+            ->when($filters['search'] ?? null, function ($query, string $search): void {
+                $query->where(function ($query) use ($search): void {
+                    $query->where('transaction_code', 'like', "%{$search}%")
+                        ->orWhere('description', 'like', "%{$search}%")
+                        ->orWhereHas('category', fn ($categoryQuery) => $categoryQuery->where('name', 'like', "%{$search}%"));
+                });
+            })
+            ->when($filters['type'] ?? null, fn ($query, string $type) => $query->where('type', $type))
+            ->when($filters['category_id'] ?? null, fn ($query, int $categoryId) => $query->where('category_id', $categoryId))
+            ->when($filters['start_date'] ?? null, fn ($query, string $date) => $query->whereDate('transaction_date', '>=', $date))
+            ->when($filters['end_date'] ?? null, fn ($query, string $date) => $query->whereDate('transaction_date', '<=', $date));
 
         $transactions = $query->paginate(10)->withQueryString();
 

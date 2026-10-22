@@ -1,7 +1,11 @@
 <?php
 
 use App\Models\Activity;
+use App\Models\Donation;
+use App\Models\FinancialCategory;
 use App\Models\FinancialReport;
+use App\Models\FinancialTransaction;
+use App\Models\Jamaah;
 use App\Models\Mustahik;
 use App\Models\Officer;
 use App\Models\Role;
@@ -159,4 +163,124 @@ test('list filters reject unsupported enum values and invalid report years', fun
         ->assertSessionHasErrors('asnaf');
     $this->actingAs($ketua)->get(route('laporan-keuangan.index', ['year' => 1800]))
         ->assertSessionHasErrors('year');
+});
+
+test('bendahara can search and combine donation type status method and date filters', function () {
+    $bendahara = createSearchFilterUser('bendahara');
+
+    Donation::create([
+        'donation_code' => 'DON-TEST-001',
+        'donor_name' => 'Ahmad Ramadhan',
+        'type' => 'infaq',
+        'amount' => 100000,
+        'payment_method' => 'qris',
+        'payment_status' => 'paid',
+        'created_at' => '2026-10-10 10:00:00',
+    ]);
+    Donation::create([
+        'donation_code' => 'DON-TEST-002',
+        'donor_name' => 'Ahmad Ramadhan',
+        'type' => 'zakat',
+        'amount' => 100000,
+        'payment_method' => 'qris',
+        'payment_status' => 'paid',
+        'created_at' => '2026-10-10 10:00:00',
+    ]);
+
+    $this->actingAs($bendahara)->get(route('donasi.index', [
+        'search' => 'DON-TEST-001',
+        'type' => 'infaq',
+        'payment_status' => 'paid',
+        'payment_method' => 'qris',
+        'start_date' => '2026-10-01',
+        'end_date' => '2026-10-31',
+    ]))
+        ->assertOk()
+        ->assertSee('DON-TEST-001')
+        ->assertDontSee('DON-TEST-002');
+
+    $this->actingAs($bendahara)->get(route('donasi.index', [
+        'start_date' => '2026-10-31',
+        'end_date' => '2026-10-01',
+    ]))->assertSessionHasErrors('end_date');
+});
+
+test('secretary can filter jamaah by age range and status', function () {
+    $secretary = createSearchFilterUser('sekretaris');
+
+    Jamaah::create([
+        'name' => 'Ahmad Muda',
+        'domicile' => 'Bandung',
+        'birth_date' => today()->subYears(20)->toDateString(),
+        'status' => 'aktif',
+    ]);
+    Jamaah::create([
+        'name' => 'Ahmad Senior',
+        'domicile' => 'Bandung',
+        'birth_date' => today()->subYears(45)->toDateString(),
+        'status' => 'aktif',
+    ]);
+    Jamaah::create([
+        'name' => 'Ahmad Nonaktif',
+        'domicile' => 'Bandung',
+        'birth_date' => today()->subYears(20)->toDateString(),
+        'status' => 'nonaktif',
+    ]);
+
+    $this->actingAs($secretary)->get(route('jamaahs.index', [
+        'search' => 'Ahmad',
+        'status' => 'aktif',
+        'min_age' => 18,
+        'max_age' => 25,
+    ]))
+        ->assertOk()
+        ->assertSee('Ahmad Muda')
+        ->assertDontSee('Ahmad Senior')
+        ->assertDontSee('Ahmad Nonaktif');
+
+    $this->actingAs($secretary)->get(route('jamaahs.index', [
+        'min_age' => 30,
+        'max_age' => 20,
+    ]))->assertSessionHasErrors('max_age');
+});
+
+test('bendahara can search transactions and combine type category and date filters', function () {
+    $bendahara = createSearchFilterUser('bendahara');
+    $category = FinancialCategory::create(['name' => 'Infaq Umum', 'type' => 'income']);
+    $expenseCategory = FinancialCategory::create(['name' => 'Perawatan', 'type' => 'expense']);
+
+    FinancialTransaction::create([
+        'category_id' => $category->id,
+        'transaction_code' => 'TRX-SEARCH-001',
+        'type' => 'income',
+        'amount' => 250000,
+        'transaction_date' => '2026-10-10',
+        'description' => 'Donasi kegiatan remaja',
+        'status' => 'approved',
+    ]);
+    FinancialTransaction::create([
+        'category_id' => $expenseCategory->id,
+        'transaction_code' => 'TRX-SEARCH-002',
+        'type' => 'expense',
+        'amount' => 150000,
+        'transaction_date' => '2026-10-10',
+        'description' => 'Donasi perawatan',
+        'status' => 'approved',
+    ]);
+
+    $this->actingAs($bendahara)->get(route('transaksi.index', [
+        'search' => 'remaja',
+        'type' => 'income',
+        'category_id' => $category->id,
+        'start_date' => '2026-10-01',
+        'end_date' => '2026-10-31',
+    ]))
+        ->assertOk()
+        ->assertSee('TRX-SEARCH-001')
+        ->assertDontSee('TRX-SEARCH-002');
+
+    $this->actingAs($bendahara)->get(route('transaksi.index', [
+        'start_date' => '2026-10-31',
+        'end_date' => '2026-10-01',
+    ]))->assertSessionHasErrors('end_date');
 });

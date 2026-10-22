@@ -11,10 +11,14 @@ class AssetController extends Controller
 {
     public function index(Request $request)
     {
-        $search = $request->query('search');
+        $filters = $request->validate([
+            'search' => ['nullable', 'string', 'max:100'],
+            'condition' => ['nullable', Rule::in(['baik', 'perlu_perbaikan', 'rusak'])],
+            'status' => ['nullable', Rule::in(['active', 'inactive'])],
+        ]);
 
         $assets = Asset::query()
-            ->when($search, function ($query, $search) {
+            ->when($filters['search'] ?? null, function ($query, string $search): void {
                 $query->where(function ($q) use ($search) {
                     $q->where('asset_code', 'like', "%{$search}%")
                         ->orWhere('name', 'like', "%{$search}%")
@@ -22,11 +26,16 @@ class AssetController extends Controller
                         ->orWhere('location', 'like', "%{$search}%");
                 });
             })
+            ->when($filters['condition'] ?? null, fn ($query, string $condition) => $query->where('condition', $condition))
+            ->when($filters['status'] ?? null, fn ($query, string $status) => $query->where('is_active', $status === 'active'))
             ->orderBy('name')
             ->paginate(10)
             ->withQueryString();
 
-        return view('assets.index', compact('assets', 'search'));
+        return view('assets.index', [
+            'assets' => $assets,
+            'filters' => $filters,
+        ]);
     }
 
     public function create()

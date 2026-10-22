@@ -190,6 +190,8 @@ for (const viewport of viewports) {
         });
 
         test('administrative search and filter forms work without overflowing', async ({ page }) => {
+            test.setTimeout(90_000);
+
             await page.goto('/login');
             await page.getByLabel('Email').fill('ketua@masjid.test');
             await page.getByLabel('Password').fill('password123');
@@ -238,6 +240,28 @@ for (const viewport of viewports) {
             await checkLayout(page);
             await page.getByRole('link', { name: 'Reset' }).click();
             await expect(page).toHaveURL(/\/mustahik$/);
+
+            await page.goto('/kelola-donasi');
+            const donationFilters = page.locator('form[method="GET"]').first();
+            await donationFilters.locator('input[name="search"]').fill('DON-TEST');
+            await donationFilters.locator('[name="type"]').selectOption('infaq');
+            await donationFilters.locator('[name="payment_status"]').selectOption('pending');
+            await donationFilters.locator('[name="payment_method"]').selectOption('qris');
+            await donationFilters.getByRole('button', { name: 'Filter' }).click();
+            await expect(page).toHaveURL(/search=DON-TEST.*type=infaq.*payment_status=pending.*payment_method=qris/);
+            await checkLayout(page);
+            await page.getByRole('link', { name: 'Reset' }).click();
+            await expect(page).toHaveURL(/\/kelola-donasi$/);
+
+            await page.goto('/transaksi-keuangan');
+            const transactionFilters = page.locator('form[method="GET"]').first();
+            await transactionFilters.locator('input[name="search"]').fill('Infaq');
+            await transactionFilters.locator('[name="type"]').selectOption('income');
+            await transactionFilters.getByRole('button', { name: 'Filter' }).click();
+            await expect(page).toHaveURL(/search=Infaq.*type=income/);
+            await checkLayout(page);
+            await page.getByRole('link', { name: 'Reset' }).click();
+            await expect(page).toHaveURL(/\/transaksi-keuangan$/);
         });
 
         for (const user of dashboardUsers) {

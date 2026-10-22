@@ -5,7 +5,7 @@
 
 @section('content')
 
-<div class="flex items-center justify-between mb-6">
+<div class="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 
     <div>
         <h1 class="text-2xl font-bold text-gray-900">
@@ -18,7 +18,7 @@
     </div>
 
     @if(auth()->user()->hasRole('bendahara'))
-        <div class="flex gap-2">
+        <div class="flex flex-wrap gap-2">
 
             <a href="{{ route('transaksi.create', ['type' => 'income']) }}"
                class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">
@@ -92,7 +92,17 @@
 
     <form method="GET"
           action="{{ route('transaksi.index') }}"
-          class="grid grid-cols-1 md:grid-cols-5 gap-4">
+          class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-6 gap-4">
+
+        <div>
+            <label class="block text-sm font-medium mb-1" for="transaction-search">
+                Pencarian
+            </label>
+            <input id="transaction-search" type="search" name="search"
+                   value="{{ request('search') }}"
+                   placeholder="Kode, kategori, atau keterangan"
+                   class="w-full rounded-lg border-gray-300">
+        </div>
 
         <div>
             <label class="block text-sm font-medium mb-1">

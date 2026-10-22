@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class DonationController extends Controller
@@ -99,18 +100,31 @@ class DonationController extends Controller
      */
     public function index(Request $request): View
     {
-        $query = Donation::latest();
+        $filters = $request->validate([
+            'search' => ['nullable', 'string', 'max:100'],
+            'type' => ['nullable', Rule::in(['infaq', 'sedekah', 'zakat', 'qurban'])],
+            'payment_status' => ['nullable', Rule::in(['pending', 'paid', 'failed', 'expired'])],
+            'payment_method' => ['nullable', Rule::in(['qris', 'cash', 'transfer', 'other'])],
+            'start_date' => ['nullable', 'date'],
+            'end_date' => ['nullable', 'date', 'after_or_equal:start_date'],
+        ]);
 
-        if ($request->filled('type')) {
-            $query->where('type', $request->type);
-        }
-
-        if ($request->filled('payment_status')) {
-            $query->where(
-                'payment_status',
-                $request->payment_status
-            );
-        }
+        $query = Donation::query()
+            ->latest()
+            ->when($filters['search'] ?? null, function ($query, string $search): void {
+                $query->where(function ($query) use ($search): void {
+                    $query->where('donation_code', 'like', "%{$search}%")
+                        ->orWhere('donor_name', 'like', "%{$search}%")
+                        ->orWhere('donor_email', 'like', "%{$search}%")
+                        ->orWhere('donor_phone', 'like', "%{$search}%")
+                        ->orWhere('gateway_reference', 'like', "%{$search}%");
+                });
+            })
+            ->when($filters['type'] ?? null, fn ($query, string $type) => $query->where('type', $type))
+            ->when($filters['payment_status'] ?? null, fn ($query, string $status) => $query->where('payment_status', $status))
+            ->when($filters['payment_method'] ?? null, fn ($query, string $method) => $query->where('payment_method', $method))
+            ->when($filters['start_date'] ?? null, fn ($query, string $date) => $query->whereDate('created_at', '>=', $date))
+            ->when($filters['end_date'] ?? null, fn ($query, string $date) => $query->whereDate('created_at', '<=', $date));
 
         $donations = $query
             ->paginate(10)

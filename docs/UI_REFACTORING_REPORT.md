@@ -24,6 +24,8 @@ Tanggal: 22 Oktober 2026
 - Kelompok menu sidebar Ketua dan Sekretaris kini dapat dilipat memakai elemen disclosure native; kelompok untuk route aktif terbuka otomatis. Menu dan pemeriksaan hak akses tidak berubah.
 - Tabel mustahik dibungkus dengan area `overflow-x-auto`, sehingga kolom tetap dapat dibaca dan digeser pada ponsel.
 - Empat daftar kini memiliki filter GET tervalidasi dan berjalan di database: kegiatan (judul/penceramah/lokasi, jenis, status), petugas (nama, posisi, status aktif), mustahik (nama, asnaf, status penyaluran), serta laporan keuangan (tahun, jenis periode, status). Filter dapat digabung, memiliki reset, dan query dipertahankan oleh pagination.
+- Filter donasi mendukung pencarian referensi/nama/email/telepon, jenis, status pembayaran, metode, dan rentang tanggal tervalidasi. Transaksi keuangan mendukung pencarian kode/deskripsi/kategori, jenis, kategori, dan rentang tanggal tervalidasi. Aset mendukung pencarian, kondisi, dan status; jamaah mendukung pencarian, status, dan rentang usia dari tanggal lahir. Parameter tanggal jadwal sholat juga divalidasi.
+- Header halaman transaksi dirapikan agar tombol aksi dapat membungkus pada layar kecil.
 - Controller yang murni publik, Ketua, Bendahara, dan Jamaah dipindahkan ke namespace role masing-masing. Controller yang menangani beberapa role tetap berada di namespace bersama agar business logic tidak diduplikasi.
 - Route, middleware, nama route, query bisnis, dan skema database dipertahankan. Import route diperbarui untuk namespace baru.
 
@@ -42,7 +44,7 @@ Suite melakukan pemeriksaan overflow dokumen, clipping kontrol di luar container
 
 Kode controller menunjukkan query search/filter server-side dan pagination telah digunakan pada sejumlah daftar, antara lain jamaah, aset, perawatan aset, buku, pengumuman, artikel dakwah, unit usaha, item stok, program/anggota remaja, santri/kelas TPQ, log aktivitas, penjualan, dan administrasi akun. Empat filter baru ditambahkan untuk kegiatan, petugas, mustahik, dan laporan keuangan. Sebagian besar paginator yang diperiksa memakai `withQueryString()`.
 
-Filter pada setiap modul lain belum diaudit satu per satu di laporan ini. Filter tanggal/rentang, pencarian donasi, transaksi, presensi, dan laporan lain perlu pemeriksaan lanjutan terhadap kebutuhan yang tersedia di skema dan kontrak data modul terkait.
+Filter pada setiap modul lain belum diaudit satu per satu. Presensi dan laporan lain masih perlu pemeriksaan terhadap kebutuhan skema dan kontrak data masing-masing.
 
 ## Struktur Controller dan View
 
@@ -69,7 +71,8 @@ Views tetap dikelompokkan mengikuti modul yang digunakan saat ini, karena pemind
 - `resources/views/officers/index.blade.php`
 - `resources/views/mustahiks/index.blade.php`
 - `resources/views/financial-reports/index.blade.php`
-- Controller empat daftar tersebut
+- `resources/views/donations/index.blade.php`, `resources/views/financial-transactions/index.blade.php`, `resources/views/assets/index.blade.php`, `resources/views/jamaahs/index.blade.php`
+- Controller daftar terkait kegiatan, petugas, mustahik, laporan, donasi, transaksi, aset, jamaah, dan jadwal sholat
 - Controller role-spesifik dan lintas role di `app/Http/Controllers/{Public,Ketua,Bendahara,Jamaah,Shared}/`
 - `routes/web.php` (import controller)
 - `tests/Feature/SearchAndFilteringTest.php`
@@ -80,18 +83,20 @@ Views tetap dikelompokkan mengikuti modul yang digunakan saat ini, karena pemind
 ## Hasil verifikasi
 
 - `php artisan route:list --except-vendor`: berhasil, 186 route.
-- `php artisan test --compact`: berhasil setelah refactor namespace, 108 test dan 436 assertion.
+- `php artisan test --compact`: lulus 111 test dan 452 assertion setelah perubahan filter.
+- `php artisan test --compact tests/Feature/SearchAndFilteringTest.php`: lulus 8 test dan 44 assertion.
 - `php artisan view:cache`: berhasil.
 - `npm.cmd run build`: berhasil dengan Vite 8.3.1 dan Tailwind CSS 4.3.3. (`npm` PowerShell shim awalnya diblokir execution policy; command yang sama berhasil lewat `npm.cmd`.)
 - `node scripts/playwright-server.mjs`: 50 test lulus pada lima viewport sebelum skenario filter ditambahkan. Harness memakai SQLite sementara dan menghapus direktori temp saat selesai.
 - Test browser sidebar Ketua: 5 test lulus pada lima viewport; memeriksa grup tertutup, buka/tutup, grup aktif, dan overflow.
 - Test browser tambahan untuk mengirim/reset empat filter dan memeriksa overflow: 5 test lulus pada lima viewport. Run pertama menemukan tabel mustahik terpotong pada 390×844 dan 360×800; setelah dibungkus area gulir, run ulang lulus pada semua ukuran.
+- Run browser terbaru menemukan overflow 8px di transaksi keuangan pada 360x800; header transaksi diperbaiki agar tombol aksi membungkus. Run ulang lulus 5/5 viewport. Timeout skenario dinaikkan karena alur login, filter lintas role, dan navigasi lengkap melebihi batas default 30 detik.
 - Browser screenshot beranda desktop dan ponsel dibuka untuk pemeriksaan visual. Tidak seluruh screenshot halaman diperiksa satu per satu secara manual.
 
 ## Belum terselesaikan
 
 - Pengelompokan Controller berbasis role sudah diterapkan untuk controller khusus; controller lintas role tetap bersama. Pemindahan View berbasis role tidak dilakukan karena view masih dikelompokkan menurut modul dan tidak diperlukan untuk mengubah namespace Controller.
-- Search/filter belum merata. Filter yang sesuai skema masih perlu diaudit dan ditambahkan pada daftar lain yang memerlukannya, termasuk validasi date range dan filter pencarian pada transaksi/donasi/presensi/laporan.
+- Search/filter belum merata. Filter presensi dan daftar/laporan lain masih perlu diaudit satu per satu.
 - Pengelompokan menu Ketua dan Sekretaris kini dapat dilipat. Peninjauan apakah setiap item menu diperlukan untuk tiap role belum dilakukan seluruhnya.
 - Audit manual UI dan perilaku untuk seluruh halaman dari 186 route belum tuntas; sebagian rute inventaris tidak punya skenario pada suite browser yang ada.
 - Build menghasilkan artefak `public/build` lokal sesuai proses Vite. Screenshot yang sudah dilacak Git dipulihkan setelah run; hanya dua screenshot beranda baru yang disimpan sebagai artefak audit terpisah.

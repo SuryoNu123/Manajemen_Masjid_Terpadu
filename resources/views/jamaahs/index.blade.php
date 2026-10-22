@@ -34,14 +34,31 @@
 
     <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
         <form method="GET" action="{{ route('jamaahs.index') }}"
-              class="flex flex-col gap-3 sm:flex-row">
+              class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5">
             <input
-                type="text"
+                type="search"
                 name="search"
-                value="{{ $search }}"
+                value="{{ $filters['search'] ?? '' }}"
                 placeholder="Cari nama, domisili, atau nomor telepon..."
                 class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm focus:border-slate-500 focus:outline-none"
             >
+
+            <select name="status" aria-label="Filter status jamaah"
+                    class="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm">
+                <option value="">Semua status</option>
+                <option value="aktif" @selected(($filters['status'] ?? '') === 'aktif')>Aktif</option>
+                <option value="nonaktif" @selected(($filters['status'] ?? '') === 'nonaktif')>Nonaktif</option>
+            </select>
+
+            <input type="number" name="min_age" min="0" max="120"
+                   value="{{ $filters['min_age'] ?? '' }}" placeholder="Usia minimum"
+                   aria-label="Usia minimum"
+                   class="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm">
+
+            <input type="number" name="max_age" min="0" max="120"
+                   value="{{ $filters['max_age'] ?? '' }}" placeholder="Usia maksimum"
+                   aria-label="Usia maksimum"
+                   class="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm">
 
             <button type="submit"
                     class="rounded-lg bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white hover:bg-slate-700">

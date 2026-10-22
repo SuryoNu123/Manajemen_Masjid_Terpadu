@@ -27,10 +27,11 @@ class PrayerScheduleController extends Controller
 
     public function index(Request $request): View
     {
-        $date = $request->get(
-            'date',
-            now()->toDateString()
-        );
+        $filters = $request->validate([
+            'date' => ['nullable', 'date'],
+        ]);
+
+        $date = $filters['date'] ?? now()->toDateString();
 
         $schedules = PrayerSchedule::query()
             ->whereDate('schedule_date', $date)

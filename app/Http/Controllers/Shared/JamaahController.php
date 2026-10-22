@@ -11,24 +11,29 @@ class JamaahController extends Controller
 {
     public function index(Request $request)
     {
-        $search = $request->query('search');
+        $filters = $request->validate([
+            'search' => ['nullable', 'string', 'max:100'],
+            'status' => ['nullable', 'in:aktif,nonaktif'],
+            'min_age' => ['nullable', 'integer', 'min:0', 'max:120'],
+            'max_age' => ['nullable', 'integer', 'min:0', 'max:120', 'gte:min_age'],
+        ]);
 
         $jamaahs = Jamaah::query()
-            ->when($search, function ($query, $search) {
+            ->when($filters['search'] ?? null, function ($query, string $search): void {
                 $query->where(function ($q) use ($search) {
                     $q->where('name', 'like', "%{$search}%")
                         ->orWhere('domicile', 'like', "%{$search}%")
                         ->orWhere('phone', 'like', "%{$search}%");
                 });
             })
+            ->when($filters['status'] ?? null, fn ($query, string $status) => $query->where('status', $status))
+            ->when($filters['min_age'] ?? null, fn ($query, int $age) => $query->whereDate('birth_date', '<=', today()->subYears($age)->toDateString()))
+            ->when($filters['max_age'] ?? null, fn ($query, int $age) => $query->whereDate('birth_date', '>=', today()->subYears($age + 1)->addDay()->toDateString()))
             ->orderBy('name')
             ->paginate(10)
             ->withQueryString();
 
-        return view('jamaahs.index', compact(
-            'jamaahs',
-            'search'
-        ));
+        return view('jamaahs.index', compact('jamaahs', 'filters'));
     }
 
     public function create()

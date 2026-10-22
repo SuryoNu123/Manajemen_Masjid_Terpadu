@@ -36,15 +36,30 @@
 
     <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
         <form method="GET" action="{{ route('assets.index') }}"
-              class="flex flex-col gap-3 sm:flex-row">
+              class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
 
             <input
                 type="text"
                 name="search"
-                value="{{ $search }}"
+                value="{{ $filters['search'] ?? '' }}"
                 placeholder="Cari kode, nama, kategori, atau lokasi aset..."
                 class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm focus:border-slate-500 focus:outline-none"
             >
+
+            <select name="condition" aria-label="Filter kondisi aset"
+                    class="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm">
+                <option value="">Semua kondisi</option>
+                @foreach (['baik' => 'Baik', 'perlu_perbaikan' => 'Perlu perbaikan', 'rusak' => 'Rusak'] as $value => $label)
+                    <option value="{{ $value }}" @selected(($filters['condition'] ?? '') === $value)>{{ $label }}</option>
+                @endforeach
+            </select>
+
+            <select name="status" aria-label="Filter status aset"
+                    class="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm">
+                <option value="">Semua status</option>
+                <option value="active" @selected(($filters['status'] ?? '') === 'active')>Aktif</option>
+                <option value="inactive" @selected(($filters['status'] ?? '') === 'inactive')>Nonaktif</option>
+            </select>
 
             <button type="submit"
                     class="rounded-lg bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white hover:bg-slate-700">
