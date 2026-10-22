@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Bendahara;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreMustahikRequest;
 use App\Http\Requests\UpdateMustahikRequest;
 use App\Models\Mustahik;

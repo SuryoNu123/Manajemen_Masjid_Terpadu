@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Jamaah;
 
+use App\Http\Controllers\Controller;
 use App\Services\ActivityLogger;
 use App\Services\WhatsApp\WhatsAppProviderManager;
 use App\Services\WhatsAppNotificationService;

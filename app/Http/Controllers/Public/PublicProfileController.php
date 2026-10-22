@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Public;
 
+use App\Http\Controllers\Controller;
 use App\Models\Officer;
 use App\Models\User;
 use Illuminate\View\View;
@@ -20,4 +21,3 @@ class PublicProfileController extends Controller
         return view('public.profile', compact('officers', 'boardMembers'));
     }
 }
-

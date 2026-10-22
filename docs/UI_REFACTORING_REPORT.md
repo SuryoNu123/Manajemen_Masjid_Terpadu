@@ -24,7 +24,8 @@ Tanggal: 22 Oktober 2026
 - Kelompok menu sidebar Ketua dan Sekretaris kini dapat dilipat memakai elemen disclosure native; kelompok untuk route aktif terbuka otomatis. Menu dan pemeriksaan hak akses tidak berubah.
 - Tabel mustahik dibungkus dengan area `overflow-x-auto`, sehingga kolom tetap dapat dibaca dan digeser pada ponsel.
 - Empat daftar kini memiliki filter GET tervalidasi dan berjalan di database: kegiatan (judul/penceramah/lokasi, jenis, status), petugas (nama, posisi, status aktif), mustahik (nama, asnaf, status penyaluran), serta laporan keuangan (tahun, jenis periode, status). Filter dapat digabung, memiliki reset, dan query dipertahankan oleh pagination.
-- Tidak ada perubahan struktur Controller/View, route, role, query bisnis, atau skema database pada patch ini. Refactor massal tidak dilakukan karena controller dan route lintas role memiliki dependensi aktif.
+- Controller yang murni publik, Ketua, Bendahara, dan Jamaah dipindahkan ke namespace role masing-masing. Controller yang menangani beberapa role tetap berada di namespace bersama agar business logic tidak diduplikasi.
+- Route, middleware, nama route, query bisnis, dan skema database dipertahankan. Import route diperbarui untuk namespace baru.
 
 ## Halaman yang diuji melalui browser
 
@@ -45,7 +46,17 @@ Filter pada setiap modul lain belum diaudit satu per satu di laporan ini. Filter
 
 ## Struktur Controller dan View
 
-Controller masih berada di root `app/Http/Controllers` (dengan namespace `Auth` yang sudah terpisah), dan view sebagian besar memakai folder modul seperti `jamaahs`, `financial-transactions`, serta `assets`; dashboard dan sidebar dipisahkan berdasarkan role. Route yang terdaftar mengarah langsung ke controller-controller tersebut. Refactor per role belum dilakukan karena cakupan pemetaan `view()`, route, middleware, dan kontrak data seluruh modul belum tuntas.
+Controller yang dipindahkan:
+
+- `Public/`: `PublicHomeController`, `PublicProfileController`, `PublicLibraryController`, `DigitalSignageController`, `TransparencyController`, `ZakatController`.
+- `Ketua/`: `ActivityLogController`, `UserAdministrationController`, `BusinessUnitController`.
+- `Bendahara/`: `MustahikController`.
+- `Jamaah/`: `WhatsAppPreferenceController`.
+- `Auth/` sudah menjadi kelompok sebelumnya.
+
+Controller kegiatan, transaksi dan laporan keuangan, donasi, jadwal/presensi, aset, perpustakaan, peminjaman, serta konten tetap di namespace bersama karena route dan operasinya dipakai lebih dari satu role. Belum ada controller yang hanya dipakai Sekretaris atau Marbot: route mereka berbagi modul dengan Ketua. Tidak dibuat controller duplikat atau folder role kosong.
+
+Views tetap dikelompokkan mengikuti modul yang digunakan saat ini, karena pemindahan view terpisah tidak diperlukan untuk perubahan namespace Controller ini.
 
 ## File yang diubah
 
@@ -58,6 +69,8 @@ Controller masih berada di root `app/Http/Controllers` (dengan namespace `Auth` 
 - `resources/views/mustahiks/index.blade.php`
 - `resources/views/financial-reports/index.blade.php`
 - Controller empat daftar tersebut
+- Controller role-spesifik di `app/Http/Controllers/{Public,Ketua,Bendahara,Jamaah}/`
+- `routes/web.php` (import controller)
 - `tests/Feature/SearchAndFilteringTest.php`
 - `tests/e2e/responsive-ui.spec.js`
 - `docs/UI_REFACTORING_REPORT.md`
@@ -67,6 +80,7 @@ Controller masih berada di root `app/Http/Controllers` (dengan namespace `Auth` 
 
 - `php artisan route:list --except-vendor`: berhasil, 186 route.
 - `php artisan test --compact`: berhasil, 108 test dan 436 assertion.
+- `php artisan test --compact`: berhasil setelah refactor namespace, 108 test dan 436 assertion.
 - `php artisan view:cache`: berhasil.
 - `npm.cmd run build`: berhasil dengan Vite 8.3.1 dan Tailwind CSS 4.3.3. (`npm` PowerShell shim awalnya diblokir execution policy; command yang sama berhasil lewat `npm.cmd`.)
 - `node scripts/playwright-server.mjs`: 50 test lulus pada lima viewport sebelum skenario filter ditambahkan. Harness memakai SQLite sementara dan menghapus direktori temp saat selesai.
@@ -76,7 +90,7 @@ Controller masih berada di root `app/Http/Controllers` (dengan namespace `Auth` 
 
 ## Belum terselesaikan
 
-- Refactor Controller/View berbasis role belum dilakukan.
+- Pengelompokan Controller berbasis role sudah diterapkan untuk controller khusus; controller lintas role tetap bersama. Pemindahan View berbasis role tidak dilakukan karena view masih dikelompokkan menurut modul dan tidak diperlukan untuk mengubah namespace Controller.
 - Search/filter belum merata. Filter yang sesuai skema masih perlu diaudit dan ditambahkan pada daftar lain yang memerlukannya, termasuk validasi date range dan filter pencarian pada transaksi/donasi/presensi/laporan.
 - Pengelompokan menu Ketua dan Sekretaris kini dapat dilipat. Peninjauan apakah setiap item menu diperlukan untuk tiap role belum dilakukan seluruhnya.
 - Audit manual UI dan perilaku untuk seluruh halaman dari 186 route belum tuntas; sebagian rute inventaris tidak punya skenario pada suite browser yang ada.

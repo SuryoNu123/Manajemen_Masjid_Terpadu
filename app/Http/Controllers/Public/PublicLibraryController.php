@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Public;
 
+use App\Http\Controllers\Controller;
 use App\Models\LibraryBook;
 use Illuminate\Http\Request;
 use Illuminate\View\View;

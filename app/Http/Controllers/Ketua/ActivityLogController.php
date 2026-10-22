@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Ketua;
 
+use App\Http\Controllers\Controller;
 use App\Models\ActivityLog;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -35,4 +36,3 @@ class ActivityLogController extends Controller
         return view('activity-logs.index', compact('logs', 'search', 'action', 'actions'));
     }
 }
-
