@@ -14,6 +14,7 @@ const viewports = [
 const publicPages = [
     { name: 'home', path: '/' },
     { name: 'profile', path: '/profil' },
+    { name: 'prayer-schedules', path: '/jadwal-sholat-harian' },
     { name: 'activities', path: '/kegiatan' },
     { name: 'announcements', path: '/pengumuman' },
     { name: 'articles', path: '/artikel' },
@@ -30,6 +31,59 @@ const dashboardUsers = [
     { role: 'sekretaris', email: 'sekretaris@masjid.test' },
     { role: 'marbot', email: 'marbot@masjid.test' },
     { role: 'jamaah', email: 'jamaah@masjid.test' },
+];
+
+const rolePages = [
+    {
+        role: 'ketua',
+        email: 'ketua@masjid.test',
+        paths: [
+            '/profile', '/transaksi-keuangan', '/laporan-keuangan', '/business-units', '/business-units/create',
+            '/business-unit-sales', '/business-unit-sales/create', '/business-unit-sales/report', '/business-unit-items',
+            '/business-unit-items/create', '/jamaahs', '/jamaahs/create', '/jadwal-sholat', '/jadwal-sholat/create',
+            '/presensi', '/laporan-presensi', '/activities', '/activities/create', '/officers', '/officers/create',
+            '/youth-members', '/youth-members/create', '/youth-programs', '/youth-programs/create', '/santris',
+            '/santris/create', '/tpq-classes', '/tpq-classes/create', '/santri-attendances', '/santri-attendances/report',
+            '/assets', '/assets/create', '/asset-maintenances', '/asset-maintenances/create', '/library-books',
+            '/library-books/create', '/book-loans', '/book-loans/create', '/book-loans/report', '/book-loan-requests',
+            '/announcements', '/announcements/create', '/dakwah-contents', '/dakwah-contents/create',
+            '/admin/pengguna', '/admin/pengguna/create', '/activity-logs',
+        ],
+    },
+    {
+        role: 'bendahara',
+        email: 'bendahara@masjid.test',
+        paths: [
+            '/profile', '/transaksi-keuangan', '/transaksi-keuangan/create', '/laporan-keuangan',
+            '/laporan-keuangan/create', '/kelola-donasi', '/mustahik', '/mustahik/create', '/business-unit-sales',
+            '/business-unit-sales/create', '/business-unit-sales/report', '/business-unit-items', '/business-unit-items/create',
+        ],
+    },
+    {
+        role: 'sekretaris',
+        email: 'sekretaris@masjid.test',
+        paths: [
+            '/profile', '/jamaahs', '/jamaahs/create', '/officers', '/officers/create', '/activities', '/activities/create',
+            '/announcements', '/announcements/create', '/dakwah-contents', '/dakwah-contents/create', '/youth-members',
+            '/youth-members/create', '/youth-programs', '/youth-programs/create', '/santris', '/santris/create',
+            '/tpq-classes', '/tpq-classes/create', '/santri-attendances', '/santri-attendances/report', '/library-books',
+            '/library-books/create', '/book-loans', '/book-loans/create', '/book-loans/report', '/book-loan-requests',
+        ],
+    },
+    {
+        role: 'marbot',
+        email: 'marbot@masjid.test',
+        paths: [
+            '/profile', '/jadwal-sholat', '/jadwal-sholat/create', '/presensi', '/laporan-presensi', '/assets',
+            '/assets/create', '/asset-maintenances', '/asset-maintenances/create', '/santri-attendances',
+            '/santri-attendances/report',
+        ],
+    },
+    {
+        role: 'jamaah',
+        email: 'jamaah@masjid.test',
+        paths: ['/profile', '/akun/peminjaman', '/akun/pengaturan-notifikasi'],
+    },
 ];
 
 async function checkLayout(page) {
@@ -343,6 +397,8 @@ for (const viewport of viewports) {
         }
 
         test('administration, notifications, and Jamaah account screens render responsively', async ({ page }) => {
+            test.setTimeout(90000);
+
             await page.goto('/login');
             await page.getByLabel('Email').fill('ketua@masjid.test');
             await page.getByLabel('Password').fill('password123');
@@ -351,6 +407,7 @@ for (const viewport of viewports) {
 
             for (const screen of [
                 { name: 'user-administration', path: '/admin/pengguna', heading: 'Akun pengguna' },
+                { name: 'book-loan-requests', path: '/book-loan-requests', heading: 'Permintaan peminjaman dari Jamaah' },
                 { name: 'notifications', path: '/notifikasi', heading: 'Notifikasi' },
             ]) {
                 await page.goto(screen.path);
@@ -358,6 +415,24 @@ for (const viewport of viewports) {
                 await capturePage(page, viewport.name, screen.name);
                 await checkLayout(page);
             }
+
+            await page.goto('/book-loan-requests');
+            const loanRequestFilters = page.locator('form[method="GET"]').first();
+            await loanRequestFilters.locator('input[name="search"]').fill('Demo');
+            await loanRequestFilters.locator('[name="status"]').selectOption('pending');
+            await loanRequestFilters.getByRole('button', { name: 'Terapkan filter' }).click();
+            await expect(page).toHaveURL(/search=Demo.*status=pending/);
+            await checkLayout(page);
+            await page.getByRole('link', { name: 'Reset' }).click();
+
+            await page.goto('/notifikasi');
+            const notificationFilters = page.locator('form[method="GET"]').first();
+            await notificationFilters.locator('input[name="search"]').fill('Kajian');
+            await notificationFilters.locator('[name="read"]').selectOption('unread');
+            await notificationFilters.getByRole('button', { name: 'Terapkan' }).click();
+            await expect(page).toHaveURL(/search=Kajian.*read=unread/);
+            await checkLayout(page);
+            await page.getByRole('link', { name: 'Reset' }).click();
 
             await page.getByRole('button', { name: 'Logout' }).click();
             await page.goto('/login');
@@ -408,6 +483,28 @@ for (const viewport of viewports) {
             await expect(confirmationModal).toBeHidden();
 
             expect(browserErrors).toEqual([]);
+        });
+
+        test('role module pages render without clipping or horizontal overflow', async ({ page }) => {
+            test.setTimeout(180_000);
+            test.skip(!['wide-desktop', 'laptop', 'tablet', 'mobile-375'].includes(viewport.name));
+
+            for (const rolePage of rolePages) {
+                await page.goto('/login');
+                await page.getByLabel('Email').fill(rolePage.email);
+                await page.getByLabel('Password').fill('password123');
+                await page.getByRole('button', { name: 'Masuk' }).click();
+                await expect(page).toHaveURL(/\/dashboard$/);
+
+                for (const path of rolePage.paths) {
+                    const response = await page.goto(path);
+
+                    expect(response?.status(), `${rolePage.role} ${path} should respond successfully`).toBeLessThan(400);
+                    await checkLayout(page);
+                }
+
+                await page.context().clearCookies();
+            }
         });
     });
 }

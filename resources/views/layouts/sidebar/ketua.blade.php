@@ -35,7 +35,7 @@
     </details>
 
     {{-- IBADAH & JAMAAH --}}
-    <details class="group" @if(request()->routeIs('jamaahs.*', 'jadwal-sholat.*', 'activities.*', 'officers.*')) open @endif>
+    <details class="group" @if(request()->routeIs('jamaahs.*', 'jadwal-sholat.*', 'prayer-attendances.*', 'activities.*', 'officers.*')) open @endif>
         <summary class="flex cursor-pointer list-none items-center justify-between rounded-md px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-400 hover:bg-slate-800 hover:text-slate-200">
             Ibadah & Jamaah
             <svg aria-hidden="true" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" class="h-4 w-4 transition-transform group-open:rotate-180"><path stroke-linecap="round" stroke-linejoin="round" d="m5 7.5 5 5 5-5" /></svg>
@@ -49,6 +49,10 @@
                class="block rounded-md px-3 py-1.5 text-sm text-slate-200 hover:bg-slate-800 {{ request()->routeIs('jadwal-sholat.*') ? 'bg-slate-800 text-white font-medium' : '' }}">
                 Jadwal Sholat
             </a>
+            <a href="{{ route('prayer-attendances.index') }}"
+               class="block rounded-md px-3 py-1.5 text-sm text-slate-200 hover:bg-slate-800 {{ request()->routeIs('prayer-attendances.*') ? 'bg-slate-800 text-white font-medium' : '' }}">
+                Presensi Sholat
+            </a>
             <a href="{{ route('activities.index') }}"
                class="block rounded-md px-3 py-1.5 text-sm text-slate-200 hover:bg-slate-800 {{ request()->routeIs('activities.*') ? 'bg-slate-800 text-white font-medium' : '' }}">
                 Kegiatan Ibadah & Kajian
@@ -61,7 +65,7 @@
     </details>
 
     {{-- REMAJA & TPQ --}}
-    <details class="group" @if(request()->routeIs('youth-members.*', 'youth-programs.*', 'santris.*', 'santri-attendances.*')) open @endif>
+    <details class="group" @if(request()->routeIs('youth-members.*', 'youth-programs.*', 'santris.*', 'tpq-classes.*', 'santri-attendances.*')) open @endif>
         <summary class="flex cursor-pointer list-none items-center justify-between rounded-md px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-400 hover:bg-slate-800 hover:text-slate-200">
             Pendidikan & Remaja
             <svg aria-hidden="true" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" class="h-4 w-4 transition-transform group-open:rotate-180"><path stroke-linecap="round" stroke-linejoin="round" d="m5 7.5 5 5 5-5" /></svg>
@@ -78,6 +82,10 @@
             <a href="{{ route('santris.index') }}"
                class="block rounded-md px-3 py-1.5 text-sm text-slate-200 hover:bg-slate-800 {{ request()->routeIs('santris.*') ? 'bg-slate-800 text-white font-medium' : '' }}">
                 Santri TPQ/TPA
+            </a>
+            <a href="{{ route('tpq-classes.index') }}"
+               class="block rounded-md px-3 py-1.5 text-sm text-slate-200 hover:bg-slate-800 {{ request()->routeIs('tpq-classes.*') ? 'bg-slate-800 text-white font-medium' : '' }}">
+                Kelas TPQ
             </a>
             <a href="{{ route('santri-attendances.report') }}"
                class="block rounded-md px-3 py-1.5 text-sm text-slate-200 hover:bg-slate-800 {{ request()->routeIs('santri-attendances.*') ? 'bg-slate-800 text-white font-medium' : '' }}">

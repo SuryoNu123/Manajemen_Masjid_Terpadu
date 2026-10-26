@@ -3,20 +3,43 @@
 namespace App\Http\Controllers\Shared;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class NotificationController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $notifications = Auth::user()
+        $filters = $request->validate([
+            'search' => ['nullable', 'string', 'max:100'],
+            'read' => ['nullable', 'in:read,unread'],
+        ]);
+
+        $notifications = $request->user()
             ->notifications()
+            ->when($filters['search'] ?? null, function (Builder $query, string $search): void {
+                $query->where(function (Builder $query) use ($search): void {
+                    $query->where('data->title', 'like', "%{$search}%")
+                        ->orWhere('data->message', 'like', "%{$search}%");
+                });
+            })
+            ->when($filters['read'] ?? null, function (Builder $query, string $read): void {
+                if ($read === 'unread') {
+                    $query->whereNull('read_at');
+
+                    return;
+                }
+
+                $query->whereNotNull('read_at');
+            })
             ->latest()
-            ->paginate(15);
+            ->paginate(15)
+            ->withQueryString();
 
         return view(
             'notifications.index',
-            compact('notifications')
+            compact('notifications', 'filters')
         );
     }
 

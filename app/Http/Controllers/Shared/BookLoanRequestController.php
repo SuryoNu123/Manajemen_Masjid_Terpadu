@@ -8,6 +8,7 @@ use App\Models\BookLoanRequest as LoanRequest;
 use App\Models\Jamaah;
 use App\Models\LibraryBook;
 use App\Services\ActivityLogger;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -63,13 +64,31 @@ class BookLoanRequestController extends Controller
         return redirect()->route('book-loan-requests.mine')->with('success', "Permintaan buku {$book->title} berhasil dikirim.");
     }
 
-    public function index(): View
+    public function index(Request $request): View
     {
-        $requests = LoanRequest::with(['book', 'jamaah', 'processor', 'loan'])
-            ->latest()
-            ->paginate(15);
+        $filters = $request->validate([
+            'search' => ['nullable', 'string', 'max:100'],
+            'status' => ['nullable', 'in:pending,approved,rejected'],
+            'start_date' => ['nullable', 'date'],
+            'end_date' => ['nullable', 'date', 'after_or_equal:start_date'],
+        ]);
 
-        return view('book-loan-requests.index', compact('requests'));
+        $requests = LoanRequest::query()
+            ->with(['book', 'jamaah', 'processor', 'loan'])
+            ->when($filters['search'] ?? null, function (Builder $query, string $search): void {
+                $query->where(function (Builder $query) use ($search): void {
+                    $query->whereHas('book', fn (Builder $bookQuery) => $bookQuery->where('title', 'like', "%{$search}%"))
+                        ->orWhereHas('jamaah', fn (Builder $jamaahQuery) => $jamaahQuery->where('name', 'like', "%{$search}%"));
+                });
+            })
+            ->when($filters['status'] ?? null, fn (Builder $query, string $status): Builder => $query->where('status', $status))
+            ->when($filters['start_date'] ?? null, fn (Builder $query, string $date): Builder => $query->whereDate('created_at', '>=', $date))
+            ->when($filters['end_date'] ?? null, fn (Builder $query, string $date): Builder => $query->whereDate('created_at', '<=', $date))
+            ->latest()
+            ->paginate(15)
+            ->withQueryString();
+
+        return view('book-loan-requests.index', compact('requests', 'filters'));
     }
 
     public function approve(Request $request, LoanRequest $bookLoanRequest): RedirectResponse

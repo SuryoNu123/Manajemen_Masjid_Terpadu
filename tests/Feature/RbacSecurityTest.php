@@ -25,6 +25,8 @@ test('jamaah role receives 403 on administrative internal routes', function () {
     $this->actingAs($jamaah)->get('/announcements/create')->assertStatus(403);
     $this->actingAs($jamaah)->get('/assets/create')->assertStatus(403);
     $this->actingAs($jamaah)->get('/jadwal-sholat/create')->assertStatus(403);
+    $this->actingAs($jamaah)->get(route('prayer-attendances.index'))->assertForbidden();
+    $this->actingAs($jamaah)->get(route('tpq-classes.index'))->assertForbidden();
 });
 
 test('bendahara role can access finance but receives 403 on assets and youth', function () {
@@ -58,7 +60,14 @@ test('ketua role can access audit logs and overview across modules', function ()
     $ketua = createRoleUser('ketua');
 
     $this->actingAs($ketua)->get('/activity-logs')->assertStatus(200);
-    $this->actingAs($ketua)->get('/transaksi-keuangan')->assertStatus(200);
-    $this->actingAs($ketua)->get('/jamaahs')->assertStatus(200);
-    $this->actingAs($ketua)->get('/assets')->assertStatus(200);
+    $dashboard = $this->actingAs($ketua)->get('/dashboard');
+    $dashboard->assertOk()
+        ->assertSee('href="'.route('prayer-attendances.index').'"', false)
+        ->assertSee('href="'.route('tpq-classes.index').'"', false);
+
+    $this->get(route('prayer-attendances.index'))->assertOk();
+    $this->get(route('tpq-classes.index'))->assertOk();
+    $this->get('/transaksi-keuangan')->assertOk();
+    $this->get('/jamaahs')->assertOk();
+    $this->get('/assets')->assertOk();
 });
