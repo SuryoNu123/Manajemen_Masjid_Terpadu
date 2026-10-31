@@ -4,6 +4,7 @@ use App\Models\Donation;
 use App\Models\FinancialCategory;
 use App\Models\Role;
 use App\Models\User;
+use App\Services\Payments\MidtransPaymentGateway;
 use App\Services\Payments\PaymentGatewayProvider;
 use App\Services\Payments\PaymentIntent;
 use App\Services\Payments\VerifiedPaymentEvent;
@@ -54,6 +55,82 @@ test('qris donations create a provider payment intent and a secret status link',
     expect($donation->gateway_reference)->toBe('TEST-REF-'.$donation->donation_code);
     expect($donation->gateway_payment_url)->toBe('https://sandbox.example.test/pay');
     expect($donation->payment_status)->toBe('pending');
+    $this->assertDatabaseCount('financial_transactions', 0);
+    $this->get(route('donasi.success', ['donasi' => $donation, 'token' => $donation->status_token]))
+        ->assertOk()
+        ->assertSee('https://sandbox.example.test/qr')
+        ->assertSee('Pindai kode QR');
+});
+
+test('midtrans webhook verifies the official signature and records a settlement once', function () {
+    config([
+        'services.payment_gateway.adapter' => MidtransPaymentGateway::class,
+        'services.midtrans.server_key' => 'sandbox-test-server-key',
+    ]);
+
+    $donation = Donation::create([
+        'donation_code' => 'DON-MIDTRANS-'.Str::upper(Str::random(8)),
+        'status_token' => (string) Str::uuid(),
+        'type' => 'infaq',
+        'amount' => 50000,
+        'payment_method' => 'qris',
+        'payment_status' => 'pending',
+        'gateway_reference' => 'MT-'.Str::random(12),
+    ]);
+    FinancialCategory::create(['name' => 'Infaq', 'type' => 'income']);
+
+    $payload = [
+        'order_id' => $donation->donation_code,
+        'status_code' => '200',
+        'gross_amount' => '50000.00',
+        'transaction_id' => $donation->gateway_reference,
+        'transaction_status' => 'settlement',
+        'payment_type' => 'qris',
+        'currency' => 'IDR',
+        'fraud_status' => 'accept',
+    ];
+    $payload['signature_key'] = hash('sha512', $payload['order_id'].$payload['status_code'].$payload['gross_amount'].'sandbox-test-server-key');
+    $rawPayload = json_encode($payload, JSON_THROW_ON_ERROR);
+
+    $this->call('POST', route('webhooks.payments'), [], [], [], ['CONTENT_TYPE' => 'application/json'], $rawPayload)->assertNoContent();
+    $this->call('POST', route('webhooks.payments'), [], [], [], ['CONTENT_TYPE' => 'application/json'], $rawPayload)->assertNoContent();
+
+    expect($donation->fresh()->payment_status)->toBe('paid');
+    $this->assertDatabaseCount('financial_transactions', 1);
+    $this->assertDatabaseCount('payment_webhook_events', 1);
+});
+
+test('midtrans challenge notifications do not mark a donation paid', function () {
+    config([
+        'services.payment_gateway.adapter' => MidtransPaymentGateway::class,
+        'services.midtrans.server_key' => 'sandbox-test-server-key',
+    ]);
+
+    $donation = Donation::create([
+        'donation_code' => 'DON-CHALLENGE-'.Str::upper(Str::random(8)),
+        'status_token' => (string) Str::uuid(),
+        'type' => 'sedekah',
+        'amount' => 15000,
+        'payment_method' => 'qris',
+        'payment_status' => 'pending',
+        'gateway_reference' => 'MT-'.Str::random(12),
+    ]);
+    $payload = [
+        'order_id' => $donation->donation_code,
+        'status_code' => '201',
+        'gross_amount' => '15000.00',
+        'transaction_id' => $donation->gateway_reference,
+        'transaction_status' => 'capture',
+        'payment_type' => 'qris',
+        'currency' => 'IDR',
+        'fraud_status' => 'challenge',
+    ];
+    $payload['signature_key'] = hash('sha512', $payload['order_id'].$payload['status_code'].$payload['gross_amount'].'sandbox-test-server-key');
+
+    $this->call('POST', route('webhooks.payments'), [], [], [], ['CONTENT_TYPE' => 'application/json'], json_encode($payload, JSON_THROW_ON_ERROR))->assertNoContent();
+
+    expect($donation->fresh()->payment_status)->toBe('pending');
+    expect($donation->fresh()->financial_transaction_id)->toBeNull();
     $this->assertDatabaseCount('financial_transactions', 0);
 });
 

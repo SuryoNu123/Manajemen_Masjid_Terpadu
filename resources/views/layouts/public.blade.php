@@ -15,7 +15,7 @@
         content="{{ csrf_token() }}"
     >
 
-    <link rel="icon" type="image/png" href="{{ asset('masjid-mark.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('masjid-mark.png') }}?v=2">
 
     <title>
         @yield('title', 'Masjid Terpadu')

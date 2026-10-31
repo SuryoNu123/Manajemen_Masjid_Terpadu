@@ -51,7 +51,7 @@ class DigitalSignageController extends Controller
 
         $runningTexts = [];
         foreach ($announcements as $a) {
-            $prefix = $a->type === 'emergency' ? '🚨 [DARURAT] ' : '📢 ';
+            $prefix = $a->type === 'emergency' ? '[DARURAT] ' : '';
             $runningTexts[] = $prefix.$a->title.': '.Str($a->content)->limit(120);
         }
 

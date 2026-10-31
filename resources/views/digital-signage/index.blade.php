@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="refresh" content="300"> {{-- Refresh otomatis tiap 5 menit untuk update jadwal/pengumuman --}}
-        <link rel="icon" type="image/png" href="{{ asset('masjid-mark.png') }}">
-    <link rel="alternate icon" type="image/png" href="{{ asset('favicon.png') }}">
+        <link rel="icon" type="image/png" href="{{ asset('masjid-mark.png') }}?v=2">
     <title>Digital Signage TV - Masjid Terpadu</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
@@ -85,15 +84,7 @@
                             $isNext = $nextSchedule && $nextSchedule->prayer_name === $sched->prayer_name;
                         @endphp
                         <div class="flex items-center justify-between px-5 py-4 rounded-xl {{ $isNext ? 'bg-blue-600/30 border border-blue-500/50 text-white' : 'bg-slate-800/60 text-slate-300' }}">
-                            <div class="flex items-center gap-3">
-                                <span class="text-lg">
-                                    @if($sched->prayer_name === 'subuh') 🌅
-                                    @elseif($sched->prayer_name === 'dzuhur') ☀️
-                                    @elseif($sched->prayer_name === 'ashar') 🌤️
-                                    @elseif($sched->prayer_name === 'maghrib') 🌇
-                                    @else 🌙
-                                    @endif
-                                </span>
+                            <div class="flex items-center">
                                 <span class="text-xl font-bold tracking-wide">
                                     {{ $prayerNames[$sched->prayer_name] ?? ucfirst($sched->prayer_name) }}
                                 </span>
@@ -118,7 +109,7 @@
             <div id="slideKegiatan" class="transition-opacity duration-700">
                 <div class="flex items-center justify-between pb-4 border-b border-slate-800 mb-6">
                     <div class="flex items-center gap-2">
-                        <span class="text-xl">📅</span>
+                        <span class="text-xl">Tanggal: </span>
                         <h2 class="text-xl font-bold text-white">Agenda Ibadah & Kajian Rutin</h2>
                     </div>
                     <span class="text-xs text-slate-400">Pekan Ini</span>
@@ -137,7 +128,7 @@
                             </div>
                             <h3 class="text-xl font-bold text-white">{{ $act->title }}</h3>
                             @if($act->speaker)
-                                <p class="text-sm text-slate-300 mt-1">🎙️ Pemateri/Imam: <strong>{{ $act->speaker }}</strong></p>
+                                <p class="text-sm text-slate-300 mt-1">Pemateri/Imam: <strong>{{ $act->speaker }}</strong></p>
                             @endif
                         </div>
                     @empty
@@ -152,7 +143,6 @@
             <div id="slideKeuangan" class="hidden transition-opacity duration-700">
                 <div class="flex items-center justify-between pb-4 border-b border-slate-800 mb-6">
                     <div class="flex items-center gap-2">
-                        <span class="text-xl">💰</span>
                         <h2 class="text-xl font-bold text-white">Transparansi Laporan Kas Masjid</h2>
                     </div>
                     <span class="text-xs text-emerald-400 font-semibold">Akuntabel & Terverifikasi</span>
@@ -204,7 +194,6 @@
     {{-- RUNNING TEXT TICKER (FOOTER MARQUEE) --}}
     <footer class="bg-blue-900/90 border-t border-blue-700 py-3.5 px-6 flex items-center gap-4">
         <div class="shrink-0 flex items-center gap-2 bg-red-600 px-3 py-1 rounded-lg text-xs font-bold text-white tracking-wide uppercase">
-            <span>📢</span>
             <span>INFORMASI</span>
         </div>
 

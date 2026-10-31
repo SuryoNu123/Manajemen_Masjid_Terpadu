@@ -39,7 +39,7 @@
                              class="h-48 w-full object-cover">
                     @else
                         <div class="flex h-48 w-full items-center justify-center bg-blue-700 text-sm font-medium text-white">
-                            📖
+                            Artikel Dakwah
                         </div>
                     @endif
 

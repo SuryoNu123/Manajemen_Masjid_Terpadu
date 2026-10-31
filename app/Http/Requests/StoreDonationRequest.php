@@ -39,8 +39,15 @@ class StoreDonationRequest extends FormRequest
 
             'amount' => [
                 'required',
-                'numeric',
+                'integer',
                 'min:1000',
+                'max:9999999999999',
+            ],
+
+            'note' => [
+                'nullable',
+                'string',
+                'max:1000',
             ],
 
             'payment_method' => [
@@ -58,6 +65,7 @@ class StoreDonationRequest extends FormRequest
             'donor_phone' => 'nomor HP',
             'type' => 'jenis donasi',
             'amount' => 'nominal',
+            'note' => 'keterangan',
             'payment_method' => 'metode pembayaran',
         ];
     }

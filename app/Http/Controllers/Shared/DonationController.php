@@ -43,6 +43,7 @@ class DonationController extends Controller
 
             'type' => $validated['type'],
             'amount' => $validated['amount'],
+            'note' => $validated['note'] ?? null,
 
             'payment_method' => $validated['payment_method'],
             'payment_status' => 'pending',
@@ -79,7 +80,8 @@ class DonationController extends Controller
      */
     public function success(
         Donation $donasi,
-        Request $request
+        Request $request,
+        PaymentGatewayManager $gateways
     ): View {
         abort_unless(
             is_string($request->query('token'))
@@ -92,6 +94,7 @@ class DonationController extends Controller
             'donasi' => $donasi,
             'gatewayReady' => $donasi->gateway_reference !== null
                 && ($donasi->gateway_payment_url !== null || $donasi->gateway_qr_code_url !== null),
+            'gatewayConfigured' => $gateways->isConfigured(),
         ]);
     }
 

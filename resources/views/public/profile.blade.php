@@ -60,7 +60,7 @@
 
             <div class="rounded-xl border border-blue-700 bg-slate-900 p-6 text-white shadow-sm sm:p-8">
                 <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
-                    <span>📍</span> Informasi & Alamat
+                    Informasi & Alamat
                 </h3>
                 <div class="space-y-4 text-sm text-slate-300">
                     <div>
@@ -129,22 +129,18 @@
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div class="flex h-56 flex-col justify-end rounded-xl border border-blue-600 bg-blue-700 p-5 text-white">
-                <span class="text-2xl mb-1">🕌</span>
                 <p class="font-bold text-sm">Ruang Utama Sholat</p>
                 <p class="text-xs text-slate-300">Kapasitas 1.000 Jamaah</p>
             </div>
             <div class="flex h-56 flex-col justify-end rounded-xl border border-blue-600 bg-blue-600 p-5 text-white">
-                <span class="text-2xl mb-1">📚</span>
                 <p class="font-bold text-sm">Perpustakaan Masjid</p>
                 <p class="text-xs text-slate-300">Koleksi Kitab & Buku</p>
             </div>
             <div class="flex h-56 flex-col justify-end rounded-xl border border-blue-600 bg-blue-600 p-5 text-white">
-                <span class="text-2xl mb-1">📖</span>
                 <p class="font-bold text-sm">Kelas Santri TPQ</p>
                 <p class="text-xs text-slate-300">Pendidikan Al-Qur'an</p>
             </div>
             <div class="flex h-56 flex-col justify-end rounded-xl border border-blue-600 bg-blue-600 p-5 text-white">
-                <span class="text-2xl mb-1">🏪</span>
                 <p class="font-bold text-sm">Unit Usaha Masjid</p>
                 <p class="text-xs text-slate-300">Koperasi Jamaah</p>
             </div>

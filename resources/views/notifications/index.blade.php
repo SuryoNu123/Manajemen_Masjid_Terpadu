@@ -75,15 +75,6 @@
 
                 <div class="flex items-start gap-4">
 
-                    <div class="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center flex-shrink-0">
-
-                        <span class="text-blue-600">
-                            🔔
-                        </span>
-
-                    </div>
-
-
                     <div class="flex-1">
 
                         <div class="flex items-start justify-between gap-4">
@@ -115,7 +106,7 @@
                             @if(isset($notification->data['activity_date']))
 
                                 <span>
-                                    📅
+                                    Tanggal:
                                     {{ \Carbon\Carbon::parse($notification->data['activity_date'])->format('d M Y') }}
                                 </span>
 
@@ -124,7 +115,7 @@
                             @if(isset($notification->data['start_time']))
 
                                 <span>
-                                    🕐
+                                    Waktu:
                                     {{ $notification->data['start_time'] }}
                                 </span>
 
@@ -133,7 +124,7 @@
                             @if(isset($notification->data['location']))
 
                                 <span>
-                                    📍
+                                    Lokasi:
                                     {{ $notification->data['location'] }}
                                 </span>
 
@@ -172,10 +163,6 @@
         @empty
 
             <div class="bg-white border border-slate-200 rounded-2xl p-8 text-center sm:p-12">
-
-                <div class="text-4xl mb-4">
-                    🔔
-                </div>
 
                 <p class="font-semibold text-slate-800">
                     {{ ($filters['search'] ?? '') || ($filters['read'] ?? '') ? 'Tidak ada notifikasi yang cocok.' : 'Belum ada notifikasi' }}

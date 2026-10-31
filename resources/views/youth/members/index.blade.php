@@ -18,7 +18,7 @@
         <div class="flex items-center gap-3">
             <a href="{{ route('youth-programs.index') }}"
                class="rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm font-semibold text-gray-700 hover:bg-gray-50">
-                📋 Program Kerja
+                Program Kerja
             </a>
 
             <a href="{{ route('youth-members.create') }}"

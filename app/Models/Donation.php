@@ -14,6 +14,7 @@ class Donation extends Model
         'donor_phone',
         'type',
         'amount',
+        'note',
         'payment_method',
         'payment_status',
         'gateway_reference',

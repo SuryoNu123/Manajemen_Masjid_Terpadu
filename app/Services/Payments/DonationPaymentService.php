@@ -30,7 +30,7 @@ class DonationPaymentService
     public function processVerifiedEvent(VerifiedPaymentEvent $event, string $payload): bool
     {
         if ($event->currency !== 'IDR'
-            || ! in_array($event->status, ['paid', 'failed', 'expired'], true)
+            || ! in_array($event->status, ['pending', 'paid', 'failed', 'expired'], true)
             || trim($event->providerEventId) === ''
             || trim($event->gatewayReference) === ''
             || trim($event->donationCode) === ''
@@ -57,6 +57,10 @@ class DonationPaymentService
                 ->where('donation_code', $event->donationCode)
                 ->lockForUpdate()
                 ->firstOrFail();
+
+            if ($donation->payment_method !== 'qris') {
+                throw ValidationException::withMessages(['payment' => 'Notifikasi Midtrans hanya dapat diproses untuk donasi QRIS.']);
+            }
 
             $donationAmount = $this->normalizeAmount((string) $donation->amount);
             $eventAmount = $this->normalizeAmount($event->amount);

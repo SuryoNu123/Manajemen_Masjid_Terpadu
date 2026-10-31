@@ -47,6 +47,15 @@ return [
         'adapter' => env('PAYMENT_GATEWAY_ADAPTER'),
     ],
 
+    'midtrans' => [
+        'server_key' => env('MIDTRANS_SERVER_KEY'),
+        'client_key' => env('MIDTRANS_CLIENT_KEY'),
+        'is_production' => env('MIDTRANS_IS_PRODUCTION', false),
+        'qris_acquirer' => env('MIDTRANS_QRIS_ACQUIRER', 'gopay'),
+        'qris_expiry_minutes' => env('MIDTRANS_QRIS_EXPIRY_MINUTES', 15),
+        'notification_url' => env('MIDTRANS_NOTIFICATION_URL'),
+    ],
+
     'whatsapp' => [
         'adapter' => env('WHATSAPP_ADAPTER'),
         'mode' => env('WHATSAPP_MODE', 'disabled'),

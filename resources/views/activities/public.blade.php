@@ -47,11 +47,11 @@
                 <div class="space-y-2 mt-5 text-sm text-slate-600">
 
                     <div>
-                        📅 {{ $activity->activity_date?->format('d M Y') }}
+                        Tanggal:  {{ $activity->activity_date?->format('d M Y') }}
                     </div>
 
                     <div>
-                        🕐 {{ $activity->start_time }}
+                        Waktu: {{ $activity->start_time }}
 
                         @if($activity->end_time)
                             - {{ $activity->end_time }}
@@ -59,13 +59,13 @@
                     </div>
 
                     <div>
-                        📍 {{ $activity->location ?? 'Masjid' }}
+                        Lokasi: {{ $activity->location ?? 'Masjid' }}
                     </div>
 
                     @if($activity->speaker)
 
                         <div>
-                            🎤 {{ $activity->speaker }}
+                            Pemateri: {{ $activity->speaker }}
                         </div>
 
                     @endif

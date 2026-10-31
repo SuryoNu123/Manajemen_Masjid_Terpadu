@@ -651,15 +651,15 @@
                         <div class="space-y-2 mt-5 text-sm text-slate-500">
 
                             <div>
-                                📅 {{ $activity->activity_date?->format('d M Y') }}
+                                Tanggal:  {{ $activity->activity_date?->format('d M Y') }}
                             </div>
 
                             <div>
-                                🕐 {{ $activity->start_time }}
+                                Waktu: {{ $activity->start_time }}
                             </div>
 
                             <div>
-                                📍 {{ $activity->location ?? 'Masjid' }}
+                                Lokasi: {{ $activity->location ?? 'Masjid' }}
                             </div>
 
                         </div>
@@ -907,8 +907,8 @@
                                  alt="{{ $article->title }}"
                                  class="h-44 w-full object-cover">
                         @else
-                            <div class="h-44 bg-slate-900 flex items-center justify-center text-4xl text-white">
-                                📚
+                            <div class="h-44 bg-slate-900 flex items-center justify-center text-sm font-medium text-white">
+                                Artikel Dakwah
                             </div>
                         @endif
 

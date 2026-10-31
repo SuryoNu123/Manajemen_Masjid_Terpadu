@@ -11,6 +11,7 @@
     >
 
     <title>Donasi - Masjid Terpadu</title>
+    <link rel="icon" type="image/png" href="{{ asset('masjid-mark.png') }}?v=2">
 
     @vite([
         'resources/css/app.css',
@@ -20,22 +21,22 @@
 </head>
 
 
-<body class="bg-gray-100 min-h-screen">
+<body class="min-h-screen bg-slate-100 text-slate-900">
 
 <div class="max-w-3xl mx-auto py-12 px-5">
 
-    <div class="bg-white rounded-2xl shadow-sm overflow-hidden">
+    <div class="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-200">
 
         {{-- HEADER --}}
 
-        <div class="bg-slate-900 text-white p-8">
+        <div class="bg-slate-900 p-8 text-white">
 
             <h1 class="text-3xl font-bold">
                 Donasi Masjid
             </h1>
 
-            <p class="text-slate-300 mt-2">
-                Salurkan donasi untuk mendukung kegiatan masjid.
+            <p class="mt-2 text-slate-300">
+                Salurkan donasi dengan aman melalui QRIS atau metode yang tersedia.
             </p>
 
         </div>
@@ -46,7 +47,7 @@
         <form
             method="POST"
             action="{{ route('donasi.store') }}"
-            class="p-8 space-y-6"
+            class="space-y-6 p-6 sm:p-8"
         >
 
             @csrf
@@ -54,7 +55,7 @@
 
             @if($errors->any())
 
-                <div class="bg-red-100 text-red-700 rounded-lg p-4">
+                <div class="rounded-lg bg-red-50 p-4 text-red-700" role="alert">
 
                     <ul class="list-disc ml-5">
 
@@ -84,7 +85,7 @@
                 <select
                     name="type"
                     required
-                    class="w-full rounded-lg border-gray-300"
+                    class="w-full rounded-lg border-slate-300 focus:border-blue-600 focus:ring-blue-600"
                 >
 
                     <option value="">
@@ -129,7 +130,7 @@
                     name="donor_name"
                     value="{{ old('donor_name') }}"
                     placeholder="Nama Anda"
-                    class="w-full rounded-lg border-gray-300"
+                    class="w-full rounded-lg border-slate-300 focus:border-blue-600 focus:ring-blue-600"
                 >
 
             </div>
@@ -148,7 +149,7 @@
                     name="donor_email"
                     value="{{ old('donor_email') }}"
                     placeholder="email@example.com"
-                    class="w-full rounded-lg border-gray-300"
+                    class="w-full rounded-lg border-slate-300 focus:border-blue-600 focus:ring-blue-600"
                 >
 
             </div>
@@ -167,7 +168,7 @@
                     name="donor_phone"
                     value="{{ old('donor_phone') }}"
                     placeholder="08xxxxxxxxxx"
-                    class="w-full rounded-lg border-gray-300"
+                    class="w-full rounded-lg border-slate-300 focus:border-blue-600 focus:ring-blue-600"
                 >
 
             </div>
@@ -194,7 +195,7 @@
                         min="1000"
                         required
                         placeholder="50000"
-                        class="w-full rounded-lg border-gray-300 pl-12"
+                        class="w-full rounded-lg border-slate-300 pl-12 focus:border-blue-600 focus:ring-blue-600"
                     >
 
                 </div>
@@ -213,14 +214,14 @@
                 <select
                     name="payment_method"
                     required
-                    class="w-full rounded-lg border-gray-300"
+                    class="w-full rounded-lg border-slate-300 focus:border-blue-600 focus:ring-blue-600"
                 >
 
                     <option value="">
                         Pilih metode pembayaran
                     </option>
 
-                    <option value="qris">
+                    <option value="qris" @selected(old('payment_method', 'qris') === 'qris')>
                         QRIS
                     </option>
 
@@ -240,14 +241,20 @@
 
             </div>
 
+            <div>
+                <label for="note" class="mb-2 block font-semibold">Pesan atau keterangan <span class="font-normal text-slate-500">(opsional)</span></label>
+                <textarea id="note" name="note" rows="3" maxlength="1000" placeholder="Contoh: untuk renovasi ruang wudu"
+                    class="w-full rounded-lg border-slate-300 focus:border-blue-600 focus:ring-blue-600">{{ old('note') }}</textarea>
+            </div>
+
 
             {{-- BUTTON --}}
 
             <button
                 type="submit"
-                class="w-full py-3 rounded-lg bg-slate-900 text-white font-semibold hover:bg-slate-800"
+                class="w-full rounded-lg bg-blue-700 py-3 font-semibold text-white transition hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
             >
-                Lanjutkan Donasi
+                Bayar Donasi
             </button>
 
         </form>

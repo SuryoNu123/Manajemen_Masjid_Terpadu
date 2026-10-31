@@ -12,7 +12,7 @@
         <div class="flex items-center gap-3 mb-3">
             @if($announcement->type === 'emergency')
                 <span class="rounded-full bg-red-500/20 text-red-300 border border-red-500/30 px-3 py-1 text-xs font-semibold">
-                    ⚠️ Darurat
+                     Darurat
                 </span>
             @else
                 <span class="rounded-full border border-blue-400/25 bg-blue-400/10 px-3 py-1 text-xs font-semibold text-blue-200">
@@ -40,7 +40,7 @@
 
             @if($announcement->expires_at)
                 <div class="mt-8 rounded-xl bg-gray-50 border border-gray-200 p-4 text-xs text-gray-500">
-                    ℹ️ Pengumuman ini berlaku sampai {{ $announcement->expires_at->format('d M Y H:i') }} WIB.
+                    Pengumuman ini berlaku sampai {{ $announcement->expires_at->format('d M Y H:i') }} WIB.
                 </div>
             @endif
 

@@ -83,7 +83,7 @@
                     </span>
                     <h4 class="font-bold text-slate-900 text-sm mt-1">{{ $activity->title }}</h4>
                     <p class="text-xs text-slate-500 mt-1">
-                         {{ \Carbon\Carbon::parse($activity->activity_date)->format('d F Y') }} • ⏰ {{ substr($activity->activity_time, 0, 5) }} WIB
+                         {{ \Carbon\Carbon::parse($activity->activity_date)->format('d F Y') }} • Waktu: {{ substr($activity->activity_time, 0, 5) }} WIB
                     </p>
                     @if($activity->speaker)
                         <p class="text-xs text-slate-600 mt-0.5"> Penceramah: {{ $activity->speaker }}</p>

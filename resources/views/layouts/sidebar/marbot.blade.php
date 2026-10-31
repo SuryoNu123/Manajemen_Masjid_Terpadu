@@ -50,7 +50,7 @@
         <div class="mt-1 space-y-0.5">
             <a href="{{ route('digital-signage.index') }}" target="_blank"
                class="block rounded-md px-3 py-1.5 text-sm text-slate-200 hover:bg-slate-800">
-                📺 Buka Digital Signage TV ↗
+                Buka Digital Signage TV ↗
             </a>
             <a href="{{ route('activities.public') }}" target="_blank"
                class="block rounded-md px-3 py-1.5 text-sm text-slate-200 hover:bg-slate-800">

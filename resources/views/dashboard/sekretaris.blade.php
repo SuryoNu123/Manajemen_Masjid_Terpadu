@@ -96,7 +96,7 @@
                         <span class="text-xs font-bold uppercase text-blue-700">{{ $activity->category }}</span>
                         <h4 class="font-semibold text-slate-900 text-sm mt-0.5">{{ $activity->title }}</h4>
                         <p class="text-xs text-slate-500 mt-1">
-                             {{ \Carbon\Carbon::parse($activity->activity_date)->format('d M Y') }} • ⏰ {{ substr($activity->activity_time, 0, 5) }} WIB
+                             {{ \Carbon\Carbon::parse($activity->activity_date)->format('d M Y') }} • Waktu: {{ substr($activity->activity_time, 0, 5) }} WIB
                         </p>
                     </div>
                     <a href="{{ route('activities.edit', $activity) }}" class="text-xs text-slate-500 hover:text-blue-700 font-medium">

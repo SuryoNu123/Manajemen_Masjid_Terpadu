@@ -32,7 +32,7 @@
         <div class="flex flex-wrap items-center gap-2 mb-4">
             @if($announcement->type === 'emergency')
                 <span class="rounded-full bg-red-100 px-3 py-1 text-xs font-semibold text-red-700">
-                    ⚠️ Informasi Darurat
+                     Informasi Darurat
                 </span>
             @else
                 <span class="rounded-full bg-gray-100 px-3 py-1 text-xs font-semibold text-gray-700">
