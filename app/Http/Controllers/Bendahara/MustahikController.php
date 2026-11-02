@@ -44,7 +44,7 @@ class MustahikController extends Controller
         )->sum('amount');
 
         return view(
-            'mustahiks.index',
+            'bendahara.mustahiks.index',
             compact(
                 'mustahiks',
                 'totalRecipients',
@@ -56,7 +56,7 @@ class MustahikController extends Controller
 
     public function create(): View
     {
-        return view('mustahiks.create');
+        return view('bendahara.mustahiks.create');
     }
 
     public function store(
@@ -103,7 +103,7 @@ class MustahikController extends Controller
         Mustahik $mustahik
     ): View {
         return view(
-            'mustahiks.edit',
+            'bendahara.mustahiks.edit',
             compact('mustahik')
         );
     }

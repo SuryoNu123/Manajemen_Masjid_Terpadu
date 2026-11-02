@@ -1,0 +1,179 @@
+<?php
+
+namespace App\Http\Controllers\Marbot;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StorePrayerScheduleRequest;
+use App\Http\Requests\UpdatePrayerScheduleRequest;
+use App\Models\PrayerSchedule;
+use App\Services\PrayerScheduleService;
+use Carbon\Carbon;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
+
+class PrayerScheduleController extends Controller
+{
+    private function prayerOrder(): array
+    {
+        return [
+            'subuh' => 1,
+            'dzuhur' => 2,
+            'ashar' => 3,
+            'maghrib' => 4,
+            'isya' => 5,
+        ];
+    }
+
+    public function index(Request $request): View
+    {
+        $filters = $request->validate([
+            'date' => ['nullable', 'date'],
+        ]);
+
+        $date = $filters['date'] ?? now()->toDateString();
+
+        $schedules = PrayerSchedule::query()
+            ->whereDate('schedule_date', $date)
+            ->orderByRaw("
+                CASE prayer_name
+                    WHEN 'subuh' THEN 1
+                    WHEN 'dzuhur' THEN 2
+                    WHEN 'ashar' THEN 3
+                    WHEN 'maghrib' THEN 4
+                    WHEN 'isya' THEN 5
+                    ELSE 6
+                END
+            ")
+            ->get();
+
+        return view(
+            'marbot.prayer-schedules.index',
+            compact('schedules', 'date')
+        );
+    }
+
+    public function create(): View
+    {
+        return view('marbot.prayer-schedules.create');
+    }
+
+    public function store(
+        StorePrayerScheduleRequest $request
+    ): RedirectResponse {
+        $data = $request->validated();
+
+        $data['source'] =
+            $data['source'] ?? 'manual';
+
+        $data['is_active'] =
+            $request->boolean('is_active', true);
+
+        PrayerSchedule::updateOrCreate(
+            [
+                'schedule_date' => $data['schedule_date'],
+                'prayer_name' => $data['prayer_name'],
+            ],
+            [
+                'prayer_time' => $data['prayer_time'],
+                'latitude' => $data['latitude'] ?? null,
+                'longitude' => $data['longitude'] ?? null,
+                'source' => $data['source'],
+                'is_active' => $data['is_active'],
+            ]
+        );
+
+        return redirect()
+            ->route('jadwal-sholat.index', [
+                'date' => $data['schedule_date'],
+            ])
+            ->with(
+                'success',
+                'Jadwal sholat berhasil disimpan.'
+            );
+    }
+
+    public function edit(
+        PrayerSchedule $jadwalSholat
+    ): View {
+        return view(
+            'marbot.prayer-schedules.edit',
+            compact('jadwalSholat')
+        );
+    }
+
+    public function update(
+        UpdatePrayerScheduleRequest $request,
+        PrayerSchedule $jadwalSholat
+    ): RedirectResponse {
+        $data = $request->validated();
+
+        $data['source'] =
+            $data['source'] ?? 'manual';
+
+        $data['is_active'] =
+            $request->boolean('is_active');
+
+        $jadwalSholat->update([
+            'schedule_date' => $data['schedule_date'],
+            'prayer_name' => $data['prayer_name'],
+            'prayer_time' => $data['prayer_time'],
+            'latitude' => $data['latitude'] ?? null,
+            'longitude' => $data['longitude'] ?? null,
+            'source' => $data['source'],
+            'is_active' => $data['is_active'],
+        ]);
+
+        return redirect()
+            ->route('jadwal-sholat.index', [
+                'date' => $data['schedule_date'],
+            ])
+            ->with(
+                'success',
+                'Jadwal sholat berhasil diperbarui.'
+            );
+    }
+
+    public function destroy(
+        PrayerSchedule $jadwalSholat
+    ): RedirectResponse {
+        $date = $jadwalSholat
+            ->schedule_date
+            ->format('Y-m-d');
+
+        $jadwalSholat->delete();
+
+        return redirect()
+            ->route('jadwal-sholat.index', [
+                'date' => $date,
+            ])
+            ->with(
+                'success',
+                'Jadwal sholat berhasil dihapus.'
+            );
+    }
+
+    public function sync(PrayerScheduleService $service)
+    {
+        try {
+
+            $count = $service->syncDate(Carbon::today());
+
+            return redirect()
+                ->route('jadwal-sholat.index')
+                ->with(
+                    'success',
+                    "Berhasil memperbarui {$count} jadwal sholat hari ini."
+                );
+
+        } catch (\Throwable $e) {
+
+            return redirect()
+                ->route('jadwal-sholat.index')
+                ->with(
+                    'error',
+                    'Gagal mengambil jadwal sholat: '.$e->getMessage()
+                );
+        }
+    }
+}

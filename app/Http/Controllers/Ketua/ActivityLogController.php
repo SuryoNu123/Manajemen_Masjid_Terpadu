@@ -33,6 +33,6 @@ class ActivityLogController extends Controller
 
         $actions = ActivityLog::select('action')->distinct()->pluck('action');
 
-        return view('activity-logs.index', compact('logs', 'search', 'action', 'actions'));
+        return view('ketua.activity-logs.index', compact('logs', 'search', 'action', 'actions'));
     }
 }

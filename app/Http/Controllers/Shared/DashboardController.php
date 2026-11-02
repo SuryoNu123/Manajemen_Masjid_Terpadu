@@ -116,7 +116,7 @@ class DashboardController extends Controller
             'recentLogs' => ActivityLog::with('user')->latest('id')->take(6)->get(),
         ];
 
-        return view('dashboard.ketua', array_merge($financeData, $crossModuleStats));
+        return view('ketua.dashboard', array_merge($financeData, $crossModuleStats));
     }
 
     private function bendaharaDashboard(array $financeData): View
@@ -130,7 +130,7 @@ class DashboardController extends Controller
             'pendingDonations' => Donation::where('payment_status', 'pending')->count(),
         ];
 
-        return view('dashboard.bendahara', array_merge($financeData, $additional));
+        return view('bendahara.dashboard', array_merge($financeData, $additional));
     }
 
     private function sekretarisDashboard(): View
@@ -148,7 +148,7 @@ class DashboardController extends Controller
             'recentAnnouncements' => Announcement::latest('id')->take(5)->get(),
         ];
 
-        return view('dashboard.sekretaris', $data);
+        return view('sekretaris.dashboard', $data);
     }
 
     private function marbotDashboard(): View
@@ -161,7 +161,7 @@ class DashboardController extends Controller
             'recentMaintenances' => AssetMaintenance::with('asset')->latest('scheduled_date')->take(5)->get(),
         ];
 
-        return view('dashboard.marbot', $data);
+        return view('marbot.dashboard', $data);
     }
 
     private function jamaahDashboard(float $balance): View
@@ -180,6 +180,6 @@ class DashboardController extends Controller
                 ->get(),
         ];
 
-        return view('dashboard.jamaah', $data);
+        return view('jamaah.dashboard', $data);
     }
 }

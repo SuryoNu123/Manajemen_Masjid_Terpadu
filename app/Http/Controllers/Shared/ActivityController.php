@@ -42,7 +42,7 @@ class ActivityController extends Controller
             ->orderBy('type')
             ->pluck('type');
 
-        return view('activities.index', compact('activities', 'activityTypes'));
+        return view('sekretaris.activities.index', compact('activities', 'activityTypes'));
     }
 
     public function create()
@@ -51,7 +51,7 @@ class ActivityController extends Controller
             ->orderBy('name')
             ->get();
 
-        return view('activities.create', compact('officers'));
+        return view('sekretaris.activities.create', compact('officers'));
     }
 
     public function store(Request $request)
@@ -220,7 +220,7 @@ class ActivityController extends Controller
     {
         $activity->load('officers');
 
-        return view('activities.show', compact('activity'));
+        return view('sekretaris.activities.show', compact('activity'));
     }
 
     public function edit(Activity $activity)
@@ -234,7 +234,7 @@ class ActivityController extends Controller
             ->keyBy('id');
 
         return view(
-            'activities.edit',
+            'sekretaris.activities.edit',
             compact(
                 'activity',
                 'officers',
@@ -430,7 +430,7 @@ class ActivityController extends Controller
             ->get();
 
         return view(
-            'activities.public',
+            'public.activities.index',
             compact('activities')
         );
     }

@@ -38,7 +38,7 @@ class NotificationController extends Controller
             ->withQueryString();
 
         return view(
-            'notifications.index',
+            'shared.notifications.index',
             compact('notifications', 'filters')
         );
     }

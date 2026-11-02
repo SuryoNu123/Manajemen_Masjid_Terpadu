@@ -25,7 +25,7 @@ class BookLoanRequestController extends Controller
             ? LoanRequest::with(['book', 'loan'])->where('jamaah_id', $jamaah->id)->latest()->paginate(10)
             : LoanRequest::whereKey([])->paginate(10);
 
-        return view('book-loan-requests.mine', compact('requests', 'jamaah'));
+        return view('jamaah.book-loan-requests.mine', compact('requests', 'jamaah'));
     }
 
     public function store(Request $request, LibraryBook $book): RedirectResponse
@@ -88,7 +88,7 @@ class BookLoanRequestController extends Controller
             ->paginate(15)
             ->withQueryString();
 
-        return view('book-loan-requests.index', compact('requests', 'filters'));
+        return view('sekretaris.book-loan-requests.index', compact('requests', 'filters'));
     }
 
     public function approve(Request $request, LoanRequest $bookLoanRequest): RedirectResponse

@@ -51,7 +51,7 @@ class SantriAttendanceController extends Controller
             ->groupBy('status')
             ->pluck('total', 'status');
 
-        return view('santri-attendances.index', compact(
+        return view('marbot.santri-attendances.index', compact(
             'date',
             'classId',
             'classes',
@@ -221,7 +221,7 @@ class SantriAttendanceController extends Controller
             ->paginate(15)
             ->withQueryString();
 
-        return view('santri-attendances.report', compact(
+        return view('marbot.santri-attendances.report', compact(
             'classes',
             'startDate',
             'endDate',

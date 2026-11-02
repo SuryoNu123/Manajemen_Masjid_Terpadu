@@ -33,12 +33,12 @@ class AnnouncementController extends Controller
             ->paginate(10)
             ->withQueryString();
 
-        return view('announcements.index', compact('announcements'));
+        return view('sekretaris.announcements.index', compact('announcements'));
     }
 
     public function create(): View
     {
-        return view('announcements.create');
+        return view('sekretaris.announcements.create');
     }
 
     public function store(Request $request)
@@ -75,12 +75,12 @@ class AnnouncementController extends Controller
     {
         $announcement->load(['whatsAppDeliveries.jamaah']);
 
-        return view('announcements.show', compact('announcement'));
+        return view('sekretaris.announcements.show', compact('announcement'));
     }
 
     public function edit(Announcement $announcement): View
     {
-        return view('announcements.edit', compact('announcement'));
+        return view('sekretaris.announcements.edit', compact('announcement'));
     }
 
     public function update(Request $request, Announcement $announcement)

@@ -14,7 +14,7 @@ class WhatsAppPreferenceController extends Controller
 {
     public function edit(Request $request): View
     {
-        return view('whatsapp-preferences.edit', [
+        return view('jamaah.whatsapp-preferences.edit', [
             'jamaah' => $request->user()->jamaah,
             'configured' => app(WhatsAppProviderManager::class)->isConfigured(),
         ]);

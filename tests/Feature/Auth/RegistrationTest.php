@@ -41,7 +41,7 @@ test('new accounts are created as Jamaah and cannot choose an administrative rol
     expect($user->password)->not->toBe('SecurePassword123!');
     expect(session()->getId())->not->toBe($previousSessionId);
 
-    $this->get('/dashboard')->assertOk()->assertViewIs('dashboard.jamaah');
+    $this->get('/dashboard')->assertOk()->assertViewIs('jamaah.dashboard');
 });
 
 test('registration rejects a duplicate email without creating another account', function () {

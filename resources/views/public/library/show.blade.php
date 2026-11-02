@@ -1,4 +1,4 @@
-@extends('layouts.public')
+@extends('shared.layouts.public')
 
 @section('title', $book->title)
 

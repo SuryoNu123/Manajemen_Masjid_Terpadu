@@ -40,7 +40,7 @@ class BusinessUnitController extends Controller
             ->paginate(10)
             ->withQueryString();
 
-        return view('business-units.index', compact(
+        return view('ketua.business-units.index', compact(
             'businessUnits',
             'search',
             'status'
@@ -49,7 +49,7 @@ class BusinessUnitController extends Controller
 
     public function create()
     {
-        return view('business-units.create', [
+        return view('ketua.business-units.create', [
             'businessUnit' => null,
         ]);
     }
@@ -84,7 +84,7 @@ class BusinessUnitController extends Controller
 
     public function edit(BusinessUnit $businessUnit)
     {
-        return view('business-units.edit', compact('businessUnit'));
+        return view('ketua.business-units.edit', compact('businessUnit'));
     }
 
     public function update(

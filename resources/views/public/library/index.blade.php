@@ -1,4 +1,4 @@
-@extends('layouts.public')
+@extends('shared.layouts.public')
 @section('title', 'Katalog Perpustakaan')
 @section('content')
 <section class="mx-auto max-w-7xl space-y-6 px-4 py-10 sm:px-6"><div><p class="text-sm font-semibold uppercase tracking-wide text-emerald-700">Perpustakaan Masjid</p><h1 class="mt-2 text-3xl font-bold text-slate-900">Katalog buku dan kitab</h1><p class="mt-2 text-slate-600">Cari koleksi dan lihat ketersediaan sebelum mengajukan pinjam.</p></div>

@@ -29,7 +29,7 @@ test('users can authenticate using the login screen and receive a fresh session'
     $response->assertRedirect(route('dashboard', absolute: false));
     expect(session()->getId())->not->toBe($previousSessionId);
 
-    $this->get('/dashboard')->assertOk()->assertViewIs('dashboard.jamaah');
+    $this->get('/dashboard')->assertOk()->assertViewIs('jamaah.dashboard');
 });
 
 test('existing accounts with mixed-case emails can still sign in', function () {
@@ -52,7 +52,7 @@ test('legacy accounts without a role receive jamaah access only', function () {
     ])->assertRedirect(route('dashboard', absolute: false));
 
     $this->assertAuthenticatedAs($user);
-    $this->get('/dashboard')->assertOk()->assertViewIs('dashboard.jamaah');
+    $this->get('/dashboard')->assertOk()->assertViewIs('jamaah.dashboard');
     $this->get('/transaksi-keuangan')->assertForbidden();
     expect($user->fresh()->role_id)->toBeNull();
 });

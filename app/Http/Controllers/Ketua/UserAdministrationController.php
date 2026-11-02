@@ -40,7 +40,7 @@ class UserAdministrationController extends Controller
             ->paginate(15)
             ->withQueryString();
 
-        return view('user-administration.index', [
+        return view('ketua.user-administration.index', [
             'users' => $users,
             'roles' => Role::orderBy('display_name')->get(),
             'filters' => $filters,
@@ -49,7 +49,7 @@ class UserAdministrationController extends Controller
 
     public function create(): View
     {
-        return view('user-administration.create', [
+        return view('ketua.user-administration.create', [
             'user' => new User(['is_active' => true]),
             'roles' => Role::orderBy('display_name')->get(),
             'jamaahs' => Jamaah::whereNull('user_id')->orderBy('name')->get(),
@@ -78,12 +78,12 @@ class UserAdministrationController extends Controller
 
     public function show(User $user): View
     {
-        return view('user-administration.show', ['user' => $user->load(['role', 'jamaah'])]);
+        return view('ketua.user-administration.show', ['user' => $user->load(['role', 'jamaah'])]);
     }
 
     public function edit(User $user): View
     {
-        return view('user-administration.edit', [
+        return view('ketua.user-administration.edit', [
             'user' => $user->load('jamaah'),
             'roles' => Role::orderBy('display_name')->get(),
             'jamaahs' => Jamaah::where(function ($query) use ($user): void {

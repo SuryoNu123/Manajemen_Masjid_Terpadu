@@ -13,7 +13,7 @@ class ZakatController extends Controller
      */
     public function index(): View
     {
-        return view('zakat.index');
+        return view('public.zakat.index');
     }
 
     /**
@@ -103,7 +103,7 @@ class ZakatController extends Controller
         }
 
         return view(
-            'zakat.index',
+            'public.zakat.index',
             [
                 'result' => $result,
                 'netAmount' => $netAmount,

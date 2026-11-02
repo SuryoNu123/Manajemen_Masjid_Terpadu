@@ -94,7 +94,7 @@ class PublicHomeController extends Controller
             $reportPeriodLabel = 'Rekapitulasi Keuangan Berjalan';
         }
 
-        return view('welcome', compact(
+        return view('public.home.index', compact(
             'schedules',
             'prayerNames',
             'activities',

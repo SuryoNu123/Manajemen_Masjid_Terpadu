@@ -24,12 +24,12 @@ class DakwahContentController extends Controller
             ->paginate(10)
             ->withQueryString();
 
-        return view('dakwah-contents.index', compact('contents'));
+        return view('sekretaris.dakwah-contents.index', compact('contents'));
     }
 
     public function create()
     {
-        return view('dakwah-contents.create');
+        return view('sekretaris.dakwah-contents.create');
     }
 
     public function store(Request $request)
@@ -69,7 +69,7 @@ class DakwahContentController extends Controller
 
     public function edit(DakwahContent $dakwahContent)
     {
-        return view('dakwah-contents.edit', [
+        return view('sekretaris.dakwah-contents.edit', [
             'content' => $dakwahContent,
         ]);
     }

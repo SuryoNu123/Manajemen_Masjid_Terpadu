@@ -63,7 +63,7 @@ class TransparencyController extends Controller
             ?? $latestYearlyReport;
 
         return view(
-            'transparency.index',
+            'public.transparency.index',
             compact(
                 'latestMonthlyReport',
                 'latestYearlyReport',

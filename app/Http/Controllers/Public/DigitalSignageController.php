@@ -88,7 +88,7 @@ class DigitalSignageController extends Controller
             $balance = $totalIncome - $totalExpense;
         }
 
-        return view('digital-signage.index', compact(
+        return view('public.digital-signage.index', compact(
             'schedules',
             'prayerNames',
             'nextSchedule',
