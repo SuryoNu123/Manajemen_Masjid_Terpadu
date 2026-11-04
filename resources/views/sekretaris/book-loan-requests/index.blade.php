@@ -7,6 +7,7 @@
     @php($hasFilters = collect($filters)->contains(fn ($filter) => $filter !== null && $filter !== ''))
 
     <div class="space-y-5">
+        @include('shared.partials.library-tabs')
         <div>
             <h1 class="text-xl font-bold text-slate-900">Permintaan peminjaman dari Jamaah</h1>
             <p class="mt-1 text-sm text-slate-500">Cari permintaan berdasarkan nama jamaah atau judul buku.</p>

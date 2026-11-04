@@ -1,0 +1,8 @@
+<nav aria-label="Navigasi Perpustakaan" class="-mx-1 overflow-x-auto px-1">
+    <div class="flex min-w-max gap-2 border-b border-slate-200 pb-2">
+        <a href="{{ route('library-books.index') }}" @class(['inline-flex min-h-11 items-center rounded-lg px-4 text-sm font-semibold transition', 'bg-blue-700 text-white' => request()->routeIs('library-books.*'), 'bg-white text-slate-600 hover:bg-slate-100' => ! request()->routeIs('library-books.*')]) @if(request()->routeIs('library-books.*')) aria-current="page" @endif>Katalog Buku</a>
+        <a href="{{ route('book-loan-requests.index') }}" @class(['inline-flex min-h-11 items-center rounded-lg px-4 text-sm font-semibold transition', 'bg-blue-700 text-white' => request()->routeIs('book-loan-requests.index'), 'bg-white text-slate-600 hover:bg-slate-100' => ! request()->routeIs('book-loan-requests.index')]) @if(request()->routeIs('book-loan-requests.index')) aria-current="page" @endif>Permintaan Pinjam</a>
+        <a href="{{ route('book-loans.index') }}" @class(['inline-flex min-h-11 items-center rounded-lg px-4 text-sm font-semibold transition', 'bg-blue-700 text-white' => request()->routeIs('book-loans.index'), 'bg-white text-slate-600 hover:bg-slate-100' => ! request()->routeIs('book-loans.index')]) @if(request()->routeIs('book-loans.index')) aria-current="page" @endif>Peminjaman</a>
+        <a href="{{ route('book-loans.report') }}" @class(['inline-flex min-h-11 items-center rounded-lg px-4 text-sm font-semibold transition', 'bg-blue-700 text-white' => request()->routeIs('book-loans.report'), 'bg-white text-slate-600 hover:bg-slate-100' => ! request()->routeIs('book-loans.report')]) @if(request()->routeIs('book-loans.report')) aria-current="page" @endif>Laporan Perpustakaan</a>
+    </div>
+</nav>

@@ -5,6 +5,7 @@
 
 @section('content')
 <div class="space-y-6">
+    @include('shared.partials.library-tabs')
 
     {{-- NOTIFIKASI --}}
     @if (session('success'))

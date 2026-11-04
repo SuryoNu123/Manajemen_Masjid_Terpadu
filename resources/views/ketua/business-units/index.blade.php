@@ -5,6 +5,7 @@
 
 @section('content')
 <div class="space-y-6">
+    @include('shared.partials.business-unit-tabs')
 
     @if (session('success'))
         <div class="rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700">

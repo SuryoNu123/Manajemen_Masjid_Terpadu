@@ -5,6 +5,7 @@
 
 @section('content')
 <div class="space-y-6">
+    @include('shared.partials.business-unit-tabs')
 
     <div class="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
         <div>

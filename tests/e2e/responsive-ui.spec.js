@@ -379,7 +379,7 @@ for (const viewport of viewports) {
                 }
 
                 if (user.role === 'ketua') {
-                    const financialGroup = page.locator('#dashboard-sidebar details').filter({ hasText: 'Keuangan & Bisnis' });
+                    const financialGroup = page.locator('#dashboard-sidebar details').filter({ hasText: 'Keuangan & Usaha' });
 
                     await expect(financialGroup.locator('summary')).toBeVisible();
                     await expect(financialGroup.locator('a').first()).toBeHidden();
@@ -387,7 +387,7 @@ for (const viewport of viewports) {
                     await expect(financialGroup.getByRole('link', { name: 'Transaksi Keuangan' })).toBeVisible();
 
                     await page.goto('/transaksi-keuangan');
-                    await expect(page.locator('#dashboard-sidebar details[open]').filter({ hasText: 'Keuangan & Bisnis' }))
+                    await expect(page.locator('#dashboard-sidebar details[open]').filter({ hasText: 'Keuangan & Usaha' }))
                         .toHaveAttribute('open', '');
                     await checkLayout(page);
                 }

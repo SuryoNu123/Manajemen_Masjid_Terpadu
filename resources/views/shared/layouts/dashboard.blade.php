@@ -56,11 +56,12 @@
 
             <a href="{{ route('dashboard') }}"
                @class([
-                   'flex min-h-10 items-center gap-3 rounded-md px-3 py-2.5 text-sm transition hover:bg-slate-800',
+                   'flex min-h-11 items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-semibold transition hover:bg-slate-800',
                    'bg-slate-800 font-semibold text-white' => request()->routeIs('dashboard'),
                    'text-slate-300' => ! request()->routeIs('dashboard'),
                ])
                @if(request()->routeIs('dashboard')) aria-current="page" @endif>
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="h-5 w-5 shrink-0 text-white"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13h8V3H3v10Zm10 8h8V11h-8v10ZM3 21h8v-6H3v6Zm10-12h8V3h-8v6Z" /></svg>
                 <span>Dashboard</span>
             </a>
 
@@ -78,23 +79,28 @@
             @endif
 
             {{-- NOTIFIKASI --}}
-            <a href="{{ route('notifications.index') }}"
-               @class([
-                   'flex min-h-10 items-center justify-between gap-3 rounded-md px-3 py-2.5 text-sm transition',
-                   'bg-slate-800 font-semibold text-white' => request()->routeIs('notifications.*'),
-                   'text-slate-300 hover:bg-slate-800' => ! request()->routeIs('notifications.*'),
-               ])
-               @if(request()->routeIs('notifications.*')) aria-current="page" @endif>
+            @unless(auth()->user()->hasRole('ketua'))
+                <a href="{{ route('notifications.index') }}"
+                   @class([
+                       'flex min-h-11 items-center justify-between gap-3 rounded-lg px-3 py-2.5 text-sm transition',
+                       'bg-slate-800 font-semibold text-white' => request()->routeIs('notifications.*'),
+                       'text-slate-300 hover:bg-slate-800' => ! request()->routeIs('notifications.*'),
+                   ])
+                   @if(request()->routeIs('notifications.*')) aria-current="page" @endif>
 
-                <span>Notifikasi</span>
-
-                @if(auth()->user()->unreadNotifications->count() > 0)
-                    <span class="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1 text-xs font-semibold text-white">
-                        {{ auth()->user()->unreadNotifications->count() }}
+                    <span class="flex items-center gap-3">
+                        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="h-5 w-5 shrink-0 text-white"><path stroke-linecap="round" stroke-linejoin="round" d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9m-8 12a2 2 0 0 0 4 0" /></svg>
+                        Notifikasi
                     </span>
-                @endif
 
-            </a>
+                    @if(auth()->user()->unreadNotifications->count() > 0)
+                        <span class="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1 text-xs font-semibold text-white">
+                            {{ auth()->user()->unreadNotifications->count() }}
+                        </span>
+                    @endif
+
+                </a>
+            @endunless
 
         </nav>
 

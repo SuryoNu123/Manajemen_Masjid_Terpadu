@@ -5,6 +5,7 @@
 
 @section('content')
 <div class="mx-auto max-w-3xl space-y-6">
+    @include('shared.partials.library-tabs')
 
     <div>
         <h2 class="text-xl font-bold text-slate-800">

@@ -5,6 +5,7 @@
 
 @section('content')
 <div class="space-y-6">
+    @include('shared.partials.youth-tabs')
     <div class="flex flex-wrap items-center justify-between gap-4">
         <div>
             <h1 class="text-2xl font-bold text-gray-900">
@@ -16,11 +17,6 @@
         </div>
 
         <div class="flex items-center gap-3">
-            <a href="{{ route('youth-members.index') }}"
-               class="rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm font-semibold text-gray-700 hover:bg-gray-50">
-                Data Anggota
-            </a>
-
             <a href="{{ route('youth-programs.create') }}"
                class="rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-700">
                 + Tambah Program Kerja

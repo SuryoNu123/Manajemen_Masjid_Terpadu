@@ -5,6 +5,7 @@
 
 @section('content')
 <div class="mx-auto max-w-3xl space-y-6">
+    @include('shared.partials.youth-tabs')
     <div class="flex items-center justify-between">
         <div>
             <h1 class="text-2xl font-bold text-gray-900">Tambah Anggota Remaja Masjid</h1>
