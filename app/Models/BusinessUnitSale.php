@@ -13,6 +13,7 @@ class BusinessUnitSale extends Model
     protected $fillable = [
         'business_unit_id',
         'sale_date',
+        'buyer_name',
         'reference_number',
         'payment_method',
         'quantity',

@@ -79,6 +79,20 @@
                     </div>
 
                     <div>
+                        <label for="buyer_name"
+                               class="mb-2 block text-sm font-medium text-slate-700">
+                            Nama Pembeli
+                        </label>
+                        <input id="buyer_name" name="buyer_name" type="text"
+                               value="{{ old('buyer_name') }}"
+                               placeholder="Opsional"
+                               class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm">
+                        @error('buyer_name')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
                         <label for="reference_number"
                                class="mb-2 block text-sm font-medium text-slate-700">
                             Nomor Referensi

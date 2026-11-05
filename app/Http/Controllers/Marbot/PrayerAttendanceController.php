@@ -27,12 +27,17 @@ class PrayerAttendanceController extends Controller
                 'nullable',
                 'in:subuh,dzuhur,ashar,maghrib,isya',
             ],
+            'search' => ['nullable', 'string', 'max:100'],
         ]);
 
         $date = $filters['date'] ?? now()->toDateString();
         $prayerName = $filters['prayer_name'] ?? 'subuh';
+        $search = trim($filters['search'] ?? '');
 
         $jamaahs = Jamaah::where('status', 'aktif')
+            ->when($search !== '', function ($query) use ($search) {
+                $query->where('name', 'like', "%{$search}%");
+            })
             ->orderBy('name')
             ->get();
 
@@ -48,6 +53,7 @@ class PrayerAttendanceController extends Controller
             'attendanceMap' => $attendanceMap,
             'date' => $date,
             'prayerName' => $prayerName,
+            'search' => $search,
             'prayers' => self::PRAYERS,
         ]);
     }
@@ -60,6 +66,7 @@ class PrayerAttendanceController extends Controller
                 'required',
                 'in:subuh,dzuhur,ashar,maghrib,isya',
             ],
+            'search' => ['nullable', 'string', 'max:100'],
             'attendance' => ['nullable', 'array'],
             'attendance.*' => [
                 'nullable',
@@ -115,6 +122,7 @@ class PrayerAttendanceController extends Controller
             ->route('prayer-attendances.index', [
                 'date' => $date,
                 'prayer_name' => $prayerName,
+                'search' => $validated['search'] ?? null,
             ])
             ->with('success', 'Presensi jamaah berhasil disimpan.');
     }

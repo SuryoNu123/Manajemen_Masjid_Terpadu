@@ -30,6 +30,7 @@ class BusinessUnitSaleController extends Controller
                 'integer',
                 'exists:business_units,id',
             ],
+            'search' => ['nullable', 'string', 'max:100'],
         ]);
 
         $referenceDate = Carbon::parse(
@@ -50,7 +51,16 @@ class BusinessUnitSaleController extends Controller
                 function ($query, $unitId) {
                     $query->where('business_unit_id', $unitId);
                 }
-            );
+            )
+            ->when(trim($filters['search'] ?? '') !== '', function ($query) use ($filters) {
+                $search = trim($filters['search']);
+
+                $query->where(function ($query) use ($search) {
+                    $query->where('buyer_name', 'like', "%{$search}%")
+                        ->orWhere('reference_number', 'like', "%{$search}%")
+                        ->orWhere('description', 'like', "%{$search}%");
+                });
+            });
 
         // Hitung ringkasan sebelum pagination diterapkan.
         $totalAmount = (clone $query)->sum('amount');
@@ -102,6 +112,7 @@ class BusinessUnitSaleController extends Controller
                 'before_or_equal:today',
             ],
             'reference_number' => ['nullable', 'string', 'max:100'],
+            'buyer_name' => ['nullable', 'string', 'max:255'],
             'payment_method' => [
                 'required',
                 'in:tunai,qris,transfer,lainnya',

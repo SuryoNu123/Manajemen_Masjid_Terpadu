@@ -11,14 +11,19 @@ class ActivityLogController extends Controller
 {
     public function index(Request $request): View
     {
-        $search = $request->query('search');
-        $action = $request->query('action');
+        $filters = $request->validate([
+            'search' => ['nullable', 'string', 'max:100'],
+            'action' => ['nullable', 'string', 'max:100'],
+        ]);
+        $search = trim($filters['search'] ?? '');
+        $action = $filters['action'] ?? '';
 
         $logs = ActivityLog::with('user')
-            ->when($search, function ($query, $search) {
+            ->when($search !== '', function ($query) use ($search) {
                 $query->where(function ($q) use ($search) {
                     $q->where('description', 'like', "%{$search}%")
                         ->orWhere('ip_address', 'like', "%{$search}%")
+                        ->orWhere('action', 'like', "%{$search}%")
                         ->orWhereHas('user', function ($qu) use ($search) {
                             $qu->where('name', 'like', "%{$search}%");
                         });

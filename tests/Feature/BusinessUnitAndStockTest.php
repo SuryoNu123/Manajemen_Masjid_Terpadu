@@ -104,6 +104,7 @@ test('recording business unit sale automatically creates financial transaction',
     $response = $this->actingAs($bendahara)->post(route('business-unit-sales.store'), [
         'business_unit_id' => $unit->id,
         'sale_date' => today()->toDateString(),
+        'buyer_name' => 'Suryo Pembeli',
         'amount' => 350000,
         'quantity' => 25,
         'payment_method' => 'tunai',
@@ -115,6 +116,7 @@ test('recording business unit sale automatically creates financial transaction',
     $this->assertDatabaseHas('business_unit_sales', [
         'business_unit_id' => $unit->id,
         'amount' => 350000,
+        'buyer_name' => 'Suryo Pembeli',
     ]);
 
     $this->assertDatabaseHas('financial_transactions', [

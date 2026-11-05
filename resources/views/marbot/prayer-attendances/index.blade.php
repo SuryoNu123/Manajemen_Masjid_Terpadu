@@ -35,7 +35,7 @@
     <div class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
         <form method="GET"
               action="{{ route('prayer-attendances.index') }}"
-              class="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:items-end">
+              class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 sm:items-end">
 
             <div>
                 <label for="date"
@@ -71,6 +71,17 @@
             </div>
 
             <div>
+                <label for="search"
+                       class="mb-2 block text-sm font-medium text-slate-700">
+                    Nama Jamaah
+                </label>
+                <input id="search" name="search" type="search"
+                       value="{{ $search }}"
+                       placeholder="Cari nama jamaah"
+                       class="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:border-slate-500 focus:outline-none">
+            </div>
+
+            <div>
                 <button type="submit"
                         class="w-full rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-700">
                     Tampilkan Jamaah
@@ -101,6 +112,7 @@
 
         <input type="hidden" name="attendance_date" value="{{ $date }}">
         <input type="hidden" name="prayer_name" value="{{ $prayerName }}">
+        <input type="hidden" name="search" value="{{ $search }}">
 
         <div class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
             <div class="overflow-x-auto">

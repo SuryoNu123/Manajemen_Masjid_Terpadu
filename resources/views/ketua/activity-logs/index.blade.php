@@ -19,10 +19,10 @@
     {{-- Filter --}}
     <div class="rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
         <form method="GET" action="{{ route('activity-logs.index') }}" class="flex flex-wrap gap-3">
-            <input type="text"
+            <input type="search"
                    name="search"
                    value="{{ request('search') }}"
-                   placeholder="Cari deskripsi, IP, atau nama pengguna..."
+                   placeholder="Cari nama pengguna, tindakan, atau deskripsi log..."
                    class="min-w-[240px] flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-600 focus:outline-none">
 
             <select name="action" class="rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-600 focus:outline-none">
