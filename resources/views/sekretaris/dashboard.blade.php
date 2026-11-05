@@ -7,10 +7,10 @@
 
 <div class="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
     <div>
-        <h1 class="text-2xl font-bold text-gray-900">
+        <h1 class="text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
             Dashboard Sekretaris & Humas
         </h1>
-        <p class="text-gray-500 mt-1">
+        <p class="mt-2 max-w-3xl text-base leading-6 text-slate-600">
             Kelola administrasi jamaah, jadwal kegiatan ibadah/kajian, publikasi pengumuman, remaja masjid, dan santri TPQ.
         </p>
     </div>
@@ -33,7 +33,7 @@
 
 {{-- STATISTIK ADMINISTRASI --}}
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
-    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+    <div class="rounded-2xl border border-slate-200 border-t-4 border-t-blue-600 bg-blue-50/40 p-5 shadow-sm">
         <div class="flex items-center justify-between">
             <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Database Jamaah</span>
 
@@ -44,7 +44,7 @@
         </a>
     </div>
 
-    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+    <div class="rounded-2xl border border-slate-200 border-t-4 border-t-emerald-600 bg-emerald-50/40 p-5 shadow-sm">
         <div class="flex items-center justify-between">
             <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Santri TPQ/TPA</span>
 
@@ -55,7 +55,7 @@
         </a>
     </div>
 
-    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+    <div class="rounded-2xl border border-slate-200 border-t-4 border-t-violet-600 bg-violet-50/40 p-5 shadow-sm">
         <div class="flex items-center justify-between">
             <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Remaja Masjid</span>
 
@@ -66,7 +66,7 @@
         </a>
     </div>
 
-    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+    <div class="rounded-2xl border border-slate-200 border-t-4 border-t-amber-500 bg-amber-50/40 p-5 shadow-sm">
         <div class="flex items-center justify-between">
             <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Perpustakaan</span>
 
@@ -124,12 +124,12 @@
                     <div>
                         <div class="flex items-center gap-2">
                             @if($announcement->type === 'emergency')
-                                <span class="rounded bg-red-100 px-1.5 py-0.5 text-[10px] font-bold text-red-700">DARURAT</span>
+                                <span class="rounded-full bg-rose-100 px-2 py-1 text-[10px] font-bold tracking-wide text-rose-800">DARURAT</span>
                             @endif
                             @if($announcement->status === 'published')
-                                <span class="rounded bg-green-100 px-1.5 py-0.5 text-[10px] font-semibold text-green-700">Dipublikasikan</span>
+                                <span class="rounded-full bg-emerald-100 px-2 py-1 text-[10px] font-semibold text-emerald-800">Dipublikasikan</span>
                             @else
-                                <span class="rounded bg-slate-100 px-1.5 py-0.5 text-[10px] font-semibold text-slate-600">Draf</span>
+                                <span class="rounded-full bg-slate-100 px-2 py-1 text-[10px] font-semibold text-slate-700">Draf</span>
                             @endif
                             <span class="text-[11px] text-slate-400">{{ $announcement->created_at->format('d/m/Y') }}</span>
                         </div>

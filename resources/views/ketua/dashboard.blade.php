@@ -6,55 +6,20 @@
 @section('content')
 
 <div class="mb-8">
-    <h1 class="text-2xl font-bold text-gray-900">
+    <h1 class="text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
         Selamat Datang, {{ auth()->user()->name }}
     </h1>
-    <p class="text-gray-500 mt-1">
+    <p class="mt-2 max-w-3xl text-base leading-6 text-slate-600">
         Ringkasan lintas modul operasional, keuangan, dan dakwah Masjid Terpadu.
     </p>
 </div>
 
 {{-- STATISTIK KEUANGAN UTAMA --}}
 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mb-8">
-    <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-5">
-        <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">
-            Total Saldo Kas
-        </p>
-        <p class="text-2xl font-bold text-slate-900 mt-2">
-            Rp {{ number_format($balance, 0, ',', '.') }}
-        </p>
-        <p class="text-xs text-slate-400 mt-1">Saldo riil operasional masjid</p>
-    </div>
-
-    <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-5">
-        <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">
-            Pemasukan (Bulan Ini)
-        </p>
-        <p class="text-2xl font-bold text-green-600 mt-2">
-            Rp {{ number_format($monthlyIncome, 0, ',', '.') }}
-        </p>
-        <p class="text-xs text-slate-400 mt-1">Total: Rp {{ number_format($totalIncome, 0, ',', '.') }}</p>
-    </div>
-
-    <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-5">
-        <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">
-            Pengeluaran (Bulan Ini)
-        </p>
-        <p class="text-2xl font-bold text-red-600 mt-2">
-            Rp {{ number_format($monthlyExpense, 0, ',', '.') }}
-        </p>
-        <p class="text-xs text-slate-400 mt-1">Total: Rp {{ number_format($totalExpense, 0, ',', '.') }}</p>
-    </div>
- 
-    <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-5">
-        <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">
-            Donasi Terverifikasi
-        </p>
-        <p class="text-2xl font-bold text-blue-700 mt-2">
-            Rp {{ number_format($totalDonation, 0, ',', '.') }}
-        </p>
-        <p class="text-xs text-slate-400 mt-1">Infaq digital & QRIS</p>
-    </div>
+    <x-shared::metric-card label="Saldo Kas Masjid" :value="'Rp '.number_format($balance, 0, ',', '.')" detail="Saldo operasional tersedia" tone="emerald" :featured="true" />
+    <x-shared::metric-card label="Pemasukan Bulan Ini" :value="'Rp '.number_format($monthlyIncome, 0, ',', '.')" :detail="'Akumulasi Rp '.number_format($totalIncome, 0, ',', '.')" tone="emerald" />
+    <x-shared::metric-card label="Pengeluaran Bulan Ini" :value="'Rp '.number_format($monthlyExpense, 0, ',', '.')" :detail="'Akumulasi Rp '.number_format($totalExpense, 0, ',', '.')" tone="rose" />
+    <x-shared::metric-card label="Donasi Terverifikasi" :value="'Rp '.number_format($totalDonation, 0, ',', '.')" detail="Infaq digital dan QRIS" tone="blue" />
 </div>
 
 {{-- RINGKASAN LINTAS MODUL (DSH-F-002) --}}
@@ -63,7 +28,7 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {{-- JAMAAH --}}
         <a href="{{ route('jamaahs.index') }}"
-           class="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm hover:border-blue-300 hover:shadow-md transition">
+           class="group rounded-2xl border border-slate-200 border-l-4 border-l-blue-600 bg-blue-50/50 p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
             <div class="flex items-center justify-between">
                 <span class="text-sm font-semibold text-slate-600">Jamaah Terdaftar</span>
 
@@ -74,7 +39,7 @@
 
         {{-- SANTRI TPQ --}}
         <a href="{{ route('santris.index') }}"
-           class="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm hover:border-blue-400 hover:shadow-md transition">
+           class="group rounded-2xl border border-slate-200 border-l-4 border-l-emerald-600 bg-emerald-50/50 p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
             <div class="flex items-center justify-between">
                 <span class="text-sm font-semibold text-slate-600">Santri TPQ/TPA</span>
 
@@ -85,7 +50,7 @@
 
         {{-- REMAJA MASJID --}}
         <a href="{{ route('youth-members.index') }}"
-           class="group rounded-xl border border-slate-200 bg-white p-5 transition hover:border-purple-400 hover:shadow-sm">
+           class="group rounded-2xl border border-slate-200 border-l-4 border-l-violet-600 bg-violet-50/50 p-5 transition hover:-translate-y-0.5 hover:shadow-md">
             <div class="flex items-center justify-between">
                 <span class="text-sm font-semibold text-slate-600">Remaja Masjid</span>
 
@@ -96,7 +61,7 @@
 
         {{-- ASET & INVENTARIS --}}
         <a href="{{ route('assets.index') }}"
-           class="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm hover:border-amber-400 hover:shadow-md transition">
+           class="group rounded-2xl border border-slate-200 border-l-4 border-l-amber-500 bg-amber-50/50 p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
             <div class="flex items-center justify-between">
                 <span class="text-sm font-semibold text-slate-600">Inventaris Aset</span>
 
@@ -169,16 +134,16 @@
                     @forelse($latestTransactions as $tx)
                         <tr>
                             <td class="px-5 py-3 text-slate-600 text-xs whitespace-nowrap">
-                                {{ \Carbon\Carbon::parse($tx->transaction_date)->format('d/m/Y') }}
+                                {{ \Carbon\Carbon::parse($tx->transaction_date)->format('d M Y') }}
                             </td>
                             <td class="px-5 py-3 text-slate-800 font-medium">
                                 {{ $tx->category?->name ?? 'Kas Umum' }}
                             </td>
                             <td class="px-5 py-3">
                                 @if($tx->type === 'income')
-                                    <span class="rounded bg-green-100 px-2 py-0.5 text-xs font-semibold text-green-700">Masuk</span>
+                    <span class="rounded-full bg-emerald-100 px-2.5 py-1 text-xs font-semibold text-emerald-800">Masuk</span>
                                 @else
-                                    <span class="rounded bg-red-100 px-2 py-0.5 text-xs font-semibold text-red-700">Keluar</span>
+                    <span class="rounded-full bg-rose-100 px-2.5 py-1 text-xs font-semibold text-rose-800">Keluar</span>
                                 @endif
                             </td>
                             <td class="px-5 py-3 text-right font-bold {{ $tx->type === 'income' ? 'text-green-600' : 'text-red-600' }}">

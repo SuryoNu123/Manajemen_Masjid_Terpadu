@@ -6,7 +6,7 @@
 <section class="bg-slate-900 py-16 text-white">
     <div class="mx-auto max-w-7xl px-6">
         <span class="text-sm font-semibold uppercase tracking-wider text-blue-200">Pusat Informasi</span>
-        <h1 class="mt-2 text-3xl md:text-4xl font-bold">Pengumuman & Informasi Masjid</h1>
+        <h1 class="mt-2 text-4xl font-bold tracking-tight sm:text-5xl">Pengumuman & Informasi Masjid</h1>
         <p class="mt-3 text-slate-300 max-w-2xl">
             Informasi terkini seputar kegiatan ibadah, layanan sosial, dan kabar penting untuk seluruh jamaah Masjid Terpadu.
         </p>
@@ -29,7 +29,7 @@
                 <div class="rounded-xl border border-red-300 bg-white p-5 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div>
                         <div class="flex items-center gap-2">
-                            <span class="rounded bg-red-600 px-2 py-0.5 text-xs font-semibold text-white">DARURAT</span>
+                            <span class="rounded-full bg-rose-700 px-2.5 py-1 text-xs font-semibold tracking-wide text-white">DARURAT</span>
                             <span class="text-xs text-gray-500">{{ $item->published_at?->format('d M Y H:i') }}</span>
                         </div>
                         <h3 class="mt-1 font-bold text-gray-900 text-lg">
@@ -79,11 +79,11 @@
                     <div>
                         <div class="flex items-center justify-between gap-2 mb-3">
                             @if($announcement->type === 'emergency')
-                                <span class="rounded-full bg-red-100 px-3 py-1 text-xs font-semibold text-red-700">
+                                <span class="rounded-full bg-rose-100 px-3 py-1 text-xs font-semibold text-rose-800">
                                     Darurat
                                 </span>
                             @else
-                                <span class="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-800">
+                                <span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">
                                     Pengumuman
                                 </span>
                             @endif

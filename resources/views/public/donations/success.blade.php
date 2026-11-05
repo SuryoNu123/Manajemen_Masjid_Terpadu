@@ -49,14 +49,14 @@
                     <dt class="text-sm text-slate-500">Status pembayaran</dt>
                     <dd class="mt-1">
                         @if ($donasi->payment_status === 'paid')
-                            <span class="inline-flex rounded-full bg-blue-100 px-3 py-1 text-sm font-semibold text-blue-800">Berhasil dibayar</span>
+                            <span class="inline-flex rounded-full bg-emerald-100 px-3 py-1 text-sm font-semibold text-emerald-800">Lunas</span>
                             @if ($donasi->paid_at)
-                                <span class="ml-2 text-sm text-slate-500">{{ $donasi->paid_at->format('d/m/Y H:i') }}</span>
+                                <span class="ml-2 text-sm text-slate-500">{{ $donasi->paid_at->timezone('Asia/Jakarta')->format('d M Y, H:i') }} WIB</span>
                             @endif
                         @elseif ($donasi->payment_status === 'expired')
                             <span class="inline-flex rounded-full bg-slate-200 px-3 py-1 text-sm font-semibold text-slate-700">Kedaluwarsa</span>
                         @elseif ($donasi->payment_status === 'failed')
-                            <span class="inline-flex rounded-full bg-red-100 px-3 py-1 text-sm font-semibold text-red-800">Gagal</span>
+                            <span class="inline-flex rounded-full bg-rose-100 px-3 py-1 text-sm font-semibold text-rose-800">Gagal</span>
                         @else
                             <span class="inline-flex rounded-full bg-amber-100 px-3 py-1 text-sm font-semibold text-amber-800">Menunggu pembayaran</span>
                         @endif
@@ -87,7 +87,7 @@
                     @endif
                 </div>
             @elseif ($donasi->payment_status === 'paid')
-                <div class="rounded-xl bg-blue-50 p-5 text-center text-blue-900">Pembayaran telah dikonfirmasi oleh Midtrans. Donasi Anda akan dicatat pada laporan keuangan masjid.</div>
+                <div class="rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center text-emerald-900">Pembayaran telah dikonfirmasi oleh Midtrans. Donasi Anda akan dicatat pada laporan keuangan masjid.</div>
             @elseif ($donasi->payment_status === 'expired' || $donasi->payment_status === 'failed')
                 <div class="rounded-xl bg-slate-50 p-5 text-center text-slate-700">Transaksi ini tidak dapat dibayar lagi. Silakan buat donasi baru untuk mendapatkan QRIS yang berlaku.</div>
             @endif

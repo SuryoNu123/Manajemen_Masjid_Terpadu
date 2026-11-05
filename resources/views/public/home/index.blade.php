@@ -41,16 +41,13 @@
 
             <div>
 
-                <div class="mb-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm text-slate-300">
-
-                    <span class="w-2 h-2 rounded-full bg-blue-400"></span>
-
+                <div class="mb-5 inline-flex items-center rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm font-medium text-slate-300">
                     Sistem Manajemen Masjid Terpadu
 
                 </div>
 
 
-                <h1 class="max-w-2xl text-3xl font-semibold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
+                <h1 class="max-w-2xl text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
 
                     Kelola Masjid
 
@@ -163,25 +160,6 @@
                             </div>
 
 
-                            <div class="flex h-11 w-11 items-center justify-center rounded-lg bg-blue-50 text-blue-600">
-
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    class="h-5 w-5"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M12 3v18m9-9H3"
-                                    />
-                                </svg>
-
-                            </div>
-
                         </div>
 
 
@@ -259,47 +237,6 @@
                     </div>
 
 
-                    {{-- Floating Badge --}}
-
-                    <div class="absolute -bottom-5 -left-5 bg-white rounded-2xl shadow-xl px-5 py-4 hidden md:block">
-
-                        <div class="flex items-center gap-3">
-
-                            <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
-
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    class="w-5 h-5 text-blue-600"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M5 13l4 4L19 7"
-                                    />
-                                </svg>
-
-                            </div>
-
-                            <div>
-
-                                <p class="text-xs text-slate-500">
-                                    Sistem
-                                </p>
-
-                                <p class="font-semibold text-sm">
-                                    Terintegrasi
-                                </p>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
                 </div>
 
             </div>
@@ -328,7 +265,7 @@
                 Layanan Jamaah
             </span>
 
-            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-3">
+            <h2 class="mt-3 text-3xl font-bold tracking-tight text-slate-950 md:text-4xl">
                 Semua kebutuhan masjid
                 dalam satu tempat.
             </h2>
@@ -756,7 +693,7 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-4">
 
-                <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+                <div class="rounded-r-2xl border-l-4 border-emerald-500 bg-white/5 p-6">
                     <p class="text-slate-400 text-sm">
                         Total Pemasukan
                     </p>
@@ -768,7 +705,7 @@
                     </p>
                 </div>
 
-                <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+                <div class="rounded-r-2xl border-l-4 border-rose-500 bg-white/5 p-6">
                     <p class="text-slate-400 text-sm">
                         Total Pengeluaran
                     </p>
@@ -780,7 +717,7 @@
                     </p>
                 </div>
 
-                <div class="bg-blue-600 rounded-2xl p-6 shadow-lg shadow-blue-500/20">
+                <div class="rounded-2xl bg-emerald-700 p-6 shadow-lg shadow-emerald-950/20">
                     <p class="text-blue-100 text-sm font-medium">
                         Saldo Kas Masjid
                     </p>
@@ -952,27 +889,7 @@
     <div class="max-w-4xl mx-auto px-6 text-center">
 
 
-        <div class="w-16 h-16 mx-auto rounded-2xl bg-blue-100 flex items-center justify-center">
-
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-8 h-8 text-blue-700"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-            >
-                <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 8c-2.21 0-4 1.343-4 3s1.79 3 4 3 4 1.343 4 3-1.79 3-4 3m0-14v2m0 14v2M5 12H3m18 0h-2"
-                />
-            </svg>
-
-        </div>
-
-
-        <h2 class="text-3xl md:text-4xl font-bold mt-7">
+        <h2 class="mt-7 text-3xl font-bold tracking-tight md:text-4xl">
             Mari Berkontribusi
             untuk Masjid
         </h2>

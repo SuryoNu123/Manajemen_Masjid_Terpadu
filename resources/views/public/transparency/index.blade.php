@@ -13,7 +13,7 @@
 
     <div class="text-center mb-10">
 
-        <h1 class="text-3xl md:text-4xl font-bold">
+        <h1 class="text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">
             Transparansi Keuangan
         </h1>
 
@@ -140,14 +140,13 @@
 
             {{-- PEMASUKAN --}}
 
-            <div class="bg-white rounded-xl border
-                        border-gray-200 p-6">
+            <div class="rounded-2xl border border-slate-200 border-t-4 border-t-emerald-600 bg-emerald-50/40 p-6">
 
                 <p class="text-sm text-gray-500">
                     Pemasukan
                 </p>
 
-                <p class="text-2xl font-bold text-green-600 mt-2">
+                <p class="mt-3 text-3xl font-bold tracking-tight text-emerald-800">
                     Rp {{ number_format(
                         $summaryReport->total_income,
                         0,
@@ -161,14 +160,13 @@
 
             {{-- PENGELUARAN --}}
 
-            <div class="bg-white rounded-xl border
-                        border-gray-200 p-6">
+            <div class="rounded-2xl border border-slate-200 border-t-4 border-t-rose-600 bg-rose-50/40 p-6">
 
                 <p class="text-sm text-gray-500">
                     Pengeluaran
                 </p>
 
-                <p class="text-2xl font-bold text-red-600 mt-2">
+                <p class="mt-3 text-3xl font-bold tracking-tight text-rose-800">
                     Rp {{ number_format(
                         $summaryReport->total_expense,
                         0,
@@ -182,14 +180,13 @@
 
             {{-- SALDO --}}
 
-            <div class="bg-white rounded-xl border
-                        border-gray-200 p-6">
+            <div class="rounded-2xl border border-slate-200 border-t-4 border-t-slate-700 bg-white p-6">
 
                 <p class="text-sm text-gray-500">
                     Saldo
                 </p>
 
-                <p class="text-2xl font-bold text-slate-900 mt-2">
+                <p class="mt-3 text-3xl font-bold tracking-tight text-slate-950">
                     Rp {{ number_format(
                         $summaryReport->balance,
                         0,

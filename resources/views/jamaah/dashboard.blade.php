@@ -7,10 +7,10 @@
 
 <div class="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
     <div>
-        <h1 class="text-2xl font-bold text-gray-900">
+        <h1 class="text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
             Ahlan wa Sahlan, {{ auth()->user()->name }}
         </h1>
-        <p class="text-gray-500 mt-1">
+        <p class="mt-2 max-w-3xl text-base leading-6 text-slate-600">
             Selamat datang di Portal Jamaah Masjid Terpadu. Pantau jadwal sholat, pengumuman, kajian dakwah, dan infaq online.
         </p>
     </div>
@@ -29,7 +29,7 @@
 
 {{-- BANNER INFORMASI RINGKAS --}}
 <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
-    <div class="rounded-xl bg-slate-900 p-5 text-white">
+    <div class="rounded-2xl border border-emerald-800 bg-emerald-900 p-6 text-white shadow-sm">
         <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Transparansi Kas Masjid</span>
         <p class="mt-2 text-2xl font-bold text-white">Rp {{ number_format($balance, 0, ',', '.') }}</p>
         <div class="mt-3">
@@ -39,7 +39,7 @@
         </div>
     </div>
 
-    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+    <div class="rounded-2xl border border-slate-200 border-l-4 border-l-blue-600 bg-blue-50/40 p-5 shadow-sm">
         <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Layanan Donasi Online</span>
         <p class="mt-2 text-sm text-slate-600">
             Dukung program operasional masjid, renovasi, santunan yatim, dan zakat secara digital dengan QRIS.
@@ -51,7 +51,7 @@
         </div>
     </div>
 
-    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+    <div class="rounded-2xl border border-slate-200 border-l-4 border-l-slate-500 bg-white p-5 shadow-sm">
         <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Website & Media Masjid</span>
         <p class="mt-2 text-sm text-slate-600">
             Akses jadwal kajian, profil struktur DKM, artikel dakwah, dan layar TV digital masjid.
@@ -109,7 +109,7 @@
                 <div class="rounded-lg border border-slate-100 p-3.5 hover:bg-slate-50">
                     <div class="flex items-center gap-2">
                         @if($announcement->type === 'emergency')
-                            <span class="rounded bg-red-100 px-2 py-0.5 text-[10px] font-bold text-red-700">DARURAT</span>
+                            <span class="rounded-full bg-rose-100 px-2 py-1 text-[10px] font-bold tracking-wide text-rose-800">DARURAT</span>
                         @endif
                         <span class="text-xs text-slate-400">{{ $announcement->published_at?->format('d M Y') }}</span>
                     </div>

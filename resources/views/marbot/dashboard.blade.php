@@ -7,10 +7,10 @@
 
 <div class="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
     <div>
-        <h1 class="text-2xl font-bold text-gray-900">
+        <h1 class="text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
             Dashboard Marbot & Petugas
         </h1>
-        <p class="text-gray-500 mt-1">
+        <p class="mt-2 max-w-3xl text-base leading-6 text-slate-600">
             Kelola operasional harian masjid: jadwal sholat 5 waktu, presensi jamaah, pemeliharaan fasilitas dan aset masjid.
         </p>
     </div>
@@ -29,7 +29,7 @@
 
 {{-- STATUS OPERASIONAL HARI INI --}}
 <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
-    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+    <div class="rounded-2xl border border-slate-200 border-l-4 border-l-blue-600 bg-blue-50/40 p-5 shadow-sm">
         <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Presensi Jamaah Hari Ini</span>
         <p class="mt-2 text-3xl font-extrabold text-blue-600">{{ number_format($todayAttendances) }}</p>
         <div class="mt-2 text-xs text-slate-500">
@@ -37,7 +37,11 @@
         </div>
     </div>
 
-    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+    <div @class([
+        'rounded-2xl border border-slate-200 border-l-4 p-5 shadow-sm',
+        'border-l-rose-600 bg-rose-50/40' => count($damagedAssets) > 0,
+        'border-l-emerald-600 bg-emerald-50/40' => count($damagedAssets) === 0,
+    ])>
         <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Fasilitas Butuh Perbaikan</span>
         <p class="mt-2 text-3xl font-extrabold {{ count($damagedAssets) > 0 ? 'text-red-600' : 'text-emerald-600' }}">
             {{ count($damagedAssets) }}
@@ -47,11 +51,11 @@
         </div>
     </div>
 
-    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
-        <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Layar Digital Signage TV</span>
-        <p class="mt-2 text-base font-bold text-slate-900">Digital Clock & Countdown</p>
+    <div class="flex flex-col justify-between rounded-2xl border border-slate-800 bg-slate-900 p-5 text-white shadow-sm">
+        <span class="text-xs font-bold uppercase tracking-wider text-white/70">Layar Informasi Masjid</span>
+        <p class="mt-2 text-xl font-bold tracking-tight text-white">Digital Clock & Countdown</p>
         <div class="mt-2">
-            <a href="{{ route('digital-signage.index') }}" target="_blank" class="text-xs font-semibold text-blue-600 hover:underline">
+            <a href="{{ route('digital-signage.index') }}" target="_blank" class="mt-3 inline-flex w-fit rounded-full bg-white/10 px-3 py-1.5 text-xs font-semibold text-white hover:bg-white/20">
                 Buka Tampilan TV Layar Penuh →
             </a>
         </div>
@@ -100,7 +104,7 @@
                         <h4 class="font-bold text-slate-800 text-sm">{{ $asset->name }}</h4>
                         <p class="text-xs text-slate-500">Lokasi: {{ $asset->location ?? 'Masjid' }} • Kode: {{ $asset->asset_code }}</p>
                     </div>
-                    <span class="rounded bg-red-100 px-2 py-0.5 text-xs font-bold text-red-700 uppercase">
+                    <span class="rounded-full bg-rose-100 px-2.5 py-1 text-xs font-bold uppercase text-rose-800">
                         {{ str_replace('_', ' ', $asset->condition) }}
                     </span>
                 </div>

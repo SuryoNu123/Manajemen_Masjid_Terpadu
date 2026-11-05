@@ -12,7 +12,7 @@
             Informasi Masjid
         </p>
 
-        <h1 class="text-3xl font-bold text-slate-900 mt-2">
+        <h1 class="mt-2 text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">
             Kegiatan Ibadah
         </h1>
 

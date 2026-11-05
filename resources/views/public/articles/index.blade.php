@@ -6,7 +6,7 @@
 <section class="bg-slate-900 py-16 text-white">
     <div class="mx-auto max-w-7xl px-6">
         <span class="text-sm font-semibold uppercase tracking-wider text-blue-200">Pojok Literasi & Dakwah</span>
-        <h1 class="mt-2 text-3xl md:text-4xl font-bold">Artikel Dakwah & Khazanah Islam</h1>
+        <h1 class="mt-2 text-4xl font-bold tracking-tight sm:text-5xl">Artikel Dakwah & Khazanah Islam</h1>
         <p class="mt-3 text-slate-300 max-w-2xl">
             Kumpulan artikel keagamaan, mutiara hikmah, dan berita seputar aktivitas kemakmuran Masjid Terpadu.
         </p>
@@ -16,7 +16,7 @@
 <section class="py-12 bg-white">
     <div class="mx-auto max-w-7xl px-6">
         <div class="mb-8 flex flex-wrap items-center justify-between gap-4">
-            <h2 class="text-2xl font-bold text-gray-900">Semua Artikel</h2>
+            <h2 class="text-2xl font-bold tracking-tight text-slate-950">Semua Artikel</h2>
 
             <form method="GET" action="{{ route('dakwah.public') }}" class="flex w-full items-center gap-2 sm:w-auto">
                 <input type="text"

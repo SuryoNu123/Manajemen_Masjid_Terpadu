@@ -15,7 +15,7 @@
             <span>Penulis: {{ $article->author?->name ?? 'DKM Masjid Terpadu' }}</span>
         </div>
 
-        <h1 class="text-3xl md:text-5xl font-bold leading-tight">
+        <h1 class="text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
             {{ $article->title }}
         </h1>
     </div>

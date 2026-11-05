@@ -25,7 +25,7 @@
             </span>
         </div>
 
-        <h1 class="text-3xl md:text-4xl font-bold leading-tight">
+        <h1 class="text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
             {{ $announcement->title }}
         </h1>
     </div>
