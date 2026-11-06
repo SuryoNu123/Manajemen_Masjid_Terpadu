@@ -5,7 +5,7 @@
 
 @section('content')
 
-<div class="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+<div class="mb-8 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
     <div>
         <h1 class="text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
             Dashboard Bendahara
@@ -15,17 +15,17 @@
         </p>
     </div>
 
-    <div class="flex flex-wrap items-center gap-2">
+    <div class="flex shrink-0 flex-nowrap items-center gap-2">
         <a href="{{ route('transaksi.create', ['type' => 'income']) }}"
-           class="rounded-lg bg-green-600 px-3.5 py-2 text-xs font-semibold text-white hover:bg-green-700">
+           class="whitespace-nowrap rounded-lg bg-green-600 px-3.5 py-2 text-xs font-semibold text-white hover:bg-green-700">
             + Pemasukan
         </a>
         <a href="{{ route('transaksi.create', ['type' => 'expense']) }}"
-           class="rounded-lg bg-red-600 px-3.5 py-2 text-xs font-semibold text-white hover:bg-red-700">
+           class="whitespace-nowrap rounded-lg bg-red-600 px-3.5 py-2 text-xs font-semibold text-white hover:bg-red-700">
             - Pengeluaran
         </a>
         <a href="{{ route('laporan-keuangan.create') }}"
-           class="rounded-lg border border-slate-300 bg-white px-3.5 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50">
+           class="whitespace-nowrap rounded-lg border border-slate-300 bg-white px-3.5 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50">
             + Buat Laporan
         </a>
     </div>

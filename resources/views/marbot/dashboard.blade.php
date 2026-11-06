@@ -5,7 +5,7 @@
 
 @section('content')
 
-<div class="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+<div class="mb-8 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
     <div>
         <h1 class="text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
             Dashboard Marbot & Petugas
@@ -15,13 +15,13 @@
         </p>
     </div>
 
-    <div class="flex flex-wrap items-center gap-2">
+    <div class="flex shrink-0 flex-nowrap items-center gap-2">
         <a href="{{ route('prayer-attendances.index') }}"
-           class="rounded-lg bg-blue-600 px-3.5 py-2 text-xs font-semibold text-white hover:bg-blue-700">
+           class="whitespace-nowrap rounded-lg bg-blue-600 px-3.5 py-2 text-xs font-semibold text-white hover:bg-blue-700">
             + Presensi Sholat
         </a>
         <a href="{{ route('digital-signage.index') }}" target="_blank"
-           class="rounded-lg bg-slate-900 px-3.5 py-2 text-xs font-semibold text-white hover:bg-slate-800">
+           class="whitespace-nowrap rounded-lg bg-slate-900 px-3.5 py-2 text-xs font-semibold text-white hover:bg-slate-800">
              Buka TV Masjid ↗
         </a>
     </div>
@@ -31,8 +31,8 @@
 <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
     <div class="rounded-2xl border border-slate-200 border-l-4 border-l-blue-600 bg-blue-50/40 p-5 shadow-sm">
         <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Presensi Jamaah Hari Ini</span>
-        <p class="mt-2 text-3xl font-extrabold text-blue-600">{{ number_format($todayAttendances) }}</p>
-        <div class="mt-2 text-xs text-slate-500">
+        <p class="mt-3 text-3xl font-extrabold tracking-tight text-slate-950">{{ number_format($todayAttendances) }}</p>
+        <div class="mt-2 text-sm text-slate-500">
             Catatan kehadiran sholat berjamaah hari ini
         </div>
     </div>
@@ -43,11 +43,13 @@
         'border-l-emerald-600 bg-emerald-50/40' => count($damagedAssets) === 0,
     ])>
         <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Fasilitas Butuh Perbaikan</span>
-        <p class="mt-2 text-3xl font-extrabold {{ count($damagedAssets) > 0 ? 'text-red-600' : 'text-emerald-600' }}">
+        <p class="mt-3 text-3xl font-extrabold tracking-tight {{ count($damagedAssets) > 0 ? 'text-rose-700' : 'text-emerald-800' }}">
             {{ count($damagedAssets) }}
         </p>
-        <div class="mt-2 text-xs text-slate-500">
-            Aset dengan status rusak / perlu perbaikan
+        <div class="mt-2">
+            <span @class(['inline-flex rounded-full px-2.5 py-1 text-xs font-semibold', 'bg-rose-100 text-rose-800' => count($damagedAssets) > 0, 'bg-emerald-100 text-emerald-800' => count($damagedAssets) === 0])>
+                {{ count($damagedAssets) > 0 ? 'Perlu ditangani' : 'Semua fasilitas baik' }}
+            </span>
         </div>
     </div>
 
@@ -67,7 +69,7 @@
     {{-- JADWAL SHOLAT HARI INI --}}
     <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
         <div class="flex items-center justify-between mb-4">
-            <h2 class="font-bold text-base text-slate-800">Jadwal Sholat Hari Ini ({{ date('d M Y') }})</h2>
+            <h2 class="font-bold text-lg tracking-tight text-slate-900">Jadwal Sholat Hari Ini <span class="text-sm font-medium text-slate-500">({{ date('d M Y') }})</span></h2>
             <a href="{{ route('jadwal-sholat.index') }}" class="text-xs font-semibold text-blue-600 hover:underline">
                 Sinkron / Edit →
             </a>

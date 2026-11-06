@@ -47,16 +47,16 @@
                 </div>
 
 
-                <h1 class="max-w-2xl text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
+                <h1 class="max-w-2xl text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
 
                     Kelola Masjid
 
-                    <span class="text-blue-400">
+                    <span class="text-emerald-300">
                         Lebih Mudah,
                     </span>
 
                     <span class="block">Layani Jamaah
-                    <span class="text-blue-400">
+                    <span class="text-emerald-300">
                         Lebih Baik.
                     </span>
                     </span>
@@ -104,7 +104,7 @@
 
                     <a
                         href="{{ route('zakat.index') }}"
-                        class="inline-flex min-h-11 items-center gap-2 rounded-lg border border-white/25 bg-white/5 px-5 py-3 font-semibold text-white transition hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                        class="inline-flex min-h-11 items-center gap-2 rounded-lg border border-white/25 bg-white/5 px-5 py-3 font-semibold text-white transition hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-emerald-300"
                     >
 
                         Kalkulator Zakat
@@ -265,7 +265,7 @@
                 Layanan Jamaah
             </span>
 
-            <h2 class="mt-3 text-3xl font-bold tracking-tight text-slate-950 md:text-4xl">
+            <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-slate-950 md:text-4xl">
                 Semua kebutuhan masjid
                 dalam satu tempat.
             </h2>
@@ -445,7 +445,7 @@
                     Waktu Ibadah
                 </span>
 
-                <h2 class="text-3xl md:text-4xl font-bold mt-3">
+                <h2 class="text-3xl font-extrabold tracking-tight text-slate-950 md:text-4xl mt-3">
                     Jadwal Sholat Hari Ini
                 </h2>
 
@@ -502,7 +502,7 @@
                         {{ $prayerNames[$schedule->prayer_name] ?? ucfirst($schedule->prayer_name) }}
                     </p>
 
-                    <p class="text-2xl font-bold mt-2">
+                    <p class="mt-2 text-3xl font-extrabold tracking-tight text-slate-950">
                         {{ \Carbon\Carbon::parse($schedule->prayer_time)->format('H:i') }}
                     </p>
 
@@ -533,7 +533,7 @@
                     Agenda
                 </span>
 
-                <h2 class="text-3xl md:text-4xl font-bold mt-3">
+                <h2 class="text-3xl font-extrabold tracking-tight text-slate-950 md:text-4xl mt-3">
                     Kegiatan Masjid
                 </h2>
 
@@ -650,7 +650,7 @@
                     Transparansi
                 </span>
 
-                <h2 class="text-3xl md:text-4xl font-bold mt-3">
+                <h2 class="text-3xl font-extrabold tracking-tight text-white md:text-4xl mt-3">
                     Keuangan Masjid
                     Terbuka untuk Jamaah
                 </h2>
@@ -697,7 +697,7 @@
                     <p class="text-slate-400 text-sm">
                         Total Pemasukan
                     </p>
-                    <p class="text-3xl font-bold mt-2 text-blue-400">
+                    <p class="mt-2 text-3xl font-extrabold tracking-tight text-emerald-300">
                         Rp {{ number_format($totalIncome ?? 0, 0, ',', '.') }}
                     </p>
                     <p class="text-xs text-slate-400 mt-2">
@@ -709,7 +709,7 @@
                     <p class="text-slate-400 text-sm">
                         Total Pengeluaran
                     </p>
-                    <p class="text-3xl font-bold mt-2 text-rose-400">
+                    <p class="mt-2 text-3xl font-extrabold tracking-tight text-rose-300">
                         Rp {{ number_format($totalExpense ?? 0, 0, ',', '.') }}
                     </p>
                     <p class="text-xs text-slate-400 mt-2">
@@ -721,7 +721,7 @@
                     <p class="text-blue-100 text-sm font-medium">
                         Saldo Kas Masjid
                     </p>
-                    <p class="text-3xl font-bold mt-2 text-white">
+                    <p class="mt-2 text-3xl font-extrabold tracking-tight text-white">
                         Rp {{ number_format($balance ?? 0, 0, ',', '.') }}
                     </p>
                     <p class="text-xs text-blue-100 mt-2">
@@ -748,7 +748,7 @@
                 <span class="text-sm font-semibold text-blue-700 uppercase tracking-wider">
                     Informasi
                 </span>
-                <h2 class="text-3xl md:text-4xl font-bold mt-2 text-slate-900">
+                <h2 class="mt-2 text-3xl font-extrabold tracking-tight text-slate-900 md:text-4xl">
                     Pengumuman Masjid
                 </h2>
                 <p class="text-slate-500 mt-2">
@@ -776,7 +776,7 @@
                                 </span>
                             @endif
 
-                            <span class="text-xs text-slate-400">
+                            <span class="inline-flex rounded-full bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-600">
                                 {{ $announcement->published_at?->format('d M Y') }}
                             </span>
                         </div>
@@ -822,7 +822,7 @@
                 <span class="text-sm font-semibold text-blue-600 uppercase tracking-wider">
                     Dakwah & Berita
                 </span>
-                <h2 class="text-3xl md:text-4xl font-bold mt-2 text-slate-900">
+                <h2 class="mt-2 text-3xl font-extrabold tracking-tight text-slate-900 md:text-4xl">
                     Artikel & Kajian Dakwah
                 </h2>
                 <p class="text-slate-500 mt-2">
@@ -889,7 +889,7 @@
     <div class="max-w-4xl mx-auto px-6 text-center">
 
 
-        <h2 class="mt-7 text-3xl font-bold tracking-tight md:text-4xl">
+        <h2 class="mt-7 text-3xl font-extrabold tracking-tight text-slate-950 md:text-4xl">
             Mari Berkontribusi
             untuk Masjid
         </h2>

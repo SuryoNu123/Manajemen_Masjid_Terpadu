@@ -5,7 +5,7 @@
 
 @section('content')
 
-<div class="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+<div class="mb-8 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
     <div>
         <h1 class="text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
             Dashboard Sekretaris & Humas
@@ -15,17 +15,17 @@
         </p>
     </div>
 
-    <div class="flex flex-wrap items-center gap-2">
+    <div class="flex shrink-0 flex-nowrap items-center gap-2">
         <a href="{{ route('announcements.create') }}"
-           class="rounded-lg bg-blue-600 px-3.5 py-2 text-xs font-semibold text-white hover:bg-blue-700">
+           class="whitespace-nowrap rounded-lg bg-blue-600 px-3.5 py-2 text-xs font-semibold text-white hover:bg-blue-700">
             + Buat Pengumuman
         </a>
         <a href="{{ route('activities.create') }}"
-           class="rounded-lg bg-emerald-600 px-3.5 py-2 text-xs font-semibold text-white hover:bg-emerald-700">
+           class="whitespace-nowrap rounded-lg bg-emerald-600 px-3.5 py-2 text-xs font-semibold text-white hover:bg-emerald-700">
             + Tambah Kegiatan
         </a>
         <a href="{{ route('jamaahs.create') }}"
-           class="rounded-lg border border-slate-300 bg-white px-3.5 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50">
+           class="whitespace-nowrap rounded-lg border border-slate-300 bg-white px-3.5 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50">
             + Tambah Jamaah
         </a>
     </div>
