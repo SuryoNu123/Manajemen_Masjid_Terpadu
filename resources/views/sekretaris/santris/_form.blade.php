@@ -176,14 +176,14 @@
     </div>
 </div>
 
-<div class="mt-6 flex justify-end gap-3 border-t border-slate-200 pt-5">
+<div class="mt-6 flex flex-col-reverse gap-3 border-t border-slate-200 pt-5 sm:flex-row sm:justify-end">
     <a href="{{ route('santris.index') }}"
-       class="rounded-lg border border-slate-300 px-5 py-2.5 text-sm">
+       class="inline-flex min-h-11 w-full items-center justify-center rounded-lg border border-slate-300 px-5 py-2.5 text-sm sm:w-auto">
         Batal
     </a>
 
     <button type="submit"
-            class="rounded-lg bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white hover:bg-slate-700">
+            class="inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white hover:bg-slate-700 sm:w-auto">
         Simpan Data
     </button>
 </div>

@@ -79,11 +79,11 @@
             <table class="min-w-full divide-y divide-slate-200 text-sm">
                 <thead class="bg-slate-50 text-left text-xs uppercase text-slate-500">
                     <tr>
-                        <th class="px-5 py-4">No.</th>
+                        <th class="hidden px-5 py-4 md:table-cell">No.</th>
                         <th class="px-5 py-4">Nama Kelas</th>
-                        <th class="px-5 py-4">Tingkat</th>
+                        <th class="hidden px-5 py-4 md:table-cell">Tingkat</th>
                         <th class="px-5 py-4">Jadwal</th>
-                        <th class="px-5 py-4">Pengajar</th>
+                        <th class="hidden px-5 py-4 md:table-cell">Pengajar</th>
                         <th class="px-5 py-4">Jumlah Santri</th>
                         <th class="px-5 py-4">Status</th>
                         <th class="px-5 py-4 text-center">Aksi</th>
@@ -93,7 +93,7 @@
                 <tbody class="divide-y divide-slate-100">
                     @forelse($classes as $class)
                         <tr class="hover:bg-slate-50">
-                            <td class="px-5 py-4">
+                            <td class="hidden px-5 py-4 md:table-cell">
                                 {{ $classes->firstItem() + $loop->index }}
                             </td>
 
@@ -101,7 +101,7 @@
                                 {{ $class->name }}
                             </td>
 
-                            <td class="px-5 py-4">
+                            <td class="hidden px-5 py-4 md:table-cell">
                                 {{ $class->level ?: '-' }}
                             </td>
 
@@ -109,7 +109,7 @@
                                 {{ $class->schedule ?: '-' }}
                             </td>
 
-                            <td class="px-5 py-4">
+                            <td class="hidden px-5 py-4 md:table-cell">
                                 {{ $class->teacher_name ?: '-' }}
                             </td>
 
@@ -130,7 +130,7 @@
                             </td>
 
                             <td class="px-5 py-4">
-                                <div class="flex items-center justify-center gap-3">
+                                <div class="flex flex-col items-stretch justify-center gap-2 sm:flex-row sm:items-center sm:gap-3">
                                     <a href="{{ route('tpq-classes.edit', $class) }}"
                                        class="font-medium text-blue-600 hover:underline">
                                         Edit

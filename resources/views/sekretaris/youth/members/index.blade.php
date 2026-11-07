@@ -60,9 +60,9 @@
                 <thead class="bg-gray-50 text-gray-600">
                     <tr>
                         <th class="px-5 py-3">Nama Lengkap</th>
-                        <th class="px-5 py-3">Divisi</th>
-                        <th class="px-5 py-3">Jabatan</th>
-                        <th class="px-5 py-3">Kontak</th>
+                        <th class="hidden px-5 py-3 md:table-cell">Divisi</th>
+                        <th class="hidden px-5 py-3 md:table-cell">Jabatan</th>
+                        <th class="hidden px-5 py-3 md:table-cell">Kontak</th>
                         <th class="px-5 py-3">Status</th>
                         <th class="px-5 py-3 text-right">Aksi</th>
                     </tr>
@@ -77,15 +77,15 @@
                                     <div class="text-xs text-gray-400">Terdaftar Jamaah: {{ $member->jamaah->domicile }}</div>
                                 @endif
                             </td>
-                            <td class="px-5 py-4 font-medium text-slate-700">
+                            <td class="hidden px-5 py-4 font-medium text-slate-700 md:table-cell">
                                 {{ $member->division }}
                             </td>
-                            <td class="px-5 py-4">
+                            <td class="hidden px-5 py-4 md:table-cell">
                                 <span class="rounded-lg bg-blue-50 px-2.5 py-1 text-xs font-semibold text-blue-700 border border-blue-200">
                                     {{ $member->position }}
                                 </span>
                             </td>
-                            <td class="px-5 py-4 text-gray-600">
+                            <td class="hidden px-5 py-4 text-gray-600 md:table-cell">
                                 {{ $member->phone ?: '-' }}
                             </td>
                             <td class="px-5 py-4">
@@ -95,7 +95,7 @@
                                 </span>
                             </td>
                             <td class="px-5 py-4 text-right">
-                                <div class="flex items-center justify-end gap-3">
+                                <div class="flex flex-col items-stretch justify-end gap-2 sm:flex-row sm:items-center sm:gap-3">
                                     <a href="{{ route('youth-members.edit', $member) }}" class="font-medium text-blue-600 hover:underline">
                                         Edit
                                     </a>

@@ -148,16 +148,16 @@
             <table class="min-w-full divide-y divide-slate-200">
                 <thead class="bg-slate-50">
                     <tr>
-                        <th class="px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500">No.</th>
+                        <th class="hidden px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500 md:table-cell">No.</th>
                         <th class="px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500">Tanggal</th>
-                        <th class="px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500">Unit Usaha</th>
+                        <th class="hidden px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500 md:table-cell">Unit Usaha</th>
                         <th class="px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500">Nama Pembeli</th>
-                        <th class="px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500">Referensi</th>
-                        <th class="px-5 py-3 text-right text-xs font-semibold uppercase text-slate-500">Kuantitas</th>
-                        <th class="px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500">Metode</th>
+                        <th class="hidden px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500 md:table-cell">Referensi</th>
+                        <th class="hidden px-5 py-3 text-right text-xs font-semibold uppercase text-slate-500 md:table-cell">Kuantitas</th>
+                        <th class="hidden px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500 md:table-cell">Metode</th>
                         <th class="px-5 py-3 text-right text-xs font-semibold uppercase text-slate-500">Omzet</th>
                         <th class="px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500">Status Keuangan</th>
-                        <th class="px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500">Pencatat</th>
+                        <th class="hidden px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500 md:table-cell">Pencatat</th>
                     </tr>
                 </thead>
 
@@ -180,25 +180,25 @@
                         @endphp
 
                         <tr class="hover:bg-slate-50">
-                            <td class="whitespace-nowrap px-5 py-4 text-sm text-slate-500">
+                            <td class="hidden whitespace-nowrap px-5 py-4 text-sm text-slate-500 md:table-cell">
                                 {{ $sales->firstItem() + $loop->index }}
                             </td>
                             <td class="whitespace-nowrap px-5 py-4 text-sm text-slate-600">
                                 {{ $sale->sale_date->format('d/m/Y') }}
                             </td>
-                            <td class="px-5 py-4 text-sm font-medium text-slate-800">
+                            <td class="hidden px-5 py-4 text-sm font-medium text-slate-800 md:table-cell">
                                 {{ $sale->businessUnit?->name ?? 'Unit tidak tersedia' }}
                             </td>
                             <td class="px-5 py-4 text-sm text-slate-700">
                                 {{ $sale->buyer_name ?: '-' }}
                             </td>
-                            <td class="px-5 py-4 text-sm text-slate-600">
+                            <td class="hidden px-5 py-4 text-sm text-slate-600 md:table-cell">
                                 {{ $sale->reference_number ?: '-' }}
                             </td>
-                            <td class="px-5 py-4 text-right text-sm text-slate-600">
+                            <td class="hidden px-5 py-4 text-right text-sm text-slate-600 md:table-cell">
                                 {{ number_format($sale->quantity) }}
                             </td>
-                            <td class="whitespace-nowrap px-5 py-4 text-sm text-slate-600">
+                            <td class="hidden whitespace-nowrap px-5 py-4 text-sm text-slate-600 md:table-cell">
                                 @switch($sale->payment_method)
                                     @case('tunai')
                                         Tunai
@@ -227,7 +227,7 @@
                                     </span>
                                 @endif
                             </td>
-                            <td class="px-5 py-4 text-sm text-slate-600">
+                            <td class="hidden px-5 py-4 text-sm text-slate-600 md:table-cell">
                                 {{ $sale->recorder?->name ?? '-' }}
                             </td>
                         </tr>

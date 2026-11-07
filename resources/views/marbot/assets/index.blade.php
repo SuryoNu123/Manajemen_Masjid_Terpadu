@@ -78,11 +78,11 @@
             <table class="min-w-full divide-y divide-slate-200">
                 <thead class="bg-slate-50">
                     <tr>
-                        <th class="px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500">No.</th>
-                        <th class="px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500">Kode Aset</th>
+                        <th class="hidden px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500 md:table-cell">No.</th>
+                        <th class="hidden px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500 md:table-cell">Kode Aset</th>
                         <th class="px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500">Nama Aset</th>
                         <th class="px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500">Kategori</th>
-                        <th class="px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500">Lokasi</th>
+                        <th class="hidden px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500 lg:table-cell">Lokasi</th>
                         <th class="px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500">Kondisi</th>
                         <th class="px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500">Status</th>
                         <th class="px-5 py-3 text-center text-xs font-semibold uppercase text-slate-500">Aksi</th>
@@ -92,11 +92,11 @@
                 <tbody class="divide-y divide-slate-100">
                     @forelse ($assets as $asset)
                         <tr class="hover:bg-slate-50">
-                            <td class="whitespace-nowrap px-5 py-4 text-sm text-slate-500">
+                            <td class="hidden whitespace-nowrap px-5 py-4 text-sm text-slate-500 md:table-cell">
                                 {{ $assets->firstItem() + $loop->index }}
                             </td>
 
-                            <td class="whitespace-nowrap px-5 py-4 text-sm text-slate-600">
+                            <td class="hidden whitespace-nowrap px-5 py-4 text-sm text-slate-600 md:table-cell">
                                 {{ $asset->asset_code ?: '-' }}
                             </td>
 
@@ -108,7 +108,7 @@
                                 {{ $asset->category }}
                             </td>
 
-                            <td class="px-5 py-4 text-sm text-slate-600">
+                            <td class="hidden px-5 py-4 text-sm text-slate-600 lg:table-cell">
                                 {{ $asset->location ?: '-' }}
                             </td>
 
@@ -147,9 +147,9 @@
                             </td>
 
                             <td class="whitespace-nowrap px-5 py-4 text-center text-sm">
-                                <div class="flex items-center justify-center gap-3">
+                                <div class="flex flex-col items-stretch justify-center gap-2 sm:flex-row sm:items-center sm:gap-3">
                                     <a href="{{ route('assets.edit', $asset) }}"
-                                       class="font-medium text-blue-700 hover:underline">
+                                       class="inline-flex min-h-10 items-center justify-center rounded-md px-3 font-medium text-blue-700 hover:bg-blue-50 sm:px-0 sm:hover:bg-transparent">
                                         Edit
                                     </a>
 
@@ -160,7 +160,7 @@
                                         @method('DELETE')
 
                                         <button type="submit"
-                                                class="font-medium text-red-600 hover:underline">
+                                                class="inline-flex min-h-10 items-center justify-center rounded-md px-3 font-medium text-red-600 hover:bg-red-50 sm:px-0 sm:hover:bg-transparent">
                                             Hapus
                                         </button>
                                     </form>

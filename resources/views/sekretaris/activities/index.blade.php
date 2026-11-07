@@ -76,7 +76,7 @@
                             Kegiatan
                         </th>
 
-                        <th class="text-left px-6 py-4 font-semibold text-slate-700">
+                        <th class="hidden text-left px-6 py-4 font-semibold text-slate-700 md:table-cell">
                             Jenis
                         </th>
 
@@ -84,7 +84,7 @@
                             Tanggal
                         </th>
 
-                        <th class="text-left px-6 py-4 font-semibold text-slate-700">
+                        <th class="hidden text-left px-6 py-4 font-semibold text-slate-700 md:table-cell">
                             Waktu
                         </th>
 
@@ -124,11 +124,11 @@
 
                             </td>
 
-                            <td class="px-6 py-4 text-slate-600">
+                            <td class="hidden px-6 py-4 text-slate-600 md:table-cell">
                                 {{ ucfirst(str_replace('_', ' ', $activity->type)) }}
                             </td>
 
-                            <td class="px-6 py-4 text-slate-600">
+                            <td class="hidden px-6 py-4 text-slate-600 md:table-cell">
                                 {{ $activity->activity_date?->format('d M Y') }}
                             </td>
 
@@ -165,18 +165,18 @@
 
                             <td class="px-6 py-4">
 
-                                <div class="flex justify-end gap-2">
+                                <div class="flex flex-col gap-2 sm:flex-row sm:justify-end">
 
                                     {{-- Detail --}}
                                     <a href="{{ route('activities.show', $activity) }}"
-                                    class="px-3 py-2 rounded-lg bg-blue-50 text-blue-700 hover:bg-blue-100">
+                                    class="inline-flex min-h-10 w-full items-center justify-center rounded-lg bg-blue-50 px-3 py-2 text-blue-700 hover:bg-blue-100 sm:w-auto">
                                         Detail
                                     </a>
 
 
                                     {{-- Edit --}}
                                     <a href="{{ route('activities.edit', $activity) }}"
-                                    class="px-3 py-2 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200">
+                                    class="inline-flex min-h-10 w-full items-center justify-center rounded-lg bg-slate-100 px-3 py-2 text-slate-700 hover:bg-slate-200 sm:w-auto">
                                         Edit
                                     </a>
 
@@ -190,7 +190,7 @@
                                         @method('DELETE')
 
                                         <button type="submit"
-                                                class="px-3 py-2 rounded-lg bg-red-50 text-red-600 hover:bg-red-100">
+                                                class="inline-flex min-h-10 w-full items-center justify-center rounded-lg bg-red-50 px-3 py-2 text-red-600 hover:bg-red-100 sm:w-auto">
                                             Hapus
                                         </button>
 

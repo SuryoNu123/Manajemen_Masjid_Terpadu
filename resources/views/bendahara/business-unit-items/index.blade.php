@@ -94,10 +94,10 @@
             <table class="w-full text-left text-sm">
                 <thead class="bg-slate-50 text-slate-600">
                     <tr>
-                        <th class="px-5 py-3">No.</th>
+                        <th class="hidden px-5 py-3 md:table-cell">No.</th>
                         <th class="px-5 py-3">Produk / Barang</th>
-                        <th class="px-5 py-3">Unit Usaha</th>
-                        <th class="px-5 py-3">Harga Beli</th>
+                        <th class="hidden px-5 py-3 md:table-cell">Unit Usaha</th>
+                        <th class="hidden px-5 py-3 md:table-cell">Harga Beli</th>
                         <th class="px-5 py-3">Harga Jual</th>
                         <th class="px-5 py-3 text-center">Stok Saat Ini</th>
                         <th class="px-5 py-3">Status</th>
@@ -107,7 +107,7 @@
                 <tbody class="divide-y divide-slate-100">
                     @forelse($items as $item)
                         <tr class="hover:bg-slate-50">
-                            <td class="px-5 py-4 text-slate-500">
+                            <td class="hidden px-5 py-4 text-slate-500 md:table-cell">
                                 {{ $items->firstItem() + $loop->index }}
                             </td>
                             <td class="px-5 py-4">
@@ -116,10 +116,10 @@
                                     SKU: {{ $item->sku ?? '-' }} • Kategori: {{ $item->category ?? 'Umum' }}
                                 </div>
                             </td>
-                            <td class="px-5 py-4 text-slate-600">
+                            <td class="hidden px-5 py-4 text-slate-600 md:table-cell">
                                 {{ $item->businessUnit?->name ?? '-' }}
                             </td>
-                            <td class="px-5 py-4 text-slate-600">
+                            <td class="hidden px-5 py-4 text-slate-600 md:table-cell">
                                 Rp {{ number_format($item->cost_price, 0, ',', '.') }}
                             </td>
                             <td class="px-5 py-4 font-semibold text-slate-800">
@@ -149,10 +149,10 @@
                                 @endif
                             </td>
                             <td class="px-5 py-4 text-right">
-                                <div class="flex items-center justify-end gap-2">
+                                <div class="flex flex-col items-stretch gap-2 sm:flex-row sm:items-center sm:justify-end">
                                     {{-- FORM CEPAT PENYESUAIAN STOK --}}
                                     <details class="relative">
-                                        <summary class="cursor-pointer rounded border border-slate-300 px-2.5 py-1 text-xs font-semibold text-slate-700 hover:bg-slate-100 list-none">
+                                        <summary class="inline-flex min-h-10 cursor-pointer items-center justify-center rounded border border-slate-300 px-2.5 py-1 text-xs font-semibold text-slate-700 hover:bg-slate-100 list-none">
                                             ± Stok
                                         </summary>
                                         <div class="absolute right-0 top-8 z-20 w-64 rounded-xl border border-slate-200 bg-white p-4 shadow-lg text-left">
@@ -185,7 +185,7 @@
                                     </details>
 
                                     <a href="{{ route('business-unit-items.edit', $item) }}"
-                                       class="rounded border border-slate-300 px-2.5 py-1 text-xs font-semibold text-blue-600 hover:bg-blue-50">
+                                       class="inline-flex min-h-10 items-center justify-center rounded border border-slate-300 px-2.5 py-1 text-xs font-semibold text-blue-600 hover:bg-blue-50">
                                         Edit
                                     </a>
 
@@ -193,7 +193,7 @@
                                           onsubmit="return confirm('Hapus produk {{ $item->name }}?')">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="rounded border border-red-200 px-2.5 py-1 text-xs font-semibold text-red-600 hover:bg-red-50">
+                                        <button type="submit" class="inline-flex min-h-10 w-full items-center justify-center rounded border border-red-200 px-2.5 py-1 text-xs font-semibold text-red-600 hover:bg-red-50 sm:w-auto">
                                             Hapus
                                         </button>
                                     </form>

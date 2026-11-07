@@ -86,12 +86,12 @@
             <table class="min-w-full divide-y divide-slate-200 text-sm">
                 <thead class="bg-slate-50 text-left text-xs uppercase text-slate-500">
                     <tr>
-                        <th class="px-5 py-4">No.</th>
-                        <th class="px-5 py-4">Nomor Santri</th>
+                        <th class="hidden px-5 py-4 md:table-cell">No.</th>
+                        <th class="hidden px-5 py-4 md:table-cell">Nomor Santri</th>
                         <th class="px-5 py-4">Nama Santri</th>
                         <th class="px-5 py-4">Kelas</th>
-                        <th class="px-5 py-4">Nama Wali</th>
-                        <th class="px-5 py-4">Telepon Wali</th>
+                        <th class="hidden px-5 py-4 lg:table-cell">Nama Wali</th>
+                        <th class="hidden px-5 py-4 lg:table-cell">Telepon Wali</th>
                         <th class="px-5 py-4">Status</th>
                         <th class="px-5 py-4 text-center">Aksi</th>
                     </tr>
@@ -100,11 +100,11 @@
                 <tbody class="divide-y divide-slate-100">
                     @forelse($santris as $santri)
                         <tr class="hover:bg-slate-50">
-                            <td class="px-5 py-4">
+                            <td class="hidden px-5 py-4 md:table-cell">
                                 {{ $santris->firstItem() + $loop->index }}
                             </td>
 
-                            <td class="whitespace-nowrap px-5 py-4 font-medium text-slate-700">
+                            <td class="hidden whitespace-nowrap px-5 py-4 font-medium text-slate-700 md:table-cell">
                                 {{ $santri->registration_number }}
                             </td>
 
@@ -116,11 +116,11 @@
                                 {{ $santri->tpqClass?->name ?? '-' }}
                             </td>
 
-                            <td class="px-5 py-4">
+                            <td class="hidden px-5 py-4 lg:table-cell">
                                 {{ $santri->parent_name ?: '-' }}
                             </td>
 
-                            <td class="whitespace-nowrap px-5 py-4">
+                            <td class="hidden whitespace-nowrap px-5 py-4 lg:table-cell">
                                 {{ $santri->parent_phone ?: '-' }}
                             </td>
 
@@ -137,7 +137,7 @@
                             </td>
 
                             <td class="px-5 py-4">
-                                <div class="flex items-center justify-center gap-3">
+                                <div class="flex flex-col items-stretch justify-center gap-2 sm:flex-row sm:items-center sm:gap-3">
                                     <a href="{{ route('santris.show', $santri) }}"
                                        class="font-medium text-slate-700 hover:underline">
                                         Detail

@@ -224,7 +224,7 @@
 
                 <tr>
 
-                    <th class="text-left px-6 py-4">
+                    <th class="hidden text-left px-6 py-4 md:table-cell">
                         Kode
                     </th>
 
@@ -232,7 +232,7 @@
                         Tanggal
                     </th>
 
-                    <th class="text-left px-6 py-4">
+                    <th class="hidden text-left px-6 py-4 lg:table-cell">
                         Kategori
                     </th>
 
@@ -265,7 +265,7 @@
 
                     <tr class="hover:bg-gray-50">
 
-                        <td class="px-6 py-4 font-medium">
+                        <td class="hidden px-6 py-4 font-medium md:table-cell">
                             {{ $transaction->transaction_code }}
                         </td>
 
@@ -273,7 +273,7 @@
                             {{ $transaction->transaction_date->format('d/m/Y') }}
                         </td>
 
-                        <td class="px-6 py-4">
+                        <td class="hidden px-6 py-4 lg:table-cell">
                             {{ $transaction->category->name }}
                         </td>
 
@@ -322,11 +322,11 @@
 
                             <td class="px-6 py-4">
 
-                                <div class="flex justify-end gap-2">
+                                <div class="flex flex-col gap-2 sm:flex-row sm:justify-end">
 
                                     <a
                                         href="{{ route('transaksi.edit', $transaction) }}"
-                                        class="px-3 py-1.5 bg-blue-100 text-blue-700 rounded-lg">
+                                        class="inline-flex min-h-10 w-full items-center justify-center rounded-lg bg-blue-100 px-3 py-1.5 text-blue-700 sm:w-auto">
                                         Edit
                                     </a>
 
@@ -341,7 +341,7 @@
 
                                         <button
                                             type="submit"
-                                            class="px-3 py-1.5 bg-red-100 text-red-700 rounded-lg">
+                                            class="inline-flex min-h-10 w-full items-center justify-center rounded-lg bg-red-100 px-3 py-1.5 text-red-700 sm:w-auto">
                                             Hapus
                                         </button>
 

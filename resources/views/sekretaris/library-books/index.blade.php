@@ -97,12 +97,12 @@
             <table class="min-w-full divide-y divide-slate-200">
                 <thead class="bg-slate-50">
                     <tr>
-                        <th class="px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500">No.</th>
-                        <th class="px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500">Kode / ISBN</th>
+                        <th class="hidden px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500 md:table-cell">No.</th>
+                        <th class="hidden px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500 md:table-cell">Kode / ISBN</th>
                         <th class="px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500">Judul Buku</th>
-                        <th class="px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500">Kategori</th>
-                        <th class="px-5 py-3 text-center text-xs font-semibold uppercase text-slate-500">Total</th>
-                        <th class="px-5 py-3 text-center text-xs font-semibold uppercase text-slate-500">Dipinjam</th>
+                        <th class="hidden px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500 md:table-cell">Kategori</th>
+                        <th class="hidden px-5 py-3 text-center text-xs font-semibold uppercase text-slate-500 md:table-cell">Total</th>
+                        <th class="hidden px-5 py-3 text-center text-xs font-semibold uppercase text-slate-500 md:table-cell">Dipinjam</th>
                         <th class="px-5 py-3 text-center text-xs font-semibold uppercase text-slate-500">Tersedia</th>
                         <th class="px-5 py-3 text-center text-xs font-semibold uppercase text-slate-500">Status</th>
                         <th class="px-5 py-3 text-center text-xs font-semibold uppercase text-slate-500">Aksi</th>
@@ -117,11 +117,11 @@
                         @endphp
 
                         <tr class="hover:bg-slate-50">
-                            <td class="whitespace-nowrap px-5 py-4 text-sm text-slate-500">
+                            <td class="hidden whitespace-nowrap px-5 py-4 text-sm text-slate-500 md:table-cell">
                                 {{ $books->firstItem() + $loop->index }}
                             </td>
 
-                            <td class="px-5 py-4 text-sm text-slate-600">
+                            <td class="hidden px-5 py-4 text-sm text-slate-600 md:table-cell">
                                 <p class="font-medium text-slate-800">
                                     {{ $book->book_code }}
                                 </p>
@@ -142,15 +142,15 @@
                                 </p>
                             </td>
 
-                            <td class="px-5 py-4 text-sm text-slate-600">
+                            <td class="hidden px-5 py-4 text-sm text-slate-600 md:table-cell">
                                 {{ $book->category }}
                             </td>
 
-                            <td class="px-5 py-4 text-center text-sm text-slate-600">
+                            <td class="hidden px-5 py-4 text-center text-sm text-slate-600 md:table-cell">
                                 {{ $book->total_copies }}
                             </td>
 
-                            <td class="px-5 py-4 text-center text-sm text-amber-700">
+                            <td class="hidden px-5 py-4 text-center text-sm text-amber-700 md:table-cell">
                                 {{ $borrowed }}
                             </td>
 

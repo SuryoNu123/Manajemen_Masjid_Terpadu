@@ -58,17 +58,17 @@
             <table class="w-full text-left text-sm">
                 <thead class="bg-gray-50 text-gray-600">
                     <tr>
-                        <th class="px-5 py-3">No.</th>
+                        <th class="hidden px-5 py-3 md:table-cell">No.</th>
                         <th class="px-5 py-3">Judul Konten</th>
                         <th class="px-5 py-3">Status</th>
-                        <th class="px-5 py-3">Tanggal Dibuat</th>
+                        <th class="hidden px-5 py-3 md:table-cell">Tanggal Dibuat</th>
                         <th class="px-5 py-3">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-100">
                     @forelse($contents as $content)
                         <tr>
-                            <td class="px-5 py-4">
+                            <td class="hidden px-5 py-4 md:table-cell">
                                 {{ $contents->firstItem() + $loop->index }}
                             </td>
                             <td class="px-5 py-4">
@@ -90,11 +90,11 @@
                                     </span>
                                 @endif
                             </td>
-                            <td class="px-5 py-4 text-gray-600">
+                            <td class="hidden px-5 py-4 text-gray-600 md:table-cell">
                                 {{ $content->created_at->format('d/m/Y') }}
                             </td>
                             <td class="px-5 py-4">
-                                <div class="flex items-center gap-3">
+                                <div class="flex flex-col items-stretch gap-2 sm:flex-row sm:items-center sm:gap-3">
                                     <a href="{{ route('dakwah-contents.edit', $content) }}"
                                        class="font-medium text-blue-600 hover:underline">
                                         Edit

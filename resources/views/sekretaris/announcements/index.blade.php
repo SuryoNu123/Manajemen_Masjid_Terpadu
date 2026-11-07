@@ -69,11 +69,11 @@
             <table class="w-full text-left text-sm">
                 <thead class="bg-gray-50 text-gray-600">
                     <tr>
-                        <th class="px-5 py-3">No.</th>
+                        <th class="hidden px-5 py-3 md:table-cell">No.</th>
                         <th class="px-5 py-3">Judul</th>
-                        <th class="px-5 py-3">Jenis</th>
+                        <th class="hidden px-5 py-3 md:table-cell">Jenis</th>
                         <th class="px-5 py-3">Status</th>
-                        <th class="px-5 py-3">Kedaluwarsa</th>
+                        <th class="hidden px-5 py-3 md:table-cell">Kedaluwarsa</th>
                         <th class="px-5 py-3">Aksi</th>
                     </tr>
                 </thead>
@@ -81,7 +81,7 @@
                 <tbody class="divide-y divide-gray-100">
                     @forelse($announcements as $announcement)
                         <tr>
-                            <td class="px-5 py-4">
+                            <td class="hidden px-5 py-4 md:table-cell">
                                 {{ $announcements->firstItem() + $loop->index }}
                             </td>
 
@@ -94,7 +94,7 @@
                                 </div>
                             </td>
 
-                            <td class="px-5 py-4">
+                            <td class="hidden px-5 py-4 md:table-cell">
                                 @if($announcement->type === 'emergency')
                                     <span class="rounded-full bg-red-100 px-3 py-1 text-xs font-medium text-red-700">
                                         Darurat
@@ -118,12 +118,12 @@
                                 @endif
                             </td>
 
-                            <td class="px-5 py-4 text-gray-600">
+                            <td class="hidden px-5 py-4 text-gray-600 md:table-cell">
                                 {{ $announcement->expires_at?->format('d/m/Y H:i') ?? 'Tidak ada' }}
                             </td>
 
                             <td class="px-5 py-4">
-                                <div class="flex items-center gap-3">
+                                <div class="flex flex-col items-stretch gap-2 sm:flex-row sm:items-center sm:gap-3">
                                     <a href="{{ route('announcements.edit', $announcement) }}"
                                        class="font-medium text-blue-600 hover:underline">
                                         Edit

@@ -143,7 +143,7 @@
 
                 <tr>
 
-                    <th class="px-6 py-4 text-left">
+                    <th class="hidden px-6 py-4 text-left md:table-cell">
                         Kode
                     </th>
 
@@ -159,7 +159,7 @@
                         Nominal
                     </th>
 
-                    <th class="px-6 py-4 text-left">
+                    <th class="hidden px-6 py-4 text-left md:table-cell">
                         Pembayaran
                     </th>
 
@@ -182,7 +182,7 @@
 
                     <tr class="hover:bg-gray-50">
 
-                        <td class="px-6 py-4 font-medium">
+                        <td class="hidden px-6 py-4 font-medium md:table-cell">
                             {{ $donation->donation_code }}
                         </td>
 
@@ -213,7 +213,7 @@
                         </td>
 
 
-                        <td class="px-6 py-4 uppercase">
+                        <td class="hidden px-6 py-4 uppercase md:table-cell">
                             {{ $donation->payment_method }}
                         </td>
 

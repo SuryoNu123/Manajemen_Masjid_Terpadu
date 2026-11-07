@@ -81,12 +81,12 @@
             <table class="min-w-full divide-y divide-slate-200">
                 <thead class="bg-slate-50">
                     <tr>
-                        <th class="px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500">No.</th>
+                        <th class="hidden px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500 md:table-cell">No.</th>
                         <th class="px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500">Aset</th>
                         <th class="px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500">Perawatan</th>
                         <th class="px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500">Jadwal</th>
-                        <th class="px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500">Penyelesaian</th>
-                        <th class="px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500">Biaya</th>
+                        <th class="hidden px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500 md:table-cell">Penyelesaian</th>
+                        <th class="hidden px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500 md:table-cell">Biaya</th>
                         <th class="px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500">Status</th>
                         <th class="px-5 py-3 text-center text-xs font-semibold uppercase text-slate-500">Aksi</th>
                     </tr>
@@ -95,7 +95,7 @@
                 <tbody class="divide-y divide-slate-100">
                     @forelse ($maintenances as $maintenance)
                         <tr class="hover:bg-slate-50">
-                            <td class="whitespace-nowrap px-5 py-4 text-sm text-slate-500">
+                            <td class="hidden whitespace-nowrap px-5 py-4 text-sm text-slate-500 md:table-cell">
                                 {{ $maintenances->firstItem() + $loop->index }}
                             </td>
 
@@ -116,11 +116,11 @@
                                 {{ $maintenance->scheduled_date->format('d/m/Y') }}
                             </td>
 
-                            <td class="whitespace-nowrap px-5 py-4 text-sm text-slate-600">
+                            <td class="hidden whitespace-nowrap px-5 py-4 text-sm text-slate-600 md:table-cell">
                                 {{ $maintenance->completed_date?->format('d/m/Y') ?? '-' }}
                             </td>
 
-                            <td class="whitespace-nowrap px-5 py-4 text-sm text-slate-600">
+                            <td class="hidden whitespace-nowrap px-5 py-4 text-sm text-slate-600 md:table-cell">
                                 Rp {{ number_format((float) $maintenance->cost, 0, ',', '.') }}
                             </td>
 

@@ -72,7 +72,7 @@
                     <tr>
                         <th class="px-6 py-4 text-left">Nama</th>
                         <th class="px-6 py-4 text-left">Posisi</th>
-                        <th class="px-6 py-4 text-left">Telepon</th>
+                        <th class="hidden px-6 py-4 text-left md:table-cell">Telepon</th>
                         <th class="px-6 py-4 text-left">Status</th>
                         <th class="px-6 py-4 text-right">Aksi</th>
                     </tr>
@@ -93,7 +93,7 @@
                                 {{ ucfirst($officer->position) }}
                             </td>
 
-                            <td class="px-6 py-4">
+                            <td class="hidden px-6 py-4 md:table-cell">
                                 {{ $officer->phone ?? '-' }}
                             </td>
 
@@ -117,10 +117,10 @@
 
                             <td class="px-6 py-4">
 
-                                <div class="flex justify-end gap-2">
+                                <div class="flex flex-col gap-2 sm:flex-row sm:justify-end">
 
                                     <a href="{{ route('officers.edit', $officer) }}"
-                                       class="px-3 py-2 rounded-lg bg-slate-100">
+                                       class="inline-flex min-h-10 w-full items-center justify-center rounded-lg bg-slate-100 px-3 py-2 sm:w-auto">
                                         Edit
                                     </a>
 
@@ -131,7 +131,7 @@
                                         @csrf
                                         @method('DELETE')
 
-                                        <button class="px-3 py-2 rounded-lg bg-red-50 text-red-600">
+                                        <button class="inline-flex min-h-10 w-full items-center justify-center rounded-lg bg-red-50 px-3 py-2 text-red-600 sm:w-auto">
                                             Hapus
                                         </button>
 

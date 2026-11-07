@@ -77,10 +77,10 @@
             <table class="min-w-full divide-y divide-slate-200">
                 <thead class="bg-slate-50">
                     <tr>
-                        <th class="px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500">No.</th>
+                        <th class="hidden px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500 md:table-cell">No.</th>
                         <th class="px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500">Nama</th>
-                        <th class="px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500">Domisili</th>
-                        <th class="px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500">Usia</th>
+                        <th class="hidden px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500 lg:table-cell">Domisili</th>
+                        <th class="hidden px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500 md:table-cell">Usia</th>
                         <th class="px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500">Kontak</th>
                         <th class="px-5 py-3 text-left text-xs font-semibold uppercase text-slate-500">Status</th>
                         <th class="px-5 py-3 text-center text-xs font-semibold uppercase text-slate-500">Aksi</th>
@@ -90,7 +90,7 @@
                 <tbody class="divide-y divide-slate-100">
                     @forelse ($jamaahs as $jamaah)
                         <tr class="hover:bg-slate-50">
-                            <td class="whitespace-nowrap px-5 py-4 text-sm text-slate-500">
+                            <td class="hidden whitespace-nowrap px-5 py-4 text-sm text-slate-500 md:table-cell">
                                 {{ $jamaahs->firstItem() + $loop->index }}
                             </td>
 
@@ -98,11 +98,11 @@
                                 {{ $jamaah->name }}
                             </td>
 
-                            <td class="px-5 py-4 text-sm text-slate-600">
+                            <td class="hidden px-5 py-4 text-sm text-slate-600 lg:table-cell">
                                 {{ $jamaah->domicile }}
                             </td>
 
-                            <td class="whitespace-nowrap px-5 py-4 text-sm text-slate-600">
+                            <td class="hidden whitespace-nowrap px-5 py-4 text-sm text-slate-600 md:table-cell">
                                 {{ $jamaah->age !== null ? $jamaah->age . ' tahun' : '-' }}
                             </td>
 
@@ -123,7 +123,7 @@
                             </td>
 
                             <td class="whitespace-nowrap px-5 py-4 text-center text-sm">
-                                <div class="flex items-center justify-center gap-3">
+                                <div class="flex flex-col items-stretch justify-center gap-2 sm:flex-row sm:items-center sm:gap-3">
                                     <a href="{{ route('jamaahs.edit', $jamaah) }}"
                                        class="font-medium text-blue-700 hover:underline">
                                         Edit

@@ -55,10 +55,10 @@
                 <thead class="bg-gray-50 text-gray-600">
                     <tr>
                         <th class="px-5 py-3">Nama Program</th>
-                        <th class="px-5 py-3">Divisi</th>
-                        <th class="px-5 py-3">Jadwal Pelaksanaan</th>
+                        <th class="hidden px-5 py-3 md:table-cell">Divisi</th>
+                        <th class="hidden px-5 py-3 md:table-cell">Jadwal Pelaksanaan</th>
                         <th class="px-5 py-3">Penanggung Jawab</th>
-                        <th class="px-5 py-3">Anggaran</th>
+                        <th class="hidden px-5 py-3 md:table-cell">Anggaran</th>
                         <th class="px-5 py-3">Status</th>
                         <th class="px-5 py-3 text-right">Aksi</th>
                     </tr>
@@ -73,10 +73,10 @@
                                     <div class="text-xs text-gray-500 mt-1 max-w-xs truncate">{{ $prog->description }}</div>
                                 @endif
                             </td>
-                            <td class="px-5 py-4 font-medium text-slate-700">
+                            <td class="hidden px-5 py-4 font-medium text-slate-700 md:table-cell">
                                 {{ $prog->division ?: '-' }}
                             </td>
-                            <td class="px-5 py-4 text-xs text-gray-600">
+                            <td class="hidden px-5 py-4 text-xs text-gray-600 md:table-cell">
                                 {{ $prog->start_date->format('d/m/Y') }}
                                 @if($prog->end_date)
                                     s/d {{ $prog->end_date->format('d/m/Y') }}
@@ -85,7 +85,7 @@
                             <td class="px-5 py-4 text-gray-800">
                                 {{ $prog->leader?->name ?? 'Belum ditentukan' }}
                             </td>
-                            <td class="px-5 py-4 font-mono font-semibold text-slate-700">
+                            <td class="hidden px-5 py-4 font-mono font-semibold text-slate-700 md:table-cell">
                                 Rp {{ number_format($prog->budget, 0, ',', '.') }}
                             </td>
                             <td class="px-5 py-4">
@@ -98,7 +98,7 @@
                                 </span>
                             </td>
                             <td class="px-5 py-4 text-right">
-                                <div class="flex items-center justify-end gap-3">
+                                <div class="flex flex-col items-stretch justify-end gap-2 sm:flex-row sm:items-center sm:gap-3">
                                     <a href="{{ route('youth-programs.edit', $prog) }}" class="font-medium text-blue-600 hover:underline">
                                         Edit
                                     </a>

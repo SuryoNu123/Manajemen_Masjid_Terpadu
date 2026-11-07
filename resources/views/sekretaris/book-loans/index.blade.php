@@ -112,8 +112,8 @@
             <table class="min-w-full divide-y divide-slate-200 text-sm">
                 <thead class="bg-slate-50">
                     <tr>
-                        <th class="px-5 py-3 text-left font-semibold text-slate-500">No.</th>
-                        <th class="px-5 py-3 text-left font-semibold text-slate-500">Kode Peminjaman</th>
+                        <th class="hidden px-5 py-3 text-left font-semibold text-slate-500 md:table-cell">No.</th>
+                        <th class="hidden px-5 py-3 text-left font-semibold text-slate-500 md:table-cell">Kode Peminjaman</th>
                         <th class="px-5 py-3 text-left font-semibold text-slate-500">Judul Buku</th>
                         <th class="px-5 py-3 text-left font-semibold text-slate-500">Nama Jamaah</th>
                         <th class="px-5 py-3 text-left font-semibold text-slate-500">Tanggal Pinjam</th>
@@ -132,11 +132,11 @@
                         @endphp
 
                         <tr class="hover:bg-slate-50">
-                            <td class="whitespace-nowrap px-5 py-4 text-slate-500">
+                            <td class="hidden whitespace-nowrap px-5 py-4 text-slate-500 md:table-cell">
                                 {{ $loans->firstItem() + $loop->index }}
                             </td>
 
-                            <td class="whitespace-nowrap px-5 py-4 font-medium text-slate-800">
+                            <td class="hidden whitespace-nowrap px-5 py-4 font-medium text-slate-800 md:table-cell">
                                 {{ $loan->loan_code }}
                             </td>
 
