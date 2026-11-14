@@ -51,12 +51,12 @@
 
                     Kelola Masjid
 
-                    <span class="text-emerald-300">
+                    <span class="text-blue-400">
                         Lebih Mudah,
                     </span>
 
                     <span class="block">Layani Jamaah
-                    <span class="text-emerald-300">
+                    <span class="text-blue-400">
                         Lebih Baik.
                     </span>
                     </span>
@@ -104,7 +104,7 @@
 
                     <a
                         href="{{ route('zakat.index') }}"
-                        class="inline-flex min-h-11 items-center gap-2 rounded-lg border border-white/25 bg-white/5 px-5 py-3 font-semibold text-white transition hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-emerald-300"
+                        class="inline-flex min-h-11 items-center gap-2 rounded-lg border border-white/25 bg-white/5 px-5 py-3 font-semibold text-white transition hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-blue-300"
                     >
 
                         Kalkulator Zakat
@@ -285,14 +285,14 @@
 
             <a
                 href="{{ route('donasi.create') }}"
-                class="group bg-slate-50 rounded-2xl border border-slate-200 p-7 hover:bg-blue-600 hover:border-blue-600 transition duration-300"
+                class="group bg-slate-50 rounded-2xl border border-slate-200 p-7 hover:bg-emerald-600 hover:border-emerald-600 transition duration-300"
             >
 
-                <div class="w-14 h-14 rounded-2xl bg-blue-100 group-hover:bg-white/15 flex items-center justify-center">
+                <div class="w-14 h-14 rounded-2xl bg-emerald-100 group-hover:bg-white/15 flex items-center justify-center">
 
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        class="w-7 h-7 text-blue-700 group-hover:text-white"
+                        class="w-7 h-7 text-emerald-700 group-hover:text-white"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -312,13 +312,13 @@
                     Donasi
                 </h3>
 
-                <p class="text-slate-500 group-hover:text-blue-100 mt-3 leading-relaxed">
+                <p class="text-slate-500 group-hover:text-emerald-100 mt-3 leading-relaxed">
                     Salurkan infaq, sedekah, zakat,
                     dan qurban untuk mendukung kegiatan masjid.
                 </p>
 
 
-                <div class="mt-6 text-sm font-semibold text-blue-700 group-hover:text-white">
+                <div class="mt-6 text-sm font-semibold text-emerald-700 group-hover:text-white">
 
                     Mulai Donasi
                     →
