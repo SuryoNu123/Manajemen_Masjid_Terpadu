@@ -29,17 +29,17 @@
             </p>
         </div>
 
-        <div class="flex items-center gap-2">
+        <div class="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:flex-wrap">
             <a href="{{ route('business-units.index') }}"
-               class="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">
+               class="inline-flex w-full items-center justify-center rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 sm:w-auto">
                 Data Unit Usaha
             </a>
             <a href="{{ route('business-unit-sales.index') }}"
-               class="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">
+               class="inline-flex w-full items-center justify-center rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 sm:w-auto">
                 Penjualan & Omset
             </a>
             <a href="{{ route('business-unit-items.create') }}"
-               class="inline-flex items-center justify-center rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-700">
+               class="inline-flex w-full items-center justify-center rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-700 sm:w-auto">
                 + Tambah Produk
             </a>
         </div>
@@ -75,13 +75,13 @@
                 </select>
             </div>
 
-            <div class="flex items-end gap-2">
+            <div class="flex flex-col items-stretch gap-2 sm:flex-row sm:items-end">
                 <button type="submit"
                         class="w-full rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700">
                     Filter
                 </button>
                 <a href="{{ route('business-unit-items.index') }}"
-                   class="rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-600 hover:bg-slate-50">
+                   class="inline-flex w-full items-center justify-center rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-600 hover:bg-slate-50 sm:flex-1">
                     Reset
                 </a>
             </div>

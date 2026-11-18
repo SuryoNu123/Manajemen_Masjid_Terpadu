@@ -5,7 +5,7 @@
 
 @section('content')
 
-<div class="flex items-center justify-between mb-8">
+<div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 
     <div>
 
@@ -24,7 +24,7 @@
 
         <a
             href="{{ route('laporan-keuangan.create') }}"
-            class="px-4 py-2.5 bg-slate-900 text-white rounded-lg"
+            class="inline-flex w-full items-center justify-center rounded-lg bg-slate-900 px-4 py-2.5 text-white sm:w-auto"
         >
             + Buat Laporan
         </a>
@@ -74,9 +74,9 @@
             @endforeach
         </select>
     </div>
-    <div class="flex flex-wrap items-end gap-2 sm:col-span-2 lg:col-span-1">
-        <button type="submit" class="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800">Terapkan</button>
-        <a href="{{ route('laporan-keuangan.index') }}" class="rounded-lg border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50">Reset</a>
+    <div class="flex flex-col items-stretch gap-2 sm:col-span-2 sm:flex-row sm:items-end lg:col-span-1">
+        <button type="submit" class="inline-flex w-full items-center justify-center rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800 sm:w-auto">Terapkan</button>
+        <a href="{{ route('laporan-keuangan.index') }}" class="inline-flex w-full items-center justify-center rounded-lg border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50 sm:w-auto">Reset</a>
     </div>
 </form>
 

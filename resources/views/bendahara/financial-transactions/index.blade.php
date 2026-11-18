@@ -18,15 +18,15 @@
     </div>
 
     @if(auth()->user()->hasRole('bendahara'))
-        <div class="flex flex-wrap gap-2">
+        <div class="flex w-full flex-col gap-2 sm:w-auto sm:flex-row">
 
             <a href="{{ route('transaksi.create', ['type' => 'income']) }}"
-               class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">
+               class="inline-flex w-full items-center justify-center rounded-lg bg-green-600 px-4 py-2 text-white hover:bg-green-700 sm:w-auto">
                 + Pemasukan
             </a>
 
             <a href="{{ route('transaksi.create', ['type' => 'expense']) }}"
-               class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
+               class="inline-flex w-full items-center justify-center rounded-lg bg-red-600 px-4 py-2 text-white hover:bg-red-700 sm:w-auto">
                 + Pengeluaran
             </a>
 
@@ -92,7 +92,7 @@
 
     <form method="GET"
           action="{{ route('transaksi.index') }}"
-          class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-6 gap-4">
+          class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-6">
 
         <div>
             <label class="block text-sm font-medium mb-1" for="transaction-search">
@@ -101,7 +101,7 @@
             <input id="transaction-search" type="search" name="search"
                    value="{{ request('search') }}"
                    placeholder="Kode, kategori, atau keterangan"
-                   class="w-full rounded-lg border-gray-300">
+                   class="w-full rounded-lg border-gray-300 text-sm focus:border-blue-600 focus:ring-blue-600">
         </div>
 
         <div>
@@ -110,7 +110,7 @@
             </label>
 
             <select name="type"
-                    class="w-full rounded-lg border-gray-300">
+                    class="w-full rounded-lg border-gray-300 text-sm focus:border-blue-600 focus:ring-blue-600">
 
                 <option value="">
                     Semua
@@ -136,7 +136,7 @@
             </label>
 
             <select name="category_id"
-                    class="w-full rounded-lg border-gray-300">
+                    class="w-full rounded-lg border-gray-300 text-sm focus:border-blue-600 focus:ring-blue-600">
 
                 <option value="">
                     Semua kategori
@@ -174,7 +174,7 @@
                 type="date"
                 name="start_date"
                 value="{{ request('start_date') }}"
-                class="w-full rounded-lg border-gray-300">
+                class="w-full rounded-lg border-gray-300 text-sm focus:border-blue-600 focus:ring-blue-600">
         </div>
 
 
@@ -187,21 +187,21 @@
                 type="date"
                 name="end_date"
                 value="{{ request('end_date') }}"
-                class="w-full rounded-lg border-gray-300">
+                class="w-full rounded-lg border-gray-300 text-sm focus:border-blue-600 focus:ring-blue-600">
         </div>
 
 
-        <div class="flex items-end gap-2">
+        <div class="flex flex-col items-stretch gap-2 sm:flex-row sm:items-end">
 
             <button
                 type="submit"
-                class="px-4 py-2 bg-slate-900 text-white rounded-lg">
+                class="inline-flex w-full items-center justify-center rounded-lg bg-slate-900 px-4 py-2 text-white sm:flex-1">
                 Filter
             </button>
 
             <a
                 href="{{ route('transaksi.index') }}"
-                class="px-4 py-2 bg-gray-200 rounded-lg">
+                class="inline-flex w-full items-center justify-center rounded-lg bg-gray-200 px-4 py-2 sm:flex-1">
                 Reset
             </a>
 

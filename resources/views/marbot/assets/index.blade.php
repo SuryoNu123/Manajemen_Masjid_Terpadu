@@ -29,7 +29,7 @@
         </div>
 
         <a href="{{ route('assets.create') }}"
-           class="inline-flex items-center justify-center rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-700">
+           class="inline-flex w-full items-center justify-center rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-700 sm:w-auto">
             + Tambah Aset
         </a>
     </div>
@@ -62,12 +62,12 @@
             </select>
 
             <button type="submit"
-                    class="rounded-lg bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white hover:bg-slate-700">
+                    class="inline-flex w-full items-center justify-center rounded-lg bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white hover:bg-slate-700 sm:w-auto">
                 Cari
             </button>
 
             <a href="{{ route('assets.index') }}"
-               class="rounded-lg border border-slate-300 px-5 py-2.5 text-center text-sm font-medium text-slate-600 hover:bg-slate-50">
+               class="inline-flex w-full items-center justify-center rounded-lg border border-slate-300 px-5 py-2.5 text-center text-sm font-medium text-slate-600 hover:bg-slate-50 sm:w-auto">
                 Reset
             </a>
         </form>

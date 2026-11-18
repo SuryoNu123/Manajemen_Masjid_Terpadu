@@ -30,7 +30,7 @@
         </div>
 
         <a href="{{ route('business-units.create') }}"
-           class="inline-flex items-center justify-center rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-700">
+           class="inline-flex w-full items-center justify-center rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-700 sm:w-auto">
             + Tambah Unit Usaha
         </a>
     </div>
@@ -59,14 +59,14 @@
                 </option>
             </select>
 
-            <div class="flex gap-2">
+            <div class="flex w-full gap-2 sm:w-auto">
                 <button type="submit"
-                        class="flex-1 rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white">
+                        class="inline-flex flex-1 items-center justify-center rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white">
                     Cari
                 </button>
 
                 <a href="{{ route('business-units.index') }}"
-                   class="rounded-lg border border-slate-300 px-4 py-2.5 text-sm text-slate-600">
+                   class="inline-flex flex-1 items-center justify-center rounded-lg border border-slate-300 px-4 py-2.5 text-sm text-slate-600">
                     Reset
                 </a>
             </div>

@@ -37,12 +37,12 @@
 
         <div class="flex flex-col gap-2 sm:flex-row">
             <a href="{{ route('business-unit-sales.report') }}"
-               class="rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-center text-sm font-semibold text-slate-700 hover:bg-slate-50">
+               class="inline-flex w-full items-center justify-center rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-center text-sm font-semibold text-slate-700 hover:bg-slate-50 sm:w-auto">
                 Laporan Omzet
             </a>
 
             <a href="{{ route('business-unit-sales.create') }}"
-               class="rounded-lg bg-slate-900 px-4 py-2.5 text-center text-sm font-semibold text-white hover:bg-slate-700">
+               class="inline-flex w-full items-center justify-center rounded-lg bg-slate-900 px-4 py-2.5 text-center text-sm font-semibold text-white hover:bg-slate-700 sm:w-auto">
                 + Catat Penjualan
             </a>
         </div>
@@ -94,13 +94,13 @@
                        class="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm">
             </div>
 
-            <div class="flex gap-2">
+            <div class="flex w-full gap-2 sm:w-auto">
                 <button type="submit"
-                        class="flex-1 rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white">
+                        class="inline-flex flex-1 items-center justify-center whitespace-nowrap rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white">
                     Tampilkan
                 </button>
                 <a href="{{ route('business-unit-sales.index') }}"
-                   class="rounded-lg border border-slate-300 px-4 py-2.5 text-sm text-slate-600">
+                   class="inline-flex flex-1 items-center justify-center whitespace-nowrap rounded-lg border border-slate-300 px-4 py-2.5 text-sm text-slate-600">
                     Reset
                 </a>
             </div>
