@@ -19,25 +19,23 @@
 
     </div>
 
-    <a
-        href="{{ route('jadwal-sholat.create') }}"
-        class="px-4 py-2.5 bg-slate-900 text-white rounded-lg"
-    >
-        + Tambah Jadwal
-    </a>
+    <div class="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center">
+        <a
+            href="{{ route('jadwal-sholat.create') }}"
+            class="inline-flex w-full items-center justify-center rounded-lg bg-slate-900 px-4 py-2.5 text-white sm:w-auto"
+        >
+            + Tambah Jadwal
+        </a>
 
-    <form action="{{ route('prayer-schedules.sync') }}"
-      method="POST"
-      class="inline">
+        <form action="{{ route('prayer-schedules.sync') }}" method="POST" class="w-full sm:w-auto">
+            @csrf
 
-        @csrf
-
-        <button type="submit"
-                class="px-4 py-2.5 rounded-xl border border-slate-300 bg-white text-slate-700 hover:bg-slate-50">
-            Sinkronisasi API
-        </button>
-
-    </form>
+            <button type="submit"
+                    class="inline-flex w-full items-center justify-center rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-slate-700 hover:bg-slate-50 sm:w-auto">
+                Sinkronisasi API
+            </button>
+        </form>
+    </div>
 
 </div>
 

@@ -15,17 +15,17 @@
         </p>
     </div>
 
-    <div class="flex shrink-0 flex-nowrap items-center gap-2">
+    <div class="flex w-full flex-col gap-2 sm:flex-row sm:flex-wrap lg:w-auto lg:flex-nowrap">
         <a href="{{ route('announcements.create') }}"
-           class="whitespace-nowrap rounded-lg bg-blue-600 px-3.5 py-2 text-xs font-semibold text-white hover:bg-blue-700">
+           class="inline-flex w-full items-center justify-center whitespace-nowrap rounded-lg bg-blue-600 px-3.5 py-2 text-xs font-semibold text-white hover:bg-blue-700 sm:flex-1 lg:w-auto">
             + Buat Pengumuman
         </a>
         <a href="{{ route('activities.create') }}"
-           class="whitespace-nowrap rounded-lg bg-emerald-600 px-3.5 py-2 text-xs font-semibold text-white hover:bg-emerald-700">
+           class="inline-flex w-full items-center justify-center whitespace-nowrap rounded-lg bg-emerald-600 px-3.5 py-2 text-xs font-semibold text-white hover:bg-emerald-700 sm:flex-1 lg:w-auto">
             + Tambah Kegiatan
         </a>
         <a href="{{ route('jamaahs.create') }}"
-           class="whitespace-nowrap rounded-lg border border-slate-300 bg-white px-3.5 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50">
+           class="inline-flex w-full items-center justify-center whitespace-nowrap rounded-lg border border-slate-300 bg-white px-3.5 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 sm:flex-1 lg:w-auto">
             + Tambah Jamaah
         </a>
     </div>

@@ -30,7 +30,7 @@
         </div>
 
         <a href="{{ route('library-books.create') }}"
-           class="inline-flex items-center justify-center rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-700">
+           class="inline-flex w-full items-center justify-center rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-700 sm:w-auto">
             + Tambah Buku
         </a>
     </div>
@@ -59,7 +59,7 @@
                 @endforeach
             </select>
 
-            <div class="flex gap-2">
+            <div class="flex flex-col gap-2 sm:flex-row">
                 <select name="status"
                         class="min-w-0 flex-1 rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm">
                     <option value="">Semua Status</option>
@@ -72,12 +72,12 @@
                 </select>
 
                 <button type="submit"
-                        class="rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white">
+                        class="inline-flex w-full items-center justify-center rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white sm:w-auto">
                     Cari
                 </button>
 
                 <a href="{{ route('library-books.index') }}"
-                   class="rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-600">
+                   class="inline-flex w-full items-center justify-center rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-600 sm:w-auto">
                     Reset
                 </a>
             </div>

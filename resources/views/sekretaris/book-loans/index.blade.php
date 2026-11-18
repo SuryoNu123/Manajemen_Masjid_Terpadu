@@ -43,7 +43,7 @@
         </div>
 
         <a href="{{ route('book-loans.create') }}"
-           class="inline-flex items-center justify-center rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-700">
+           class="inline-flex w-full items-center justify-center rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-700 sm:w-auto">
             + Tambah Peminjaman
         </a>
     </div>
@@ -83,14 +83,14 @@
                 </select>
             </div>
 
-            <div class="flex gap-2">
+            <div class="flex w-full gap-2 sm:w-auto">
                 <button type="submit"
-                        class="rounded-lg bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white hover:bg-slate-700">
+                        class="inline-flex flex-1 items-center justify-center whitespace-nowrap rounded-lg bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white hover:bg-slate-700">
                     Filter
                 </button>
 
                 <a href="{{ route('book-loans.index') }}"
-                   class="rounded-lg border border-slate-300 px-5 py-2.5 text-center text-sm text-slate-600 hover:bg-slate-50">
+                   class="inline-flex flex-1 items-center justify-center whitespace-nowrap rounded-lg border border-slate-300 px-5 py-2.5 text-center text-sm text-slate-600 hover:bg-slate-50">
                     Reset
                 </a>
             </div>
@@ -223,7 +223,7 @@
                                 </p>
 
                                 <a href="{{ route('book-loans.create') }}"
-                                   class="mt-4 inline-flex rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-700">
+                                   class="mt-4 inline-flex w-full items-center justify-center rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-700 sm:w-auto">
                                     + Tambah Peminjaman
                                 </a>
                             </td>

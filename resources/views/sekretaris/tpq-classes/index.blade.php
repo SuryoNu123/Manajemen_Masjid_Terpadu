@@ -14,7 +14,7 @@
         </div>
 
         <a href="{{ route('tpq-classes.create') }}"
-           class="rounded-lg bg-slate-900 px-4 py-2.5 text-center text-sm font-semibold text-white hover:bg-slate-700">
+           class="inline-flex w-full items-center justify-center rounded-lg bg-slate-900 px-4 py-2.5 text-center text-sm font-semibold text-white hover:bg-slate-700 sm:w-auto">
             + Tambah Kelas
         </a>
     </div>
@@ -63,7 +63,7 @@
             </select>
 
             <button type="submit"
-                    class="rounded-lg bg-slate-800 px-5 py-2 text-sm font-semibold text-white">
+                    class="inline-flex w-full items-center justify-center rounded-lg bg-slate-800 px-5 py-2 text-sm font-semibold text-white sm:w-auto">
                 Cari
             </button>
 

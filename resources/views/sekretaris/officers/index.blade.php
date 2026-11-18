@@ -19,7 +19,7 @@
         </div>
 
         <a href="{{ route('officers.create') }}"
-           class="px-5 py-3 rounded-xl bg-slate-900 text-white font-semibold hover:bg-slate-800">
+           class="inline-flex w-full items-center justify-center px-5 py-3 rounded-xl bg-slate-900 text-white font-semibold hover:bg-slate-800 sm:w-auto">
             + Tambah Petugas
         </a>
 
@@ -55,9 +55,9 @@
                 <option value="inactive" @selected(request('status') === 'inactive')>Tidak aktif</option>
             </select>
         </div>
-        <div class="flex flex-wrap items-center gap-2 sm:col-span-2 lg:col-span-4">
-            <button type="submit" class="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800">Terapkan filter</button>
-            <a href="{{ route('officers.index') }}" class="rounded-lg border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">Reset</a>
+        <div class="flex flex-col items-stretch gap-2 sm:flex-row sm:items-center sm:col-span-2 lg:col-span-4">
+            <button type="submit" class="inline-flex w-full items-center justify-center rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800 sm:w-auto">Terapkan filter</button>
+            <a href="{{ route('officers.index') }}" class="inline-flex w-full items-center justify-center rounded-lg border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 sm:w-auto">Reset</a>
         </div>
     </form>
 

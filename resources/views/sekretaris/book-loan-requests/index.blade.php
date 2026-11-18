@@ -47,9 +47,9 @@
                 <label for="loan-request-end-date" class="mb-1 block text-sm font-medium text-slate-700">Sampai tanggal</label>
                 <input id="loan-request-end-date" name="end_date" type="date" value="{{ $filters['end_date'] ?? '' }}" class="min-h-11 w-full rounded-lg border-slate-300 text-sm focus:border-blue-600 focus:ring-blue-600">
             </div>
-            <div class="flex flex-wrap items-end gap-2 sm:col-span-2 xl:col-span-6">
-                <button type="submit" class="min-h-11 rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-800">Terapkan filter</button>
-                <a href="{{ route('book-loan-requests.index') }}" class="inline-flex min-h-11 items-center rounded-lg border border-slate-300 px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50">Reset</a>
+            <div class="flex flex-col items-stretch gap-2 sm:col-span-2 sm:flex-row sm:items-end xl:col-span-6">
+                <button type="submit" class="inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-800 sm:w-auto">Terapkan filter</button>
+                <a href="{{ route('book-loan-requests.index') }}" class="inline-flex min-h-11 w-full items-center justify-center rounded-lg border border-slate-300 px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 sm:w-auto">Reset</a>
             </div>
         </form>
 

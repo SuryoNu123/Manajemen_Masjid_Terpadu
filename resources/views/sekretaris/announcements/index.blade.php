@@ -13,7 +13,7 @@
         </div>
 
         <a href="{{ route('announcements.create') }}"
-           class="rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-700">
+           class="inline-flex w-full items-center justify-center rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-700 sm:w-auto">
             + Tambah Pengumuman
         </a>
     </div>
@@ -58,7 +58,7 @@
             </select>
 
             <button type="submit"
-                    class="rounded-lg border border-gray-300 px-4 py-2 text-sm hover:bg-gray-50">
+                    class="inline-flex w-full items-center justify-center rounded-lg border border-gray-300 px-4 py-2 text-sm hover:bg-gray-50 sm:w-auto">
                 Cari
             </button>
         </form>

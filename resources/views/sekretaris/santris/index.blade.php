@@ -11,7 +11,7 @@
         </div>
 
         <a href="{{ route('santris.create') }}"
-           class="rounded-lg bg-slate-900 px-4 py-2.5 text-center text-sm font-semibold text-white hover:bg-slate-700">
+           class="inline-flex w-full items-center justify-center rounded-lg bg-slate-900 px-4 py-2.5 text-center text-sm font-semibold text-white hover:bg-slate-700 sm:w-auto">
             + Tambah Santri
         </a>
     </div>
@@ -70,11 +70,11 @@
 
             <div class="flex gap-2">
                 <button type="submit"
-                        class="flex-1 rounded-lg bg-slate-800 px-4 py-2 text-sm font-semibold text-white">
+                        class="inline-flex flex-1 items-center justify-center rounded-lg bg-slate-800 px-4 py-2 text-sm font-semibold text-white">
                     Cari
                 </button>
                 <a href="{{ route('santris.index') }}"
-                   class="rounded-lg border border-slate-300 px-4 py-2 text-sm">
+                   class="inline-flex flex-1 items-center justify-center rounded-lg border border-slate-300 px-4 py-2 text-sm">
                     Reset
                 </a>
             </div>

@@ -80,14 +80,14 @@
 
 <div class="mb-6 rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
     <form method="GET" action="{{ route('donasi.index') }}"
-          class="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-7">
-        <div>
+          class="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-16">
+        <div class="2xl:col-span-2">
             <label class="mb-1 block text-sm font-medium" for="donation-search">Cari donasi</label>
             <input id="donation-search" type="search" name="search" value="{{ request('search') }}"
                    placeholder="Kode atau data donatur"
                    class="w-full rounded-lg border-gray-300 text-sm">
         </div>
-        <div>
+        <div class="2xl:col-span-2">
             <label class="mb-1 block text-sm font-medium" for="donation-type">Jenis</label>
             <select id="donation-type" name="type" class="w-full rounded-lg border-gray-300 text-sm">
                 <option value="">Semua jenis</option>
@@ -96,7 +96,7 @@
                 @endforeach
             </select>
         </div>
-        <div>
+        <div class="2xl:col-span-2">
             <label class="mb-1 block text-sm font-medium" for="donation-status">Status pembayaran</label>
             <select id="donation-status" name="payment_status" class="w-full rounded-lg border-gray-300 text-sm">
                 <option value="">Semua status</option>
@@ -105,7 +105,7 @@
                 @endforeach
             </select>
         </div>
-        <div>
+        <div class="2xl:col-span-2">
             <label class="mb-1 block text-sm font-medium" for="donation-method">Metode</label>
             <select id="donation-method" name="payment_method" class="w-full rounded-lg border-gray-300 text-sm">
                 <option value="">Semua metode</option>
@@ -114,19 +114,19 @@
                 @endforeach
             </select>
         </div>
-        <div>
+        <div class="2xl:col-span-2">
             <label class="mb-1 block text-sm font-medium" for="donation-start-date">Dari tanggal</label>
             <input id="donation-start-date" type="date" name="start_date" value="{{ request('start_date') }}"
                    class="w-full rounded-lg border-gray-300 text-sm">
         </div>
-        <div>
+        <div class="2xl:col-span-2">
             <label class="mb-1 block text-sm font-medium" for="donation-end-date">Sampai tanggal</label>
             <input id="donation-end-date" type="date" name="end_date" value="{{ request('end_date') }}"
                    class="w-full rounded-lg border-gray-300 text-sm">
         </div>
-        <div class="flex items-end gap-2">
-            <button type="submit" class="rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-medium text-white">Filter</button>
-            <a href="{{ route('donasi.index') }}" class="rounded-lg border border-gray-300 px-4 py-2.5 text-sm">Reset</a>
+        <div class="flex items-end gap-2 xl:col-span-4 2xl:col-span-4">
+            <button type="submit" class="inline-flex flex-1 items-center justify-center whitespace-nowrap rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-medium text-white">Filter</button>
+            <a href="{{ route('donasi.index') }}" class="inline-flex flex-1 items-center justify-center whitespace-nowrap rounded-lg border border-gray-300 px-4 py-2.5 text-sm">Reset</a>
         </div>
     </form>
 </div>

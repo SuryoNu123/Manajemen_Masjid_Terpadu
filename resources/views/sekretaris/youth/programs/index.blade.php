@@ -16,9 +16,9 @@
             </p>
         </div>
 
-        <div class="flex items-center gap-3">
+        <div class="flex w-full items-center gap-3 sm:w-auto">
             <a href="{{ route('youth-programs.create') }}"
-               class="rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-700">
+               class="inline-flex w-full items-center justify-center rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-700 sm:w-auto">
                 + Tambah Program Kerja
             </a>
         </div>
@@ -42,7 +42,7 @@
                 @endforeach
             </select>
 
-            <button type="submit" class="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800">
+            <button type="submit" class="inline-flex w-full items-center justify-center rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800 sm:w-auto">
                 Filter
             </button>
         </form>
