@@ -19,7 +19,7 @@
         </div>
     @endif
 
-    <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+    <div class="space-y-4">
         <div>
             <h2 class="text-xl font-bold text-slate-800">
                 Stok Produk Unit Usaha Masjid
@@ -29,17 +29,17 @@
             </p>
         </div>
 
-        <div class="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:flex-wrap">
+        <div class="grid w-full grid-cols-1 gap-2 sm:grid-cols-3">
             <a href="{{ route('business-units.index') }}"
-               class="inline-flex w-full items-center justify-center rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 sm:w-auto">
+               class="inline-flex min-h-11 w-full items-center justify-center rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">
                 Data Unit Usaha
             </a>
             <a href="{{ route('business-unit-sales.index') }}"
-               class="inline-flex w-full items-center justify-center rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 sm:w-auto">
+               class="inline-flex min-h-11 w-full items-center justify-center rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">
                 Penjualan & Omset
             </a>
             <a href="{{ route('business-unit-items.create') }}"
-               class="inline-flex w-full items-center justify-center rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-700 sm:w-auto">
+               class="inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-700">
                 + Tambah Produk
             </a>
         </div>
@@ -153,7 +153,7 @@
                                     {{-- FORM CEPAT PENYESUAIAN STOK --}}
                                     <details class="relative">
                                         <summary class="inline-flex min-h-10 cursor-pointer items-center justify-center rounded border border-slate-300 px-2.5 py-1 text-xs font-semibold text-slate-700 hover:bg-slate-100 list-none">
-                                            ± Stok
+                                            Stok
                                         </summary>
                                         <div class="absolute right-0 top-8 z-20 w-64 rounded-xl border border-slate-200 bg-white p-4 shadow-lg text-left">
                                             <form action="{{ route('business-unit-items.adjust-stock', $item) }}" method="POST" class="space-y-3">

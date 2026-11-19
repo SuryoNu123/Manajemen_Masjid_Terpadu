@@ -119,11 +119,11 @@
 
                             <td class="px-5 py-4">
                                 @if($class->is_active)
-                                    <span class="rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-700">
+                                    <span class="inline-flex whitespace-nowrap rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-700">
                                         Aktif
                                     </span>
                                 @else
-                                    <span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600">
+                                    <span class="inline-flex whitespace-nowrap rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600">
                                         Tidak aktif
                                     </span>
                                 @endif
