@@ -455,14 +455,6 @@
 
             </div>
 
-
-            <a
-                href="#prayer-schedule-cards"
-                class="text-sm font-semibold text-blue-700"
-            >
-                Lihat Jadwal Lengkap →
-            </a>
-
         </div>
 
 
@@ -470,7 +462,7 @@
 
             @foreach($schedules as $schedule)
 
-                <div class="bg-white border border-slate-200 rounded-2xl p-6 hover:shadow-lg transition">
+                <div data-prayer-card="{{ $schedule->prayer_name }}" class="bg-white border border-slate-200 rounded-2xl p-6 hover:shadow-lg transition">
 
                     <div class="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center mb-5">
 

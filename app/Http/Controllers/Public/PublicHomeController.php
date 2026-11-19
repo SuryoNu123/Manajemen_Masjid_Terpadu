@@ -35,7 +35,10 @@ class PublicHomeController extends Controller
                     ELSE 6
                 END
             ")
-            ->get();
+            ->orderByDesc('updated_at')
+            ->get()
+            ->unique('prayer_name')
+            ->values();
 
         $prayerNames = [
             'subuh' => 'Subuh',
