@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class="max-w-3xl">
+<div class="max-w-5xl">
 
     {{-- Header --}}
     <div class="mb-6">

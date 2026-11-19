@@ -6,7 +6,7 @@
 @section('content')
 <div class="space-y-6">
     @include('shared.partials.library-tabs')
-<div class="mx-auto max-w-2xl rounded-xl bg-white p-6 shadow-sm">
+<div class="mx-auto max-w-5xl rounded-xl bg-white p-6 shadow-sm">
 
     <h2 class="mb-6 text-xl font-bold">
         Form Peminjaman Buku

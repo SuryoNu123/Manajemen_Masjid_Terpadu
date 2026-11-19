@@ -5,7 +5,7 @@
 
 @section('content')
 
-<div class="max-w-2xl mx-auto">
+<div class="max-w-5xl mx-auto">
 
     <div class="mb-6">
 

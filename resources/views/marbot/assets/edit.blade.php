@@ -4,7 +4,7 @@
 @section('page-title', 'Edit Aset')
 
 @section('content')
-<div class="mx-auto max-w-3xl space-y-6">
+<div class="mx-auto max-w-5xl space-y-6">
 
     <div>
         <h2 class="text-xl font-bold text-slate-800">Edit Data Aset</h2>

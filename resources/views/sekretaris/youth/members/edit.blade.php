@@ -4,7 +4,7 @@
 @section('page-title', 'Edit Anggota Remaja Masjid')
 
 @section('content')
-<div class="mx-auto max-w-3xl space-y-6">
+<div class="mx-auto max-w-5xl space-y-6">
     @include('shared.partials.youth-tabs')
     <div class="flex items-center justify-between">
         <div>

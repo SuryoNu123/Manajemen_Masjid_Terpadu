@@ -4,7 +4,7 @@
 @section('page-title', 'Edit Buku')
 
 @section('content')
-<div class="mx-auto max-w-3xl space-y-6">
+<div class="mx-auto max-w-5xl space-y-6">
     @include('shared.partials.library-tabs')
 
     <div>

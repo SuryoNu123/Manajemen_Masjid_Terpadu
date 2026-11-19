@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class="max-w-2xl">
+<div class="max-w-5xl">
 
     <h1 class="text-2xl font-bold text-slate-900">
         Tambah Petugas

@@ -4,7 +4,7 @@
 @section('page-title', 'Tambah Barang / Produk')
 
 @section('content')
-<div class="mx-auto max-w-3xl space-y-6">
+<div class="mx-auto max-w-5xl space-y-6">
     @include('shared.partials.business-unit-tabs')
     <div class="flex items-center justify-between">
         <a href="{{ route('business-unit-items.index') }}" class="text-sm font-medium text-blue-600 hover:underline">

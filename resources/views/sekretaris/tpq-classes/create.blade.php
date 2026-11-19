@@ -1,7 +1,7 @@
 @extends('shared.layouts.dashboard')
 
 @section('content')
-<div class="mx-auto max-w-3xl">
+<div class="mx-auto max-w-5xl">
     <h1 class="mb-2 text-2xl font-bold text-slate-800">Tambah Kelas TPQ/TPA</h1>
     <p class="mb-6 text-sm text-slate-500">Masukkan informasi kelas dan jadwal belajar.</p>
 
